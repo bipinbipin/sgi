@@ -1,0 +1,22 @@
+#
+# This is an example of creating a DAT tape with three audio programs.
+#
+seek bot 				# go to the beginning of the tape
+leadin					# write a lead-in on the tape
+rate 44					# set the rate to 44.1 kHz
+prohibit n				# no copy protection
+program 1				# begin the first program
+index 1
+write /usr/tmp/track1.aiff		# write the specified file to tape
+program					# increment the program number
+index 0					# index 0 is inter-program spacing
+silence 100				# 100 frames of silence is 3 seconds
+index					# increment the index number
+write /usr/tmp/track2.aiff
+program
+index 0
+silence 100
+index
+write /usr/tmp/track3.aiff
+leadout					# write a lead-out
+quit					# we're done

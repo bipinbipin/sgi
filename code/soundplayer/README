@@ -1,0 +1,78 @@
+README for soundfile programming examples
+
+playaifc:    
+--------
+
+Playaifc parses AIFF-C (and AIFF) file(s) containing 8-bit or
+16-bit audio sample data (single channel or stereo)
+and plays the samples through the audio hardware.
+
+Playaifc supports decompression of CCITT G.722, CCITT G.711 u-law,
+Aware MPEG, and Aware MultiRate AIFF-C file formats.
+
+Please see the man page for more details.
+
+recordaifc:
+----------
+
+Recordaifc creates an AIFF-C (or AIFF) output file 
+containing 16-bit stereo sample data recorded 
+through the audio hardware.  Recordaiff records 
+audio input until the user sends it an interrupt. 
+It writes the current hardware input sample rate 
+into the appropriate location in the AIFF Common 
+chunk.  When recordaiff receives a user interrupt, 
+it writes all sample data
+currently in the audio buffer out to disk before it
+exits. 
+
+Recordaifc supports compressing to CCITT G.722 4:1, CCITT G.711 
+u-law 2:1, Aware MPEG, and Aware MultiRate compression for the 
+AIFF-C file format.
+
+Please see the man page for more details.
+README for Audio File Library programming examples
+
+aifcinfo:    
+--------
+
+Parses an AIFF or AIFF-C file and prints out a 
+detailed description of the audio data and header
+information inside the file.
+
+aiff2aifc, aifc2aiff, aifccompress, aifcdecompress:
+---------------------------------------------------
+
+These sample programs are all generated from the same
+source file:   aifcconvert.c
+
+aiff2aifc: 
+    Converts an AIFF file to the newer AIFF-C standard
+    format. Preserves all header and auxiliary information
+    (strings, MIDI exclusive data, etc) during the conversion.
+
+aifc2aiff:
+    Converts an AIFF-C file to the older AIFF format.
+    Preserves all header and auxiliary data chunks (strings,
+    MIDI exclusive data, etc) common to both formats.
+
+    Provides backward compatability for applications which
+    do not support the newer AIFF-C format. Applications 
+    linked with the SGI Audio File Library can automatically
+    parse files in either format. 
+
+aifccompress:
+    Converts an AIFF-C file which contains uncompressed audio data to
+    an AIFF-C file which contains compressed data. Nonaudio and 
+    auxiliary header information is preserved.
+
+    Compression algorithms supported by the SGI Audio File Library are:
+    CCITT G.722 ADPCM, CCITT G.711 mu-law, CCITT G.722 A-law, and
+    Aware MPEG and MultiRate algorithms.
+    The SGI Audio File Library does not support Apple proprietary
+    compression schemes. 
+
+aifcdecompress:
+    Converts an AIFF-C file which contains compressed audio data to
+    an AIFF-C file which contains uncompressed data. Nonaudio and
+    auxiliary header information is preserved.

@@ -1,0 +1,140 @@
+		    README for video programming examples
+
+This directory has example video programs for the SGI Video Library.
+
+The example programs are contcapt, mtov, simpleblend, simplewipe, simplev2v,
+vidtomem, videoin, colorcapture, colorposterize, simplegrab, simplem2v, 
+simplev2s, simpleccapt and eventex. 
+
+The first nine examples provide command line options for selecting
+the video device used.
+
+The examples simpleblend, simplewipe and simplev2v are designed for Galileo,
+Impact and Octane digital video.
+
+NOTE: In order to keep some of the examples as simple as possible event 
+handling is not implemented in most of them. This means the examples
+will not update their windows if they are moved.
+
+
+contcapt:    
+--------
+
+Contcapt continuously captures a stream of live video to 
+memory. Command line options provide the ability to set the 
+number of memory buffers used in capture, set the number of 
+frames to be captured, choose whether to display the video 
+in a window on the computer's display, set the frame geometry 
+and zoom ratio, set the frame rate and to report statistics
+on frame rate.
+
+
+simpleblend:
+-----------
+
+Simpleblend blends a screen source and a video source and 
+displays the blended result in a window on the computer's 
+display and on video output.  Use the utility, keyctls, 
+to set/change blender keying parameters.  Use "ipaste" or other
+utility to put the RGB image in colorwheel.rgb onto the screen
+region where simpleblend gets its graphics input: it can help
+in becoming familiar with the effects of the luma-key and
+chroma-key controls.  Simpleblend requires video hardware with
+a video output port.
+
+
+simplewipe:
+---------
+
+Simplewipe spatially blends video with graphics over time. It 
+shows the output in a graphics window and on video out.
+With your mouse positioned in the graphics window containing
+your blended video, the "w" key executes a rectangular zoom
+wipe. This application only runs on video hardware that has
+a video output port.
+
+
+vidtomem:
+--------
+
+Vidtomem captures a stream of video to memory and disk. 
+Command line options provide the ability to set the filename 
+of the file to receive the video data, disable writing the 
+video data to disk, set frame size and zoom ratio and set
+the output mode (RGB or YUV).
+
+
+videoin:
+--------
+
+Videoin captures an incoming stream of video to the screen.
+Command line options provide the ability to set the initial 
+position of the window, turn off window borders, set the zoom
+ratio and the window title. Use the arrow keys to pan when
+the screen window is smaller than the video (after resizing
+the window, for example). Use the + and - keys to zoom the
+video.
+
+colorcapture:
+-------------
+
+Colorcapture is a simple continuous capture application very similar
+to simpleccapt, but by using the Color Space Library, allows the
+setting of contrast, brightness, saturation, hue, and image
+orientation.
+
+colorposterize:
+---------------
+
+Colorposterize is a simple continuous capture application very similar
+to simpleccapt, but by using the Color Space Library, allows the
+setting of posterization level and image size.
+
+
+The following example programs appear in the Programmers' Guide. 
+
+simplegrab:
+----------
+
+Simplegrab grabs a frame of video to memory and the computer's
+display.
+
+
+simplem2v:
+---------
+
+Simplem2v gets a frame of YUV422 image data from memory and sends it out 
+the video output port.  Simplem2v requires video hardware with
+a video output port.
+
+
+simplev2s:
+---------
+
+Simplev2s displays video in a window on the computer's display.
+
+
+simpleccapt:
+-----------
+
+Simpleccapt is a simple continuous capture application.
+
+
+simplev2v:
+---------
+
+Simplev2v takes video in and sends it to the video output port.
+Simplev2v requires video hardware with a video output port.
+
+
+eventex:
+-------
+
+Eventex demonstrates a simple event loop in a VL application.
+
+mtov:
+----
+
+Mtov is a simple example program that plays a movie-library movie out
+the video output port.  Mtov requires video hardware with a video
+output port.

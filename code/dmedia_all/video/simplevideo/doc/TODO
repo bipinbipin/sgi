@@ -1,0 +1,21 @@
+$Id: TODO,v 1.6 1994/05/02 19:27:19 dpb Exp $
+
+* add control setting, method for returning errors;
+
+* whack something in so it will work on *all* flavors of ev1;
+
+* Add a routine to exit a context;
+
+* When calling getframe, when we set the data ptr,
+  make sure it isn't allready pointing at an malloced
+  block!  If it is, we need to free it first!
+
+* Hey, will different contexts in the same thread share the
+  same server connection?
+
+* Here's an idea - it might be interesting to have a function
+  svWaitForPreemption() to keep a path open until someone
+  else comes along...
+
+
+

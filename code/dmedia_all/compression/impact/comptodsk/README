@@ -1,0 +1,61 @@
+comptodsk & dsktodecomp
+-----------------------
+2:1 compressed data to disk in real-time (*)
+
+These example programs demonstrate how an application can get very low
+compression ratio data to and from disk, given a hardware configuration
+that supports those data rates.
+
+When data compression ratios approach 2:1, the compressed data stream is
+approximately 10MB per second to disk, and the default disk subsystem of
+an Indigo2 is not capable of sustaining a such high data rate.  
+Fortunately, there are some specialized disk configurations that will
+sustain these data rates in an Indigo2.
+
+The hardware configuration that was used to verify these programs was a
+250MHz Indigo2 with four disk drives and 128MB RAM.
+  1x  1GB Seagate ST31200, system disk, efs filesystem, dks0d1
+  3x  2GB Quantum XP32150, striped xlv, xfs filesystem, dks0d2, dks0d3, dks1d2
+
+Two 2GB and the system drive are installed inside the Indigo2 chassis,
+and one 2GB is in an external enclosure on the external SCSI bus.
+
+The three 2GB disks are configured as a single striped xlv, with a
+stripe unit of 128KB.  A single, normal xfs filesystem is built on
+top of the xlv.
+
+No other system activities are performed while the program is running.
+Any activities that utilize the SCSI busses will cause contention for
+the SCSI bus, and lower the achieved bandwidth to disk, which will result
+in dropped or repeated fields.
+
+The examples use Direct I/O to avoid data copies and avoid using the
+buffer cache.  Direct I/O introduces a set of restrictions on the size
+of reads and writes to a file.  Because of these restrictions, the file
+format used by these examples is incompatible with the dmplay and 
+dmrecord applets (the dmplay and dmrecord applets are not able to
+sustain low compression ratio capture or playback).  For more information
+on Direct I/O, look at the fcntl(2) and open(2) man pages.
+
+The file format used by these applications is a simple file header block
+followed by continguous JPEG compressed fields.  No effort is made to
+captured the sizes of the individual fields, or to capture audio along
+with the video.
+
+comptodsk
+  comptodsk -f outfile [-c n_images] [-q quality] [-b bitrate] [-v vin_node]
+	-f outfile	output (captured data) file name
+	-c n_images	number of fields to capture
+	-q quality	JPEG quality factor (25-100)
+	-b bitrate	bits per second (overrides quality setting)
+	-v vin_node	video input node
+
+for capture of 2:1 compressed NTSC video from analog video input:
+  comptodsk -f outfile -q 90 -b 87000000 -v 4
+
+
+dsktodecomp
+  dsktodecomp -f infile [-E] [-v vout_node]
+	-f infile	input file
+	-v vout_node	video output node
+	-E		exit without prompt at end of mjfif file

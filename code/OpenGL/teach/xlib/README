@@ -1,0 +1,32 @@
+This directory contains very simple programs which demonstrate
+how to write OpenGL programs using only Xlib
+
+too-simple.c	- this program is from the glXIntro man page. its here
+		  to demonstrate the most minimal xlib program, but its
+		  not recommended for general use since it doesn't
+		  deal with expose, resize or any type of input.
+
+simplest.c	- minimal xlib program - draws simple geometry and
+		  has simple event loop which deals with expose, resize
+		  and keyboard events.
+
+mouse.c		- simple double buffered xlib program using mouse motion
+		  events to update viewing transform
+		  LEFTMOUSE pans, MIDDLEMOUSE rotates about X and Y axes,
+		  LEFTMOUSE+MIDDLEMOUSE zooms
+
+animate.c	- simple double buffered xlib program.  uses spacebar
+		  to stop and start animation.  uses MapNotify and UnmapNotify
+		  events to disable animation while window is unmapped.
+
+image.c		- simple single buffered RGB program which displays
+		  an SGI image library (libimage) file.
+		  Usage: image [-n] file.rgb
+
+overlay.c	- a modification of the animate.c program which also creates
+		  a transparent overlay window using the visual_info extension.
+		  the program draws a static grid in the overlay window and
+		  resizes or redraws the overlay window whenever it is
+		  necessary.
+
+pixmap.c	- demonstrates OpenGL rendering to an X11 pixmap.

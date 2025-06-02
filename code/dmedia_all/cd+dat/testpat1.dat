@@ -1,0 +1,32 @@
+#
+# This example makes a simple test tape to be read with 'verifydat.'
+#
+seek bot			# go to the beginning of the tape
+leadin				# write a lead-in area
+rate 44				# set the rate to 44.1kHz
+prohibit n
+program 1
+index 1
+testpat 1000
+program
+index 0
+silence 100
+index
+testpat 1000
+program
+index 0
+silence 100
+index
+testpat 1000
+program
+index 0
+silence 100
+index
+testpat 1000
+program
+index 0
+silence 100
+index
+testpat 1000
+leadout
+quit

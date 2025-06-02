@@ -1,0 +1,14 @@
+To build all of the OpenGL samples, type make. Look in the
+makefile for the order in which directories must be built.
+
+You can set the different object styles by setting the env
+variable OBJECT_STYLE:
+
+    setenv OBJECT_STYLE 32
+    setenv OBJECT_STYLE N32    <- default
+    setenv OBJECT_STYLE 64
+
+You can enable debugging by setting the env variable GLDEBUG:
+
+    setenv GLDEBUG y
+

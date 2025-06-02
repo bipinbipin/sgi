@@ -1,0 +1,23 @@
+The syncrecord directory contains example programs that 
+illustrate synchronized audio/MIDI recording and playback:
+
+	- recordmidi.c++
+	- playmidi.c++
+
+Both programs demonstrate the use of synchronization primitives
+in the MIDI Library (libmd) and the Audio Library (libaudio).
+
+These programs also demonstrate use of the MIDI File Library
+(libmidifile) which is provided as example source code. This
+library allows you to read and write standard MIDI files.
+
+recordmidi.c++:
+	Records a MIDI file and audio file starting at the
+	same time. Recordmidi.c++ creates test.mid and test.aifc
+	by default, although alternate file names can be
+	provided on the command line.
+
+playmidi.c++:
+	Plays the files created by recordmidi.c++. The file
+	playback is synchronized by starting both files at
+	the same time.

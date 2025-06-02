@@ -1,0 +1,41 @@
+CDTODAT: A simple CD-to-DAT copying example
+
+cdtodat serves as a simple example of how to record to an audio DAT. 
+It takes an entire CD and digitally transfers the data to DAT, providing
+correct program numbers, index numbers, program-time, absolute-time,
+copy-protect bits, and lead-in and lead-out areas on the tape. cdtodat 
+should produce tapes that conform to the DAT specification.
+
+cdtodat does not provide any user-interface. It has two modes: quiet
+and verbose. In quiet mode, the program will perform the entire copy
+without printing anything except errors. In quiet mode, which is 
+invoked with the '-q' option, the program will not indicate which program
+and index it is currently copying.
+
+If cdtodat has problems on your machine, you may want to clean the
+heads on the DAT drive using a head-cleaner DAT. The DAT drives are 
+notoriously sensitive to dirty heads.
+
+Please don't use cdtodat to reproduce copyrighted material except where 
+permitted by law.
+
+Requirements:
+
+cdtodat requires a CDROM drive capable of reading audio over the SCSI
+bus. The Toshiba models shipped by SGI have this capability. It also
+requires an audio-capable DAT drive which is compatible with the 
+ARDAT Python. The standard DAT drives from SGI provide this. Further,
+cdtodat must be run as root, because access to the CD drive requires
+root privileges. The media to be recorded to/from must be present in both
+drives before the program is executed.
+
+cdtodat is provided as-is and without warranty -- please see the notice in the
+source code.
+
+I welcome any feedback about cdtodat, as well as enhancements that you
+may make.
+
+
+	Doug Cook
+	cook@sgi.com
+	December, 1993

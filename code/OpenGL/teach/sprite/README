@@ -1,0 +1,7 @@
+This directory contains simple program which demonstrates how 
+to use OpenGL Sprite extension.
+
+
+    sprt.c 	- simple program that allows the user to interactively
+              	modify number of sprite geometry primitives ('trees')
+	      	as well as switching sprite rendering modes.			 

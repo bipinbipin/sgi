@@ -1,0 +1,272 @@
+;
+;	File:		examplecodec.a
+;
+;	Contains:	xxx put contents here xxx
+;
+;	Written by:	xxx put writers here xxx
+;
+;	Copyright:	© 1991 by Apple Computer, Inc., all rights reserved.
+;
+;   This file is used in these builds: Warhol
+;
+;	Change History (most recent first):
+;
+;		 <3>	 9/23/91	MK		fix table access to new struct
+;		 <2>	 4/22/91	MK		
+;		 <1>	 3/25/91	MK		first checked in
+;
+;	To Do:
+;
+
+;
+;	Copyright:	© 1991 by Apple Computer, Inc., all rights reserved.
+;
+
+
+
+
+			BLANKS    ON
+			STRING    ASIS
+			MACHINE	MC68030
+			CASE	ON			
+
+
+	macro	
+	pin	&d
+	
+	spl		d2
+	cmp.w	d2,&d
+	sgt		d0
+	or.b	d0,&d
+	and.w	d2,&d
+
+	endm
+	
+
+	macro
+	do_yuv_rgb
+
+	lsl.w	#2,d5				; make y an 8-bit value
+	move.w	d5,d6				; get Y
+	add.w	d7,d6				; get Y+U (red)
+	pin		d6
+	swap	d6					; move red to position
+	move.w	d5,d6				; get Y
+	add.w	d4,d6				; get Y+V (blue)
+	pin		d6
+
+	swap	d5					; extend Y to fixed
+	clr.w	d5					; clear fract part
+	sub.l	0(a4,d6.w*4),d5		; sub blue (weighted) from Y
+	swap	d6
+	sub.l	0(a3,d6.w*4),d5		; sub red (weighted) from Y
+	swap	d6					; fix result
+	swap	d5					; convert back to int
+	tst.w	d5
+	pin		d5
+	move.b	0(a5,d5.w),d2		; get green from Y->G table
+	bfins	d2,d6{16:8}			; put green in position
+
+	endm
+
+
+
+
+
+argc		equ	16
+data		equ	16+4
+baseAddr	equ	12+4
+rowBytes	equ	10+4
+len			equ	8+4
+glob		equ	4+4
+
+
+DECOMPRESSSTRIP	PROC	EXPORT
+
+;pascal void 
+;DecompressStrip(char *data,char *baseAddr,short rowBytes,short len,SharedGlobals *sg)
+
+
+	link	a6,#0				; create stack frame
+	movem.l	d3-d7/a2-a5,-(sp)	; save standard registers
+
+	move.l	glob(a6),a0
+	move.l	(a0),a3				; base of red weight table
+	tst.l	a3
+	beq		bail				; no table - we should really deal with this case
+	move.l	(a3),a3				; dereference
+	tst.l	a3
+	beq		bail				; no table - we should really deal with this case
+	move.l	a3,a4				; base of blue weight table
+	adda.w	#512*4,a4
+	move.l	4(a0),a5			; base of inverse green weight table
+	move.l	(a5),a5				; dereference
+	tst.l	a3
+	beq		bail				; no table - we should really deal with this case
+	move.l	data(a6),a0			; start of the YUV data
+	move.l	baseAddr(a6),a1		; pixel baseaddr
+	move.w	rowBytes(a6),a2		; row bytes
+	move.w	len(a6),d1			; number of blocks to do
+	
+	
+	addq.w	#1,d1
+	lsr.w	#1,d1				; make len number of blocks
+	subq.w	#1,d1				; fix len for dbra
+	clr.w	d2					; clear mask word
+loop:
+	move.l	(a0)+,d3			; get first data word
+	move.b	(a0)+,d4			; get V
+	ext.w	d4					; V is a word
+	lsl.w	#2,d4
+	move.b	d3,d7				; get U
+	ext.w	d7					; U is a word
+	lsl.w	#2,d7
+	
+	bfextu	d3{0:6},d5			; get first Y
+	do_yuv_rgb
+	move.l	d6,(a1)+			; write rgb pixel
+	
+	bfextu	d3{6:6},d5			; get next Y
+	do_yuv_rgb
+	move.l	d6,(a1)				; write rgb pixel
+	adda.w	a2,a1				; bump to next scanline
+	subq.l	#4,a1				; back up one
+	
+	bfextu	d3{12:6},d5			; get next Y
+	do_yuv_rgb
+	move.l	d6,(a1)+			; write rgb pixel
+	
+	bfextu	d3{18:6},d5			; get last Y
+	do_yuv_rgb
+	move.l	d6,(a1)+			; write rgb pixel
+	suba.w	a2,a1				; backup to first scanline
+		
+	dbra	d1,loop				; continue for whole row
+
+bail:
+	movem.l	(sp)+,d3-d7/a2-a5	; restore registers
+	unlk	a6					; ditch stack frame
+	move.l	(sp)+,a0			; get return address
+	add.l	#argc,sp			; ditch incoming arguments
+	jmp	(a0)					; return to caller
+
+	endproc
+	
+
+
+
+	macro
+	do_rgb_yuv
+								; enter with 888 rgb in d0.l
+								; exit with 8 bit y in do.w
+
+	move.w	d0,d3				; get blue
+	and.w	d6,d3				; strip blue
+	add.w	d3,d4				; accum blue
+	swap 	d4					; point to red_accum
+
+	move.w	d0,d2
+	lsr.w	#8,d2				; get green
+	
+	swap	d0					; get red
+	and.w	d6,d0				; strip red
+	add.w	d0,d4				; accum red
+	swap 	d4					; point to blue_accum
+
+	move.l	0(a3,d0.w*4),d0		; weighted red
+	add.l	0(a4,d2.w*4),d0		; weighted green
+	add.l	0(a5,d3.w*4),d0		; weighted blue
+	swap	d0					; get integer part of Y
+	cmp.w	d6,d0				; see if > 255
+	blt.s	@1
+	move.w	d6,d0				; if so mask it
+@1:
+	add.w	d0,d7				; accum Y
+	lsr.w	#2,d0				; convert Y to 6-bits
+	
+	
+	endm
+
+
+
+COMPRESSSTRIP	PROC	EXPORT
+
+;pascal void 
+;CompressStrip(char *data,char *baseAddr,short rowBytes,short len,SharedGlobals *sg)
+
+
+	link	a6,#0				; create stack frame
+	movem.l	d3-d7/a2-a5,-(sp)		; save standard registers
+	
+
+	move.l	glob(a6),a0
+	move.l	(a0),a3				; base of red weight table
+	tst.l	a3
+	beq		bail				; no table - we should really deal with this case
+	move.l	(a3),a3				; dereference
+	tst.l	a3
+	beq		bail				; no table - we should really deal with this case
+	move.l	a3,a4				
+	adda.w	#256*4,a4			; base of green weight table
+	move.l	a4,a5				
+	adda.w	#256*4,a5			; base of blue weight table
+	move.l	data(a6),a0			; start of the YUV data
+	move.l	baseAddr(a6),a1		; pixel baseaddr
+	move.w	rowBytes(a6),a2		; row bytes
+	move.w	len(a6),d1			; number of blocks to do
+	
+	addq.w	#1,d1
+	lsr.w	#1,d1				; make len number of blocks
+	subq.w	#1,d1				; fix len for dbra
+	clr.w	d6					; clear mask word
+	st		d6					; set mask
+loop:
+
+	clr.l	d4					; clear blue_accum and red_accum
+	clr.w	d7					; clear y_accum
+	move.l	(a1)+,d0			; read rgb pixel
+	do_rgb_yuv
+	bfins	d0,d5{0:6}	
+	
+	move.l	(a1),d0				; read rgb pixel
+	do_rgb_yuv
+	bfins	d0,d5{6:6}	
+
+	adda.w	a2,a1				; bump to next scanline
+	subq.l	#4,a1
+	
+	move.l	(a1)+,d0			; read rgb pixel
+	do_rgb_yuv
+	bfins	d0,d5{12:6}	
+	
+	move.l	(a1)+,d0			; read rgb pixel
+	do_rgb_yuv
+	bfins	d0,d5{18:6}	
+	suba.w	a2,a1				; back up to first scanline
+	
+	swap	d4					; get red accum
+	sub.w	d7,d4				; R-Y = U
+	asr.w	#4,d4				; normalize 
+	move.b	d4,d5				; combine in dword
+	move.l	d5,(a0)+			; write out Ys and U
+	
+	swap	d4					; get blue accum
+	sub.w	d7,d4				; Y-B = V
+	asr.w	#4,d4				; normalize
+	move.b	d4,(a0)+			; write out V
+
+	dbra	d1,loop				; continue for whole row
+bail:
+	movem.l	(sp)+,d3-d7/a2-a5	; restore registers
+	unlk	a6					; ditch stack frame
+	move.l	(sp)+,a0			; get return address
+	add.l	#argc,sp			; ditch incoming arguments
+	jmp	(a0)					; return to caller
+
+	endproc
+	
+
+
+
+	end
+	

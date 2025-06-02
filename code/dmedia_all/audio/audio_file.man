@@ -1,0 +1,1716 @@
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+NNNNAAAAMMMMEEEE
+     afIntro, AFintro -	Introduction to	the Silicon Graphics Audio File
+     Library (AF)
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     ####iiiinnnncccclllluuuuddddeeee <<<<ddddmmmmeeeeddddiiiiaaaa////aaaauuuuddddiiiiooooffffiiiilllleeee....hhhh>>>>
+
+     ----llllaaaauuuuddddiiiiooooffffiiiilllleeee
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The Silicon Graphics Audio	File Library (AF) provides a uniform
+     programming interface to standard digital audio file formats.
+
+     Thirteen audio file formats are currently supported by the	library:
+
+     Extended AIFF-C standard
+     AIFF (older version)
+     NeXT/Sun SND/AU
+     WAVE (RIFF)
+     Berkeley/IRCAM/CARL SoundFile
+     MPEG1 audio bitstream
+     Sound Designer II
+     Audio Visual Research
+     Amiga IFF/8SVX
+     SampleVision
+     VOC
+     SoundFont2
+     Raw (headerless)
+
+     Note that the library will	continue to support additional file formats
+     and data formats, and this	has significant	ramifications for how it
+     should be used.  The Audio	File Library is	released as a Dynamic Shared
+     Object (DSO). This	means that as the library starts supporting new	file
+     formats, programs written at an earlier time can automatically support
+     these new formats.	 It requires a bit of caution to write a program so
+     that it operates correctly	as new Audio File Libraries are	released.  See
+     aaaaffffGGGGeeeettttFFFFiiiilllleeeeFFFFoooorrrrmmmmaaaatttt(3dm) for an example of this.  Make	sure to	read the
+     CAVEATS section of	each Audio Library function man	page; this is where
+     the warning about correct use will	appear.
+
+     SGI has adopted AIFF-C as its default digital audio file format.  This
+     means that	the default file configuration for writing (see
+     aaaaffffNNNNeeeewwwwFFFFiiiilllleeeeSSSSeeeettttuuuupppp(3dm)) is set to match the default parameters of this
+     format.  For backward compatibility, the Audio File Library fully
+     supports the older	AIFF standard in addition to AIFF-C.  See aaaaiiiiffffffff(4) for
+     more detailed information.
+
+     Key goals of the Audio File Library are _f_i_l_e _f_o_r_m_a_t _t_r_a_n_s_p_a_r_e_n_c_y and _d_a_t_a
+     _f_o_r_m_a_t _t_r_a_n_s_p_a_r_e_n_c_y.  The same calls for opening a	file, reading/writing
+     basic header information (e.g., sample rate, sample format), and
+     reading/writing sample data will work with	any supported audio file
+     format.
+
+
+
+									PPPPaaaaggggeeee 1111
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     The basic library routines	for reading audio samples from files and
+     writing samples to	files, aaaaffffRRRReeeeaaaaddddFFFFrrrraaaammmmeeeessss(3dm) and aaaaffffWWWWrrrriiiitttteeeeFFFFrrrraaaammmmeeeessss(3dm),
+     contain built-in codec support for	compressed audio data.
+
+     The library currently supports read-only and write-only file access.  To
+     edit an existing file, you	must create a new file and copy	audio and
+     other data	 from the original file.  Example code which shows how to copy
+     the logical components of a file is available in the
+     /_u_s_r/_s_h_a_r_e/_s_r_c/_d_m_e_d_i_a/_s_o_u_n_d_f_i_l_e directory.
+
+LLLLOOOOGGGGIIIICCCCAAAALLLL	CCCCOOOOMMMMPPPPOOOONNNNEEEENNNNTTTTSSSS OOOOFFFF AAAANNNN AAAAUUUUDDDDIIIIOOOO FFFFIIIILLLLEEEE
+     The Audio File Library API	breaks audio files up into these logical
+     components: _t_r_a_c_k_s, _i_n_s_t_r_u_m_e_n_t _c_o_n_f_i_g_u_r_a_t_i_o_n_s, and	_m_i_s_c_e_l_l_a_n_e_o_u_s _d_a_t_a
+     _c_h_u_n_k_s.
+
+     _t_r_a_c_k_s
+	  consist of audio sample data,	parameters which characterize the data
+	  (sample rate,	mono/stereo, compression type),	and _m_a_r_k_e_r structures
+	  which	store sample frame locations in	the track.  _M_a_r_k_e_r_s are	used
+	  for indicating loop point locations within audio tracks, for
+	  example.
+
+     _i_n_s_t_r_u_m_e_n_t	_c_o_n_f_i_g_u_r_a_t_i_o_n_s
+	  are collections of parameters	which can be used to configure
+	  samplers to play back	audio _t_r_a_c_k data.  These parameters include
+	  _l_o_o_p_s, gain levels, and keyboard mapping information.	 Though	these
+	  were originally designed only	for use	with AIFF-C files, they	have
+	  been expanded	to provide access to instrument	and/or sample
+	  parameters in	all file types which support such things.
+
+     _m_i_s_c_e_l_l_a_n_e_o_u_s _d_a_t_a	_c_h_u_n_k_s
+	  include text strings (author,	copyright, name, annotation) and
+	  pieces of auxiliary information (MIDI	exclusive data,	application-
+	  specific data).  The kinds of	_m_i_s_c_e_l_l_a_n_e_o_u_s _d_a_t_a which may be	stored
+	  in an	audio file depend on the file format.  The AIFF-C format, for
+	  example, has been designed so	that it	can be extended	in the future
+	  to support different kinds of	auxiliary data without breaking
+	  backward compatibility.
+
+     The library API has been designed to accommodate extended file formats
+     which contain multiple instrument configurations with arbitrary numbers
+     of	loops, and additional types of miscellaneous data.  Future releases of
+     the AF may	support	formats	with multiple audio tracks.
+
+     Audio File	Library	routines such as aaaaffffRRRReeeeaaaaddddFFFFrrrraaaammmmeeeessss(3dm) manipulate data for
+     a specified track in an audio file, which is specified by an integer
+     identifier.  The current implementation of	the library only supports a
+     single audio track	per file, regardless of	the file format, so for	now,
+     library routines expect the constant value	AAAAFFFF____DDDDEEEEFFFFAAAAUUUULLLLTTTT____TTTTRRRRAAAACCCCKKKK whenever an
+     audio track identifier argument is	required.
+
+
+
+
+
+									PPPPaaaaggggeeee 2222
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+DDDDAAAATTTTAAAA FFFFOOOORRRRMMMMAAAATTTT TTTTRRRRAAAANNNNSSSSPPPPAAAARRRREEEENNNNCCCCYYYY
+     In	addition to allowing transparent access	to a variety of	audio file
+     formats, the AF also allows transparent conversion	of the audio data
+     format between the	audio track (file) and the audio buffer	(as returned
+     by	aaaaffffRRRReeeeaaaaddddFFFFrrrraaaammmmeeeessss(3dm)) and for the reverse case (aaaaffffWWWWrrrriiiitttteeeeFFFFrrrraaaammmmeeeessss(3dm)).
+
+     _D_a_t_a _F_o_r_m_a_t consists of the following parameters:
+
+     Byte Order
+     Sample Format
+     Sample Width
+     Channel Count
+     Sampling Rate
+     Compression Type
+
+     The format	of the data that is loaded by the AF into the application's
+     audio buffer is known as the _v_i_r_t_u_a_l _f_o_r_m_a_t of the	data.  By default,
+     this format is identical to the _t_r_a_c_k format with two important
+     exceptions:
+
+     1)	The _b_y_t_e _o_r_d_e_r always defaults to big-endian.
+
+     2)	The data will always be	in _u_n_c_o_m_p_r_e_s_s_e_d	format.
+
+     Both of these are done in order to	assure backwards compatibility with
+     the older AF.  It is possible to set the _v_i_r_t_u_a_l _b_y_t_e _o_r_d_e_r to little-
+     endian using aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllBBBByyyytttteeeeOOOOrrrrddddeeeerrrr(3dm), but in the current AF the
+     _v_i_r_t_u_a_l _c_o_m_p_r_e_s_s_i_o_n will always be	'none'.	 The _v_i_r_t_u_a_l _f_o_r_m_a_t of the
+     audio data	may be changed at any time, and	may be done without
+     interruption of any ongoing audio i/o.
+
+     Here are the current compression and decompression	engines	supported by
+     the Audio File Library.  Note that	many others may	be supported in	the
+     future.
+
+     The Audio File Library implements software	codecs for the following:
+
+
+	  CCITT	G.711 mu-law/A-law (64 Kbs encoding for	8 kHz 16-bit data)
+	  CCITT	G.722 ADPCM (64	Kbs encoding for 16 kHz	16-bit data)
+	  CCITT	G.726 ADPCM (16, 24, 32, or 40 Kbs for 8 kHz 16-bit data)
+	  CCITT	G.728 ADPCM (16	Kbs for	8 kHz 16-bit data)
+	  GSM 06.10 (13	kBs for	8 kHz 16-bit data)
+	  IMA ADPCM (for 16-bit	data at	any sample rate)
+
+     The codecs	operate	in real-time at	the recommended	sample rates.  Real-
+     time operation for	stereo data may	require	setting	a high non-degrading
+     process priority (see _s_c_h_e_d_c_t_l(_2) or _n_p_r_i(_1)).
+
+     The Audio File Library also includes built-in support for MPEG bitstream
+     and Aware MultiRate audio compression.  In	order to enable	the MultiRate
+     compression support, you need to purchase a special license from Silicon
+
+
+
+									PPPPaaaaggggeeee 3333
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     Graphics, Inc. (see _A_w_a_r_e_I_n_t_r_o(3dm) and _a_f_A_w_a_r_e(3dm) for more
+     information).
+
+     Apple proprietary compression algorithms (ACE2, ACE8, MAC3, MAC6)
+     mentioned in the AIFF-C spec are not supported by the Audio File Library.
+
+PPPPCCCCMMMM MMMMAAAAPPPPPPPPIIIINNNNGGGG
+     In	the Audio File library,	the PCM	mapping	solves the following problem:
+     When you want to convert integer data to floating point data or vice
+     versa, how	do you specify the numeric mapping of one format to another?
+     For example, do you map to	the integer range or to	[-1.0,1.0]?  How do
+     you deal with the asymmetry of integers about 0?
+
+     An	application may	want to	take (possibly compressed) integer files with
+     8,16,24, or 32 bit	data in	them, and read those files into	a buffer in a
+     floating point format.  Sometimes the integer data	in the file is signed,
+     and sometimes it is unsigned.  Similarly, an application may want to
+     write floating point buffers which	are converted to signed	or unsigned
+     integers in real time as they are written to the file.
+
+     The user may have written his or her code to expect the floating point
+     sample values within a certain range, perhaps -1.0	to 1.0,	perhaps	0.0 to
+     1.0, perhaps -1000.0 to 1000.0.  If an integer->float conversion is
+     specified only by a slope,	it is impossible to achieve some of those
+     mappings (since the intercept is fixed).  Therefor	there is the concept
+     of	an intercept.  That way, for example, integer data which ranged	from
+     [0,65535] could be	mapped to the range [-1.0,1.0].	 However, this is
+     still not enough information.  The	integer	range is not symmetric and the
+     floating point range effectively is, and so we need to be more specific
+     about how the endpoints of	the mapping line up.  The addition of a
+     minimum and maximum clip value allow the application to determine how it
+     wishes to map values outside of a symmetrical range onto another
+     symmetrical range.
+
+     This technique assumes that there exists one PCM value which corresponds
+     to	'zero volts', and that there exists a differential PCM value which,
+     when added	to or subtracted from the 'zero	volt' value, produces a	value
+     corresponding to 'full-voltage'.  Also the	model (optionally) includes
+     the notion	of a maximum and minimum PCM value; the	library	will always
+     clip any PCM values it inputs or outputs to these values:
+
+     ssssllllooooppppeeee	 the 'full-voltage' differential PCM value
+
+     iiiinnnntttteeeerrrrcccceeeepppptttt	 the 'zero-volt' PCM value
+
+     mmmmiiiinnnncccclllliiiipppp	 the minimum 'legal' PCM value
+
+     mmmmaaaaxxxxcccclllliiiipppp	 the maximum 'legal' PCM value
+
+	  The idea of 'voltage'	is merely a canonical form and is in no	way
+	  intended to correspond with the hardware.
+
+
+
+
+									PPPPaaaaggggeeee 4444
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     Note that it does not matter what the 'full-voltage' level	is
+     numerically.  The user simply specifies the parameters of their data, and
+     the library uses the PCM mapping to map the user's	values to a desired
+     internal mapping, or perhaps to another user PCM mapping.
+
+     If	maxclip	<= minclip, this implies no clipping is	to be done.  It	means
+     all PCM values are	legal, even if they are	outside	the range of 'full-
+     voltage'.
+
+     In	the Audio File Library,	you specify a PCM mapping for the virtual
+     format and	optionally also	for the	track format.  This pseudo-code	shows
+     exactly how the AF	maps each sample value "in_pcm"	to a sample value
+     "out_pcm."	 For an	AFfilehandle opened for	input, "in" is the track and
+     "out" is your buffer.  For	an AFfilehandle	opened for output, "in"	is
+     your buffer and "out" is the track:
+
+	  /* transform in_pcm to volts */
+
+	  if (in_maxclip > in_minclip)
+	  {
+	      if (in_pcm < in_minclip) in_pcm =	in_minclip;
+	      if (in_pcm > in_maxclip) in_pcm =	in_maxclip;
+	  }
+	  volts	= (in_pcm - in_intercept) / in_slope;
+
+
+
+
+
+
+
+
+	  /* transform volts to	out_pcm	*/
+
+	  out_pcm = out_intercept + out_slope *	volts;
+	  if (out_maxclip > out_minclip)
+	  {
+	      if (out_pcm < out_minclip) out_pcm = out_minclip;
+	      if (out_pcm > out_maxclip) out_pcm = out_maxclip;
+	  }
+
+AAAAUUUUDDDDIIIIOOOO FFFFIIIILLLLEEEE LLLLIIIIBBBBRRRRAAAARRRRYYYY PPPPRRRROOOOGGGGRRRRAAAAMMMMMMMMIIIINNNNGGGG IIIINNNNTTTTEEEERRRRFFFFAAAACCCCEEEE
+     The basic data types for the Audio	File Library are the AAAAFFFFffffiiiilllleeeesssseeeettttuuuupppp and
+     AAAAFFFFffffiiiilllleeeehhhhaaaannnnddddlllleeee structures.
+
+     AAAAFFFFffffiiiilllleeeesssseeeettttuuuupppp is an opaque structure	which is used to configure a new audio
+     file before it is created by aaaaffffOOOOppppeeeennnnFFFFiiiilllleeee(3dm).  Parameters stored in an
+     AAAAFFFFffffiiiilllleeeesssseeeettttuuuupppp include the file format, sample format	and sample rate, and
+     types and sizes of	miscellaneous data chunks to be	stored in the file.
+     aaaaffffOOOOppppeeeennnnFFFFiiiilllleeee(3dm) allocates file header space according to the parameters
+     stored in the AAAAFFFFffffiiiilllleeeesssseeeettttuuuupppp(3dm) argument.
+
+
+
+
+									PPPPaaaaggggeeee 5555
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     An	AAAAFFFFffffiiiilllleeeehhhhaaaannnnddddlllleeee is	an opaque structure which is used to read audio	data
+     and auxiliary information from an existing	file, or write audio data and
+     auxiliary information to a	new file.  The AAAAFFFFffffiiiilllleeeehhhhaaaannnnddddlllleeee structure
+     maintains state information such as the current location of the logical
+     audio sample read/write pointer and the logical locations of the data
+     read/write	pointers for the various miscellaneous data chunks.
+
+     Following is a list of the	functions included in the Audio	File Library.
+
+     Functions for performing basic operations on an AAAAFFFFffffiiiilllleeeehhhhaaaannnnddddlllleeee structure,
+     and for allocating	and freeing AAAAFFFFffffiiiilllleeeesssseeeettttuuuupppp	and AAAAFFFFffffiiiilllleeeehhhhaaaannnnddddlllleeee structures:
+
+     aaaaffffCCCClllloooosssseeeeFFFFiiiilllleeee(3dm)		    close and deallocate an AFfilehandle
+
+     aaaaffffFFFFrrrreeeeeeeeFFFFiiiilllleeeeSSSSeeeettttuuuupppp(3dm)	    deallocate an AFfilesetup struct
+
+     aaaaffffIIIIddddeeeennnnttttiiiiffffyyyyFFFFDDDD(3dm)		    determine the audio	file format for	a Unix
+				    file descriptor
+
+     aaaaffffIIIIddddeeeennnnttttiiiiffffyyyyNNNNaaaammmmeeeeddddFFFFDDDD(3dm)	    determine the audio	file format for	a Unix
+				    file descriptor and	supplied filename
+
+     aaaaffffNNNNeeeewwwwFFFFiiiilllleeeeSSSSeeeettttuuuupppp(3dm)	    create an AFfilesetup struct
+
+     aaaaffffOOOOppppeeeennnnFFFFDDDD(3dm)		    create an AFfilehandle for a Unix file
+				    descriptor
+
+     aaaaffffOOOOppppeeeennnnFFFFiiiilllleeee(3dm)		    create an AFfilehandle for a named file
+
+     aaaaffffRRRReeeeaaaaddddMMMMiiiisssscccc(3dm)		    read buffer	of miscellaneous data
+
+     aaaaffffRRRReeeeaaaaddddFFFFrrrraaaammmmeeeessss(3dm)		    read a buffer of sample frames from	an
+				    audio track
+
+     aaaaffffSSSSeeeeeeeekkkkMMMMiiiisssscccc(3dm)		    seek to given location in miscellaneous
+				    data
+
+     aaaaffffSSSSeeeettttCCCCoooonnnnvvvveeeerrrrssssiiiioooonnnnPPPPaaaarrrraaaammmmssss(3dm)	    set, via ddddmmmmPPPPaaaarrrraaaammmmssss(3dm), the	parameters
+				    used for format and	rate conversion	in an
+				    audio track.  This includes	the rate
+				    conversion algorithm, if any, and the
+				    dithering algorithm.
+
+     aaaaffffSSSSeeeettttEEEErrrrrrrroooorrrrHHHHaaaannnnddddlllleeeerrrr(3dm)	    supply an error reporting routine for the
+				    library
+
+     aaaaffffSSSSeeeettttTTTTrrrraaaacccckkkkPPPPCCCCMMMMMMMMaaaappppppppiiiinnnngggg(3dm)	    set	the PCM	mapping	(slope,	intercept, min
+				    clip, max clip) for	the audio data in a
+				    track, overriding the track's default
+
+
+
+
+
+
+									PPPPaaaaggggeeee 6666
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     aaaaffffSSSSyyyynnnnccccFFFFiiiilllleeee(3dm)		    update file	header without closing file
+
+     aaaaffffWWWWrrrriiiitttteeeeFFFFrrrraaaammmmeeeessss(3dm)		    write a buffer of sample frames to an
+				    audio track
+
+     aaaaffffWWWWrrrriiiitttteeeeMMMMiiiisssscccc(3dm)		    write buffer of miscellaneous data
+
+     Functions for obtaining information from an AAAAFFFFffffiiiilllleeeehhhhaaaannnnddddlllleeee structure:
+
+     aaaaffffGGGGeeeettttAAAAEEEESSSSCCCChhhhaaaannnnnnnneeeellllDDDDaaaattttaaaa(3dm)	    read AES channel status for	an audio track
+
+     aaaaffffGGGGeeeettttBBBByyyytttteeeeOOOOrrrrddddeeeerrrr(3dm)	    get	the byte order (big- or	little-endian)
+				    for	samples	in a track
+
+     aaaaffffGGGGeeeettttCCCChhhhaaaannnnnnnneeeellllssss(3dm)		    get	the number of interleaved channels in
+				    a track
+
+     aaaaffffGGGGeeeettttCCCCoooommmmpppprrrreeeessssssssiiiioooonnnn(3dm)	    get	compression type for a track
+
+     aaaaffffGGGGeeeettttCCCCoooommmmpppprrrreeeessssssssiiiioooonnnnPPPPaaaarrrraaaammmmssss(3dm)    get	compression type and algorithm-
+				    specific compression parameters for	a
+				    track
+
+     aaaaffffGGGGeeeettttDDDDaaaattttaaaaOOOOffffffffsssseeeetttt(3dm)	    get	the offset in bytes from the beginning
+				    of the file	to the beginning of the	audio
+				    data
+
+     aaaaffffGGGGeeeettttFFFFDDDD(3dm)		    get	Unix file descriptor from an
+				    AFfilehandle
+
+     aaaaffffGGGGeeeettttFFFFiiiilllleeeeFFFFoooorrrrmmmmaaaatttt(3dm)	    get	the file format	for an AFfilehandle
+
+     aaaaffffGGGGeeeettttFFFFoooorrrrmmmmaaaattttPPPPaaaarrrraaaammmmssss(3dm)	    get	(via ddddmmmmPPPPaaaarrrraaaammmmssss(3dm)) the	sample format,
+				    channels, byte order, etc. for a track
+
+     aaaaffffGGGGeeeettttFFFFrrrraaaammmmeeeeCCCCoooouuuunnnntttt(3dm)	    get	the total number of frames in a	track.
+
+     aaaaffffGGGGeeeettttIIIInnnnssssttttIIIIDDDDssss(3dm)		    get	list of	instrument map id's
+
+     aaaaffffGGGGeeeettttIIIInnnnssssttttPPPPaaaarrrraaaammmmLLLLoooonnnngggg(3dm)	    get	value of an instrument map parameter
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppCCCCoooouuuunnnntttt(3dm)	    get	the loop count (number of repetitions)
+				    for	a given	loop
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppEEEEnnnndddd(3dm)		    get	the marker id for a loop's end frame
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppEEEEnnnnddddFFFFrrrraaaammmmeeee(3dm)	    get	a loop's end frame directly
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppIIIIDDDDssss(3dm)		    get	a list of loop id's for	an instrument
+				    config
+
+
+
+
+
+									PPPPaaaaggggeeee 7777
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppMMMMooooddddeeee(3dm)		    get	the loop mode for a given loop
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppSSSSttttaaaarrrrtttt(3dm)	    get	the marker id for a loop's start frame
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppSSSSttttaaaarrrrttttFFFFrrrraaaammmmeeee(3dm)	    get	a loop's start frame directly
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppTTTTrrrraaaacccckkkk(3dm)	    get	the track id for a given loop
+
+     aaaaffffGGGGeeeettttMMMMaaaarrrrkkkkCCCCoooommmmmmmmeeeennnntttt(3dm)	    get	text comment for a marker
+
+     aaaaffffGGGGeeeettttMMMMaaaarrrrkkkkIIIIDDDDssss(3dm)		    get	list of	markers	for an audio track
+
+     aaaaffffGGGGeeeettttMMMMaaaarrrrkkkkNNNNaaaammmmeeee(3dm)		    get	name of	a marker
+
+     aaaaffffGGGGeeeettttMMMMaaaarrrrkkkkPPPPoooossssiiiittttiiiioooonnnn(3dm)	    get	track location for a given marker
+
+     aaaaffffGGGGeeeettttMMMMiiiissssccccIIIIDDDDssss(3dm)		    get	list of	miscellaneous data chunks
+
+     aaaaffffGGGGeeeettttMMMMiiiissssccccSSSSiiiizzzzeeee(3dm)		    get	size of	a miscellaneous	data chunk
+
+     aaaaffffGGGGeeeettttMMMMiiiissssccccTTTTyyyyppppeeee(3dm)		    get	type of	data in	miscellaneous data
+				    chunk
+
+     aaaaffffGGGGeeeettttPPPPCCCCMMMMMMMMaaaappppppppiiiinnnngggg(3dm)	    get	the PCM	mapping	(slope,	intercept, min
+				    clip, max clip) for	the audio data in a
+				    track
+
+     aaaaffffGGGGeeeettttRRRRaaaatttteeee(3dm)		    get	the sample rate	for an audio track
+
+     aaaaffffGGGGeeeettttSSSSaaaammmmpppplllleeeeFFFFoooorrrrmmmmaaaatttt(3dm)	    get	the sample format and resolution
+				    (sample width) for a track
+
+     aaaaffffGGGGeeeettttTTTTrrrraaaacccckkkkBBBByyyytttteeeessss(3dm)	    get	the total raw byte count for the audio
+				    data in a track
+
+     aaaaffffGGGGeeeettttTTTTrrrraaaacccckkkkIIIIDDDDssss(3dm)		    get	list of	track id's for an AFfilehandle
+
+     Functions for setting and getting the virtual (audio data buffer) format.
+
+     aaaaffffGGGGeeeettttVVVViiiirrrrttttuuuuaaaallllBBBByyyytttteeeeOOOOrrrrddddeeeerrrr(3dm)	     get the byte order	(big- or little-
+				     endian) of	the audio data buffer
+
+     aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllBBBByyyytttteeeeOOOOrrrrddddeeeerrrr(3dm)	     set the byte order	(big- or little-
+				     endian) of	the audio data buffer
+
+     aaaaffffGGGGeeeettttVVVViiiirrrrttttuuuuaaaallllCCCChhhhaaaannnnnnnneeeellllssss(3dm)	     get the number of interleaved channels in
+				     the audio data buffer
+
+     aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllCCCChhhhaaaannnnnnnneeeellllssss(3dm)	     set the number of interleaved channels in
+				     the audio data buffer
+
+
+
+
+
+									PPPPaaaaggggeeee 8888
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllFFFFoooorrrrmmmmaaaattttPPPPaaaarrrraaaammmmssss(3dm)   set (via ddddmmmmPPPPaaaarrrraaaammmmssss(3dm)) the virtual
+				     sample format, channels, byte order, etc.
+				     for a track
+
+     aaaaffffGGGGeeeettttVVVViiiirrrrttttuuuuaaaallllFFFFrrrraaaammmmeeeeSSSSiiiizzzzeeee(3dm)	     get the frame size	in bytes for the audio
+				     data buffer
+
+     aaaaffffGGGGeeeettttVVVViiiirrrrttttuuuuaaaallllPPPPCCCCMMMMMMMMaaaappppppppiiiinnnngggg(3dm)     get the PCM mapping (slope, intercept,
+				     min clip, max clip) for the audio data
+				     buffer
+
+     aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllPPPPCCCCMMMMMMMMaaaappppppppiiiinnnngggg(3dm)     set the PCM mapping (slope, intercept,
+				     min clip, max clip) for the audio data
+				     buffer
+
+     aaaaffffGGGGeeeettttVVVViiiirrrrttttuuuuaaaallllRRRRaaaatttteeee(3dm)	     get the sampling rate of the audio	data
+				     buffer.
+
+     aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllRRRRaaaatttteeee(3dm)	     set the sampling rate for the audio data
+				     buffer.  Data will	be automatically
+				     rate-converted to match the virtual rate
+				     setting.
+
+     aaaaffffGGGGeeeettttVVVViiiirrrrttttuuuuaaaallllSSSSaaaammmmpppplllleeeeFFFFoooorrrrmmmmaaaatttt(3dm)   get the sample format and resolution
+				     (sample width) of the audio data buffer
+
+     aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllSSSSaaaammmmpppplllleeeeFFFFoooorrrrmmmmaaaatttt(3dm)   set the sample format and resolution of
+				     the audio data buffer
+
+     Functions for setting initialization parameters in	an AAAAFFFFffffiiiilllleeeesssseeeettttuuuupppp
+     structure (which is used to configure an audio file when the file is
+     opened):
+
+     aaaaffffIIIInnnniiiittttAAAAEEEESSSSCCCChhhhaaaannnnnnnneeeellllDDDDaaaattttaaaa(3dm)	    reserve space for AES channel status in a
+				    new	file
+
+     aaaaffffIIIInnnniiiittttBBBByyyytttteeeeOOOOrrrrddddeeeerrrr(3dm)	    configure the byte order for the audio
+				    data in a track
+
+     aaaaffffIIIInnnniiiittttCCCChhhhaaaannnnnnnneeeellllssss(3dm)	    configure number of	channels for a new
+				    track
+
+     aaaaffffIIIInnnniiiittttCCCCoooommmmpppprrrreeeessssssssiiiioooonnnn(3dm)	    configure compression type for a track
+
+     aaaaffffIIIInnnniiiittttCCCCoooommmmpppprrrreeeessssssssiiiioooonnnnPPPPaaaarrrraaaammmmssss(3dm)   configure compression type and algorithm-
+				    specific parameters
+
+     aaaaffffIIIInnnniiiittttFFFFiiiilllleeeeFFFFoooorrrrmmmmaaaatttt(3dm)	    configure the format for a new file
+
+     aaaaffffIIIInnnniiiittttFFFFoooorrrrmmmmaaaattttPPPPaaaarrrraaaammmmssss(3dm)	    configure (via ddddmmmmPPPPaaaarrrraaaammmmssss(3dm)) the sample
+				    format, channels, byte order, etc. for a
+				    new	track
+
+
+
+									PPPPaaaaggggeeee 9999
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     aaaaffffIIIInnnniiiittttDDDDaaaattttaaaaOOOOffffffffsssseeeetttt(3dm)	    configure the offset in bytes from the
+				    beginning of the file for the audio	data
+
+     aaaaffffIIIInnnniiiittttFFFFrrrraaaammmmeeeeCCCCoooouuuunnnntttt(3dm)	    configure the expected frame count for the
+				    audio data
+
+     aaaaffffIIIInnnniiiittttIIIInnnnssssttttIIIIDDDDssss(3dm)		    configure instrument config	id's for a new
+				    file
+
+     aaaaffffIIIInnnniiiittttLLLLooooooooppppIIIIDDDDssss(3dm)		    configure loop id's	for an instrument map
+
+     aaaaffffIIIInnnniiiittttMMMMaaaarrrrkkkkCCCCoooommmmmmmmeeeennnntttt(3dm)	    configure text comment of a	marker
+
+     aaaaffffIIIInnnniiiittttMMMMaaaarrrrkkkkIIIIDDDDssss(3dm)		    configure marker id's for an audio track
+
+     aaaaffffIIIInnnniiiittttMMMMaaaarrrrkkkkNNNNaaaammmmeeee(3dm)	    configure name of a	marker
+
+     aaaaffffIIIInnnniiiittttMMMMiiiissssccccIIIIDDDDssss(3dm)		    configure miscellaneous data chunk id's
+
+     aaaaffffIIIInnnniiiittttMMMMiiiissssccccSSSSiiiizzzzeeee(3dm)	    configure size of a	miscellaneous chunk
+
+     aaaaffffIIIInnnniiiittttMMMMiiiissssccccTTTTyyyyppppeeee(3dm)	    configure type of data for a miscellaneous
+				    chunk
+
+     aaaaffffIIIInnnniiiittttPPPPCCCCMMMMMMMMaaaappppppppiiiinnnngggg(3dm)	    configure the PCM mapping (slope,
+				    intercept, min clip, max clip) for the
+				    audio data in a track
+
+     aaaaffffIIIInnnniiiittttRRRRaaaatttteeee(3dm)		    configure sample rate for a	new track
+
+     aaaaffffIIIInnnniiiittttSSSSaaaammmmpppplllleeeeFFFFoooorrrrmmmmaaaatttt(3dm)	    configure sample format for	a new track
+
+     aaaaffffIIIInnnniiiittttTTTTrrrraaaacccckkkkIIIIDDDDssss(3dm)	    configure track id's for a new audio file
+
+     Functions for setting values in an	audio file after it has	been opened.
+
+     aaaaffffSSSSeeeettttAAAAEEEESSSSCCCChhhhaaaannnnnnnneeeellllDDDDaaaattttaaaa(3dm)	    write AES channel status to	an audio track
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppCCCCoooouuuunnnntttt(3dm)	    set	loop count (number of repetitions) for
+				    a specified	loop
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppEEEEnnnndddd(3dm)		    set	marker for a loop's end	frame
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppEEEEnnnnddddFFFFrrrraaaammmmeeee(3dm)	    set	a loop's end frame directly
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppMMMMooooddddeeee(3dm)		    set	loop mode for a	specified loop
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppSSSSttttaaaarrrrtttt(3dm)	    set	marker for a loop's start frame
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppSSSSttttaaaarrrrttttFFFFrrrraaaammmmeeee(3dm)	    set	a loop's start frame directly
+
+
+
+
+
+								       PPPPaaaaggggeeee 11110000
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppTTTTrrrraaaacccckkkk(3dm)	    set	the track id for a given loop
+
+     aaaaffffSSSSeeeettttMMMMaaaarrrrkkkkPPPPoooossssiiiittttiiiioooonnnn(3dm)	    set	the track location for a given marker
+
+     Functions for querying static parameters associated with the Audio	File
+     Library
+
+     aaaaffffQQQQuuuueeeerrrryyyy(3dm)	   return the value of a parameter as an AAAAUUUUppppvvvvlllliiiisssstttt
+			   struct
+
+     aaaaffffQQQQuuuueeeerrrryyyyLLLLoooonnnngggg(3dm)	   return the value of a parameter as a	long integer
+
+     aaaaffffQQQQuuuueeeerrrryyyyDDDDoooouuuubbbblllleeee(3dm)	   return the value of a parameter as a	double
+			   precision float point
+
+     aaaaffffQQQQuuuueeeerrrryyyyPPPPooooiiiinnnntttteeeerrrr(3dm)   return the value of a parameter as a	generic
+			   pointer (void *)
+
+CCCCAAAAVVVVEEEEAAAATTTTSSSS	FFFFOOOORRRR UUUUSSSSIIIINNNNGGGG TTTTHHHHEEEE HHHHAAAANNNNDDDDLLLLEEEE''''SSSS FFFFIIIILLLLEEEE DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTOOOORRRR
+     The file descriptor returned by aaaaffffGGGGeeeettttFFFFDDDD(3dm) is not intended to allow
+     users to read, write, and seek in the file	without	the knowledge of the
+     Audio File	Library.  Doing	so will	cause the library to give
+     unpredictable results unless the user saves and restores the file
+     position whenever they modify it.	This can be done using
+     aaaaffffSSSSaaaavvvveeeeFFFFiiiilllleeeePPPPoooossssiiiittttiiiioooonnnn(3dm) and aaaaffffRRRReeeessssttttoooorrrreeeeFFFFiiiilllleeeePPPPoooossssiiiittttiiiioooonnnn(3dm).  The same
+     precautions must be also used with	the file descriptor given to
+     afOpenFD().  Developers can get the offset	of the audio data in an	audio
+     file via the aaaaffffGGGGeeeettttDDDDaaaattttaaaaOOOOffffffffsssseeeetttt(3dm) function.
+
+CCCCAAAAVVVVEEEEAAAATTTTSSSS	AAAABBBBOOOOUUUUTTTT TTTTHHHHEEEE MMMMAAAANNNNNNNNEEEERRRR IIIINNNN WWWWHHHHIIIICCCCHHHH TTTTHHHHEEEE AAAAFFFF AAAACCCCCCCCEEEESSSSSSSSEEEESSSS FFFFIIIILLLLEEEESSSS
+     SGI gives no guarantees about the number or nature	of UNIX	system calls
+     that will result from a given AF call.  In	particular, afReadFrames() and
+     afWriteFrames() could actually read or write any amount of	data from the
+     file, or could read or write more than once in varying chunk sizes.
+     Also, afOpenFile(), afSeekFrame(),	afSyncFile(), afCloseFile(), and other
+     AF	functions could	result in any amount of	data being read	from or
+     written to	the file.  The AF will not write to a file opened for read
+     access or read from a file	opened for write access.
+
+     Users who are attempting to optimize the I/O in their program by managing
+     I/O system	call behavior should be	aware that at this time	we offer no
+     guarantees	about when the AF will perform system calls.
+
+CCCCAAAAVVVVEEEEAAAATTTTSSSS	FFFFOOOORRRR MMMMUUUULLLLTTTTIIIITTTTHHHHRRRREEEEAAAADDDDEEEEDDDD PPPPRRRROOOOGGGGRRRRAAAAMMMMMMMMIIIINNNNGGGG
+     The Audio File Library is NOT a multi-thread and/or multi-processor safe
+     library, in the following sense:
+
+     Users can make multiple, simultaneous, uncoordinated AF calls on
+     different AFfilehandles from different threads and	the library will
+     operate fine.  Each AFfilehandle completely encapsulates the state	needed
+     to	do operations on that AFfilehandle (except for error handling, which
+     is	explained next).
+
+
+
+								       PPPPaaaaggggeeee 11111111
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     Users cannot make multiple, simultaneous, uncoordinated AF	calls from
+     different threads to set or access	the library's global state--namely,
+     the error handler function.  If two threads simultaneously	try to set the
+     global error handler (even	the same error handler), the behavior is
+     undefined.	 See below for an alternative.
+
+     Furthermore, if the user writes an	error handler, then makes multiple,
+     simultaneous, uncoordinated AF calls on different filehandles from
+     different threads,	and both AF calls issue	an error simultaneously, then
+     two instances of the user's error handler will be called in a
+     simultaneous, uncoordinated manner	in two threads.	 If this situation is
+     possible in a user's program, the user should use semaphores in their
+     error handler in order to make sure their handler doesn't try and report
+     or	deal with two errors at	the same time.	Note that any AF function can
+     cause an AF error to occur.  Do not assume	a function will	not produce
+     and error just because it is simple.
+
+     A new form	of MT-safe error handling mechanism is now available; if an
+     application wishes	to use it, it should call aaaaffffSSSSeeeettttEEEErrrrrrrroooorrrrHHHHaaaannnnddddlllleeeerrrr(3dm) with
+     a NULL value to disable the old error handler system, and call
+     ddddmmmmGGGGeeeettttEEEErrrrrrrroooorrrr(3dm) when a function returns an	error value.  The application
+     must also add ----llllddddmmmmeeeeddddiiiiaaaa to the link	arguments if it	calls this routine.
+
+     Now the most important caveat:  Users cannot make multiple, simultaneous,
+     uncoordinated AF calls on the same	AFfilehandle from different threads,
+     even if the order of execution of those calls does	not matter to the
+     user.  Doing so will very likely cause a core dump, or at least
+     corruption	of the AFfilehandle.  This behavior will never be changed, as
+     we	refuse to make our developers pay the price of semaphore locking code
+     at	the beginning and end of every afReadFrames and	afWriteFrames call.
+     Most users	do not need, and in fact really	do not want, semaphore
+     protection	that is	built-in to the	AF calls themselves.
+
+FFFFIIIILLLLEEEESSSS
+     Audio File	Library	header file:
+	  /usr/include/dmedia/audiofile.h
+
+     Audio File	Library	code examples:
+	  /usr/share/src/dmedia/soundcommands/*
+	  /usr/share/src/dmedia/soundfile/*
+
+     The programs ppppllllaaaayyyyaaaaiiiiffffffff((((1111)))) and ppppllllaaaayyyyaaaaiiiiffffcccc((((1111)))) are now installed	as links to
+     the program ssssffffppppllllaaaayyyy((((1111)))); rrrreeeeccccoooorrrrddddaaaaiiiiffffffff((((1111)))) and rrrreeeeccccoooorrrrddddaaaaiiiiffffcccc((((1111)))) are	now installed
+     as	links to the program ssssffffrrrreeeeccccoooorrrrdddd((((1111)))).  These programs are based on calls
+     to	the and	Audio File Library and Audio Library.
+
+     The file aaaaiiiiffffccccccccoooonnnnvvvveeeerrrrtttt....cccc is actually	the source for several programs	which
+     are installed in /usr/sbin: aaaaiiiiffffcccc2222aaaaiiiiffffffff((((1111)))), aaaaiiiiffffffff2222aaaaiiiiffffcccc((((1111)))), aaaaiiiiffffccccccccoooommmmpppprrrreeeessssssss((((1111)))),
+     and aaaaiiiiffffccccddddeeeeccccoooommmmpppprrrreeeessssssss((((1111)))).
+
+
+
+
+
+
+								       PPPPaaaaggggeeee 11112222
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+BBBBUUUUGGGGSSSS
+     The AIFF-C	"comments chunk" described in the format spec is not yet
+     supported by the library.	AIFF-C files which contain comment-marker data
+     will parse, but there is not yet a	way to access comment-marker
+     information through the Audio File	API.
+
+DDDDOOOOCCCCUUUUMMMMEEEENNNNTTTTAAAATTTTIIIIOOOONNNN
+     Digital Audio/MIDI	Programming Guide
+
+     _A_u_d_i_o _I_n_t_e_r_c_h_a_n_g_e _F_i_l_e _F_o_r_m_a_t _A_I_F_F-_C _S_p_e_c_i_f_i_c_a_t_i_o_n, Apple Computer	Inc.
+
+     _A_d_d_e_n_d_u_m _t_o _t_h_e _A_u_d_i_o _I_n_t_e_r_c_h_a_n_g_e _F_i_l_e _F_o_r_m_a_t _A_I_F_F-_C _S_p_e_c_i_f_i_c_a_t_i_o_n,
+     Silicon Graphics Inc.
+
+     CCITT _R_e_c_o_m_m_e_n_d_a_t_i_o_n _G._7_1_1
+
+     CCITT _R_e_c_o_m_m_e_n_d_a_t_i_o_n _G._7_2_2
+
+     aware(5), Introduction to Aware audio compression,	Aware Inc.
+
+     ISO/IEC MPEG Specification
+
+     afAware(3dm), Audio File Library interface	to Aware audio compression
+
+RRRREEEELLLLAAAATTTTEEEEDDDD	LLLLIIIIBBBBRRRRAAAARRRRIIIIEEEESSSS
+     ALintro(3dm), Introduction	to the SGI Audio Library
+
+     CDaudio(3), Introduction to the SGI Audio Compact Disc library
+
+     DATaudio(3), Introduction to the SGI Digital Audio	Tape Library
+
+     dmIntro(3dm), Introduction	to the IRIS Digital Media Libraries
+
+     /usr/include/dmedia/midi.h, header	file for the SGI MIDI Library
+
+SSSSEEEEEEEE AAAALLLLSSSSOOOO
+     IRIX Real-time Support:
+     npri(1), select(2), sproc(2), setitimer(2), schedctl(2)
+
+     Audio File	Library	demo programs:
+     recordaifc(1), playaifc(1), aifcinfo(1), dmGetError(3dm), aiff2aifc(1),
+     aifc2aiff(1), aifccompress(1), aifcdecompress(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+								       PPPPaaaaggggeeee 11113333
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+NNNNAAAAMMMMEEEE
+     afIntro, AFintro -	Introduction to	the Silicon Graphics Audio File
+     Library (AF)
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     ####iiiinnnncccclllluuuuddddeeee <<<<ddddmmmmeeeeddddiiiiaaaa////aaaauuuuddddiiiiooooffffiiiilllleeee....hhhh>>>>
+
+     ----llllaaaauuuuddddiiiiooooffffiiiilllleeee
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The Silicon Graphics Audio	File Library (AF) provides a uniform
+     programming interface to standard digital audio file formats.
+
+     Thirteen audio file formats are currently supported by the	library:
+
+     Extended AIFF-C standard
+     AIFF (older version)
+     NeXT/Sun SND/AU
+     WAVE (RIFF)
+     Berkeley/IRCAM/CARL SoundFile
+     MPEG1 audio bitstream
+     Sound Designer II
+     Audio Visual Research
+     Amiga IFF/8SVX
+     SampleVision
+     VOC
+     SoundFont2
+     Raw (headerless)
+
+     Note that the library will	continue to support additional file formats
+     and data formats, and this	has significant	ramifications for how it
+     should be used.  The Audio	File Library is	released as a Dynamic Shared
+     Object (DSO). This	means that as the library starts supporting new	file
+     formats, programs written at an earlier time can automatically support
+     these new formats.	 It requires a bit of caution to write a program so
+     that it operates correctly	as new Audio File Libraries are	released.  See
+     aaaaffffGGGGeeeettttFFFFiiiilllleeeeFFFFoooorrrrmmmmaaaatttt(3dm) for an example of this.  Make	sure to	read the
+     CAVEATS section of	each Audio Library function man	page; this is where
+     the warning about correct use will	appear.
+
+     SGI has adopted AIFF-C as its default digital audio file format.  This
+     means that	the default file configuration for writing (see
+     aaaaffffNNNNeeeewwwwFFFFiiiilllleeeeSSSSeeeettttuuuupppp(3dm)) is set to match the default parameters of this
+     format.  For backward compatibility, the Audio File Library fully
+     supports the older	AIFF standard in addition to AIFF-C.  See aaaaiiiiffffffff(4) for
+     more detailed information.
+
+     Key goals of the Audio File Library are _f_i_l_e _f_o_r_m_a_t _t_r_a_n_s_p_a_r_e_n_c_y and _d_a_t_a
+     _f_o_r_m_a_t _t_r_a_n_s_p_a_r_e_n_c_y.  The same calls for opening a	file, reading/writing
+     basic header information (e.g., sample rate, sample format), and
+     reading/writing sample data will work with	any supported audio file
+     format.
+
+
+
+									PPPPaaaaggggeeee 1111
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     The basic library routines	for reading audio samples from files and
+     writing samples to	files, aaaaffffRRRReeeeaaaaddddFFFFrrrraaaammmmeeeessss(3dm) and aaaaffffWWWWrrrriiiitttteeeeFFFFrrrraaaammmmeeeessss(3dm),
+     contain built-in codec support for	compressed audio data.
+
+     The library currently supports read-only and write-only file access.  To
+     edit an existing file, you	must create a new file and copy	audio and
+     other data	 from the original file.  Example code which shows how to copy
+     the logical components of a file is available in the
+     /_u_s_r/_s_h_a_r_e/_s_r_c/_d_m_e_d_i_a/_s_o_u_n_d_f_i_l_e directory.
+
+LLLLOOOOGGGGIIIICCCCAAAALLLL	CCCCOOOOMMMMPPPPOOOONNNNEEEENNNNTTTTSSSS OOOOFFFF AAAANNNN AAAAUUUUDDDDIIIIOOOO FFFFIIIILLLLEEEE
+     The Audio File Library API	breaks audio files up into these logical
+     components: _t_r_a_c_k_s, _i_n_s_t_r_u_m_e_n_t _c_o_n_f_i_g_u_r_a_t_i_o_n_s, and	_m_i_s_c_e_l_l_a_n_e_o_u_s _d_a_t_a
+     _c_h_u_n_k_s.
+
+     _t_r_a_c_k_s
+	  consist of audio sample data,	parameters which characterize the data
+	  (sample rate,	mono/stereo, compression type),	and _m_a_r_k_e_r structures
+	  which	store sample frame locations in	the track.  _M_a_r_k_e_r_s are	used
+	  for indicating loop point locations within audio tracks, for
+	  example.
+
+     _i_n_s_t_r_u_m_e_n_t	_c_o_n_f_i_g_u_r_a_t_i_o_n_s
+	  are collections of parameters	which can be used to configure
+	  samplers to play back	audio _t_r_a_c_k data.  These parameters include
+	  _l_o_o_p_s, gain levels, and keyboard mapping information.	 Though	these
+	  were originally designed only	for use	with AIFF-C files, they	have
+	  been expanded	to provide access to instrument	and/or sample
+	  parameters in	all file types which support such things.
+
+     _m_i_s_c_e_l_l_a_n_e_o_u_s _d_a_t_a	_c_h_u_n_k_s
+	  include text strings (author,	copyright, name, annotation) and
+	  pieces of auxiliary information (MIDI	exclusive data,	application-
+	  specific data).  The kinds of	_m_i_s_c_e_l_l_a_n_e_o_u_s _d_a_t_a which may be	stored
+	  in an	audio file depend on the file format.  The AIFF-C format, for
+	  example, has been designed so	that it	can be extended	in the future
+	  to support different kinds of	auxiliary data without breaking
+	  backward compatibility.
+
+     The library API has been designed to accommodate extended file formats
+     which contain multiple instrument configurations with arbitrary numbers
+     of	loops, and additional types of miscellaneous data.  Future releases of
+     the AF may	support	formats	with multiple audio tracks.
+
+     Audio File	Library	routines such as aaaaffffRRRReeeeaaaaddddFFFFrrrraaaammmmeeeessss(3dm) manipulate data for
+     a specified track in an audio file, which is specified by an integer
+     identifier.  The current implementation of	the library only supports a
+     single audio track	per file, regardless of	the file format, so for	now,
+     library routines expect the constant value	AAAAFFFF____DDDDEEEEFFFFAAAAUUUULLLLTTTT____TTTTRRRRAAAACCCCKKKK whenever an
+     audio track identifier argument is	required.
+
+
+
+
+
+									PPPPaaaaggggeeee 2222
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+DDDDAAAATTTTAAAA FFFFOOOORRRRMMMMAAAATTTT TTTTRRRRAAAANNNNSSSSPPPPAAAARRRREEEENNNNCCCCYYYY
+     In	addition to allowing transparent access	to a variety of	audio file
+     formats, the AF also allows transparent conversion	of the audio data
+     format between the	audio track (file) and the audio buffer	(as returned
+     by	aaaaffffRRRReeeeaaaaddddFFFFrrrraaaammmmeeeessss(3dm)) and for the reverse case (aaaaffffWWWWrrrriiiitttteeeeFFFFrrrraaaammmmeeeessss(3dm)).
+
+     _D_a_t_a _F_o_r_m_a_t consists of the following parameters:
+
+     Byte Order
+     Sample Format
+     Sample Width
+     Channel Count
+     Sampling Rate
+     Compression Type
+
+     The format	of the data that is loaded by the AF into the application's
+     audio buffer is known as the _v_i_r_t_u_a_l _f_o_r_m_a_t of the	data.  By default,
+     this format is identical to the _t_r_a_c_k format with two important
+     exceptions:
+
+     1)	The _b_y_t_e _o_r_d_e_r always defaults to big-endian.
+
+     2)	The data will always be	in _u_n_c_o_m_p_r_e_s_s_e_d	format.
+
+     Both of these are done in order to	assure backwards compatibility with
+     the older AF.  It is possible to set the _v_i_r_t_u_a_l _b_y_t_e _o_r_d_e_r to little-
+     endian using aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllBBBByyyytttteeeeOOOOrrrrddddeeeerrrr(3dm), but in the current AF the
+     _v_i_r_t_u_a_l _c_o_m_p_r_e_s_s_i_o_n will always be	'none'.	 The _v_i_r_t_u_a_l _f_o_r_m_a_t of the
+     audio data	may be changed at any time, and	may be done without
+     interruption of any ongoing audio i/o.
+
+     Here are the current compression and decompression	engines	supported by
+     the Audio File Library.  Note that	many others may	be supported in	the
+     future.
+
+     The Audio File Library implements software	codecs for the following:
+
+
+	  CCITT	G.711 mu-law/A-law (64 Kbs encoding for	8 kHz 16-bit data)
+	  CCITT	G.722 ADPCM (64	Kbs encoding for 16 kHz	16-bit data)
+	  CCITT	G.726 ADPCM (16, 24, 32, or 40 Kbs for 8 kHz 16-bit data)
+	  CCITT	G.728 ADPCM (16	Kbs for	8 kHz 16-bit data)
+	  GSM 06.10 (13	kBs for	8 kHz 16-bit data)
+	  IMA ADPCM (for 16-bit	data at	any sample rate)
+
+     The codecs	operate	in real-time at	the recommended	sample rates.  Real-
+     time operation for	stereo data may	require	setting	a high non-degrading
+     process priority (see _s_c_h_e_d_c_t_l(_2) or _n_p_r_i(_1)).
+
+     The Audio File Library also includes built-in support for MPEG bitstream
+     and Aware MultiRate audio compression.  In	order to enable	the MultiRate
+     compression support, you need to purchase a special license from Silicon
+
+
+
+									PPPPaaaaggggeeee 3333
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     Graphics, Inc. (see _A_w_a_r_e_I_n_t_r_o(3dm) and _a_f_A_w_a_r_e(3dm) for more
+     information).
+
+     Apple proprietary compression algorithms (ACE2, ACE8, MAC3, MAC6)
+     mentioned in the AIFF-C spec are not supported by the Audio File Library.
+
+PPPPCCCCMMMM MMMMAAAAPPPPPPPPIIIINNNNGGGG
+     In	the Audio File library,	the PCM	mapping	solves the following problem:
+     When you want to convert integer data to floating point data or vice
+     versa, how	do you specify the numeric mapping of one format to another?
+     For example, do you map to	the integer range or to	[-1.0,1.0]?  How do
+     you deal with the asymmetry of integers about 0?
+
+     An	application may	want to	take (possibly compressed) integer files with
+     8,16,24, or 32 bit	data in	them, and read those files into	a buffer in a
+     floating point format.  Sometimes the integer data	in the file is signed,
+     and sometimes it is unsigned.  Similarly, an application may want to
+     write floating point buffers which	are converted to signed	or unsigned
+     integers in real time as they are written to the file.
+
+     The user may have written his or her code to expect the floating point
+     sample values within a certain range, perhaps -1.0	to 1.0,	perhaps	0.0 to
+     1.0, perhaps -1000.0 to 1000.0.  If an integer->float conversion is
+     specified only by a slope,	it is impossible to achieve some of those
+     mappings (since the intercept is fixed).  Therefor	there is the concept
+     of	an intercept.  That way, for example, integer data which ranged	from
+     [0,65535] could be	mapped to the range [-1.0,1.0].	 However, this is
+     still not enough information.  The	integer	range is not symmetric and the
+     floating point range effectively is, and so we need to be more specific
+     about how the endpoints of	the mapping line up.  The addition of a
+     minimum and maximum clip value allow the application to determine how it
+     wishes to map values outside of a symmetrical range onto another
+     symmetrical range.
+
+     This technique assumes that there exists one PCM value which corresponds
+     to	'zero volts', and that there exists a differential PCM value which,
+     when added	to or subtracted from the 'zero	volt' value, produces a	value
+     corresponding to 'full-voltage'.  Also the	model (optionally) includes
+     the notion	of a maximum and minimum PCM value; the	library	will always
+     clip any PCM values it inputs or outputs to these values:
+
+     ssssllllooooppppeeee	 the 'full-voltage' differential PCM value
+
+     iiiinnnntttteeeerrrrcccceeeepppptttt	 the 'zero-volt' PCM value
+
+     mmmmiiiinnnncccclllliiiipppp	 the minimum 'legal' PCM value
+
+     mmmmaaaaxxxxcccclllliiiipppp	 the maximum 'legal' PCM value
+
+	  The idea of 'voltage'	is merely a canonical form and is in no	way
+	  intended to correspond with the hardware.
+
+
+
+
+									PPPPaaaaggggeeee 4444
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     Note that it does not matter what the 'full-voltage' level	is
+     numerically.  The user simply specifies the parameters of their data, and
+     the library uses the PCM mapping to map the user's	values to a desired
+     internal mapping, or perhaps to another user PCM mapping.
+
+     If	maxclip	<= minclip, this implies no clipping is	to be done.  It	means
+     all PCM values are	legal, even if they are	outside	the range of 'full-
+     voltage'.
+
+     In	the Audio File Library,	you specify a PCM mapping for the virtual
+     format and	optionally also	for the	track format.  This pseudo-code	shows
+     exactly how the AF	maps each sample value "in_pcm"	to a sample value
+     "out_pcm."	 For an	AFfilehandle opened for	input, "in" is the track and
+     "out" is your buffer.  For	an AFfilehandle	opened for output, "in"	is
+     your buffer and "out" is the track:
+
+	  /* transform in_pcm to volts */
+
+	  if (in_maxclip > in_minclip)
+	  {
+	      if (in_pcm < in_minclip) in_pcm =	in_minclip;
+	      if (in_pcm > in_maxclip) in_pcm =	in_maxclip;
+	  }
+	  volts	= (in_pcm - in_intercept) / in_slope;
+
+
+
+
+
+
+
+
+	  /* transform volts to	out_pcm	*/
+
+	  out_pcm = out_intercept + out_slope *	volts;
+	  if (out_maxclip > out_minclip)
+	  {
+	      if (out_pcm < out_minclip) out_pcm = out_minclip;
+	      if (out_pcm > out_maxclip) out_pcm = out_maxclip;
+	  }
+
+AAAAUUUUDDDDIIIIOOOO FFFFIIIILLLLEEEE LLLLIIIIBBBBRRRRAAAARRRRYYYY PPPPRRRROOOOGGGGRRRRAAAAMMMMMMMMIIIINNNNGGGG IIIINNNNTTTTEEEERRRRFFFFAAAACCCCEEEE
+     The basic data types for the Audio	File Library are the AAAAFFFFffffiiiilllleeeesssseeeettttuuuupppp and
+     AAAAFFFFffffiiiilllleeeehhhhaaaannnnddddlllleeee structures.
+
+     AAAAFFFFffffiiiilllleeeesssseeeettttuuuupppp is an opaque structure	which is used to configure a new audio
+     file before it is created by aaaaffffOOOOppppeeeennnnFFFFiiiilllleeee(3dm).  Parameters stored in an
+     AAAAFFFFffffiiiilllleeeesssseeeettttuuuupppp include the file format, sample format	and sample rate, and
+     types and sizes of	miscellaneous data chunks to be	stored in the file.
+     aaaaffffOOOOppppeeeennnnFFFFiiiilllleeee(3dm) allocates file header space according to the parameters
+     stored in the AAAAFFFFffffiiiilllleeeesssseeeettttuuuupppp(3dm) argument.
+
+
+
+
+									PPPPaaaaggggeeee 5555
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     An	AAAAFFFFffffiiiilllleeeehhhhaaaannnnddddlllleeee is	an opaque structure which is used to read audio	data
+     and auxiliary information from an existing	file, or write audio data and
+     auxiliary information to a	new file.  The AAAAFFFFffffiiiilllleeeehhhhaaaannnnddddlllleeee structure
+     maintains state information such as the current location of the logical
+     audio sample read/write pointer and the logical locations of the data
+     read/write	pointers for the various miscellaneous data chunks.
+
+     Following is a list of the	functions included in the Audio	File Library.
+
+     Functions for performing basic operations on an AAAAFFFFffffiiiilllleeeehhhhaaaannnnddddlllleeee structure,
+     and for allocating	and freeing AAAAFFFFffffiiiilllleeeesssseeeettttuuuupppp	and AAAAFFFFffffiiiilllleeeehhhhaaaannnnddddlllleeee structures:
+
+     aaaaffffCCCClllloooosssseeeeFFFFiiiilllleeee(3dm)		    close and deallocate an AFfilehandle
+
+     aaaaffffFFFFrrrreeeeeeeeFFFFiiiilllleeeeSSSSeeeettttuuuupppp(3dm)	    deallocate an AFfilesetup struct
+
+     aaaaffffIIIIddddeeeennnnttttiiiiffffyyyyFFFFDDDD(3dm)		    determine the audio	file format for	a Unix
+				    file descriptor
+
+     aaaaffffIIIIddddeeeennnnttttiiiiffffyyyyNNNNaaaammmmeeeeddddFFFFDDDD(3dm)	    determine the audio	file format for	a Unix
+				    file descriptor and	supplied filename
+
+     aaaaffffNNNNeeeewwwwFFFFiiiilllleeeeSSSSeeeettttuuuupppp(3dm)	    create an AFfilesetup struct
+
+     aaaaffffOOOOppppeeeennnnFFFFDDDD(3dm)		    create an AFfilehandle for a Unix file
+				    descriptor
+
+     aaaaffffOOOOppppeeeennnnFFFFiiiilllleeee(3dm)		    create an AFfilehandle for a named file
+
+     aaaaffffRRRReeeeaaaaddddMMMMiiiisssscccc(3dm)		    read buffer	of miscellaneous data
+
+     aaaaffffRRRReeeeaaaaddddFFFFrrrraaaammmmeeeessss(3dm)		    read a buffer of sample frames from	an
+				    audio track
+
+     aaaaffffSSSSeeeeeeeekkkkMMMMiiiisssscccc(3dm)		    seek to given location in miscellaneous
+				    data
+
+     aaaaffffSSSSeeeettttCCCCoooonnnnvvvveeeerrrrssssiiiioooonnnnPPPPaaaarrrraaaammmmssss(3dm)	    set, via ddddmmmmPPPPaaaarrrraaaammmmssss(3dm), the	parameters
+				    used for format and	rate conversion	in an
+				    audio track.  This includes	the rate
+				    conversion algorithm, if any, and the
+				    dithering algorithm.
+
+     aaaaffffSSSSeeeettttEEEErrrrrrrroooorrrrHHHHaaaannnnddddlllleeeerrrr(3dm)	    supply an error reporting routine for the
+				    library
+
+     aaaaffffSSSSeeeettttTTTTrrrraaaacccckkkkPPPPCCCCMMMMMMMMaaaappppppppiiiinnnngggg(3dm)	    set	the PCM	mapping	(slope,	intercept, min
+				    clip, max clip) for	the audio data in a
+				    track, overriding the track's default
+
+
+
+
+
+
+									PPPPaaaaggggeeee 6666
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     aaaaffffSSSSyyyynnnnccccFFFFiiiilllleeee(3dm)		    update file	header without closing file
+
+     aaaaffffWWWWrrrriiiitttteeeeFFFFrrrraaaammmmeeeessss(3dm)		    write a buffer of sample frames to an
+				    audio track
+
+     aaaaffffWWWWrrrriiiitttteeeeMMMMiiiisssscccc(3dm)		    write buffer of miscellaneous data
+
+     Functions for obtaining information from an AAAAFFFFffffiiiilllleeeehhhhaaaannnnddddlllleeee structure:
+
+     aaaaffffGGGGeeeettttAAAAEEEESSSSCCCChhhhaaaannnnnnnneeeellllDDDDaaaattttaaaa(3dm)	    read AES channel status for	an audio track
+
+     aaaaffffGGGGeeeettttBBBByyyytttteeeeOOOOrrrrddddeeeerrrr(3dm)	    get	the byte order (big- or	little-endian)
+				    for	samples	in a track
+
+     aaaaffffGGGGeeeettttCCCChhhhaaaannnnnnnneeeellllssss(3dm)		    get	the number of interleaved channels in
+				    a track
+
+     aaaaffffGGGGeeeettttCCCCoooommmmpppprrrreeeessssssssiiiioooonnnn(3dm)	    get	compression type for a track
+
+     aaaaffffGGGGeeeettttCCCCoooommmmpppprrrreeeessssssssiiiioooonnnnPPPPaaaarrrraaaammmmssss(3dm)    get	compression type and algorithm-
+				    specific compression parameters for	a
+				    track
+
+     aaaaffffGGGGeeeettttDDDDaaaattttaaaaOOOOffffffffsssseeeetttt(3dm)	    get	the offset in bytes from the beginning
+				    of the file	to the beginning of the	audio
+				    data
+
+     aaaaffffGGGGeeeettttFFFFDDDD(3dm)		    get	Unix file descriptor from an
+				    AFfilehandle
+
+     aaaaffffGGGGeeeettttFFFFiiiilllleeeeFFFFoooorrrrmmmmaaaatttt(3dm)	    get	the file format	for an AFfilehandle
+
+     aaaaffffGGGGeeeettttFFFFoooorrrrmmmmaaaattttPPPPaaaarrrraaaammmmssss(3dm)	    get	(via ddddmmmmPPPPaaaarrrraaaammmmssss(3dm)) the	sample format,
+				    channels, byte order, etc. for a track
+
+     aaaaffffGGGGeeeettttFFFFrrrraaaammmmeeeeCCCCoooouuuunnnntttt(3dm)	    get	the total number of frames in a	track.
+
+     aaaaffffGGGGeeeettttIIIInnnnssssttttIIIIDDDDssss(3dm)		    get	list of	instrument map id's
+
+     aaaaffffGGGGeeeettttIIIInnnnssssttttPPPPaaaarrrraaaammmmLLLLoooonnnngggg(3dm)	    get	value of an instrument map parameter
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppCCCCoooouuuunnnntttt(3dm)	    get	the loop count (number of repetitions)
+				    for	a given	loop
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppEEEEnnnndddd(3dm)		    get	the marker id for a loop's end frame
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppEEEEnnnnddddFFFFrrrraaaammmmeeee(3dm)	    get	a loop's end frame directly
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppIIIIDDDDssss(3dm)		    get	a list of loop id's for	an instrument
+				    config
+
+
+
+
+
+									PPPPaaaaggggeeee 7777
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppMMMMooooddddeeee(3dm)		    get	the loop mode for a given loop
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppSSSSttttaaaarrrrtttt(3dm)	    get	the marker id for a loop's start frame
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppSSSSttttaaaarrrrttttFFFFrrrraaaammmmeeee(3dm)	    get	a loop's start frame directly
+
+     aaaaffffGGGGeeeettttLLLLooooooooppppTTTTrrrraaaacccckkkk(3dm)	    get	the track id for a given loop
+
+     aaaaffffGGGGeeeettttMMMMaaaarrrrkkkkCCCCoooommmmmmmmeeeennnntttt(3dm)	    get	text comment for a marker
+
+     aaaaffffGGGGeeeettttMMMMaaaarrrrkkkkIIIIDDDDssss(3dm)		    get	list of	markers	for an audio track
+
+     aaaaffffGGGGeeeettttMMMMaaaarrrrkkkkNNNNaaaammmmeeee(3dm)		    get	name of	a marker
+
+     aaaaffffGGGGeeeettttMMMMaaaarrrrkkkkPPPPoooossssiiiittttiiiioooonnnn(3dm)	    get	track location for a given marker
+
+     aaaaffffGGGGeeeettttMMMMiiiissssccccIIIIDDDDssss(3dm)		    get	list of	miscellaneous data chunks
+
+     aaaaffffGGGGeeeettttMMMMiiiissssccccSSSSiiiizzzzeeee(3dm)		    get	size of	a miscellaneous	data chunk
+
+     aaaaffffGGGGeeeettttMMMMiiiissssccccTTTTyyyyppppeeee(3dm)		    get	type of	data in	miscellaneous data
+				    chunk
+
+     aaaaffffGGGGeeeettttPPPPCCCCMMMMMMMMaaaappppppppiiiinnnngggg(3dm)	    get	the PCM	mapping	(slope,	intercept, min
+				    clip, max clip) for	the audio data in a
+				    track
+
+     aaaaffffGGGGeeeettttRRRRaaaatttteeee(3dm)		    get	the sample rate	for an audio track
+
+     aaaaffffGGGGeeeettttSSSSaaaammmmpppplllleeeeFFFFoooorrrrmmmmaaaatttt(3dm)	    get	the sample format and resolution
+				    (sample width) for a track
+
+     aaaaffffGGGGeeeettttTTTTrrrraaaacccckkkkBBBByyyytttteeeessss(3dm)	    get	the total raw byte count for the audio
+				    data in a track
+
+     aaaaffffGGGGeeeettttTTTTrrrraaaacccckkkkIIIIDDDDssss(3dm)		    get	list of	track id's for an AFfilehandle
+
+     Functions for setting and getting the virtual (audio data buffer) format.
+
+     aaaaffffGGGGeeeettttVVVViiiirrrrttttuuuuaaaallllBBBByyyytttteeeeOOOOrrrrddddeeeerrrr(3dm)	     get the byte order	(big- or little-
+				     endian) of	the audio data buffer
+
+     aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllBBBByyyytttteeeeOOOOrrrrddddeeeerrrr(3dm)	     set the byte order	(big- or little-
+				     endian) of	the audio data buffer
+
+     aaaaffffGGGGeeeettttVVVViiiirrrrttttuuuuaaaallllCCCChhhhaaaannnnnnnneeeellllssss(3dm)	     get the number of interleaved channels in
+				     the audio data buffer
+
+     aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllCCCChhhhaaaannnnnnnneeeellllssss(3dm)	     set the number of interleaved channels in
+				     the audio data buffer
+
+
+
+
+
+									PPPPaaaaggggeeee 8888
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllFFFFoooorrrrmmmmaaaattttPPPPaaaarrrraaaammmmssss(3dm)   set (via ddddmmmmPPPPaaaarrrraaaammmmssss(3dm)) the virtual
+				     sample format, channels, byte order, etc.
+				     for a track
+
+     aaaaffffGGGGeeeettttVVVViiiirrrrttttuuuuaaaallllFFFFrrrraaaammmmeeeeSSSSiiiizzzzeeee(3dm)	     get the frame size	in bytes for the audio
+				     data buffer
+
+     aaaaffffGGGGeeeettttVVVViiiirrrrttttuuuuaaaallllPPPPCCCCMMMMMMMMaaaappppppppiiiinnnngggg(3dm)     get the PCM mapping (slope, intercept,
+				     min clip, max clip) for the audio data
+				     buffer
+
+     aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllPPPPCCCCMMMMMMMMaaaappppppppiiiinnnngggg(3dm)     set the PCM mapping (slope, intercept,
+				     min clip, max clip) for the audio data
+				     buffer
+
+     aaaaffffGGGGeeeettttVVVViiiirrrrttttuuuuaaaallllRRRRaaaatttteeee(3dm)	     get the sampling rate of the audio	data
+				     buffer.
+
+     aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllRRRRaaaatttteeee(3dm)	     set the sampling rate for the audio data
+				     buffer.  Data will	be automatically
+				     rate-converted to match the virtual rate
+				     setting.
+
+     aaaaffffGGGGeeeettttVVVViiiirrrrttttuuuuaaaallllSSSSaaaammmmpppplllleeeeFFFFoooorrrrmmmmaaaatttt(3dm)   get the sample format and resolution
+				     (sample width) of the audio data buffer
+
+     aaaaffffSSSSeeeettttVVVViiiirrrrttttuuuuaaaallllSSSSaaaammmmpppplllleeeeFFFFoooorrrrmmmmaaaatttt(3dm)   set the sample format and resolution of
+				     the audio data buffer
+
+     Functions for setting initialization parameters in	an AAAAFFFFffffiiiilllleeeesssseeeettttuuuupppp
+     structure (which is used to configure an audio file when the file is
+     opened):
+
+     aaaaffffIIIInnnniiiittttAAAAEEEESSSSCCCChhhhaaaannnnnnnneeeellllDDDDaaaattttaaaa(3dm)	    reserve space for AES channel status in a
+				    new	file
+
+     aaaaffffIIIInnnniiiittttBBBByyyytttteeeeOOOOrrrrddddeeeerrrr(3dm)	    configure the byte order for the audio
+				    data in a track
+
+     aaaaffffIIIInnnniiiittttCCCChhhhaaaannnnnnnneeeellllssss(3dm)	    configure number of	channels for a new
+				    track
+
+     aaaaffffIIIInnnniiiittttCCCCoooommmmpppprrrreeeessssssssiiiioooonnnn(3dm)	    configure compression type for a track
+
+     aaaaffffIIIInnnniiiittttCCCCoooommmmpppprrrreeeessssssssiiiioooonnnnPPPPaaaarrrraaaammmmssss(3dm)   configure compression type and algorithm-
+				    specific parameters
+
+     aaaaffffIIIInnnniiiittttFFFFiiiilllleeeeFFFFoooorrrrmmmmaaaatttt(3dm)	    configure the format for a new file
+
+     aaaaffffIIIInnnniiiittttFFFFoooorrrrmmmmaaaattttPPPPaaaarrrraaaammmmssss(3dm)	    configure (via ddddmmmmPPPPaaaarrrraaaammmmssss(3dm)) the sample
+				    format, channels, byte order, etc. for a
+				    new	track
+
+
+
+									PPPPaaaaggggeeee 9999
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     aaaaffffIIIInnnniiiittttDDDDaaaattttaaaaOOOOffffffffsssseeeetttt(3dm)	    configure the offset in bytes from the
+				    beginning of the file for the audio	data
+
+     aaaaffffIIIInnnniiiittttFFFFrrrraaaammmmeeeeCCCCoooouuuunnnntttt(3dm)	    configure the expected frame count for the
+				    audio data
+
+     aaaaffffIIIInnnniiiittttIIIInnnnssssttttIIIIDDDDssss(3dm)		    configure instrument config	id's for a new
+				    file
+
+     aaaaffffIIIInnnniiiittttLLLLooooooooppppIIIIDDDDssss(3dm)		    configure loop id's	for an instrument map
+
+     aaaaffffIIIInnnniiiittttMMMMaaaarrrrkkkkCCCCoooommmmmmmmeeeennnntttt(3dm)	    configure text comment of a	marker
+
+     aaaaffffIIIInnnniiiittttMMMMaaaarrrrkkkkIIIIDDDDssss(3dm)		    configure marker id's for an audio track
+
+     aaaaffffIIIInnnniiiittttMMMMaaaarrrrkkkkNNNNaaaammmmeeee(3dm)	    configure name of a	marker
+
+     aaaaffffIIIInnnniiiittttMMMMiiiissssccccIIIIDDDDssss(3dm)		    configure miscellaneous data chunk id's
+
+     aaaaffffIIIInnnniiiittttMMMMiiiissssccccSSSSiiiizzzzeeee(3dm)	    configure size of a	miscellaneous chunk
+
+     aaaaffffIIIInnnniiiittttMMMMiiiissssccccTTTTyyyyppppeeee(3dm)	    configure type of data for a miscellaneous
+				    chunk
+
+     aaaaffffIIIInnnniiiittttPPPPCCCCMMMMMMMMaaaappppppppiiiinnnngggg(3dm)	    configure the PCM mapping (slope,
+				    intercept, min clip, max clip) for the
+				    audio data in a track
+
+     aaaaffffIIIInnnniiiittttRRRRaaaatttteeee(3dm)		    configure sample rate for a	new track
+
+     aaaaffffIIIInnnniiiittttSSSSaaaammmmpppplllleeeeFFFFoooorrrrmmmmaaaatttt(3dm)	    configure sample format for	a new track
+
+     aaaaffffIIIInnnniiiittttTTTTrrrraaaacccckkkkIIIIDDDDssss(3dm)	    configure track id's for a new audio file
+
+     Functions for setting values in an	audio file after it has	been opened.
+
+     aaaaffffSSSSeeeettttAAAAEEEESSSSCCCChhhhaaaannnnnnnneeeellllDDDDaaaattttaaaa(3dm)	    write AES channel status to	an audio track
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppCCCCoooouuuunnnntttt(3dm)	    set	loop count (number of repetitions) for
+				    a specified	loop
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppEEEEnnnndddd(3dm)		    set	marker for a loop's end	frame
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppEEEEnnnnddddFFFFrrrraaaammmmeeee(3dm)	    set	a loop's end frame directly
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppMMMMooooddddeeee(3dm)		    set	loop mode for a	specified loop
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppSSSSttttaaaarrrrtttt(3dm)	    set	marker for a loop's start frame
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppSSSSttttaaaarrrrttttFFFFrrrraaaammmmeeee(3dm)	    set	a loop's start frame directly
+
+
+
+
+
+								       PPPPaaaaggggeeee 11110000
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     aaaaffffSSSSeeeettttLLLLooooooooppppTTTTrrrraaaacccckkkk(3dm)	    set	the track id for a given loop
+
+     aaaaffffSSSSeeeettttMMMMaaaarrrrkkkkPPPPoooossssiiiittttiiiioooonnnn(3dm)	    set	the track location for a given marker
+
+     Functions for querying static parameters associated with the Audio	File
+     Library
+
+     aaaaffffQQQQuuuueeeerrrryyyy(3dm)	   return the value of a parameter as an AAAAUUUUppppvvvvlllliiiisssstttt
+			   struct
+
+     aaaaffffQQQQuuuueeeerrrryyyyLLLLoooonnnngggg(3dm)	   return the value of a parameter as a	long integer
+
+     aaaaffffQQQQuuuueeeerrrryyyyDDDDoooouuuubbbblllleeee(3dm)	   return the value of a parameter as a	double
+			   precision float point
+
+     aaaaffffQQQQuuuueeeerrrryyyyPPPPooooiiiinnnntttteeeerrrr(3dm)   return the value of a parameter as a	generic
+			   pointer (void *)
+
+CCCCAAAAVVVVEEEEAAAATTTTSSSS	FFFFOOOORRRR UUUUSSSSIIIINNNNGGGG TTTTHHHHEEEE HHHHAAAANNNNDDDDLLLLEEEE''''SSSS FFFFIIIILLLLEEEE DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTOOOORRRR
+     The file descriptor returned by aaaaffffGGGGeeeettttFFFFDDDD(3dm) is not intended to allow
+     users to read, write, and seek in the file	without	the knowledge of the
+     Audio File	Library.  Doing	so will	cause the library to give
+     unpredictable results unless the user saves and restores the file
+     position whenever they modify it.	This can be done using
+     aaaaffffSSSSaaaavvvveeeeFFFFiiiilllleeeePPPPoooossssiiiittttiiiioooonnnn(3dm) and aaaaffffRRRReeeessssttttoooorrrreeeeFFFFiiiilllleeeePPPPoooossssiiiittttiiiioooonnnn(3dm).  The same
+     precautions must be also used with	the file descriptor given to
+     afOpenFD().  Developers can get the offset	of the audio data in an	audio
+     file via the aaaaffffGGGGeeeettttDDDDaaaattttaaaaOOOOffffffffsssseeeetttt(3dm) function.
+
+CCCCAAAAVVVVEEEEAAAATTTTSSSS	AAAABBBBOOOOUUUUTTTT TTTTHHHHEEEE MMMMAAAANNNNNNNNEEEERRRR IIIINNNN WWWWHHHHIIIICCCCHHHH TTTTHHHHEEEE AAAAFFFF AAAACCCCCCCCEEEESSSSSSSSEEEESSSS FFFFIIIILLLLEEEESSSS
+     SGI gives no guarantees about the number or nature	of UNIX	system calls
+     that will result from a given AF call.  In	particular, afReadFrames() and
+     afWriteFrames() could actually read or write any amount of	data from the
+     file, or could read or write more than once in varying chunk sizes.
+     Also, afOpenFile(), afSeekFrame(),	afSyncFile(), afCloseFile(), and other
+     AF	functions could	result in any amount of	data being read	from or
+     written to	the file.  The AF will not write to a file opened for read
+     access or read from a file	opened for write access.
+
+     Users who are attempting to optimize the I/O in their program by managing
+     I/O system	call behavior should be	aware that at this time	we offer no
+     guarantees	about when the AF will perform system calls.
+
+CCCCAAAAVVVVEEEEAAAATTTTSSSS	FFFFOOOORRRR MMMMUUUULLLLTTTTIIIITTTTHHHHRRRREEEEAAAADDDDEEEEDDDD PPPPRRRROOOOGGGGRRRRAAAAMMMMMMMMIIIINNNNGGGG
+     The Audio File Library is NOT a multi-thread and/or multi-processor safe
+     library, in the following sense:
+
+     Users can make multiple, simultaneous, uncoordinated AF calls on
+     different AFfilehandles from different threads and	the library will
+     operate fine.  Each AFfilehandle completely encapsulates the state	needed
+     to	do operations on that AFfilehandle (except for error handling, which
+     is	explained next).
+
+
+
+								       PPPPaaaaggggeeee 11111111
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     Users cannot make multiple, simultaneous, uncoordinated AF	calls from
+     different threads to set or access	the library's global state--namely,
+     the error handler function.  If two threads simultaneously	try to set the
+     global error handler (even	the same error handler), the behavior is
+     undefined.	 See below for an alternative.
+
+     Furthermore, if the user writes an	error handler, then makes multiple,
+     simultaneous, uncoordinated AF calls on different filehandles from
+     different threads,	and both AF calls issue	an error simultaneously, then
+     two instances of the user's error handler will be called in a
+     simultaneous, uncoordinated manner	in two threads.	 If this situation is
+     possible in a user's program, the user should use semaphores in their
+     error handler in order to make sure their handler doesn't try and report
+     or	deal with two errors at	the same time.	Note that any AF function can
+     cause an AF error to occur.  Do not assume	a function will	not produce
+     and error just because it is simple.
+
+     A new form	of MT-safe error handling mechanism is now available; if an
+     application wishes	to use it, it should call aaaaffffSSSSeeeettttEEEErrrrrrrroooorrrrHHHHaaaannnnddddlllleeeerrrr(3dm) with
+     a NULL value to disable the old error handler system, and call
+     ddddmmmmGGGGeeeettttEEEErrrrrrrroooorrrr(3dm) when a function returns an	error value.  The application
+     must also add ----llllddddmmmmeeeeddddiiiiaaaa to the link	arguments if it	calls this routine.
+
+     Now the most important caveat:  Users cannot make multiple, simultaneous,
+     uncoordinated AF calls on the same	AFfilehandle from different threads,
+     even if the order of execution of those calls does	not matter to the
+     user.  Doing so will very likely cause a core dump, or at least
+     corruption	of the AFfilehandle.  This behavior will never be changed, as
+     we	refuse to make our developers pay the price of semaphore locking code
+     at	the beginning and end of every afReadFrames and	afWriteFrames call.
+     Most users	do not need, and in fact really	do not want, semaphore
+     protection	that is	built-in to the	AF calls themselves.
+
+FFFFIIIILLLLEEEESSSS
+     Audio File	Library	header file:
+	  /usr/include/dmedia/audiofile.h
+
+     Audio File	Library	code examples:
+	  /usr/share/src/dmedia/soundcommands/*
+	  /usr/share/src/dmedia/soundfile/*
+
+     The programs ppppllllaaaayyyyaaaaiiiiffffffff((((1111)))) and ppppllllaaaayyyyaaaaiiiiffffcccc((((1111)))) are now installed	as links to
+     the program ssssffffppppllllaaaayyyy((((1111)))); rrrreeeeccccoooorrrrddddaaaaiiiiffffffff((((1111)))) and rrrreeeeccccoooorrrrddddaaaaiiiiffffcccc((((1111)))) are	now installed
+     as	links to the program ssssffffrrrreeeeccccoooorrrrdddd((((1111)))).  These programs are based on calls
+     to	the and	Audio File Library and Audio Library.
+
+     The file aaaaiiiiffffccccccccoooonnnnvvvveeeerrrrtttt....cccc is actually	the source for several programs	which
+     are installed in /usr/sbin: aaaaiiiiffffcccc2222aaaaiiiiffffffff((((1111)))), aaaaiiiiffffffff2222aaaaiiiiffffcccc((((1111)))), aaaaiiiiffffccccccccoooommmmpppprrrreeeessssssss((((1111)))),
+     and aaaaiiiiffffccccddddeeeeccccoooommmmpppprrrreeeessssssss((((1111)))).
+
+
+
+
+
+
+								       PPPPaaaaggggeeee 11112222
+
+
+
+
+
+
+aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaaffffIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+BBBBUUUUGGGGSSSS
+     The AIFF-C	"comments chunk" described in the format spec is not yet
+     supported by the library.	AIFF-C files which contain comment-marker data
+     will parse, but there is not yet a	way to access comment-marker
+     information through the Audio File	API.
+
+DDDDOOOOCCCCUUUUMMMMEEEENNNNTTTTAAAATTTTIIIIOOOONNNN
+     Digital Audio/MIDI	Programming Guide
+
+     _A_u_d_i_o _I_n_t_e_r_c_h_a_n_g_e _F_i_l_e _F_o_r_m_a_t _A_I_F_F-_C _S_p_e_c_i_f_i_c_a_t_i_o_n, Apple Computer	Inc.
+
+     _A_d_d_e_n_d_u_m _t_o _t_h_e _A_u_d_i_o _I_n_t_e_r_c_h_a_n_g_e _F_i_l_e _F_o_r_m_a_t _A_I_F_F-_C _S_p_e_c_i_f_i_c_a_t_i_o_n,
+     Silicon Graphics Inc.
+
+     CCITT _R_e_c_o_m_m_e_n_d_a_t_i_o_n _G._7_1_1
+
+     CCITT _R_e_c_o_m_m_e_n_d_a_t_i_o_n _G._7_2_2
+
+     aware(5), Introduction to Aware audio compression,	Aware Inc.
+
+     ISO/IEC MPEG Specification
+
+     afAware(3dm), Audio File Library interface	to Aware audio compression
+
+RRRREEEELLLLAAAATTTTEEEEDDDD	LLLLIIIIBBBBRRRRAAAARRRRIIIIEEEESSSS
+     ALintro(3dm), Introduction	to the SGI Audio Library
+
+     CDaudio(3), Introduction to the SGI Audio Compact Disc library
+
+     DATaudio(3), Introduction to the SGI Digital Audio	Tape Library
+
+     dmIntro(3dm), Introduction	to the IRIS Digital Media Libraries
+
+     /usr/include/dmedia/midi.h, header	file for the SGI MIDI Library
+
+SSSSEEEEEEEE AAAALLLLSSSSOOOO
+     IRIX Real-time Support:
+     npri(1), select(2), sproc(2), setitimer(2), schedctl(2)
+
+     Audio File	Library	demo programs:
+     recordaifc(1), playaifc(1), aifcinfo(1), dmGetError(3dm), aiff2aifc(1),
+     aifc2aiff(1), aifccompress(1), aifcdecompress(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+								       PPPPaaaaggggeeee 11113333
+
+
+

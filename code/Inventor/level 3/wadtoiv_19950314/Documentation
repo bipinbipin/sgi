@@ -1,0 +1,87 @@
+wadtoiv version 1.2 -- 3/14/94			Kenneth Russell
+						kbrussel@media.mit.edu
+
+What is wadtoiv?
+----------------
+
+As the name implies, wadtoiv is a Doom WADfile to Inventor converter.
+It reads in the main Doom or Doom 2 wad (plus, optionally, a patchwad)
+and outputs a specified level's polygons and associated textures.
+
+
+How do I use wadtoiv?
+---------------------
+
+First, put wadtoiv in your path. Then make a directory for its output
+(which, be forewarned, will be lots of .rgb files, plus the .iv file),
+and cd there. Create a symlink to doom.wad or doom2.wad in the output
+directory (or copy it there, if you have the disk space and really
+want to).
+
+The command line options are as follows:
+
+wadtoiv [-f <filename>] [-2] -e <episode> -m <mission>
+
+"filename" is the pathname of an optional patch wad.
+
+The -2 option turns on Doom 2 mode. wadtoiv will look for "doom2.wad"
+as the main wad in this mode. Additionally, it will expect the
+patchwad, if any, to be a Doom 2 patchwad.
+
+For Doom 1 mode (default), episode and mission must be between 1-3 and
+1-9, respectively. For Doom 2 mode, the episode is ignored, and the
+mission must be between 1 and 32.
+
+Note that specifying no command line options will cause the program to
+print its usage. Both episode and mission default to 1.
+
+
+What doesn't wadtoiv do?
+------------------------
+
+Right now it doesn't handle raised ceilings and sunken floors. They
+could be handled properly by expressing the ceiling and floor polygons
+as trimmed NURBS instead. This is left as an exercise for the reader. :-)
+
+
+How do I use the output from wadtoiv?
+-------------------------------------
+
+SceneViewer E*M*.iv  [MAP**.iv if Doom 2 mode]
+or:
+ivview -q E*M*.iv
+
+(filling in the episode and mission of the level you've outputted)
+
+All of the .rgb files must be in the same directory as the .iv file in
+order for textures to work.
+
+
+Legalese
+--------
+
+DOOM is a trademark of id software, inc.
+
+Thanks to Raphael Quinet and Brendan Wyber for distributing the source
+for DEU, their Doom Editor Utility, from which several functions (and
+all the wad data structures) came.
+
+This program comes with absolutely no warranty.
+
+
+Version History
+---------------
+
+1.2 3/14/95
+Fixed most texture alignments.
+Got rid of bogus polygons.
+Added Doom 2 support.
+Added lights to the scene to illuminate ceilings and floors.
+
+1.1 12/20/94 First public release.
+Added ceilings and floors and their textures.
+Fixed texture aspect ratios.
+
+1.0 12/6/94
+Outputs normal, upper, and lower textures and associated polygons.
+Texture aspect ratios are usually wrong.

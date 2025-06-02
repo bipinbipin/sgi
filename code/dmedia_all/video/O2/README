@@ -1,0 +1,49 @@
+These are some examples of using DMbuffers to pass images between
+video and OpenGL on O2:
+
+lib:
+
+	This is a small C++ library that holds classes to perform
+	common operations, such as starting a video path and 
+	creating a window.  This makes it easy to write example
+	programs.
+
+	The error handling in the library is simple, it just prints
+	a message and exits when something goes wrong.  Real
+	application programs would have to check error codes and 
+	do something more polite.
+
+	The library uses reference counting for memory management (see
+	lib/RefCount.h).
+
+clock:
+
+	This shows how to composite grahpics onto video by using
+	the incoming video frames with a digital media pbuffer.
+	The composited images are sent to video output.
+
+	It also shows how to use stenciling to render the two
+	fields of a video frame separately.
+
+copypixels:
+
+	This is an alternative method of compositing, where video 
+	images are copied onto the screen, rendered onto, and then
+	copied to video output buffers.  It is less efficient
+	that the method used by "clock".
+
+fieldblend:
+
+	This is a third way to do compositing.  The graphics are
+	rendered onto the screen, and then copied onto the video
+	frame, with blending enabled.
+
+image:
+
+	An static image (from an image file) is overlayed on video,
+	with interactive controls to size, scale, rotate, and fade the
+	image. 
+	
+videoin:
+
+	Puts video input into a window.

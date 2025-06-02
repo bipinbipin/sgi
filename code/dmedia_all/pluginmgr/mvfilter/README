@@ -1,0 +1,4 @@
+mvfilter is a program that applies a special-effects filter or
+transition to a movie (or movies) and puts the result in a new movie
+file.  It illustrates the use of the plug-in manager library and the
+efficient use of DMfxbuffers to pass images between plugins.

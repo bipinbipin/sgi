@@ -1,0 +1,136 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                         README for MFfile                                %%
+%%                        Date: July 25, 1995                               %%
+%%                                                                          %%
+%%         Please see: Jordan Slott (hordack@esd) for questions             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+I. Overview
+
+This README described the MFfile abstraction and its methods. It is
+dependent also upon the classes MDevent, MFmeta, MFfileEvent, and
+MFtrack. The MFfile abstraction is meant as an in-memory representation
+of a MIDI file. It is the lowest level I/O interface between disk and
+memory and does very little interpretation of the contents of the
+MIDI file. This implementation is based upon the MIDI File Spec 0.6.
+
+The MFfile class provides basic I/O routines (Section II), methods to
+access the tracks associated with the file (Section III), some to treat
+the file as a single stream of data (Section IV).
+
+Include: #include <libmidifile.h>
+Link:    -llibmidifile
+
+II. Basic I/O routines
+
+The basic I/O routines for MFfile include: load, save, rewind, seek, 
+and tell. A single MFfile object may have only a single file name open 
+and associated with it at one time. The decision to choose a load/save
+interface instead of an open/read/write/close interface was based upon
+the relatively insignficant time required to load in even large midi
+files. The load/save approach simplifies the interface.
+
+IMPORTANT: The MIDI File spec says that all time stamp are relative to
+  the previous event. The internal representation of time stamps in the
+  MFfile is different. Time stamp in MFfile are given in an absolute 
+  offset from 0. The load() and save() methods automatically convert
+  between absolute and delta-time stamps where appropriate.
+
+int load(char *name);
+    Reads the currently opened MIDI file. Note that there is no way
+    to only partially read in a file. A file must be read before one
+    can access its tracks nor seek to a particular point in the file.
+    Returns 0 on success, and -1 if the input file was not properly
+    opened or if the file given was formatted improperly and
+    unrecoverably. The seek pointers for each track (see MFtrack) are
+    set at NULL.
+
+int save(char *name);
+    Writes the entire image in memory to disk. Note that only the
+    entire file in memory can be written. It does not worry about
+    if the data is in the correct format, it simply writes the
+    data it has. Returns 0 on success, and -1 on error.
+
+void rewind();
+    Rewinds the current seek pointer for each track to the beginning.
+
+void seek(unsigned long long time);
+    Seeks each track to 'time'. Refer to MFtrack->seekTime() for
+    more information.
+
+unsigned long long tell();
+    Returns the time stamp associated with the current seek pointer.
+
+
+Once a MIDI file has been read in, the MFfile object stores some
+information from the file header. This information may be retreived 
+and set via the following methods. Note that the class does not
+concern itself with the correctness of the fields (expect the number
+of tracks). If, for example, the user specifies and writes a file
+with the incorrect format type (0, 1, or 2), then it is his/her loss.
+
+int format();
+    Returns either 0, 1, or 2 -- the current format given by the file.
+
+int numbertracks();
+    Returns the number of tracks in the file.
+
+int division();
+    Returns the quarter-note division information.
+
+void setFormat(int format);
+    Sets the format of the file. 'format' should be either 0, 1, or 2.
+
+void setDivision(int division);
+    Sets the division information for the MIDI file header.
+
+
+III. Track Access Methods
+
+The following three methods: geTrack, addTrack, and deleteTrack, are
+a simple means to get at the tracks in the MIDIfile. They use the
+MFtrack abstraction, please see README.MFtrack for more information
+on them.
+
+MFtrack *getTrack(int trackno);
+   Returns the track associated with 'trackno'. Returns NULL if
+   'trackno' is out of bounds of the current tracks in the file.
+   The first track is numbered 0 and the last is the number of
+   total tracks minus one.
+
+void addTrack(MFtrack *track);
+   Add 'track' to the MIDI file. Note that it does not getting written
+   to disk until the user does a write(). Also, the MFfile class does
+   not check to see if 'track' is the proper format according to the
+   currently set format; this is the responsibility of the user.
+
+void deleteTrack(int trackno);
+   Removes the track associated with 'trackno' from the file. Note that
+   this change does propagate to disk until the user does a write().
+   This methods does nothing if 'trackno' is out-of-bounds.
+
+
+IV. Single-Stream Access Methods
+
+The purpose of nextEvent() is for applications such as MIDI File players
+who simple want a stream of time-ordered MIDI events regardless of its
+format or number of tracks. nextEvent() returns a list of MFfileEvent
+pointer to the user which represent the "next" events in the file
+stream. nextEvent() uses the current track seek pointers to determine
+the position for each track (see MFtrack). nevents is set to the number
+of events returned.
+
+MFfileEvent **nextEvent(int *nevents);
+    Returns a list of MFfileEvents (see README.MFfileEvents) which
+    correspond to the next available time-stamped event. Note that it
+    uses the current seek pointer for each track to determine the next 
+    event. It also advances the seek pointer in the tracks to the event 
+    following those which are returned. It returns the list of events,
+    NULL if there are no more remaining events. nevents is set to the
+    number of events returned.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+END OF README.MFfile
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

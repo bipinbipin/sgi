@@ -1,0 +1,24 @@
+static char *reversePixmap[] = {
+/* width height ncolors chars_per_pixel */
+"15 12 4 1",
+/* colors */
+"` c #8A8A8A s fillcolor",
+"a c #999999 s background",
+"b c #333333 s darkShadow",
+"c c #DDDDDD s lightShadow",
+/* pixels */
+
+"aaaaaaaaaaabbaa",
+"aaaaaaaaaabbcaa",
+"aaaaaaaabb``caa",
+"aaaaaaabb```caa",
+"aaaaabb`````caa",
+"aaaabb``````caa",
+"aaab````````caa",
+"aaaaa```````caa",
+"aaaaaaa`````caa",
+"aaaaaaaa````caa",
+"aaaaaaaaaa``caa",
+"aaaaaaaaaaaacaa",
+};
+

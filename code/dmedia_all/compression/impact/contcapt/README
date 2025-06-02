@@ -1,0 +1,15 @@
+		    README for video programming examples
+
+This directory has example video programs for the SGI Video Library
+that have been re-written in OpenGL.
+contcapt:    
+--------
+
+Contcapt continuously captures a stream of live video to 
+memory. Command line options provide the ability to set the 
+number of memory buffers used in capture, set the number of 
+frames to be captured, choose whether to display the video 
+in a window on the computer's display, set the frame geometry 
+and zoom ratio, set the frame rate and to report statistics
+on frame rate.
+

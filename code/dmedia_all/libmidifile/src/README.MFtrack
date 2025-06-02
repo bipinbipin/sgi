@@ -1,0 +1,131 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                         README for MFtrack                               %%
+%%                        Date: July 25, 1995                               %%
+%%                                                                          %%
+%%         Please see: Jordan Slott (hordack@esd) for questions             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+I. Overview
+
+This README described the MFtrack abstraction and its methods. It is
+dependent also upon the classes MDevent, MFmeta, and MFfileEvent.
+
+An MFtrack class is simply a list of time-ordered MIDI events. It is
+important to remember that all events are time-stamped relative to 0, the
+beginning of the track. Note that this is different from the MIDI File
+Spec 0.6 where time stamps are relative to the immediately previous event.
+Events are time-stamped with respect to the beginning of the track in order
+to simplify the implementation of certain methods.
+
+In addition to a list of events, an MFtrack class also maintains a notion
+of a "current seek pointer". This seek pointer could be set to NULL, which
+means the seek pointer is off the end of the track. Many of the methods
+operate in terms of this seek pointer.
+
+Section II of the README file describes methods to modify the list of events
+in the track. Section III explains the many ways to move the seek pointer
+and scan the list of events. Finally, Section IV gives some miscellaneous
+methods on MFtrack classes.
+
+Include: #include <libmidifile.h>
+Link:    -llibmidifile
+
+
+II. Methods to Modify the List of Events in the Track
+
+There are two events to modify the list of events: insertEvent() and
+deleteEvent().
+
+MFfileEvent *insertEvent(MFfileEvent *fev);
+    Inserts 'fev' into the track in time-order. The time stamp for 'fev'
+    must be relative to 0, the beginning of the track. 'fev' is inserted
+    after all events of the same time stamp. If successful, returns fev,
+    otherwise returns NULL.
+
+MFfileEvent *deleteEvent(MFfileEvent *fev);
+   Deletes 'fev' from the track. If successful, returns fev, otherwise
+   returns NULL.
+
+
+III. Methods to Seek and Scan the Track
+
+The MFtrack class maintains the notion of a "current seek pointer", and the
+following methods use and/or modify this seek pointer. The seek pointer is
+initially unset, and remains unset until the user specifically sets it
+to a certain location.
+
+MFfileEvent *seekTime(unsigned long long time);
+    Sets the current seek pointer to the event with timestamp 'time' or the
+    first event after that 'time'. Returns this event.
+
+MFfileEvent *seekEvent(MFfileEvent *fev);
+    Sets the current seek pointer to the event with pointer 'fev'. Returns
+    fev if fev exists in the track, NULL otherwise.
+
+MFfileEvent *seekNthEvent(int n);
+    Sets the current seek pointer to the nth event in the track, where the
+    first event is numbered 1.
+
+MFfileEvent *seekBeginning();
+    Sets the current seek pointer to the beginning of the track.
+
+MFfileEvent *seekEnd();
+    Sets the current seek pointer to the end of the track.
+
+MFfileEvent *currentEvent();
+    Returns the current seek pointer event.
+
+MFfileEvent *nextEvent();
+    Sets the current seek pointer to the next event following the current
+    seek pointer. Returns this next event.
+
+MFfileEvent *prevEvent();
+    Sets the current seek poitner to the previous event before the current
+    seek pointer. Returns this previous event.
+
+MFfileEvent *seekMetaEvent(MIDImetaEvents type);
+    Sets the current seek pointer to the first meta event in the track of
+    type 'type'.
+
+MFfileEvent *seekMidiEvent(int type);
+    Sets the current seek pointer to the first midi event in the track of
+    type 'type'.
+
+MFfileEvent *nextMetaEvent(MIDImetaEvents type);
+    Sets the current seek pointer to the next Meta event of type 'type'
+    following the current seek pointer.
+
+MFfileEvent *nextMidiEvent(int type);
+    Sets the current seek pointer to the next Midi event of type 'type'
+    following the current seek pointer.
+
+
+IV. Miscellaneous Methods
+
+
+unsigned long long currentTimeStamp(int *howmany);
+    Looks at the current seek pointer and returns the time stamp associated
+    with that event. Sets 'howmany' to the number of events in the track 
+    which share this same timestamp.
+
+unsigned long long firstTimeStamp(int *howmany);
+    Looks at the first event in the track and returns the time stamp
+    associated with that event. Sets 'howmany' to the number of events in
+    the track which share this same timestamp.
+
+unsigned long long lastTimeStamp(int *howmany);
+    Looks at the last event in the track and returns the time stamp
+    assocaited with that event. Sets 'howmany' to the number of events in
+    the track which share this same timestamp.
+
+int numberEvents();
+    Returns the number of events in the track.
+
+int empty();
+    Returns 1 if the track is empty, 0 otherwise.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+END OF README.MFtrack
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

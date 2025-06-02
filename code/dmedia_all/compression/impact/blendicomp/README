@@ -1,0 +1,10 @@
+blendicomp: decompress video stream and blend with screen node example
+----------------------------------------------------------------------
+
+Decompresses the JPEG compressed SGI movie file provided
+the command line and blends the decompressed video stream
+with the contents of the upper left hand portion of the
+graphics monitor.
+
+Blended output is presented on the digital video out #1
+of IMPACT Video.

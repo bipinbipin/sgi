@@ -1,0 +1,17 @@
+#!smake
+
+include $(ROOT)/usr/include/make/commondefs
+sinclude $(ROOT)/usr/include/make/$(PRODUCT)defs
+
+OPTIMIZER = -O2
+
+default: libirisgl.a
+
+include $(COMMONRULES)
+
+CFILES = irisgl_light.c
+
+TARGETS = libirisgl.a
+
+libirisgl.a: $(OBJECTS)
+	$(AR) -rv $@ $(OBJECTS);

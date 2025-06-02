@@ -1,0 +1,10 @@
+hiddenline.c -	Xlib-based program which uses the PolygonOffset
+		extension to do a hidden line rendering.  Depth
+		buffered black polygons are used to occlude the
+		hidden lines.  The PolygonOffset extension offsets
+		the polygons slightly so that their edges do not
+		interfere with the lines.  The program shows an
+		ordinary wireframe drawing, a hidden-line drawing
+		without PolygonOffset, and a hidden-line drawing
+		with PolygonOffset side-by-side so that it's easy
+		to compare the three techniques.

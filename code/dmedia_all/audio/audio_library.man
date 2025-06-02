@@ -1,0 +1,396 @@
+
+
+
+aaaallllIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaallllIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+NNNNAAAAMMMMEEEE
+     alIntro, audio - Introduction to the Silicon Graphics Audio Library (AL)
+
+
+SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+     ####iiiinnnncccclllluuuuddddeeee <<<<ddddmmmmeeeeddddiiiiaaaa////aaaauuuuddddiiiioooo....hhhh>>>>
+
+     ----llllaaaauuuuddddiiiioooo
+
+
+DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+     The Silicon Graphics Audio	Library	(AL) provides a	uniform, device-
+     independent programming interface to real-time audio I/O on Silicon
+     Graphics workstations.
+
+     The AL was	designed to enable multiple programs to	share the audio
+     resources of the workstation. Multiple programs may have input and	output
+     streams open concurrently,	either sharing audio devices or	using
+     independent audio devices.
+
+     The Audio Library provides	four major capabilities:
+
+	  1. input and output of digital audio data
+
+	  2. control of	the attributes of the digital audio data
+
+	  3. control of	physical parameters of the audio subsystem
+
+	  4. Audio subsystem event notification
+
+     The first two of these capabilities are briefly described in the section
+     "Basic I/O." The device control capabilities are described	in the section
+     "Resources	and Control." The audio	event notification model is described
+     in	the "Audio Events" section.
+
+BBBBAAAASSSSIIIICCCC IIII////OOOO
+     The basic data types for the Audio	Library	are AAAALLLLccccoooonnnnffffiiiigggg and AAAALLLLppppoooorrrrtttt.  An
+     application uses an AAAALLLLccccoooonnnnffffiiiigggg to define the	attributes of the digital
+     audio data	it wishes to send or receive. It then opens an AAAALLLLppppoooorrrrtttt, which
+     actually writes or	reads the audio	data to	or from	the hardware.
+
+     The Audio Library includes	the following functions:
+
+     alNewConfig(3dm)	      -	create a new ALconfig
+
+     alFreeConfig(3dm)	      -	free ALconfig
+
+     alSetConfig(3dm)	      -	set an ALconfig	on an existing ALport
+
+     alGetConfig(3dm)	      -	get the	ALconfig from an ALport
+
+
+
+
+
+									PPPPaaaaggggeeee 1111
+
+
+
+
+
+
+aaaallllIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaallllIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     alSetQueueSize(3dm)      -	set the	sample queue size for an audio port
+
+     alGetQueueSize(3dm)      -	get the	sample queue size for an audio port
+
+     alSetWidth(3dm)	      -	set the	sample wordsize	for an audio port
+
+     alGetWidth(3dm)	      -	get the	sample wordsize	for an audio port
+
+     alSetSampFmt(3dm)	      -	set the	sample data type and format for	an
+			      audio port
+
+     alGetSampFmt(3dm)	      -	get the	sample data type and format for	an
+			      audio port
+
+     alSetChannels(3dm)	      -	set the	number of channels for an audio	port
+
+     alGetChannels(3dm)	      -	get the	number of channels for an audio	port
+
+     alSetFloatMax(3dm)	      -	set the	max. amplitude of floating point data
+			      for an AL	port
+
+     alGetFloatMax(3dm)	      -	get the	max. amplitude of floating point data
+			      for an AL	port
+
+     alSetLimiting(3dm)	      -	specify	if limiting is required	for floating-
+			      point data
+
+     alGetLimiting(3dm)	      -	determine whether or not limiting is specified
+			      for an ALconfig
+
+     alOpenPort(3dm)	      -	open an	audio port and begin I/O
+
+     alClosePort(3dm)	      -	close an audio port and	stop I/O
+
+     alGetFilled(3dm)	      -	get number of filled spots in an audio port
+
+     alGetFillable(3dm)	      -	get number of fillable spots in	an audio port
+
+     alReadFrames(3dm)	      -	read interleaved sample	frames from an audio
+			      port
+
+     alWriteFrames(3dm)	      -	write interleaved sample frames	to an audio
+			      port
+
+     alZeroFrames(3dm)	      -	write zero-valued sample-frames	to an output
+			      audio port
+
+     alDiscardFrames(3dm)     -	discard	data from an input or output audio
+			      port
+
+
+
+
+
+
+									PPPPaaaaggggeeee 2222
+
+
+
+
+
+
+aaaallllIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaallllIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     alReadBuffers(3dm)	      -	read flexibly interleaved or non-interleaved
+			      sample frames from an audio port
+
+     alWriteBuffers(3dm)      -	write flexibly interleaved or non-interleaved
+			      sample frames to an audio	port
+
+     alGetFD(3dm)	      -	get a file descriptor for an audio port, so
+			      that one can use _s_e_l_e_c_t(_2) or _p_o_l_l(_2) to block
+			      waiting for a fillpoint
+
+     alSetFillPoint(3dm)      -	define audio port high-/low-water mark
+			      (fillpoint) to unblock application
+
+     alGetFillPoint(3dm)      -	get the	current	fillpoint from an audio	port.
+
+     alGetFrameNumber(3dm)    -	get the	absolute sample	frame number
+			      associated with a	port
+
+     alGetFrameTime(3dm)      -	get the	time at	which a	sample frame came in
+			      or will go out
+
+RRRREEEESSSSOOOOUUUURRRRCCCCEEEESSSS AAAANNNNDDDD CCCCOOOONNNNTTTTRRRROOOOLLLL
+     The AL manages a number of	hardware and software entities called
+     rrrreeeessssoooouuuurrrrcccceeeessss (see aaaallllRRRReeeessssoooouuuurrrrcccceeeessss((((3333ddddmmmm)))) for a more	detailed description).
+     Resources include devices,	ports, clock generators, master	clocks,
+     connections, interfaces, subsystems, and the system resource.
+     Applications can acquire or change	the state of the audio resources
+     through the following functions:
+
+     alParams(3dm)
+	  - general information	about AL parameters
+
+     alGetParams(3dm)
+	  - get	parameter values from an audio resource
+
+     alSetParams(3dm)
+	  - set	parameter values on an audio resource
+
+     alGetParamInfo(3dm)
+	  - find out what kinds	of values a parameter can have on a specific
+	  resource
+
+     alQueryValues(3dm)
+	  - find the set of possible values for	a discrete-valued parameter
+
+     alIsSubtype(3dm)
+	  - determine if one resource type is a	subtype	of another
+
+     alGetResourceByName(3dm)
+	  - find a resource with a given name
+
+
+
+
+
+									PPPPaaaaggggeeee 3333
+
+
+
+
+
+
+aaaallllIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaallllIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     alConnect(3dm)
+	  - connect the	output of one audio I/O	resource to the	input of
+	  another
+
+     alDisconnect(3dm)
+	  - disconnect one audio I/O resource from another
+
+AAAAUUUUDDDDIIIIOOOO EEEEVVVVEEEENNNNTTTTSSSS
+     The AL provides event notification	for applications interested in
+     monitoring	audio system changes.  An audio	event is represented by	an
+     AAAALLLLeeeevvvveeeennnntttt structure.	 This structure	includes the parameter which changed
+     of	event, the new parameter value in many cases, the time at which	the
+     event was posted, and the sources of the event. Events are	delivered to
+     each application via an _A_L_e_v_e_n_t_Q_u_e_u_e. Following is	the list of event-
+     related functions:
+
+     alOpenEventQueue(3dm)
+	  - Allocate and initialize an event queue
+
+     alCloseEventQueue(3dm)
+	  - Deallocate a previously initialized	event queue
+
+     alNewEvent(3dm)
+	  - Allocate and initialize an event
+
+     alFreeEvent(3dm)
+	  - Deallocate a previously initialized	event
+
+     alSelectEvents(3dm)
+	  - Select events to be	received into event queue
+
+     alDeselectEvents(3dm)
+	  - Deselect events from event queue
+
+     alGetEventQueueFD(3dm)
+	  - Get	file descriptor	of event queue
+
+     alNextEvent(3dm)
+	  - Retrieves the next event from an event queue
+
+     alCheckEvent(3dm)
+	  - Check for a	particular event in an event queue
+
+     alPendingEvents(3dm)
+	  - Get	the number of pending events in	an event queue
+
+     alFlushEvents(3dm)
+	  - Flush all events from event	queue
+
+     alGetEventParam(3dm)
+	  - Returns the	event parameter
+
+
+
+
+									PPPPaaaaggggeeee 4444
+
+
+
+
+
+
+aaaallllIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaallllIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+     alGetEventResource(3dm)
+	  - Returns the	id of the resource that	posted the event
+
+     alGetEventSrcResource(3dm)
+	  - Returns the	id of the resource that	generated the event
+
+     alGetEventUST(3dm)
+	  - Returns the	Unadjusted System Time of an event
+
+     alGetEventValue(3dm)
+	  - Return the new value of the	event parameter
+
+     alGetEventData(3dm)
+	  - Returns a pointer to an event info struct
+
+MMMMIIIISSSSCCCCEEEELLLLLLLLAAAANNNNEEEEOOOOUUUUSSSS
+     alGetErrorString(3dm)
+	  - get	a text message associated with an AL error return code
+
+     alDoubleToFixed(3dm)
+	  - convert from double-precision to AL-format fixed-point
+
+     alFixedToDouble(3dm)
+	  - convert from AL-format fixed-point to double-precision
+
+     alSetErrorHandler(3dm)
+	  - specify a user-defined error handler, if desired
+
+     /usr/include/dmedia/audio.h	- Audio	Library	header file
+
+     /usr/share/src/dmedia/audio/*	- code examples
+
+     /usr/share/src/dmedia/soundcommands/*   - code examples
+
+     /usr/share/src/dmedia/soundplayer/*     - code examples
+
+
+SSSSEEEEEEEE AAAALLLLSSSSOOOO
+     DOCUMENTATION:
+
+	  Digital Media	Programming Guide: Audio, MIDI,	Video, and Compression
+
+     RELATED LIBRARIES:
+
+	  AFintro(3dm) - Introduction to the Audio File	Library
+
+	  CDaudio(3) - Introduction to the audio Compact Disc library
+
+	  DATaudio(3) -	Introduction to	the Digital Audio Tape Library
+
+
+
+
+
+
+									PPPPaaaaggggeeee 5555
+
+
+
+
+
+
+aaaallllIIIInnnnttttrrrroooo((((3333ddddmmmm))))							  aaaallllIIIInnnnttttrrrroooo((((3333ddddmmmm))))
+
+
+
+	  mdIntro(3dm) - Introduction to the Silicon Graphics MIDI Library
+	  (libmd)
+
+     IRIX Real-time Support:
+
+	  select(2), sproc(2), setitimer(2), schedctl(2), prctl(2), poll(2),
+	  mpin(2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+									PPPPaaaaggggeeee 6666
+
+
+

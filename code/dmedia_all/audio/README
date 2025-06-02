@@ -1,0 +1,85 @@
+README for audio programming examples
+
+This directory has example audio programs programs for the Silicon
+Graphics Audio Library, version 2.
+
+These programs run on all Silicon Graphics audio-equipped workstations
+running IRIX 6.3 or later releases.
+
+The programs included are:
+	concert_a motifexample aesover1 connect connect2
+	disconnect find_digital getconns getgain getrate
+	setrate sinput soutput recordexample printdevs
+	sync_example waop
+
+concert_a 	is a simple program which demonstrates
+		audio output and getting audio sample rates.
+
+motifexample	is a simple multi-process "application" which has
+		a Motif UI in one process which sends messages to
+		a real-time audio process that plays an audio file.
+
+aesover1	demonstrates setting the output sample-rate to
+		an AES-related input rate, where supported.
+
+connect		shows how to connect two audio devices.
+
+connect2	a more robust example: this takes two audio
+		devices and connects them, but allows the user
+		to specify a specific input on the source device.
+
+disconnect	disconnects a connection between two devices
+
+getconns	shows the connections currently active on the 
+		system (you can also use "apanel -print" to do this).
+
+getgain		Shows how to get the gain on a device. Note that
+		this simple program is device-independent; it works
+		equally well on input and output devices.
+
+getrate		Shows how to get the sample-rate of a device. Note that
+		this simple program is device-independent; it works
+		equally well on input and output devices.
+
+setrate		Shows how to set the sample-rate on a device. Note that
+		this simple program is device-independent; it works
+		equally well on input and output devices.
+
+sinput		Set the global default input device
+
+soutput		Sets the global default output device
+
+recordexample	Records audio input to an AIFF file using the
+		Audio Library and the Audio File Library.
+
+printdevs	Prints out the devices and interfaces available
+		on the system.
+
+sync_example	A simple example of synchronization between two
+		audio devices.
+
+find_digital	An example of how to find a digital input device
+		on a system. Shows how to use alQueryValues with
+		simple qualifiers.
+
+waop		Wide Audio OutPut app takes many input files and
+		spreads them across several output devices. Good
+		example of sample accurate output synchronization.
+
+audin		A simple program to output audio from an audio 
+		device to standard output. Nice for working with
+		programs that want audio input on stdin.
+
+audout		A simple program to take audio from stdin and 
+		output to an audio device. Nice for working with
+		programs that want audio output to stdout.
+
+widerecord	A program to record across a set of synchronized
+		audio devices into a single wide audio file.
+
+wideplay	Play a wide audio file, but mix it down to a
+		single device. This program is an example of
+		how to mix audio.
+
+events		A simple example of how to receive events with
+		the Audio Library.

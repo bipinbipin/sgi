@@ -1,0 +1,193 @@
+
+**********************************************************************
+
+
+SV - Simple Video
+
+  "Video so simple, the programs almost write themselves"
+
+
+**********************************************************************
+
+
+This library exists to provide the video programmer with a simple
+programmatic interface on top of the video library(VL). It provides
+functions such as getframe() and putframe() for dealing with single
+frame input/output, while requiring as little additional knowledge of
+the VL possible. Additional utility routines provide control over some
+of the underlying behaviour of the VL. To those familiar with the VL,
+SV hides the details of devices, nodes, paths, and ring buffers.  It
+defines an image data type svImage for dealing with frames of data.
+
+
+Features
+--------
+* Simple: No need to know the details of devices, nodes, 
+  paths, and ring buffers;
+* Frame I/O: capture frames, send frames to video output, 
+  pastes frames to screen;
+* Read/Write compressed images of all types;
+* Define simple, safer macros for setting some VL controls;
+* Mutiple contexts to support concurrent transfers;
+
+
+
+Simple Single Frame Video Input to Video Output
+-----------------------------------------------
+Suppose we would like to write a simple program to grab a frame
+of video and send it back to our video output:
+
+    main()
+    {
+	getFrame();
+	putFrame();
+    }	
+
+There, that did it.  Except for one a few small details:
+* How do we select the video input and output sources, and
+* How do we represent the image?
+
+To manipulate the frames of data we're moving around, we define the 
+following functions to deal with images: 
+
+    svImage *svNewImage(void);
+    void    svFreeImage(svImage **);
+
+To grab a frame of video or send an image to video output, we 
+use the functions:
+
+    int svGetFrame(svImage *);
+    int svPutFrame(svImage *);
+
+To select our source an destination, we use the functions:
+
+    void svSelectInput(int);
+    void svSelectOutput(int);
+
+So the full length version of our single frame video
+input to video output goes as follows:
+
+    main()
+    {
+	svImage *image;
+
+	svSelectInput(gvINPUT_COMPOSITE_1);
+	svSelectOutput(gvOUTPUT_ANALOG);
+
+	image = svNewImage();
+	svGetFrame(image);
+	svPutFrame(image);
+	svFreeImage(&image);
+    }
+
+
+Selecting a Video Input or Output
+---------------------------------
+As mentioned above, the function svSelectinput(int) is used to select the
+video input for svGetFrame() and the function svSelectOutput(int) is
+used to selected the video output for svPutFrame(). The list of
+valid inputs and outputs are:
+
+    /*
+     * Indy connections -
+     */
+
+    #define vnINPUT_INDYCAM		1
+    #define vnINPUT_COMPOSITE		2
+    #define vnINPUT_SVIDEO		3
+
+
+    /*
+     * Galileo connections -
+     */
+
+    #define gvINPUT_COMPOSITE_1		4
+    #define gvINPUT_SVIDEO		5
+    #define gvINPUT_COMPOSITE_2		6
+    #define gvINPUT_DIGITAL_1		7
+    #define gvINPUT_DIGITAL_2		8
+    #define gvOUTPUT_ANALOG		9
+    #define gvOUTPUT_DIGITAL	       10
+
+
+What Else Can You Do With The Image Once You've Got Your Hands On It?
+---------------------------------------------------------------------
+We've introduced the functions svGetFrame(svImage *) and
+svPutFrame(svImage *) for getting images from video input sending
+images to video output; Here is a complete list of useful functions
+for dealing with images:
+
+
+svImage *svNewImage(void);
+    - allocate a new svImage;
+
+void svFreeImage(svImage **);
+    - free the image;
+
+int svSaveImage(char *filename, svImage *frame);
+    - save the image to a named file;
+
+int svLoadImage(char *filename, svImage **frame /* return */);
+    - load in image from a named file;
+
+int svViewImage(svImage *frame, int x, int y);
+    - paste an rgb image to the screen;
+
+void  svCompressedImages(int saveCompressed);
+   - enable writing of compressed images; 
+
+void svSetImagePacking(int packingType);
+   - set the VL_PACKING control; 
+
+
+What else can I do with SV?
+---------------------------
+Here are some other utility functions that let you modify the
+behaviour of the underlying VL code.
+
+*** Configure the path and control usage mode -  
+
+    You can control the usage mode using the functions
+
+	void svNodeAccessMode(VLUsageType);
+	void svControlAccessMode(VLUsageType);
+
+    To set the usage mode on the underlying path path.
+    The default is to setup the path with a mode of VL_SHARE.
+
+*** Recover from preemption - 
+
+    Since by default the path is configured in VL_SHARE mode,
+    it will be preempted by another video program. Use the 
+    function 
+
+	svRecoverFromPreemption()
+
+    to tell SV to attempt to re-setup the path it is using
+    when it is preempted.
+
+*** Set the frame count and transfer mode -
+
+    void svSetFrameCount(int);   /* default 1 */
+    void svSetTransferMode(int); /* default svTRANSFER_DISCRETE */
+
+
+I Don't Understand, Where Can I Find Examples?
+----------------------------------------------
+There is sample source code for capturing frames, 
+pasting frames to the screen, sending a series of frames 
+to video out, and continuous transfer of frames from
+the vino video input to the galileo video output.
+
+Look in the source code in the examples subdirectory.
+
+
+Where can I get SV?
+-------------------
+I put it in the source tree under video/examples/sv.
+So, if you're inclined to build your own video tree, you can 
+find it there.  Otherwise, drop me a line with your opinion
+on how this stuff should be distributed.
+
+
+

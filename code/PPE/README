@@ -1,0 +1,17 @@
+To run PPE, copy the file 'Ppe' to /usr/lib/X11/app-defaults/
+You have to be placed in the PPE directory when you start
+ppe (using the command 'ppe'), because the program will look
+for drum sounds etc. in the subdirectories.
+
+You should replace the files in the SAMPS directory with
+samples you might want to use (they must be called samp0-samp13.aiff).
+
+There is a kind of automation function, but it is a little silly
+and flaky.
+
+I'm not seriously involved in this program, so don't have your
+hopes too high about improvements.
+
+
+Oyvind Hammer
+oyvindha@notam.uio.no

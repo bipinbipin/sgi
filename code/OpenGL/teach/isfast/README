@@ -1,0 +1,491 @@
+______________________________________________________________________
+The Problem
+
+When you're writing an OpenGL application, how do you know whether a
+particular feature (like depth buffering or texture mapping) is fast
+enough to be useful?
+
+If you want your application to run fast on a variety of machines,
+while taking advantage of as many hardware features as possible, you
+need to write code that makes configuration decisions at runtime.
+
+For OpenGL's predecessor, IRIS GL, you could call getgdesc() to
+determine whether a feature had hardware support.  For example, you
+could determine whether a Z buffer existed.  If it did, you might
+assume that Z buffering was fast, and therefore your application would
+use it.  Usually (but not always) this was a reasonable approach.
+
+In OpenGL, things are more complicated.  All the core features are
+provided, even when there is no hardware support for them and they must
+be implemented completely in software.  There is no OpenGL routine that
+reports whether a feature is implemented partially or completely in
+hardware.
+
+Furthermore, features interact in essentially unpredictable ways.  For
+example, a machine might have hardware support for depth buffering, but
+only for some comparison functions.  Or depth buffering might be fast
+only as long as stencilling is not enabled.  Or depth buffering might
+be fast when drawing to a window, but slow when drawing to a pixmap.
+And so on.  A routine that identifies hardware support for particular
+features is actually a lot more complicated and less useful than you'd
+like!
+
+
+
+______________________________________________________________________
+A Solution
+
+So how do you decide whether a given OpenGL feature is fast?  The
+answer is "Measure it." Since the performance of a section of graphics
+code is dependent on dozens of pieces of information from the runtime
+environment, no other method is as well-defined and reliable.
+
+Performance measurement can be tricky.  You need to handle the cases
+when you're displaying over a network, as well as locally.  You also
+want to think about flushing the graphics pipeline properly, and
+accounting for the resulting overhead.
+
+Measuring all the features needed by your application might take a
+while -- probably too long to make your users wait for the results each
+time the application starts.  Therefore you'll want to save performance
+measurements and reuse them whenever possible.
+
+And you might want to measure things other than graphics:  Disk and
+network throughput, processing time for a particular set of data,
+performance on uniprocessor and multiprocessor systems.
+
+This document describes two libraries that can help with all of the
+tasks just mentioned.
+
+	libpdb
+		"Performance DataBase" routines for measuring execution
+		rates and maintaining a simple database.
+
+	libisfast
+		A set of routines demonstrating libpdb that answer
+		common questions about the performance of OpenGL
+		features (using reasonable but subjective criteria).
+
+These libraries can't substitute for comprehensive benchmarking and
+performance analysis, and don't replace more sophisticated tools (like
+IRIS Performer and IRIS Inventor) that optimize application performance
+in a variety of ways.  However, they can handle simple tasks easily.
+
+
+
+______________________________________________________________________
+libpdb Tutorial
+
+libpdb provides five routines:
+
+	pdbOpen() opens the performance database.
+
+	pdbReadRate() reads the execution rate for a given benchmark
+	(identified by a machine name, application name, benchmark
+	name, and version string) from the database.
+
+	pdbMeasureRate() measures the execution rate for a given
+	operation.
+
+	pdbWriteRate() writes the execution rate for a given benchmark
+	into the database.
+
+	pdbClose() closes the performance database and writes it back
+	to disk if necessary.
+
+All libpdb routines return a value of type pdbStatusT, which is a
+bitmask of error conditions.  If the value is zero (PDB_NO_ERROR), then
+the call completed successfully.  If the value is nonzero, then it is a
+combination of one or more of the following conditions:
+
+	PDB_OUT_OF_MEMORY       An attempt to allocate memory failed.
+
+	PDB_SYNTAX_ERROR        The database contains one or more
+				records that could not be parsed.
+
+	PDB_NOT_FOUND           The database does not contain the
+				record requested by the application.
+
+	PDB_CANT_WRITE          The database file could not be
+				updated.
+
+	PDB_NOT_OPEN		pdbOpen() was not invoked before
+				calling one of the other libpdb
+				routines.
+
+	PDB_ALREADY_OPEN	pdbOpen() was called while the database
+				is still open (e.g., before pdbClose()
+				is invoked).
+
+Every program must call pdbOpen() before using the database, and
+pdbClose() when the database is no longer needed.  pdbOpen() opens the
+database file (stored in $HOME/.pdb2 on UNIX systems) and reads all the
+performance measurements into main memory.  pdbClose() releases all
+memory used by the library, and writes the database back to its file if
+any changes have been made by invoking pdbWriteRate().
+
+	Synopsis
+
+		pdbStatusT pdbOpen(void);
+
+		pdbStatusT pdbClose(void);
+
+pdbOpen() returns PDB_NO_ERROR on success, PDB_OUT_OF_MEMORY if there
+was insufficient main memory to store the entire database,
+PDB_SYNTAX_ERROR if the contents of the database could not be parsed or
+seemed implausible (e.g. a nonpositive performance measurement), or
+PDB_ALREADY_OPEN if the database has been opened by a previous call to
+pdbOpen() and not closed by a call to pdbClose().
+
+pdbClose() returns PDB_NO_ERROR on success, PDB_CANT_WRITE if the
+database file is unwritable for any reason, or PDB_NOT_OPEN if the
+database is not open.
+
+Normally applications should look for the performance data they need
+before going to the trouble of taking measurements.  pdbReadRate() is
+used for this.
+
+	Synopsis
+
+		pdbStatusT pdbReadRate (
+				const char* machineName,
+				const char* applicationName,
+				const char* benchmarkName,
+				const char* versionString,
+				double* rate
+				);
+	
+	Example
+
+		main() {
+			double rate;
+			pdbOpen();
+			if (pdbReadRate(NULL, "myApp", "triangles",
+			   glGetString(GL_VERSION), &rate)
+			      == PDB_NO_ERROR)
+				printf("%g triangle calls per second\n", rate);
+			pdbClose();
+			}
+
+The first argument is a zero-terminated string giving the name of the
+machine for which the measurement is sought.  If NULL, the default
+machine name is used.  (In X11 environments, the display name is an
+appropriate choice, and the default machine name is the content of the
+DISPLAY environment variable.)
+
+The second argument is the name of the application.  This is used as an
+additional database key to reduce accidental collisions between
+benchmark names.
+
+The third argument is the name of the benchmark.
+
+The fourth argument is a string identifying the desired version of the
+benchmark.  For OpenGL performance measurements, the string returned
+by glGetString(GL_VERSION) is a good value for this argument.  Other
+applications might use the version number of the benchmark, rather
+than the version number of the system under test.
+
+The fourth argument is a pointer to a double-precision floating-point
+variable which receives the performance measurement (the "rate") from
+the database.  The rate indicates the number of benchmark operations per
+second that were measured on a previous run.
+
+if pdbReadRate() returns zero, then it completed successfully and the
+rate is returned in the last argument.  If the requested benchmark is
+not present in the database, it returns PDB_NOT_FOUND.  Finally, if
+pdbReadRate() is called when the database has not been opened by
+pdbOpen(), it returns PDB_NOT_OPEN.
+
+When the application is run for the first time, or when the performance
+database file has been removed (perhaps to allow a fresh start after a
+hardware upgrade), pdbReadRate() will not be able to find the desired
+benchmark.  If this happens, the application should use
+pdbMeasureRate() to make a measurement.
+
+	Synopsis
+
+		pdbStatusT pdbMeasureRate (
+				pdbCallbackT initialize,
+				pdbCallbackT operation,
+				pdbCallbackT finalize,
+				int calibrate,
+				double* rate
+				);
+	
+	Example
+
+		void SetupOpenGLState(void) {
+			/* set all OpenGL state to desired values */
+			}
+
+		void DrawTriangles(void) {
+			glBegin(GL_TRIANGLE_STRIP);
+				/* specify some vertices... */
+			glEnd();
+			}
+		
+		main() {
+			double rate;
+			pdbOpen();
+			if (pdbReadRate(NULL, "myApp", "triangles",
+			   glGetString(GL_VERSION), &rate)
+			      != PDB_NO_ERROR) {
+				SetupOpenGLState();
+				pdbMeasureRate(glFinish, DrawTriangles,
+				    glFinish, 1, &rate);
+				}
+			printf("%g triangle calls per second\n", rate);
+			pdbClose();
+			}
+
+The first argument is a pointer to the initialization function.  The
+initialization function is run before each set of operations.  For
+OpenGL performance measurement, it's appropriate to use glFinish() for
+initialization, to make sure that the graphics pipe is quiet.  However,
+for other performance measurements, the initialization function could
+be used to create test data, preload caches, etc.  It may be NULL, in
+which case no initialization is performed.
+
+The second argument is a pointer to the operation function.  This
+function performs the operations that are to be measured.  Usually
+you'll want to make sure that any global state needed by the operation
+is set up before calling the operation function, so that you don't
+include the cost of the setup operations in the measurement.
+
+The third argument is a pointer to a finalization function.  This is
+run once, after all the calls to the operation function are complete.
+In the example above, we used glFinish() again to ensure that the
+graphics pipeline is idle.  It may be NULL, in which case no
+finalization is performed.
+
+The finalization function must be "calibrated" so that the overhead of
+calling it may be subtracted from the time used by the operation
+function.  If the fourth argument is nonzero, then pdbMeasureRate()
+calibrates the finalization function.  If the fourth argument is zero,
+then pdbMeasureRate() uses the results of the previous calibration.
+Recalibrating each measurement is the safest approach, but it roughly
+doubles the amount of time needed for a measurement.  For OpenGL, it
+should be OK to calibrate once and recalibrate only when using a
+different X11 display.
+
+The final argument is a pointer to a double-precision floating-point
+variable which receives the execution rate.  This rate is the number of
+times the operation function was called per second.
+
+pdbMeasureRate() attempts to compute a number of repetitions that
+results in a run time of about one second.  (Calibration requires an
+additional second.)  It's reasonably careful about timekeeping on
+systems with low-resolution clocks.
+
+pdbMeasureRate() always returns PDB_NO_ERROR.
+
+Once a rate has been measured, it should be stored in the database
+by calling pdbWriteRate().
+
+	Synopsis
+
+		pdbStatusT pdbWriteRate (
+				const char* machineName,
+				const char* applicationName,
+				const char* benchmarkName,
+				const char* versionString,
+				double rate
+				);
+	
+	Example
+
+		main() {
+			double rate;
+			pdbOpen();
+			if (pdbReadRate(NULL, "myApp", "triangles",
+			   glGetString(GL_VERSION), &rate)
+			      != PDB_NO_ERROR) {
+				SetupOpenGL();
+				pdbMeasureRate(glFinish, DrawTriangles,
+				    glFinish, 1, &rate);
+				pdbWriteRate(NULL, "myApp", "triangles",
+				    glGetString(GL_VERSION), rate);
+				}
+			printf("%g triangle calls per second\n", rate);
+			pdbClose();
+			}
+
+The first four arguments of pdbWriteRate() match the first four
+arguments of pdbReadRate().
+
+The final argument is the performance measurement to be saved in the
+database.
+
+pdbWriteRate() will return PDB_NO_ERROR if the performance measurement
+was added to the in-memory copy of the database, PDB_OUT_OF_MEMORY if
+there was insufficient main memory to do so, or PDB_NOT_OPEN if the
+database is not open.
+
+When pdbWriteRate() is called, the in-memory copy of the performance
+database is marked "dirty."  pdbClose() takes note of this and writes
+the database back to disk.
+
+
+
+______________________________________________________________________
+libisfast Tutorial
+
+libisfast is a set of demonstration routines that show how libpdb can
+be used to measure and maintain OpenGL performance data.  libisfast is
+based on purely subjective performance criteria.  If they're
+appropriate for your application, please feel free to use them.  If
+not, please copy the source code and modify it accordingly.
+
+In all cases that follow, the term "triangles" refers to a triangle
+strip with 37 vertices.  The triangles are drawn with perspective
+projection, lighting, and smooth (Gouraud) shading.  Unless otherwise
+stated, display-list-mode drawing is used.  (This makes isfast yield
+more useful results when the target machine is being accessed over
+a network.)
+
+The app must initialize isfast before performing any performance
+measurements, and clean up after the measurements are finished.  On X11
+systems these tasks are accomplished by calling
+
+	int IsFastXOpenDisplay(const char* displayName);
+
+and
+
+	void IsFastXCloseDisplay(void);
+
+respectively.  IsFastOpenXDisplay() returns zero if the named display
+could not be opened, and nonzero if the display was opened
+successfully.
+
+DepthBufferingIsFast() returns nonzero if depth buffered triangles can
+be drawn at least one-half as fast as triangles without depth
+buffering:
+
+	int DepthBufferingIsFast(void);
+
+ImmediateModeIsFast() returns nonzero if immediate-mode triangles can
+be drawn at least one-half as fast as display-listed triangles:
+
+	int ImmediateModeIsFast(void);
+
+Note that one significant use of ImmediateModeIsFast() might be to
+decide whether a "local" or a "remote" rendering strategy is
+appropriate.  If immediate mode is fast, as on a local workstation, it
+might be best to use it and avoid the memory cost of duplicating the
+application's data structures in display lists.  If immediate mode is
+slow, as is likely for a remote workstation, it may be best to use
+display lists for bulky geometry and textures.
+
+LineAAIsFast() returns nonzero if blended, antialiased lines can
+be drawn at least one-half as fast as ordinary aliased lines:
+
+	int LineAAIsFast(void);
+
+Keep in mind that LineAAIsFast() uses just one of several possible
+algorithms for line antialiasing.  You might need to use one of the
+others (e.g., with depth buffering) for best-quality results or best
+performance in your application.
+
+StencillingIsFast() returns nonzero if stencilled triangles can be
+drawn at least one-half as fast as non-stencilled triangles:
+
+	int StencillingIsFast(void);
+
+TextureMappingIsFast() returns nonzero if texture-mapped triangles can
+be drawn at least one-half as fast as non-texture-mapped triangles:
+
+	int TextureMappingIsFast(void);
+
+Although the routines in libisfast will be useful for a number of
+applications, we suggest that you study them and modify them for your
+own use.  That way you'll explore the particular performance
+characteristics of your machines:  their sensitivity to triangle size,
+triangle strip length, culling, stencil function, texture map type,
+texture coordinate generation method, etc.
+
+Keep in mind that while the results of the libisfast routines are
+interesting, they apply to very limited special cases.  You should
+always consider using a more general tool like Inventor or Performer.
+
+
+
+______________________________________________________________________
+Notes
+
+The source directory has three subdirectories:
+
+	demo
+		Contains a trivial main program to call the routines
+		in libisfast.
+
+	libisfast
+		Source code for libisfast.
+
+	libpdb
+		Source code for libpdb.
+
+Each subdirectory has its own makefile, and there is a master makefile
+in the main source directory.
+
+This code has been tested lightly in IRIX 5.3, a UNIX SVR4 environment,
+on an Indigo2 Extreme and an Onyx RealityEngine.
+
+
+
+
+______________________________________________________________________
+Revision History
+
+Version 1.0:
+
+	Initial release.
+
+Version 2.0:
+	
+	libpdb:
+
+		Added support for benchmark version identifiers.  This
+		solved problems with out-of-date libpdb databases, but
+		made it necessary to create a new pdb database format
+		and file.
+
+		Added calibration option for pdbMeasureRate().  This
+		speeds up libisfast significantly.
+
+		Allowed more special characters in the machine name,
+		application name, benchmark name, and version string. 
+		For example, these strings may now contain blanks and
+		tabs.  In the database file, special characters are
+		escaped with backslashes.
+
+	libisfast:
+
+		Removed dependency on the libtk toolkit.  This makes
+		it easier to integrate libisfast with real
+		applications, but exposes some system-specific
+		interfaces.  The separation between
+		window-system-independent code and
+		window-system-dependent code is not as thorough as it
+		used to be (I refuse to create *another* toolkit), so
+		porting this version of libisfast to OS/2 or Windows
+		will take a little more effort.
+
+		Used visinfo package for selecting Visuals.
+
+		Made calibration operations less frequent.
+
+		Restructured tests to use display lists wherever
+		possible, in order to get more reasonable results for
+		machines that are accessed over the network.
+
+	demo:
+
+		Replaced old initialization and cleanup calls with new
+		ones.
+
+Version 2.1:
+
+	libisfast:
+
+		Added LineAAIsFast() and an explanation of the ways in
+		which the internal libisfast routines are used.

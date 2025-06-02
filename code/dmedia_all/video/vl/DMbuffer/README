@@ -1,0 +1,20 @@
+This directory contains example programs for using DMbuffers to
+capture and playback video to and from memory.
+
+These examples work only on the mvp video device.
+
+vtov
+----
+Receive video input to a DMbuffer and send the DMbuffer to video output.
+
+vtos
+----
+Receive video input to a DMbuffer and display it on the graphics screen.
+
+vtom
+----
+Receive video input to a DMbuffer and save it to a file.
+
+mtov
+----
+Read video images from a file into DMbuffers and send them to video output.

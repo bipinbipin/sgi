@@ -1,0 +1,15 @@
+
+VERIFYDAT: A simple DAT checking program
+
+verifydat will read an entire DAT tape, from lead-in to lead-out areas,
+and verify the timecode contents of the DAT. In particular, it tests
+for discontinuities in a-time or p-time, and verifies that the p-time
+is correctly recorded according to the DAT spec. This is useful
+for checking the output of cdtodat and dodat; for some 
+commands (writes following reads, writes following seeks) older DAT 
+firmware is not frame-accurate.
+
+With the -t option, verifydat will also test the audio data on the
+DAT, assuming that it has been written with the 'testpat' command
+under 'dodat'. This will verify that the audio data on the tape is
+perfect.

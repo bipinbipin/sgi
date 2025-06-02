@@ -1,0 +1,71 @@
+dmplay: digital media file player utility
+-----------------------------------------
+
+Plays back SGI movie files which contain JPEG-compressed
+video frames, and audio data.
+
+See the man page dmplay(1) for more information.
+
+Also see the man page dmrecord(1) and the example
+code under ~4Dgifts/examples/dmedia/dmrecord.
+
+
+Documented playback modes
+-------------------------
+
+Playback engine for these modes is "streamDecompress.c"
+
+dmplay -p video,device=ev1,engine=cosmo file.mv
+
+	Play back an SGI movie using Cosmo JPEG decompression, display
+        in an ev1 (IndyVideo, Indigo2 Video, Gailieo Video) video window.
+
+dmplay -p video,device=ev1,engine=cosmo -p audio file.mv
+
+	Same as above with synchronized audio playback.
+        This is the only display mode for which synchronized audio playback 
+        has been implemented.
+
+dmplay -p graphics,engine=cosmo 	file.mv
+
+	Play back an SGI movie using Cosmo JPEG decompression, display
+        in a graphics window. Non-realtime playback.
+
+dmplay -p graphics,engine=sw 		file.mv
+
+	Play back an SGI movie using software JPEG decompression, display
+        in a graphics window. Non-realtime playback.
+
+dmplay -z n/d ...
+
+	Zoom up or down playback window by n/d.  n/d can be 1/8, 1/4, 1/2,
+	1, 2, or 4.  It can be expressed as either a fraction or a float.
+
+
+Additional playback modes
+-------------------------
+
+These modes are included to provide example code for developers.
+Playback engine for these modes is "singleFrameDecompress.c"
+
+dmplay [-P cont | step] -p video,device=ev1,engine=cosmoSF  file.mv 
+
+	Play back an SGI movie using Cosmo JPEG decompression in
+        "single-frame" mode, display in a video window. Non-realtime 
+        playback.
+
+dmplay [-P cont | step] -p graphics,engine=cosmoSF          
+
+	Play back an SGI movie using Cosmo JPEG decompression in
+        "single-frame" mode, display in a graphics window. Non-realtime 
+        playback.
+
+dmplay [-P cont | step] -p graphics,engine=swSF  file.mv
+
+	Play back an SGI movie using software JPEG decompression in
+        "single-frame" mode, display in a graphics window. Non-realtime 
+        playback.
+
+-P cont: continuous frame advance
+-P step: manual frame advance triggered by user input (mouse click 
+         or key press)

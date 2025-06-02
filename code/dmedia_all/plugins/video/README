@@ -1,0 +1,13 @@
+Transitions:
+
+    beamMeUp.c++		Pixel based (direct) transition
+
+    CrossDissolve.c++		OpenGL based dissolve, using alpha blending
+
+Filters:
+
+    fade.c++			Pixel based (direct) fade with a dialog
+
+    NoopConvolveFilter.c++	OpenGL based using convolution
+    NoopDrawPixelsFilter.c++	OpenGL based using DrawPixels
+    NoopTextureFilter.c++	OpengL based using texturing

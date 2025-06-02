@@ -1,0 +1,198 @@
+DODAT: A simple DAT command interface
+
+dodat is a simple program for creating DAT tapes from disk files, and
+extracting disk files from DAT tapes. It allows you to specify the exact 
+format of the DAT tape: what goes where, what program and index numbers are 
+used for each track, how much silence is between the tracks, lead-in and 
+lead-out areas, etc. 
+
+dodat takes one option: -q, which tells it to be quiet. Normally it 
+spews constant feedback about what it's doing.
+
+You can specify the name of a script to read as an argument to dodat.
+
+Dodat's command parser is very simple and not very tolerant of errors. dodat 
+supports the following commands:
+
+(BOT = beginning-of-tape; EOT = end-of-tape).
+
+# 	A comment. Anything following a '#' on a line is ignored.
+
+quit	
+	quit the program.
+
+leadin	
+	write a "lead-in" area at the current tape location.
+	This is 100 frames of silence in which the program number is
+	0xB (indicating BOT) and the timecodes are marked as invalid.
+
+	Resets the program and index numbers.
+
+leadout
+	write a "lead-out" area at the current tape location.
+	This is 300 frames of silence in which the program number is
+	0xE (indicating EOT) and the timecodes are marked as invalid.
+	When datman encounters an area such as this during a seek or
+	play, it stops the tape.
+
+	You should not issue writes after the leadout area on the tape --
+	dodat will get confused.
+
+write <filename>
+	Write the given file to the tape at the current location. The
+	current index and program numbers will be used; atime and ptime
+	will be incremented from the current values.
+
+read <filename> <prognum>
+	Read from the current location on the tape into the given file.
+	Stop as soon as program <prognum> is encountered, without reading
+	any of <prognum> into the file. The sample rate written on the tape
+	will be used to mark the file.
+
+	The read command skips over tape areas marked as BOT (beginning
+	of tape).
+
+read <filename> <h>:<m>:<s>:<f>
+	Read from the current location on the tape into the given file.
+	Stop as soon as a-time given by {h,m,s,f} is encountered, without 
+	writing that frame into the file. The sample rate written on the tape
+	will be used to mark the file.
+
+	The read command skips over tape areas marked as BOT (beginning
+	of tape).
+
+silence <nframes>
+	Write the specified number of frames of silence to the tape, starting 
+	at the current position. Note that, following a seek or a read, dodat
+	must determine its current position in order to write the correct 
+	timecodes with the silence. 
+
+	If you just issued a seek, dodat will need to read a frame to get
+	the correct position. Since writes following reads do not work 
+	properly, it will then seek back to the location it was just at,
+	write the frame it just read back to the tape, and then begin
+	writing the silence.
+
+	If you just issued a read, dodat knows the correct position, but
+	it cannot immediately do a write, because writes following reads do 
+	not work properly. It will seek back to the location of the
+	frame you just read, write that frame back to the tape, and then begin
+	writing the silence.
+
+testpat <nframes>
+	Write the specified number of frames of test-pattern to the tape, 
+	starting at the current position. Note that, following a seek or a 
+	read, dodat must determine its current position in order to write the 
+	correct timecodes with the test-pattern. See the notes under 'silence.'
+
+	The test-pattern is used only by the verifydat program (with the
+	-t option) to verify the data on the tape as well as the timecode.
+
+seek bot
+	rewind the tape.
+
+seek at <h>:<m>:<s>:<f>
+	Seek to the absolute time given by the quadruple {h,m,s,f}. h is the
+	number of hours, m is the number of minutes, s is the number of
+	seconds, and f is the number of frames. See the section "About
+	DAT Timecode" for more information.
+
+seek pt <h>:<m>:<s>:<f>
+	Seek to the program time, within the current program,  given by the 
+	quadruple {h,m,s,f}. h is the number of hours, m is the number of 
+	minutes, s is the number of seconds, and f is the number of frames. 
+	See the section "About DAT Timecode" for more information.
+
+seek pn <n>
+	Seek to the beginning of program n. 
+
+readframe
+	Read a single frame of audio from the tape, decode the timecodes, and
+	print them. Since this moves the tape, the actual tape position will 
+	be immediately AFTER the timecodes printed. In other words, suppose
+	you have just seeked to atime 0:0:5:0. If you do a readframe, 
+	it will print atime 0:0:5:0, since that was the frame read from the 
+	tape. However, your actual position following the readframe will be
+	0:0:5:1.
+
+	This is strictly for diagnostic purposes.
+
+readpos
+	Issue a read position command to the drive and print out what it says.
+	This does not move the tape.
+	NOTE: for current firmware revisions, this value will be incorrect. You
+	must use 'readframe' to get the correct tape position.
+
+	This is strictly for diagnostic purposes.
+
+program [n]
+	Set the program number to n. This number will be used on subsequent
+	write operations. This does not move the tape.
+
+	If n is omitted, dodat increments the program number. This allows
+	you to make scripts, insert new programs in the middle of the script,
+	and have the remaining program numbers automatically corrected.
+
+index [n]
+	Set the index number to n. This number will be used on subsequent
+	write operations. This does not move the tape.
+
+	Index 0 has special meaning: it is reserved for inter-program
+	spacing, and program-time remains zero during this interval.
+
+	If n is omitted, dodat increments the index number. This allows
+	you to make scripts, insert new things in the middle of the script,
+	and have the remaining index numbers automatically corrected.
+
+rate <r>
+	Sets the sample rate to r. r must be one of {32,44,48}, corresponding
+	to the DAT sample rates of 32kHz, 44.1kHz, and 48 kHz, respectively.
+	This rate will be used on subsequent writes. The default is 44.1kHz.
+
+prohibit <b>
+	Sets the value of the copy prohibit bit. b should
+	be either "y" or "n"; y indicates that copies are prohibited. This 
+	value will be used on subsequent writes.  The default is to permit 
+	copies.
+
+at <h>:<m>:<s>:<f>
+	Sets the starting atime for the next write to the tape. In 
+	general, you should not use this command; dodat will automatically 
+	record the correct atime on the tape. Program changes, index 
+	changes, seeks, and reads will reset this value.
+
+pt <h>:<m>:<s>:<f>
+	Sets the starting ptime for the next write to the tape. In 
+	general, you should not use this command; dodat will 
+	automatically record the correct ptime on the tape.  Program
+	changes, index changes, seeks, and reads will reset this value.
+
+About DAT Timecode:
+
+DAT has a somewhat strange timecode format. A timecode consists of four
+values: hours, minutes, seconds, and frames. DAT audio is exactly 100 frames
+of audio every three seconds, i.e. 33 1/3 frames per second. However, 
+the timecode format allows only integral values of frame numbers. Therefore
+the number of frames per second as seen in the timecode will vary, even
+though the actual audio frame rate is constant. The first two seconds of 
+timecode have 33 frames, numbered 0-32, and the third second has 34 frames,
+numbered 0-33. This rule holds throughout the tape, so that for any integer
+k, seconds 3k and 3k+1 have 33 frames, and second 3k+2 has 34.
+
+If you specify an invalid timecode, dodat will attempt to convert to a valid 
+timecode equivalent.  For example, 0:0:0:33 is invalid since there are only 
+33 frames in second 0. dodat will convert this to 0:0:1:0. 
+
+What's more, there are multiple types of timecode that can be written on
+a DAT. dodat fully supports absolute time ("atime") and program time ("ptime").
+Absolute time is the time elapsed since the beginning of the first
+valid program on the tape. Program time is the time elapsed since the first
+non-zero index within a program. During index 0, which is considered 
+inter-program spacing, program time remains 0:0:0:0. There are other types of
+timecode, but since dodat does not support them, we do not describe them here.
+
+Example DAT scripts
+	example1.dat	writes a DAT from three files,
+			making separate programs, with proper inter-track
+			spacing.
+	example2.dat 	reads track 1 from a DAT into a disk file

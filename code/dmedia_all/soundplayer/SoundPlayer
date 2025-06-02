@@ -1,0 +1,158 @@
+*sgiMode:	True
+*useSchemes:	all
+*scheme:	Base
+*useSmallFonts:	True
+
+*fileCloneItem.labelString:  Clone Window
+*fileCloneItem.mnemonic:     C
+
+*fileOpenItem.labelString:   Open...
+*fileOpenItem.mnemonic:      O
+*fileOpenItem.acceleratorText: Ctrl+O
+*fileOpenItem.accelerator: Ctrl<Key>O
+
+*fileSaveAsItem.labelString: Save As...
+*fileSaveAsItem.mnemonic:    S
+*fileSaveAsItem.acceleratorText: Ctrl+S
+*fileSaveAsItem.accelerator: Ctrl<Key>S
+
+*fileQuitItem.labelString: Exit
+*fileQuitItem.mnemonic: x
+*fileQuitItem.acceleratorText: Ctrl+Q
+*fileQuitItem.accelerator: Ctrl<Key>Q
+
+*fileMenu.labelString:       File
+*fileMenu.mnemonic:  F
+
+*optionsMenu.labelString:    Utilities
+*optionsMenu.mnemonic:       U
+
+*playbackControlItem.labelString: Playback Control
+*playbackControlItem.mnemonic: P
+*playbackControlItem.acceleratorText: Ctrl+P
+*playbackControlItem.accelerator: Ctrl<Key>P
+
+*audioLabel.labelString: Audio Level (dB)
+*midiLabel.labelString: MIDI Tempo (percent of actual)
+
+*utilControlPanelItem.labelString:   Audio Control Panel
+*utilControlPanelItem.mnemonic:      A
+
+*unsupportedFileMessage.labelString: File Unsupported
+
+*midiControlPanelItem.labelString: Synthesizer Control Panel
+*midiControlPanelItem.mnemonic: S
+
+*midiDevice.labelString: MIDI Devices
+*midiDevice.mnemonic: D
+
+*audioDevice.labelString: Audio Device
+*audioDevice.mnemonic: D
+
+! Override font for transport controls
+SoundPlayer*XmPushButton.fontList: -*-helvetica-medium-r-normal-*-10-*-*-*-*-*-iso8859-1
+
+
+*audioControl.marginWidth:   2
+*audioControl.marginHeight:  2
+*midiControl.marginWidth:    2
+*midiControl.marginHeight:   2
+*midiSBox.marginWidth:       5
+*midiSBox.marginHeight:      5
+*audioSBox.marginWidth:      5
+*audioSBox.marginHeight:     5
+*levelEntry.marginWidth:     2
+*levelEntry.marginHeight:    2
+*tempoEntry.marginWidth:     2
+*tempoEntry.marginHeight:    2
+
+*levelControl.homePosition:  0
+*tempoControl.homePosition:  100
+
+SoundPlayer*Stop.selectColor:   sgislateblue
+SoundPlayer*Play.selectColor:   green
+
+
+!***********************
+! For I18N
+!***********************
+
+!-----------
+! Help Menu
+!-----------
+*helpMenu.labelString: Help
+*menuBar*helpMenu.mnemonic: H
+*helpMenu.helpOnContextMenuItem.labelString: Click for Help
+*helpMenu.helpOnContextMenuItem.mnemonic:    C
+*helpMenu.helpOnContextMenuItem.accelerator: Shift<Key>F1
+*helpMenu.helpOnContextMenuItem.acceleratorText: Shift+F1
+*helpMenu.helpOverviewMenuItem.labelString:  Overview
+*helpMenu.helpOverviewMenuItem.mnemonic:     O
+*helpMenu.helpIndexMenuItem.labelString:   Index
+*helpMenu.helpIndexMenuItem.mnemonic:      I
+*helpMenu.helpKeysMenuItem.labelString:    Keys & Shortcuts
+*helpMenu.helpKeysMenuItem.mnemonic:       K
+*helpMenu.helpVersionMenuItem.labelString: Product Info
+*helpMenu.helpVersionMenuItem.mnemonic:    P
+
+
+!--------------------------
+! File Menu ( additional )
+!--------------------------
+*fileCloneItem.labelString:   Clone
+*fileCloneItem.mnemonic:      C
+
+
+!--------------------------
+! General title
+!--------------------------
+*title: SoundPlayer
+
+
+!-----------------------
+! File Selection Dialog
+!-----------------------
+*intl.SDTitleOpenFile:            Sound Player: Open File
+*intl.SDTitleSaveFileAs:          Sound Player: Save File As
+*fileSelectionDialog.okLabelString: OK
+*fileSelectionDialog.applyLabelString: Filter
+*fileSelectionDialog.cancelLabelString: Cancel
+*fileSelectionDialog.selectionLabelString: Selection
+*fileSelectionDialog.fileListLabelString: Files
+
+
+!-----------------
+! Filter Dialog
+!-----------------
+*filterDialog_popup.title: Filter
+*filterDialog.okLabelString: OK
+*filterDialog.applyLabelString: Apply
+*filterDialog.cancelLabelString: Cancel
+*filterDialog.Selection.labelString: Selection
+
+
+!----------------
+! Error Dialog
+!----------------
+*errorDialog.okLabelString: OK
+
+
+!----------------
+! Messages
+!----------------
+*intl.ErrorTitleOFReadError: Open File: Read Error
+*intl.ErrorPostCRUnsupportFormat: Cannot read selected file: Unsupported file format
+*intl.ErrorPostNotOpenSelFile:  Cannot open selected file.
+*intl.ErrorTitleSFAError:  Save File As: Error
+*intl.ErrorPostNoFileOpen:  No file currently open.
+*intl.ErrorPostNotWriteSelFile:  Cannot write selected file.
+*intl.ErrorPostFISaveNotPerformed:  Files are identical: Save not performed.
+*intl.ErrorPostNotSaveAcrossFile:  Cannot save across file systems yet.
+*intl.ErrorPostFileExists:  File already exists: Save not performed.
+*intl.ErrorPostErrorSaving:  Error saving file.
+
+*productInfo:  SoundPlayer - Sound Player Application\n\
+for AIFF, AIFF-C, Sun .au/Next .snd,\n\
+MS RIFF .WAV, MPEG, MIDI .mid files\n\
+Version 1.0\n\n\
+Copyright 1996 Silicon Graphics, Inc. All Rights Reserved\n

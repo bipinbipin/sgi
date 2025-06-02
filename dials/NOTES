@@ -1,0 +1,15 @@
+showfiles inventor_dev
+ 
+folder with Inventor dial+button example:
+/usr/share/src/Inventor/examples/Toolmaker/11.Events/
+
+compile a shared lib from the above folder
+
+CC -n32 -shared -I/usr/include/Inventor -I/usr/include/X11 -c ButtonBoxEvent.c++ -o ButtonBoxEvent.o
+CC -n32 -shared -I/usr/include/Inventor -I/usr/include/X11 -c DialEvent.c++ -o DialEvent.o
+CC -n32 -shared -I/usr/include/Inventor -I/usr/include/X11 -c DialNButton.c++ -o DialNButton.o
+CC -n32 -shared ButtonBoxEvent.o DialEvent.o DialNButton.o -L/usr/lib32 -lInventor -o libInventorInput.so
+
+mv libInventorInput.so /usr/lib32
+
+compile code like "dialNbutton_event-test.cc" using -libInventorInput

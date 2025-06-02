@@ -1,0 +1,112 @@
+Patch 1765 is absolutely necessary for the tools in this directory to work
+properly.
+
+avcapture
+=========
+avcapture will synchronously record uncompressed video and audio in realtime 
+to a disk array.  Data is stored in the QuickTime file format using
+SGI digital media libraries.
+
+
+Movie Files
+==========
+
+All of the tools in this directory use libmoviefile to create file formats.
+Files created with these tools can be used by other the SGI Digital Media Tools,
+including moviemaker(1), mediaplayer(1), and mediarecorder.
+Some of the file formats discussed are only available with newer versions of 
+the SGI Digital Media Libraries.
+
+Movie file formats are data structures that store
+time based material, usually in the form of tracks.  An
+example of a track is the image track which is composed of
+a sequence of individual images. Sometimes the image track
+is also called the video track. A typical movie file
+contains two tracks of time based material, an audio track
+and an image track.
+
+Uncompressed 
+
+The uncompressed method is exactly what it says. The data
+for each frame is left unmodified. This results in large
+file sizes and high bandwidth required to play and record
+these files to and from disk.
+
+SGI Movie 
+
+This is a proprietary format defined by Silicon Graphics.
+There are three versions of this format available.
+Beginning with IRIX 5.1, all of the digital media tools and
+libraries output version three movie files. As of IRIX 5.3,
+the tools and libraries can still read version one and two
+files, but cannot write them.  The tools will not create SGI movie files.
+
+QuickTime 
+
+QuickTime is an extension of the Apple Macintosh operating
+system software to allow manipulation of time-based data
+such as audio, video, and animations. QuickTime movies
+can be captured and played.
+
+With avcapture and avplayback SGI Digital Media Libraries 
+support the following QuickTime movie file formats:
+
+o	"Raw" (uncompressed) 
+
+o	"Raw" (uncompressed) with SGI extensions to 
+	support RGBA, ABGR, RGBA1555 and YUV422 
+	pixel packing formats. 
+
+The SGI Digital Media Libraries do not support the
+QuickTime editing API.
+
+V-LAN
+=====
+
+Copy the following V-LAN commands into a text file without any leading
+whitespace and run avcapture or avplayback with the [-v cmd_file_name] option.
+There is also a simple V-LAN command file (vlan.setup) which provides a
+commented example of V-LAN commands.
+For avcapture the last command issued should be RV (review).
+For avplayback the last command issued should be PF (perform).
+
+It is IMPORTANT not to use the PF command when reading data from a video tape
+deck and capturing to a disk array (avcapture) as the record mode of the deck
+will be enabled and the tape will be erased if it is not write protected. 
+
+ND 1
+TSV
+PR 5:00
+PT 1:00
+CO
+SC 4:29
+SI 01:03:05:00
+SO 01:03:15:00
+GP
+
+V-LAN provides frame accurate deck control for a wide variety of professional
+quality decks via the serial port.  Note that an RS-232 to RS-422 protocol
+converter may be required on O2.  The V-LAN firmware can be upgraded (in most
+models) by obtaining the download program and firmware images from the
+Videomedia web site: http://www.videomedia.com.
+
+
+References 
+==========
+
+The Silicon Graphics Digital Media Programming Guide is
+available to view or download from the SGI Web site.  To
+access the SGI Technical Publications library, choose
+Technical Publications under Sales & Support on the main
+SGI Web site (http://www.sgi.com), or use the direct URL
+http://www.sgi.com/Technology/TechPubs/. To locate a
+particular document, select Library Search and enter the
+title (or one or more keywords).
+
+The QuickTime home page is available at the URL
+http://quicktime.apple.com.
+
+"V-LAN Technical Reference Manual"
+Videomedia, Inc., 175 Lewis Rd., San Jose, CA, 95111,
+ph. (408) 227-9977, fax. (408) 227-6707, http://www.videomedia.com
+

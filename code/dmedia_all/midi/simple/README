@@ -1,0 +1,20 @@
+Some simple MIDI examples.
+
+simple_scale.c	- Plays a 12-note ascending scale eight times, using a 
+		  different program number for each scale.  This is a 
+		  good example to start with.
+
+scale.c  	- Plays a scale in a specified mode.  This is a fairly complete
+	   	  example that provides extensive control over how the scale
+	          is played.  For a simpler example, check out simple_scale.c.
+
+thru.c 		- Automatically copies MIDI messages from an input port to
+		  an output port (a process knowing as "thruing").  This
+		  program can be useful if you have a controller keyboard
+		  connected to a MIDI input port and a tone generator 
+		  connected to a MIDI output port and you simply want to
+		  control the tone generator from the keyboard.
+
+panic.c		- Turns off any stuck notes which might be left behind by
+		  a buggy or interrupted MIDI application.  See the header
+		  comment in panic.c for more information.

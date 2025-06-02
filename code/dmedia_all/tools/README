@@ -1,0 +1,18 @@
+
+This directory contains production utilities for SGI digital media products.
+The intention this directory is to provide tools which work across the product
+line independent of digital media devices, i.e. if it lives here it must work
+on all of SGI's new (O2, Octane, Onyx2/Origin/DIVO) products.  We will not be
+providing backwards support for older products such as Indigo, Indy, Impact, 
+and Sirius video products.  When the images are installed the source will be 
+placed in this directory, /usr/share/src/dmedia/tools, and binaries will be 
+installed in /usr/sbin.  A make in the local directories will leave binaries 
+local.
+
+The tools directory contains the following subdirectories:
+
+vlan - source to V-LAN library
+
+capture - real-time capture tools
+
+

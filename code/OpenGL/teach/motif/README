@@ -1,0 +1,35 @@
+This directory contains very simple programs which illustrate
+how to use the OpenGL Motif widget.
+
+simplest.c	- minimal motif program - uses a single widget, but
+		  handles expose, resize, and keyboard events
+
+simple-popup.c	- minimal motif program with popup menu - uses a single
+		  widget, but handles expose, resize, and keyboard events.
+		  RIGHTMOUSE activates menu.
+
+mouse.c		- simple double buffered motif program using mouse motion
+		  events to update viewing transform
+		  LEFTMOUSE pans, MIDDLEMOUSE rotates about X and Y axes,
+		  LEFTMOUSE+MIDDLEMOUSE zooms
+
+animate.c	- simple double buffered motif program.  uses an Xt
+		  work proc to do animation.  popup menu is used to
+		  enable and disable work proc
+
+multi-widget.c	- uses two drawing area widgets with potentially different
+		  dimensions with a single GLX context.  Also includes
+		  a quit button.  The interactions are the same as in mouse.c
+
+overlay.c	- a modification of the animate.c program which also creates
+		  a transparent overlay window using the visual_info extension.
+		  The program draws a static grid in the overlay window and
+		  resizes or redraws the overlay window whenever it is
+		  necessary.  The overlay window and main window are each
+		  a separate drawing area widget and the two are sandwiched
+		  together inside a form widget.
+
+switch-visual.c	- another modification of the animate.c program which creates
+		  two context/visual/widget pairs -- one single buffered
+		  and one double buffered.  A cascading popup menu allows
+		  the user to switch between the two visuals.

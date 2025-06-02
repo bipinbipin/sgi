@@ -1,0 +1,41 @@
+Contents of this directory:
+
+README		This file
+GLwDrawA.c	The Widget
+GLwDrawA.h	The public include file
+GLwDrawAP.h	The private include file
+GLwMDrawA.c	Motif wrapper around GLwDrawA.c
+GLwMDrawA.h	Motif wrapper around GLwDrawA.h
+GLwMDrawAP.h	Motif wrapper around GLwDrawAP.h
+GLwMDUtil.c	Some wrapper functions
+Imakefile	A rough starting point (but it works)
+simple.c	a simple test program with one widget
+man		the manual pages
+everything else	garbage
+
+Notes:
+
+This needs to be built in a Motif 1.2 environment or later.
+
+The include file directory and the library name need to be determined.
+Both the code and the manual pages will need updating.
+
+The manual Page for GLwDrawingArea should be symlinked to
+GLwMDrawingArea when installed.
+
+All glXChooseVisual attributes (except GLX_USE_GL) have been
+incorporated into the widget.  If there are any changes or new
+attributes, they must be added to the widget.  Unfortunately, there
+are several places that need modifying:
+
+GLwDrawA.h:
+	Update the comment near the top.
+	Add Appropriate GLwN and GLwC declarations.
+GLwDrawAP.h:
+	Declare variables in the GLwDrawingAreaPart structure.
+GLwDrawA.c
+	Add them to the resources array.
+	Update either the intAttribs or the booleanAttribs array.
+Manual
+	Update the table in the GLwCreateMDrawingArea.3X manual page.
+	

@@ -1,0 +1,27 @@
+# sample vlan command file
+
+# select node 1
+ND 1
+
+# select the video track
+TSV
+
+# 5 second pre roll
+PR 5:00
+
+# 1 second post roll
+PT 1:00
+
+# enable coincidence pulse 1 frame before inpoint (assumes NTSC)
+CO
+SC 4:29
+
+# set inpoint at 2 minutes
+SI 00:02:00:00
+
+#set outpoint at 2 mintues 10 seconds
+SO 00:02:10:00
+
+# seek deck to pre roll point
+GP
+

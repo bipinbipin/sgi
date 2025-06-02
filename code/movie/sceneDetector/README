@@ -1,0 +1,9 @@
+The sceneDetector program read a stream of video from the default
+video input jack, and creates a movie file.  It attemps to detect
+scene transitions (based on total difference between successive
+frames), and only puts one frame per scene in the output movie.
+
+To run the program, use "make" to compile it, and then type
+"sceneDetector".  It will create a movie called "scenes.mv" in the
+current directory.  As each scene is detected, a frame from the
+previous scene is displayed on the screen.

@@ -1,0 +1,5 @@
+Audio PlugIn Examples:
+
+audio_fadein.c		-   Simple audio fade plugin (no user interface component)
+audio_volume.c++	-   Change volume plugin (with dialog box UI)
+

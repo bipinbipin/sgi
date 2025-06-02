@@ -1,0 +1,188 @@
+
+Toogl (TO OpenGL) is a program to translate Iris GL programs into OpenGL
+programs.
+
+Usage: toogl [-clLqwv] < infile > outfile
+        -c  don't put comments with OGLXXX into program
+        -l  don't translate lighting calls (e.g. lmdef, lmbind, #defines) 
+        -L  translate lighting calls for emulation library (mylmdef, mylmbind) (implies -l) 
+        -q  don't translate event queue calls (e.g. qread, setvaluator) 
+        -v  print revision number.
+        -w  don't translate window manager calls (e.g. winopen, mapcolor) 
+
+Typical usage might be like this:
+
+#!/bin/sh
+mkdir OpenGL
+for i in *.c
+    do
+	echo $i
+	toogl < $i > OpenGL/$i
+    done
+
+You should most definitly KEEP YOUR ORIGINAL SOURCE. Use a directory
+like the above shell script or use RCS:
+
+#!/bin/sh
+for i in *.c
+    do
+	ci -fm"check in for toogl" $i < /dev/null
+	co -lp $i | toogl  > $i
+    done
+
+
+That's it. It's a filter that scans each line of infile looking for
+IrisGL stuff. When it finds an IrisGL function, it replaces it with the
+corresponding OpenGL function(s). It attempts to fix up arguments where
+it can. Many IrisGL #defines from gl.h are also translated into
+equivalent OpenGL defines where possible. You will need to edit the
+results and probably use gdiff to figure things out.
+
+Any time toogl does something that I thought you might need to look at,
+check, or change, it outputs a comment with "OGLXXX" in it. These come
+out before the line in question and you may search for them with your
+editor.  Use the -c option if you don't want the comments.
+
+Toogl can help with translation of lighting commands (lmdef, lmbind,
+and data structures), but it's not perfect. The -L option will cause
+toogl to translate lmdef and lmbind into commands for the emulation
+library in irisgl_light.c
+
+Toogl goes wild on sections of code where you make window manager,
+window configuration, device, and event calls. You're going to have to
+re-write these yourself until some compatibility library comes along.
+Using the -w and -q options will leave this code alone so you can still
+read it to translate it manually.
+
+Toogl understands a little about matching parentheses and quotes:
+
+	v3f( v[strlen(strcat(foo, "foo("))] );
+
+
+translates into:
+
+        glVertex3fv( v[strlen(strcat(foo, "foo("))] );
+      
+
+PROBLEMS:
+
+1) Toogl expects to find the matching parentheses or quotes ON THE SAME LINE
+as the IrisGL function:
+
+	v3f( foo 
+		); 
+
+won't work. This will probably generate an warning message and the function
+won't be changed.
+
+
+2) Toogl expects to find only <space> and <tab> characters between the 
+function name and the '(':
+
+	v3f
+		(foo);
+
+will be left un-changed, as will:
+
+	v3f /* comment */ (foo);
+
+
+3) C comments inside the argument list of a function shouldn't contain 
+parentheses or quote characters. e.g:
+
+	v3f ( foo /* I really mean bar "-) */ );
+
+will generate a warning and be un-changed.
+
+
+4) "Gets" in IrisGL were of the form:
+
+
+	int getthing();
+
+	int getthings( int *a, int *b);
+
+and y'all write code like:
+
+	thing = getthing();
+
+	if(getthing() == THING) {
+	}
+
+	getthings (&a, &b);
+
+"Gets" in OpenGL are of the form:
+
+	void glGetIntegerfv(NAME_OF_THING, &thing);
+
+Toogl does the best it can:
+
+	i = getcolor();
+
+	getdepth(&near, &far);
+
+will translate into:
+
+
+	/* OGLXXX
+	 * getshade:
+	 * GLint gctmp;
+	 */
+    i = (glGetIntegerv(GL_CURRENT_INDEX, &gstmp), gstmp);
+
+    /* OGLXXX You can probably do better than this. */
+    {
+	    int	get_depth_tmp[2];
+	    glGetIntegerv(GL_DEPTH_RANGE, get_depth_tmp);
+	    *(&near) = get_depth_tmp[0];
+	    *( &far) = get_depth_tmp[1];
+    };
+
+
+5) "lmdef" and "texdef" are close to impossible to deal with. The parameter lists
+are translated and commented and the function calls are mangled. See the
+-l and -L options for lighting. No such code currently exists for texture.
+
+6) Toogl does all the translation on ONE LINE. I've re-formatted the stuff above
+to make it readable. The comments do come out as shown. You may want to use cb.
+If you do, you may want to "cb" your code before using toogl, so gdiff
+will only show changes due to toogl and not ones due to cb. Note that cb 
+isn't perfect, either.
+
+7) This space intentionally left almost blank.
+
+8) (BUG) stuff inside quotes and comments is scanned, too.
+
+	printf("scale (reason %d)", reason); 
+
+causes a non-fatal error message. (Looks like a call to scale with one argument).
+
+9) You'll need to change #include <gl.h> into #include <GL/gl.h>
+This sed script may be of help:
+
+sed -e 's@^#[   ]*include[       ]*[<"][^">]*[/]*gl.h[">]@#include "GL/gl.h"@' < in  > out
+              ^^ tab       ^^ tab
+
+10) There are 2 warning messages during compilation: optimization won't
+help the routines that are too big. 
+
+11) (BUG) toogl translates stuff in comments and likely screws up the comment 
+in the process:
+
+
+	/* 
+	 i = getcolor(); 
+	 */
+
+
+(incorrectly) translates into:
+
+
+        /* 
+        /* OGLXXX
+         * getshade:
+         * GLint gctmp;
+         */
+         i = (glGetIntegerv(GL_CURRENT_INDEX, &gstmp), gstmp); 
+         */
+

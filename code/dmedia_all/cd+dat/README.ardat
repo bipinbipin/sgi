@@ -1,0 +1,119 @@
+Here are some simple instructions on how to use this software.
+
+There are two programs included here: dodat and verifydat.
+For information on how to use these programs, see README.dodat and
+README.verifydat.
+
+There are also several scripts with which you can reproduce the
+firmware bugs. The scripts all end in .dat. Here is the lowdown
+on these. My comments are inserted into the program output within
+[brackets].
+
+-----------------------------------------------------------------------
+dodat -v < cleartape.dat
+	This will create a tape with 10 seconds of silence and correct
+	a-time and p-time on it. Run verifydat on this and it should
+	be OK.
+-----------------------------------------------------------------------
+
+dodat -v < readpos.dat
+	[ This demonstrates the read position problem. ]
+
+DAT tape ready... lay it on me.
+  seeking to atime 00:00:09:00... done
+
+DAT pos (read position) prog 1 atime 00:00:09:00 ptime 00:00:08:20
+	[ see how ptime is wrong when I seeked by atime? ]
+
+reading a frame...
+DAT pos (read frame): prog 1 index 1 atime 00:00:09:00 ptime 00:00:09:00
+correcting time for moved tape...
+	[ above atime and ptime are OK since I read them off the tape ]
+
+DAT pos (read position) prog 1 atime 00:00:09:32 ptime 00:00:09:32
+
+reading a frame...
+DAT pos (read frame): prog 1 index 1 atime 00:00:09:01 ptime 00:00:09:01
+correcting time for moved tape...
+
+DAT pos (read position) prog 1 atime 00:00:09:32 ptime 00:00:09:32
+
+reading a frame...
+DAT pos (read frame): prog 1 index 1 atime 00:00:09:02 ptime 00:00:09:02
+correcting time for moved tape...
+
+DAT pos (read position) prog 1 atime 00:00:09:32 ptime 00:00:09:32
+
+  seeking to ptime 00:00:03:00... done
+
+DAT pos (read position) prog 1 atime 00:00:02:25 ptime 00:00:03:00
+	[ see how atime is wrong when I seeked by ptime? ]
+
+reading a frame...
+DAT pos (read frame): prog 1 index 1 atime 00:00:03:00 ptime 00:00:03:00
+correcting time for moved tape...
+	[ once again, the tape was actually in the right place ]
+
+DAT pos (read position) prog 1 atime 00:00:04:12 ptime 00:00:04:12
+	[ now read position is way off, should be 03:01 ]
+
+reading a frame...
+DAT pos (read frame): prog 1 index 1 atime 00:00:03:01 ptime 00:00:03:01
+correcting time for moved tape...
+
+DAT pos (read position) prog 1 atime 00:00:04:12 ptime 00:00:04:12
+
+reading a frame...
+DAT pos (read frame): prog 1 index 1 atime 00:00:03:02 ptime 00:00:03:02
+correcting time for moved tape...
+
+DAT pos (read position) prog 1 atime 00:00:04:12 ptime 00:00:04:12
+-----------------------------------------------------------------------
+
+Create a clean test tape (with cleartape.dat) if you don't already have
+one.
+
+dodat -v < readwrite.dat
+	This demonstrates the write following read problem. This
+puts dodat in its "stupid" mode, in which it doesn't try to do 
+fancy workarounds. Then it seeks to 0:0:5:0, reads a frame, then
+(starting at 5:01) writes 5 seconds of silence, then a lead-out.
+ here should be no gaps in timecode on the tape.
+
+Then run verifydat and notice how something is wrong:
+
+bebop:cook> verifydat
+lead-in...
+
+program 1   
+
+index 1   
+unexpected ptime: wanted 00:00:05:02 got 00:00:05:00
+unexpected atime: wanted 00:00:05:02 got 00:00:05:00
+00:00:09:32
+lead-out...
+
+So what verifydat is saying is that it found frame 5:00 after
+frame 5:02. So it looks like the write was off by a couple frames.
+
+-----------------------------------------------------------------------
+
+Create a clean test tape (with cleartape.dat) if you don't already have
+one.
+
+dodat -v < seekwrite.dat
+	This demonstrates the write following seek problem. This
+leaves dodat in its "smart" mode, in which it will issue a seek
+before a write to try to work around the read-before-write problem.
+(Though it's not explicitly in the script, it has to do a read 
+before the write in order to determine its position, since read
+position doesn't work). It seeks to 0:0:5:0, and does a write.
+Before writing, the program will read a frame to figure out where it
+is, then seek back to that frame, then write the frame back to tape,
+then write the silence that I asked for in the script. (Confusing, no?)
+
+Then run verifydat and notice how something is wrong here, too.
+
+If verifydat succeeds with no errors, then try again. (This bug
+happens about 50% of the time for me).
+

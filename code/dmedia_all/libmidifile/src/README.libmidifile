@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                         README for libmidifile                           %%
+%%                        Date: July 25, 1995                               %%
+%%                                                                          %%
+%%         Please see: Jordan Slott (hordack@esd) for questions             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+I. Overview
+
+The README provides an overview of the library "libmidifile". The main
+function of libmidifile is to provide an interface to reading and writing
+on-disk standard MIDI files. Two other READMEs, README.MFfile and 
+README.MFtrack describe the methods associated with the MIDI File
+abstraction. In addition to reading and writing MIDI Files, libmidifile
+provides some useful function for MIDI Files events.
+
+Include: #include <libmidifile.h>
+Link:    -llibmidifile
+
+
+II. MFfile, MFtrack, MFfileEvent, MDevent, and MFmeta
+
+Several new classes have been defined for libmidifile. MDevent is provided
+by the digital media midi library. MFmeta is a class which represents
+Meta events. MFfileEvents are a container for MFmeta and MDevent objects.
+An MFtrack is a time-ordered list of MFfileEvents. An MFfile is a list
+of MFtrack objects.
+
+
+II. Useful functions
+
+int mfIsChannelVoice(MFfileEvent *fev);
+int mfIsChannelMode(MFfileEvent *fev);
+int mfIsSystemCommon(MFfileEvent *fev);
+int mfIsSystemRealTime(MFfileEvent *fev);
+int mfIsSystemExclusive(MFfileEvent *fev);
+int mfIsMeta(MFfileEvent *fev);
+
+int mfChannelVoiceType(MFfileEvent *fev);
+int mfChannelModeType(MFfileEvent *fev);
+int mfSystemCommonType(MFfileEvent *fev);
+int mfSystemRealTimeType(MFfileEvent *fev);
+int mfSystemExclusiveType(MFfileEvent *fev);
+int mfMetaType(MFfileEvent *fev);
+
+char *mfEncodeEvent(MFfileEvent *fev);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+END OF README.libmidifile
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

@@ -1,0 +1,24133 @@
+cvstatic 0 /home/tulip13/bipin/code -c -q 0000002768               0000153942
+	@/home/tulip13/bipin/code/buf_viz.c
+
+1 #include 
+	~/usr/include/dmedia/audio.h
+>
+
+2 #include 
+	~/usr/include/math.h
+>
+
+3 #include 
+	~/usr/include/stdio.h
+>
+
+4 #include 
+	~/usr/include/sys/hdsp.h
+>
+
+5 #include 
+	~/usr/include/sys/fcntl.h
+>
+
+6 #include 
+	~/usr/include/stdlib.h
+>
+
+8 
+	Imain
+(int 
+argc
+, char **
+argv
+)
+
+10 int 
+counter
+;
+
+11 double 
+samplingRate
+;
+
+12 double 
+frequency
+;
+
+13 double 
+arg
+;
+
+14 double 
+argInc
+;
+
+15 int 
+buf
+[44100];
+
+18 
+samplingRate
+ = 44100.0;
+
+19 
+frequency
+ = 240;
+
+20 
+argInc
+ = 
+frequency
+*2.0*
+M_PI
+/
+	lsamplingRate
+;
+
+21 
+arg
+ = 
+M_PI
+ / 2.0;
+
+23 for (
+counter
+ = 0; counter < (
+samplingRate
+/4); counter++, 
+arg
+ += 
+argInc
+)
+
+26 
+buf
+[
+counter
+] = (short) (32767.0*
+	`cos
+(
+arg
+));
+
+28 
+	`printf
+("arg - %f\targInc - %f\tbuffer[%d] - %d\n",
+arg
+,
+argInc
+,
+counter
+,
+buf
+[counter]);
+
+32 
+	}
+}
+
+	@/usr/include/dmedia/audio.h
+
+2 #define 
+	#__AUDIO_H__
+
+
+	)
+
+29 #include 
+	~/usr/include/sys/time.h
+>
+
+41 #define 
+	#AL_MAX_RESOURCE_ID
+ 0x0fffffff
+
+	)
+
+42 #define 
+	#AL_PARAM_BIT
+ 0x10000000
+
+	)
+
+43 #define 
+	#AL_TYPE_BIT
+ 0x20000000
+
+	)
+
+54 #define 
+	#AL_SAMPFMT_TWOSCOMP
+ 1
+
+	)
+
+55 #define 
+	#AL_SAMPFMT_FLOAT
+ 32
+
+	)
+
+56 #define 
+	#AL_SAMPFMT_DOUBLE
+ 64
+
+	)
+
+57 #define 
+	#AL_SAMPFMT_AES_CHANNEL_STATUS
+ (
+AL_PARAM_BIT
+ | 47)
+
+	)
+
+58 #define 
+	#AL_SAMPFMT_AES_USER
+ (
+AL_PARAM_BIT
+ | 48)
+
+	)
+
+59 #define 
+	#AL_SAMPFMT_AES_VALIDITY
+ (
+AL_PARAM_BIT
+ | 49)
+
+	)
+
+60 #define 
+	#AL_SAMPFMT_ADAT_USER0
+ (
+AL_PARAM_BIT
+ | 50)
+
+	)
+
+61 #define 
+	#AL_SAMPFMT_ADAT_USER1
+ (
+AL_PARAM_BIT
+ | 51)
+
+	)
+
+62 #define 
+	#AL_SAMPFMT_ADAT_USER2
+ (
+AL_PARAM_BIT
+ | 52)
+
+	)
+
+63 #define 
+	#AL_SAMPFMT_ADAT_USER3
+ (
+AL_PARAM_BIT
+ | 53)
+
+	)
+
+76 #define 
+	#AL_SAMPLE_8
+ 1
+
+	)
+
+77 #define 
+	#AL_SAMPLE_16
+ 2
+
+	)
+
+78 #define 
+	#AL_SAMPLE_24
+ 4
+
+	)
+
+83 #define 
+	#AL_MONO
+ 1
+
+	)
+
+84 #define 
+	#AL_STEREO
+ 2
+
+	)
+
+85 #define 
+	#AL_4CHANNEL
+ 4
+
+	)
+
+91 #define 
+	#AL_INPUT_LINE
+ 0
+
+	)
+
+92 #define 
+	#AL_INPUT_MIC
+ 1
+
+	)
+
+93 #define 
+	#AL_INPUT_DIGITAL
+ 2
+
+	)
+
+98 #define 
+	#AL_MONITOR_OFF
+ 0
+
+	)
+
+99 #define 
+	#AL_MONITOR_ON
+ 1
+
+	)
+
+104 #define 
+	#AL_SPEAKER_MUTE_OFF
+ 0
+
+	)
+
+105 #define 
+	#AL_SPEAKER_MUTE_ON
+ 1
+
+	)
+
+110 #define 
+	#AL_PORTSTYLE_SERIAL
+ 0
+
+	)
+
+111 #define 
+	#AL_PORTSTYLE_DIRECT
+ 1
+
+	)
+
+114 #define 
+	#AL_ERROR_NUMBER
+ 0
+
+	)
+
+115 #define 
+	#AL_ERROR_TYPE
+ 1
+
+	)
+
+116 #define 
+	#AL_ERROR_LOCATION_LSP
+ 2
+
+	)
+
+117 #define 
+	#AL_ERROR_LOCATION_MSP
+ 3
+
+	)
+
+118 #define 
+	#AL_ERROR_LENGTH
+ 4
+
+	)
+
+121 #define 
+	#AL_ERROR_INPUT_OVERFLOW
+ 0
+
+	)
+
+122 #define 
+	#AL_ERROR_OUTPUT_UNDERFLOW
+ 1
+
+	)
+
+124 typedef struct 
+_ALconfig
+ *
+	tALconfig
+;
+
+125 typedef struct 
+_ALport
+ *
+	tALport
+;
+
+126 typedef int 
+	tALresource
+;
+
+127 typedef long long 
+	tALfixed
+;
+
+130 int 
+	mi
+;
+
+131 long long 
+	mll
+;
+
+132 void* 
+	mptr
+;
+
+133 } 
+	tALvalue
+;
+
+136 int 
+	mparam
+;
+
+137 int 
+	mdummy
+;
+
+138 
+ALvalue
+ 
+	mvalue
+;
+
+139 short 
+	msizeIn
+;
+
+140 short 
+	msize2In
+;
+
+141 short 
+	msizeOut
+;
+
+142 short 
+	msize2Out
+;
+
+143 } 
+	tALpv
+;
+
+146 int 
+	mresource
+;
+
+147 int 
+	mparam
+;
+
+148 int 
+	mvalueType
+;
+
+149 int 
+	melementType
+;
+
+150 int 
+	mmaxElems
+;
+
+151 int 
+	mmaxElems2
+;
+
+152 char 
+	mname
+[32];
+
+153 
+ALvalue
+ 
+	minitial
+;
+
+154 
+ALvalue
+ 
+	mmin
+;
+
+155 
+ALvalue
+ 
+	mmax
+;
+
+156 
+ALvalue
+ 
+	mminDelta
+;
+
+157 
+ALvalue
+ 
+	mmaxDelta
+;
+
+158 int 
+	mspecialVals
+;
+
+159 int 
+	moperations
+;
+
+160 int 
+	mspace
+[15];
+
+161 } 
+	tALparamInfo
+;
+
+206 
+ALconfig
+);
+
+233 #define 
+	#alFixedToInt
+(
+x
+) ((int)((x) >> 32))
+
+	)
+
+234 #define 
+	#alIntToFixed
+(
+x
+) (((
+ALfixed
+)(x)) << 32)
+
+	)
+
+242 #define 
+	#AL_DEFAULT_DEVICE
+ 1
+
+	)
+
+248 
+ALpv
+ *
+	gquals
+, int 
+	gqualsize
+);
+
+264 #define 
+	#AL_PRINT_ERRORS
+ ((
+ALerrfunc
+)1)
+
+	)
+
+265 #define 
+	#AL_NO_ERRORS
+ ((
+ALerrfunc
+)0)
+
+	)
+
+266 #define 
+	#AL_MAX_PBUFSIZE
+ 64
+
+	)
+
+267 #define 
+	#AL_MAX_STRLEN
+ 32
+
+	)
+
+273 #define 
+	#AL_NO_ELEM
+ 0
+
+	)
+
+274 #define 
+	#AL_INT32_ELEM
+ 0x10
+
+	)
+
+275 #define 
+	#AL_RESOURCE_ELEM
+ (
+AL_INT32_ELEM
+ | 0x1)
+
+	)
+
+276 #define 
+	#AL_ENUM_ELEM
+ (
+AL_INT32_ELEM
+ | 0x2)
+
+	)
+
+277 #define 
+	#AL_INT64_ELEM
+ 0x20
+
+	)
+
+278 #define 
+	#AL_FIXED_ELEM
+ (
+AL_INT64_ELEM
+ | 0x1)
+
+	)
+
+279 #define 
+	#AL_PTR_ELEM
+ 0x40
+
+	)
+
+280 #define 
+	#AL_CHAR_ELEM
+ 0x80
+
+	)
+
+285 #define 
+	#AL_NO_VAL
+ 0
+
+	)
+
+286 #define 
+	#AL_VECTOR_VAL
+ 1
+
+	)
+
+287 #define 
+	#AL_SCALAR_VAL
+ 2
+
+	)
+
+288 #define 
+	#AL_SET_VAL
+ 3
+
+	)
+
+289 #define 
+	#AL_STRING_VAL
+ 4
+
+	)
+
+290 #define 
+	#AL_MATRIX_VAL
+ 5
+
+	)
+
+298 #define 
+	#AL_RESOURCE
+ (
+AL_PARAM_BIT
+ | 1)
+
+	)
+
+299 #define 
+	#AL_INTERFACE
+ (
+AL_PARAM_BIT
+ | 2)
+
+	)
+
+300 #define 
+	#AL_CLOCK_GEN
+ (
+AL_PARAM_BIT
+ | 3)
+
+	)
+
+301 #define 
+	#AL_CHANNELS
+ (
+AL_PARAM_BIT
+ | 4)
+
+	)
+
+302 #define 
+	#AL_PORT_COUNT
+ (
+AL_PARAM_BIT
+ | 5)
+
+	)
+
+303 #define 
+	#AL_MAX_PORTS
+ (
+AL_PARAM_BIT
+ | 6)
+
+	)
+
+304 #define 
+	#AL_UNUSED_PORTS
+ (
+AL_PARAM_BIT
+ | 7)
+
+	)
+
+305 #define 
+	#AL_MAX_SETSIZE
+ (
+AL_PARAM_BIT
+ | 8)
+
+	)
+
+306 #define 
+	#AL_DEFAULT_INPUT
+ 9
+
+	)
+
+307 #define 
+	#AL_DEFAULT_OUTPUT
+ 10
+
+	)
+
+308 #define 
+	#AL_SYSTEM
+ 11
+
+	)
+
+309 #define 
+	#AL_DEVICES
+ (
+AL_PARAM_BIT
+ | 12)
+
+	)
+
+310 #define 
+	#AL_RATE
+ (
+AL_PARAM_BIT
+ | 13)
+
+	)
+
+311 #define 
+	#AL_RATE_FRACTION_N
+ (
+AL_PARAM_BIT
+ | 14)
+
+	)
+
+312 #define 
+	#AL_RATE_FRACTION_D
+ (
+AL_PARAM_BIT
+ | 15)
+
+	)
+
+313 #define 
+	#AL_JITTER
+ (
+AL_PARAM_BIT
+ | 16)
+
+	)
+
+314 #define 
+	#AL_MASTER_CLOCK
+ (
+AL_PARAM_BIT
+ | 17)
+
+	)
+
+315 #define 
+	#AL_TYPE
+ (
+AL_PARAM_BIT
+ | 18)
+
+	)
+
+316 #define 
+	#AL_NAME
+ (
+AL_PARAM_BIT
+ | 19)
+
+	)
+
+317 #define 
+	#AL_PARAMS
+ (
+AL_PARAM_BIT
+ | 20)
+
+	)
+
+318 #define 
+	#AL_NO_OP
+ (
+AL_PARAM_BIT
+ | 21)
+
+	)
+
+319 #define 
+	#AL_SOURCE
+ (
+AL_PARAM_BIT
+ | 22)
+
+	)
+
+320 #define 
+	#AL_DEST
+ (
+AL_PARAM_BIT
+ | 23)
+
+	)
+
+321 #define 
+	#AL_CONNECTIONS
+ (
+AL_PARAM_BIT
+ | 24)
+
+	)
+
+322 #define 
+	#AL_GAIN
+ (
+AL_PARAM_BIT
+ | 25)
+
+	)
+
+323 #define 
+	#AL_PORTS
+ (
+AL_PARAM_BIT
+ | 26)
+
+	)
+
+324 #define 
+	#AL_GAIN_REF
+ (
+AL_PARAM_BIT
+ | 27)
+
+	)
+
+325 #define 
+	#AL_WORDSIZE
+ (
+AL_PARAM_BIT
+ | 28)
+
+	)
+
+326 #define 
+	#AL_MUTE
+ (
+AL_PARAM_BIT
+ | 29)
+
+	)
+
+327 #define 
+	#AL_SUBSYSTEM
+ (
+AL_PARAM_BIT
+ | 30)
+
+	)
+
+328 #define 
+	#AL_LABEL
+ (
+AL_PARAM_BIT
+ | 31)
+
+	)
+
+329 #define 
+	#AL_INTERVAL
+ (
+AL_PARAM_BIT
+ | 32)
+
+	)
+
+331 #define 
+	#AL_SHORT_NAME
+ (
+AL_PARAM_BIT
+ | 36)
+
+	)
+
+335 #define 
+	#AL_CONNECT
+ (
+AL_PARAM_BIT
+ | 37)
+
+	)
+
+336 #define 
+	#AL_DISCONNECT
+ (
+AL_PARAM_BIT
+ | 38)
+
+	)
+
+340 #define 
+	#AL_ASSOCIATE
+ (
+AL_PARAM_BIT
+ | 39)
+
+	)
+
+341 #define 
+	#AL_LOCKED
+ (
+AL_PARAM_BIT
+ | 40)
+
+	)
+
+342 #define 
+	#AL_SUBSYSTEMS
+ (
+AL_PARAM_BIT
+ | 41)
+
+	)
+
+343 #define 
+	#AL_VIDEO_SYNC
+ (
+AL_PARAM_BIT
+ | 42)
+
+	)
+
+344 #define 
+	#AL_VERSION
+ (
+AL_PARAM_BIT
+ | 43)
+
+	)
+
+346 #define 
+	#AL_SUBCODE_FRAMESIZE
+ (
+AL_PARAM_BIT
+ | 44)
+
+	)
+
+347 #define 
+	#AL_SUBCODE_FORMAT
+ (
+AL_PARAM_BIT
+ | 45)
+
+	)
+
+348 #define 
+	#AL_SUBCODE_CHANNELS
+ (
+AL_PARAM_BIT
+ | 46)
+
+	)
+
+350 #define 
+	#AL_AES_CHANNEL_STATUS
+ (
+AL_PARAM_BIT
+ | 47)
+
+	)
+
+351 #define 
+	#AL_AES_USER
+ (
+AL_PARAM_BIT
+ | 48)
+
+	)
+
+352 #define 
+	#AL_AES_VALIDITY
+ (
+AL_PARAM_BIT
+ | 49)
+
+	)
+
+353 #define 
+	#AL_ADAT_USER0
+ (
+AL_PARAM_BIT
+ | 50)
+
+	)
+
+354 #define 
+	#AL_ADAT_USER1
+ (
+AL_PARAM_BIT
+ | 51)
+
+	)
+
+355 #define 
+	#AL_ADAT_USER2
+ (
+AL_PARAM_BIT
+ | 52)
+
+	)
+
+356 #define 
+	#AL_ADAT_USER3
+ (
+AL_PARAM_BIT
+ | 53)
+
+	)
+
+362 #define 
+	#AL_RESOURCE_TYPE
+ (
+AL_TYPE_BIT
+ | 0)
+
+	)
+
+363 #define 
+	#AL_SYSTEM_TYPE
+ (
+AL_TYPE_BIT
+ | 1)
+
+	)
+
+364 #define 
+	#AL_DEVICE_TYPE
+ (
+AL_TYPE_BIT
+ | 2)
+
+	)
+
+365 #define 
+	#AL_PORT_TYPE
+ (
+AL_TYPE_BIT
+ | 3)
+
+	)
+
+366 #define 
+	#AL_CLOCKGEN_TYPE
+ (
+AL_TYPE_BIT
+ | 4)
+
+	)
+
+367 #define 
+	#AL_SUBSYSTEM_TYPE
+ (
+AL_TYPE_BIT
+ | 5)
+
+	)
+
+368 #define 
+	#AL_CONNECTION_TYPE
+ (
+AL_TYPE_BIT
+ | 6)
+
+	)
+
+369 #define 
+	#AL_INTERFACE_TYPE
+ (
+AL_TYPE_BIT
+ | 7)
+
+	)
+
+370 #define 
+	#AL_HRB_TYPE
+ (
+AL_TYPE_BIT
+ | 8)
+
+	)
+
+371 #define 
+	#AL_MCLK_TYPE
+ (
+AL_TYPE_BIT
+ | 9)
+
+	)
+
+372 #define 
+	#AL_CRYSTAL_MCLK_TYPE
+ (
+AL_TYPE_BIT
+ | 10)
+
+	)
+
+373 #define 
+	#AL_AES_MCLK_TYPE
+ (
+AL_TYPE_BIT
+ | 11)
+
+	)
+
+374 #define 
+	#AL_ADAT_MCLK_TYPE
+ (
+AL_TYPE_BIT
+ | 12)
+
+	)
+
+375 #define 
+	#AL_MIC_IF_TYPE
+ (
+AL_TYPE_BIT
+ | 13)
+
+	)
+
+376 #define 
+	#AL_LINE_IF_TYPE
+ (
+AL_TYPE_BIT
+ | 14)
+
+	)
+
+377 #define 
+	#AL_AES_IF_TYPE
+ (
+AL_TYPE_BIT
+ | 15)
+
+	)
+
+378 #define 
+	#AL_ADAT_IF_TYPE
+ (
+AL_TYPE_BIT
+ | 16)
+
+	)
+
+379 #define 
+	#AL_SPEAKER_IF_TYPE
+ (
+AL_TYPE_BIT
+ | 17)
+
+	)
+
+380 #define 
+	#AL_FIXED_MCLK_TYPE
+ (
+AL_TYPE_BIT
+ | 18)
+
+	)
+
+381 #define 
+	#AL_VARIABLE_MCLK_TYPE
+ (
+AL_TYPE_BIT
+ | 19)
+
+	)
+
+382 #define 
+	#AL_ANALOG_IF_TYPE
+ (
+AL_TYPE_BIT
+ | 20)
+
+	)
+
+383 #define 
+	#AL_DIGITAL_IF_TYPE
+ (
+AL_TYPE_BIT
+ | 21)
+
+	)
+
+384 #define 
+	#AL_VIDEO_MCLK_TYPE
+ (
+AL_TYPE_BIT
+ | 22)
+
+	)
+
+385 #define 
+	#AL_INPUT_PORT_TYPE
+ (
+AL_TYPE_BIT
+ | 23)
+
+	)
+
+386 #define 
+	#AL_OUTPUT_PORT_TYPE
+ (
+AL_TYPE_BIT
+ | 24)
+
+	)
+
+387 #define 
+	#AL_INPUT_HRB_TYPE
+ (
+AL_TYPE_BIT
+ | 25)
+
+	)
+
+388 #define 
+	#AL_OUTPUT_HRB_TYPE
+ (
+AL_TYPE_BIT
+ | 26)
+
+	)
+
+389 #define 
+	#AL_INPUT_DEVICE_TYPE
+ (
+AL_TYPE_BIT
+ | 27)
+
+	)
+
+390 #define 
+	#AL_OUTPUT_DEVICE_TYPE
+ (
+AL_TYPE_BIT
+ | 28)
+
+	)
+
+391 #define 
+	#AL_A2_SUBSYS_TYPE
+ (
+AL_TYPE_BIT
+ | 29)
+
+	)
+
+392 #define 
+	#AL_RAD_SUBSYS_TYPE
+ (
+AL_TYPE_BIT
+ | 30)
+
+	)
+
+393 #define 
+	#AL_A3_SUBSYS_TYPE
+ (
+AL_TYPE_BIT
+ | 31)
+
+	)
+
+394 #define 
+	#AL_TEST_IF_TYPE
+ (
+AL_TYPE_BIT
+ | 32)
+
+	)
+
+395 #define 
+	#AL_SPEAKER_PLUS_LINE_IF_TYPE
+ (
+AL_TYPE_BIT
+ | 33)
+
+	)
+
+396 #define 
+	#AL_A1_SUBSYS_TYPE
+ (
+AL_TYPE_BIT
+ | 34)
+
+	)
+
+397 #define 
+	#AL_DIVO_SUBSYS_TYPE
+ (
+AL_TYPE_BIT
+ | 35)
+
+	)
+
+398 #define 
+	#AL_SMPTE272M_IF_TYPE
+ (
+AL_TYPE_BIT
+ | 36)
+
+	)
+
+399 #define 
+	#AL_OPTICAL_IF_TYPE
+ (
+AL_TYPE_BIT
+ | 37)
+
+	)
+
+401 #define 
+	#AL_NULL_RESOURCE
+ 2
+
+	)
+
+403 #define 
+	#AL_ALL_INTERFACES
+ 3
+
+	)
+
+404 #define 
+	#AL_NULL_INTERFACE
+ 4
+
+	)
+
+406 #define 
+	#AL_GET_OP
+ 0x1
+
+	)
+
+407 #define 
+	#AL_SET_OP
+ 0x2
+
+	)
+
+408 #define 
+	#AL_QUERY_OP
+ 0x4
+
+	)
+
+409 #define 
+	#AL_EVENT_OP
+ 0x8
+
+	)
+
+414 #define 
+	#AL_INVALID_PARAM
+ -1
+
+	)
+
+415 #define 
+	#AL_INVALID_VALUE
+ -2
+
+	)
+
+420 #define 
+	#AL_REF_NONE
+ 0
+
+	)
+
+421 #define 
+	#AL_REF_0DBV
+ 1
+
+	)
+
+426 #define 
+	#AL_VID_EXTERNAL
+ 0
+
+	)
+
+427 #define 
+	#AL_VID_INTERNAL
+ 1
+
+	)
+
+432 #define 
+	#AL_NO_CHANGE
+ 0xffffffffffffffffLL
+
+	)
+
+433 #define 
+	#AL_NEG_INFINITY
+ 0x8000000000000000LL
+
+	)
+
+438 #define 
+	#AL_NO_CHANGE_BIT
+ 0x1
+
+	)
+
+439 #define 
+	#AL_NEG_INFINITY_BIT
+ 0x2
+
+	)
+
+444 #define 
+	#AL_BAD_NOT_IMPLEMENTED
+ 0
+
+	)
+
+445 #define 
+	#AL_BAD_PORT
+ 1
+
+	)
+
+446 #define 
+	#AL_BAD_CONFIG
+ 2
+
+	)
+
+447 #define 
+	#AL_BAD_DEVICE
+ 3
+
+	)
+
+448 #define 
+	#AL_BAD_RESOURCE
+ 3
+
+	)
+
+449 #define 
+	#AL_BAD_DEVICE_ACCESS
+ 4
+
+	)
+
+450 #define 
+	#AL_BAD_DIRECTION
+ 5
+
+	)
+
+451 #define 
+	#AL_BAD_OUT_OF_MEM
+ 6
+
+	)
+
+452 #define 
+	#AL_BAD_NO_PORTS
+ 7
+
+	)
+
+453 #define 
+	#AL_BAD_WIDTH
+ 8
+
+	)
+
+454 #define 
+	#AL_BAD_ILLEGAL_STATE
+ 9
+
+	)
+
+455 #define 
+	#AL_BAD_QSIZE
+ 10
+
+	)
+
+456 #define 
+	#AL_BAD_FILLPOINT
+ 11
+
+	)
+
+457 #define 
+	#AL_BAD_BUFFER_NULL
+ 12
+
+	)
+
+458 #define 
+	#AL_BAD_COUNT_NEG
+ 13
+
+	)
+
+459 #define 
+	#AL_BAD_PVBUFFER
+ 14
+
+	)
+
+460 #define 
+	#AL_BAD_BUFFERLENGTH_NEG
+ 15
+
+	)
+
+461 #define 
+	#AL_BAD_BUFFERLENGTH_ODD
+ 16
+
+	)
+
+462 #define 
+	#AL_BAD_CHANNELS
+ 17
+
+	)
+
+463 #define 
+	#AL_BAD_PARAM
+ 18
+
+	)
+
+464 #define 
+	#AL_BAD_SAMPFMT
+ 19
+
+	)
+
+465 #define 
+	#AL_BAD_RATE
+ 20
+
+	)
+
+466 #define 
+	#AL_BAD_TRANSFER_SIZE
+ 21
+
+	)
+
+467 #define 
+	#AL_BAD_FLOATMAX
+ 22
+
+	)
+
+468 #define 
+	#AL_BAD_PORTSTYLE
+ 23
+
+	)
+
+469 #define 
+	#AL_BAD_BUFFERLENGTH
+ 24
+
+	)
+
+470 #define 
+	#AL_BAD_NOT_FOUND
+ 25
+
+	)
+
+471 #define 
+	#AL_BAD_PERMISSIONS
+ 26
+
+	)
+
+472 #define 
+	#AL_MAX_ERROR
+ 26
+
+	)
+
+495 
+ALconfig
+);
+
+533 #define 
+	#AL_RATE_48000
+ 48000
+
+	)
+
+534 #define 
+	#AL_RATE_44100
+ 44100
+
+	)
+
+535 #define 
+	#AL_RATE_32000
+ 32000
+
+	)
+
+536 #define 
+	#AL_RATE_22050
+ 22050
+
+	)
+
+537 #define 
+	#AL_RATE_16000
+ 16000
+
+	)
+
+538 #define 
+	#AL_RATE_11025
+ 11025
+
+	)
+
+539 #define 
+	#AL_RATE_8000
+ 8000
+
+	)
+
+545 #define 
+	#AL_RATE_INPUTRATE
+ (-1)
+
+	)
+
+553 #define 
+	#AL_RATE_AES_1
+ (-2)
+
+	)
+
+554 #define 
+	#AL_RATE_AES_2
+ (-3)
+
+	)
+
+555 #define 
+	#AL_RATE_AES_3
+ (-4)
+
+	)
+
+556 #define 
+	#AL_RATE_AES_4
+ (-5)
+
+	)
+
+557 #define 
+	#AL_RATE_AES_6
+ (-6)
+
+	)
+
+558 #define 
+	#AL_RATE_AES_1s
+ (-7)
+
+	)
+
+572 #define 
+	#AL_RATE_UNDEFINED
+ (-8)
+
+	)
+
+573 #define 
+	#AL_RATE_NO_DIGITAL_INPUT
+ (-9)
+
+	)
+
+574 #define 
+	#AL_RATE_UNACQUIRED
+ (-10)
+
+	)
+
+578 #define 
+	#AL_INPUT_SOURCE
+ 0
+
+	)
+
+579 #define 
+	#AL_LEFT_INPUT_ATTEN
+ 1
+
+	)
+
+580 #define 
+	#AL_RIGHT_INPUT_ATTEN
+ 2
+
+	)
+
+581 #define 
+	#AL_INPUT_RATE
+ 3
+
+	)
+
+582 #define 
+	#AL_OUTPUT_RATE
+ 4
+
+	)
+
+583 #define 
+	#AL_LEFT_SPEAKER_GAIN
+ 5
+
+	)
+
+584 #define 
+	#AL_RIGHT_SPEAKER_GAIN
+ 6
+
+	)
+
+585 #define 
+	#AL_INPUT_COUNT
+ 7
+
+	)
+
+586 #define 
+	#AL_OUTPUT_COUNT
+ 8
+
+	)
+
+587 #define 
+	#AL_UNUSED_COUNT
+ 9
+
+	)
+
+588 #define 
+	#AL_SYNC_INPUT_TO_AES
+ 10
+
+	)
+
+589 #define 
+	#AL_SYNC_OUTPUT_TO_AES
+ 11
+
+	)
+
+590 #define 
+	#AL_MONITOR_CTL
+ 12
+
+	)
+
+591 #define 
+	#AL_LEFT_MONITOR_ATTEN
+ 13
+
+	)
+
+592 #define 
+	#AL_RIGHT_MONITOR_ATTEN
+ 14
+
+	)
+
+593 #define 
+	#AL_CHANNEL_MODE
+ 15
+
+	)
+
+594 #define 
+	#AL_SPEAKER_MUTE_CTL
+ 16
+
+	)
+
+595 #define 
+	#AL_MIC_MODE
+ 17
+
+	)
+
+596 #define 
+	#AL_LEFT1_INPUT_ATTEN
+ 1
+
+	)
+
+597 #define 
+	#AL_RIGHT1_INPUT_ATTEN
+ 2
+
+	)
+
+598 #define 
+	#AL_LEFT2_INPUT_ATTEN
+ 18
+
+	)
+
+599 #define 
+	#AL_RIGHT2_INPUT_ATTEN
+ 19
+
+	)
+
+600 #define 
+	#AL_DIGITAL_INPUT_RATE
+ 20
+
+	)
+
+605 #define 
+	#AL_ENUM_VALUE
+ 1
+
+	)
+
+606 #define 
+	#AL_RANGE_VALUE
+ 2
+
+	)
+
+615 typedef struct 
+_ALeventQueue
+ *
+	tALeventQueue
+;
+
+616 typedef struct 
+_ALevent
+ *
+	tALevent
+;
+
+643 
+ALvalue
+ 
+alGetEventValue
+(
+	gALevent
+);
+
+644 void* 
+alGetEventData
+(
+ALevent
+);
+
+646 #define 
+	#AL_MAX_EVENT_PARAM
+ 64
+
+	)
+
+652 #define 
+	#AL_BAD_NO_EVENTQS
+ 1024
+
+	)
+
+653 #define 
+	#AL_BAD_INVALID_EVENTQ
+ 1025
+
+	)
+
+654 #define 
+	#AL_BAD_INVALID_EVENT
+ 1026
+
+	)
+
+655 #define 
+	#AL_BAD_EVENT_NOT_FOUND
+ 1027
+
+	)
+
+661 typedef struct 
+	s_ALconnectionInfo
+ {
+
+662 int 
+	msource
+, 
+	mdest
+, 
+	mconnection
+;
+
+663 } 
+	tALconnectionInfo
+;
+
+665 typedef struct 
+	s_ALsetChangeInfo
+ {
+
+666 
+ALvalue
+ 
+	mval
+;
+
+667 int 
+	mtotal
+;
+
+668 int 
+	mpchange
+;
+
+669 } 
+	tALsetChangeInfo
+;
+
+	@/usr/include/math.h
+
+2 #define 
+	#__MATH_H__
+
+
+	)
+
+8 #include 
+	~/usr/include/sgidefs.h
+>
+
+9 #include 
+	~/usr/include/standards.h
+>
+
+64 #define 
+	#__TYPEDEF_H_VAL
+
+
+	)
+
+65 typedef union 
+	u_h_val
+ {
+
+67 unsigned long 
+	mi
+[2];
+
+70 
+__uint32_t
+ 
+	mi
+[2];
+
+72 double 
+	md
+;
+
+73 } 
+	t_h_val
+;
+
+77 #define 
+	#HUGE_VAL
+ 
+__huge_val
+.
+d
+
+
+	)
+
+83 #define 
+	#HUGE_VAL
+ 
+__infinity
+
+
+	)
+
+88 #define 
+	#_SIZE_T
+
+
+	)
+
+90 typedef unsigned int 
+	tsize_t
+;
+
+93 typedef unsigned long 
+	tsize_t
+;
+
+132 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+182 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+232 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+272 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+355 #define 
+	#M_E
+ 2.7182818284590452354
+
+	)
+
+356 #define 
+	#M_LOG2E
+ 1.4426950408889634074
+
+	)
+
+357 #define 
+	#M_LOG10E
+ 0.43429448190325182765
+
+	)
+
+358 #define 
+	#M_LN2
+ 0.69314718055994530942
+
+	)
+
+359 #define 
+	#M_LN10
+ 2.30258509299404568402
+
+	)
+
+360 #define 
+	#M_PI
+ 3.14159265358979323846
+
+	)
+
+361 #define 
+	#M_PI_2
+ 1.57079632679489661923
+
+	)
+
+362 #define 
+	#M_PI_4
+ 0.78539816339744830962
+
+	)
+
+363 #define 
+	#M_1_PI
+ 0.31830988618379067154
+
+	)
+
+364 #define 
+	#M_2_PI
+ 0.63661977236758134308
+
+	)
+
+365 #define 
+	#M_2_SQRTPI
+ 1.12837916709551257390
+
+	)
+
+366 #define 
+	#M_SQRT2
+ 1.41421356237309504880
+
+	)
+
+367 #define 
+	#M_SQRT1_2
+ 0.70710678118654752440
+
+	)
+
+433 #define 
+	#_MAXFLOAT
+
+
+	)
+
+434 #define 
+	#MAXFLOAT
+ ((float)3.40282346638528860e+38)
+
+	)
+
+518 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+526 struct 
+	s__cabsl_s
+ { long double 
+a
+,
+b
+; };
+
+537 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+550 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+575 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+589 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+600 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+662 enum 
+	eversion
+ { 
+c_issue_4
+, 
+ansi_1
+, 
+strict_ansi
+ };
+
+665 struct 
+	s__cabs_s
+ { double 
+	ma
+,
+	mb
+; };
+
+746 #define 
+	#facos
+ 
+acosf
+
+
+	)
+
+747 #define 
+	#fasin
+ 
+asinf
+
+
+	)
+
+748 #define 
+	#fatan
+ 
+atanf
+
+
+	)
+
+749 #define 
+	#fatan2
+ 
+atan2f
+
+
+	)
+
+750 #define 
+	#fcos
+ 
+cosf
+
+
+	)
+
+751 #define 
+	#fsin
+ 
+sinf
+
+
+	)
+
+752 #define 
+	#ftan
+ 
+tanf
+
+
+	)
+
+753 #define 
+	#fcosh
+ 
+coshf
+
+
+	)
+
+754 #define 
+	#fsinh
+ 
+sinhf
+
+
+	)
+
+755 #define 
+	#ftanh
+ 
+tanhf
+
+
+	)
+
+756 #define 
+	#fexp
+ 
+expf
+
+
+	)
+
+757 #define 
+	#flog
+ 
+logf
+
+
+	)
+
+758 #define 
+	#flog10
+ 
+log10f
+
+
+	)
+
+759 #define 
+	#fsqrt
+ 
+sqrtf
+
+
+	)
+
+760 #define 
+	#fceil
+ 
+ceilf
+
+
+	)
+
+761 #define 
+	#ffloor
+ 
+floorf
+
+
+	)
+
+768 #define 
+	#isnanq
+ 
+isnanl
+
+
+	)
+
+770 #define 
+	#qabs
+ 
+fabsl
+
+
+	)
+
+771 #define 
+	#qacos
+ 
+acosl
+
+
+	)
+
+772 #define 
+	#qasin
+ 
+asinl
+
+
+	)
+
+773 #define 
+	#qatan
+ 
+atanl
+
+
+	)
+
+774 #define 
+	#qatan2
+ 
+atan2l
+
+
+	)
+
+776 #define 
+	#__qcabs_s
+ 
+__cabsl_s
+
+
+	)
+
+778 #define 
+	#qcabs
+ 
+cabsl
+
+
+	)
+
+779 #define 
+	#qceil
+ 
+ceill
+
+
+	)
+
+780 #define 
+	#qcopysign
+ 
+copysignl
+
+
+	)
+
+781 #define 
+	#qcos
+ 
+cosl
+
+
+	)
+
+782 #define 
+	#qcosh
+ 
+coshl
+
+
+	)
+
+783 #define 
+	#qerf
+ 
+erfl
+
+
+	)
+
+784 #define 
+	#qerfc
+ 
+erfcl
+
+
+	)
+
+785 #define 
+	#qexp
+ 
+expl
+
+
+	)
+
+786 #define 
+	#qfinite
+ 
+finitel
+
+
+	)
+
+787 #define 
+	#qfloor
+ 
+floorl
+
+
+	)
+
+788 #define 
+	#qfrexp
+ 
+frexpl
+
+
+	)
+
+789 #define 
+	#qhypot
+ 
+hypotl
+
+
+	)
+
+790 #define 
+	#qj0
+ 
+j0l
+
+
+	)
+
+791 #define 
+	#qj1
+ 
+j1l
+
+
+	)
+
+792 #define 
+	#qjn
+ 
+jnl
+
+
+	)
+
+793 #define 
+	#qldexp
+ 
+ldexpl
+
+
+	)
+
+794 #define 
+	#qlog
+ 
+logl
+
+
+	)
+
+795 #define 
+	#qlog1p
+ 
+log1pl
+
+
+	)
+
+796 #define 
+	#qlog10
+ 
+log10l
+
+
+	)
+
+797 #define 
+	#qlogb
+ 
+logbl
+
+
+	)
+
+798 #define 
+	#qmod
+ 
+fmodl
+
+
+	)
+
+799 #define 
+	#qmodf
+ 
+modfl
+
+
+	)
+
+800 #define 
+	#qnextafter
+ 
+nextafterl
+
+
+	)
+
+801 #define 
+	#qpow
+ 
+powl
+
+
+	)
+
+802 #define 
+	#qrint
+ 
+rintl
+
+
+	)
+
+803 #define 
+	#qscalb
+ 
+scalbl
+
+
+	)
+
+804 #define 
+	#qsin
+ 
+sinl
+
+
+	)
+
+805 #define 
+	#qsinh
+ 
+sinhl
+
+
+	)
+
+806 #define 
+	#qsqrt
+ 
+sqrtl
+
+
+	)
+
+807 #define 
+	#qtan
+ 
+tanl
+
+
+	)
+
+808 #define 
+	#qtanh
+ 
+tanhl
+
+
+	)
+
+809 #define 
+	#qtrunc
+ 
+truncl
+
+
+	)
+
+810 #define 
+	#qy0
+ 
+y0l
+
+
+	)
+
+811 #define 
+	#qy1
+ 
+y1l
+
+
+	)
+
+812 #define 
+	#qyn
+ 
+ynl
+
+
+	)
+
+815 #define 
+	#qgamma
+ 
+gammal
+
+
+	)
+
+816 #define 
+	#qlgamma
+ 
+lgammal
+
+
+	)
+
+817 #define 
+	#qsigngam
+ 
+signgaml
+
+
+	)
+
+829 #define 
+	#flog1p
+ 
+	glog1pf
+
+
+	)
+
+830 #define 
+	#ftrunc
+ 
+	gtruncf
+
+
+	)
+
+834 #define 
+	#_ABS_
+
+
+	)
+
+835 inline int 
+	Iabs
+(int 
+	lx
+) {return x > 0 ? x : -x;
+	}
+}
+
+850 struct 
+	s__fcabs_s
+ { float 
+	ma
+,
+	mb
+; };
+
+878 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 400))
+
+910 #define 
+	#HUGE
+ 
+MAXFLOAT
+
+
+	)
+
+912 #define 
+	#HUGE
+ ((float)3.40282346638528860e+38)
+
+	)
+
+916 #define 
+	#_ABS
+(
+x
+) ((x) < 0 ? -(x) : (x))
+
+	)
+
+917 #define 
+	#_REDUCE
+(
+TYPE
+, 
+X
+, 
+XN
+, 
+C1
+, 
+C2
+) { \
+
+918 double 
+x1
+ = (double)(
+TYPE
+)
+X
+, 
+x2
+ = X - x1; \
+
+919 
+X
+ = 
+x1
+ - (
+XN
+) * (
+C1
+); X += 
+x2
+; X -= (XN) * (
+C2
+); }
+
+	)
+
+920 #define 
+	#_POLY1
+(
+x
+, 
+c
+) ((c)[0] * (x) + (c)[1])
+
+	)
+
+921 #define 
+	#_POLY2
+(
+x
+, 
+c
+) (
+	`_POLY1
+((x), (c)) * (x) + (c)[2])
+
+	)
+
+922 #define 
+	#_POLY3
+(
+x
+, 
+c
+) (
+	`_POLY2
+((x), (c)) * (x) + (c)[3])
+
+	)
+
+923 #define 
+	#_POLY4
+(
+x
+, 
+c
+) (
+	`_POLY3
+((x), (c)) * (x) + (c)[4])
+
+	)
+
+924 #define 
+	#_POLY5
+(
+x
+, 
+c
+) (
+	`_POLY4
+((x), (c)) * (x) + (c)[5])
+
+	)
+
+925 #define 
+	#_POLY6
+(
+x
+, 
+c
+) (
+	`_POLY5
+((x), (c)) * (x) + (c)[6])
+
+	)
+
+926 #define 
+	#_POLY7
+(
+x
+, 
+c
+) (
+	`_POLY6
+((x), (c)) * (x) + (c)[7])
+
+	)
+
+927 #define 
+	#_POLY8
+(
+x
+, 
+c
+) (
+	`_POLY7
+((x), (c)) * (x) + (c)[8])
+
+	)
+
+928 #define 
+	#_POLY9
+(
+x
+, 
+c
+) (
+	`_POLY8
+((x), (c)) * (x) + (c)[9])
+
+	)
+
+931 
+defined
+(
+_MIPS_SIM
+) && _MIPS_SIM != 
+_MIPS_SIM_ABI32
+ && \
+
+932 !
+	Idefined
+(
+__OLD_MATHERR_NAMES
+)
+
+933 #define 
+	#__MATH_EXCEPTION
+ 
+math_exception
+
+
+	)
+
+935 #define 
+	#__MATH_EXCEPTION
+ 
+exception
+
+
+	)
+
+938 struct 
+	s__MATH_EXCEPTION
+ {
+
+939 int 
+type
+;
+
+940 char *
+	mname
+;
+
+941 double 
+	marg1
+;
+
+942 double 
+	marg2
+;
+
+943 double 
+	mretval
+;
+
+950 #include 
+	~/usr/include/svr4_math.h
+>
+
+975 
+	}
+}
+
+984 
+defined
+(
+_MIPS_SIM
+) && _MIPS_SIM != 
+_MIPS_SIM_ABI32
+ && \
+
+985 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 720) && \
+
+986 
+defined
+(
+__LIBC_OVERLOAD__
+) && __LIBC_OVERLOAD__
+
+989 #define 
+	#__sgi_cpp_abs_long_defined
+
+
+	)
+
+990 inline long 
+	Iabs
+(long 
+x
+) {return x > 0 ? x : -x;
+	}
+}
+
+992 inline long long 
+	Iabs
+(long long 
+x
+) {return x > 0 ? x : -x;
+	}
+}
+
+999 
+defined
+(
+_MIPS_SIM
+) && _MIPS_SIM != 
+_MIPS_SIM_ABI32
+ && \
+
+1000 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 720) && \
+
+1001 
+defined
+(
+__LIBC_OVERLOAD__
+) && __LIBC_OVERLOAD__
+
+1043 
+defined
+(
+	g_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+1081 inline float 
+	Iabs
+(float 
+x
+) { return 
+	`fabsf
+(
+	lx
+); 
+	}
+}
+
+1082 inline double 
+	Iabs
+(double 
+x
+) { return 
+	`fabs
+(x); 
+	}
+}
+
+1083 inline long double 
+	Iabs
+(long double 
+x
+) { return ::
+	`fabsl
+(x); 
+	}
+}
+
+1085 inline float 
+	Ifabs
+(float 
+x
+) { return 
+	`fabsf
+(x); 
+	}
+}
+
+1086 inline long double 
+	Ifabs
+(long double 
+x
+) { return ::
+	`fabsl
+(x); 
+	}
+}
+
+1088 inline float 
+	Iceil
+(float 
+x
+) { return 
+	`ceilf
+(x); 
+	}
+}
+
+1089 inline long double 
+	Iceil
+(long double 
+x
+) { return ::
+	`ceill
+(x); 
+	}
+}
+
+1091 inline float 
+	Ifloor
+(float 
+x
+) { return 
+	`floorf
+(x); 
+	}
+}
+
+1092 inline long double 
+	Ifloor
+(long double 
+x
+) { return ::
+	`floorl
+(x); 
+	}
+}
+
+1094 inline float 
+	Ifmod
+(float 
+x
+, float 
+y
+) { return 
+	`fmodf
+(x, y); 
+	}
+}
+
+1095 inline long double 
+	Ifmod
+(long double 
+x
+, long double 
+y
+) {
+
+1096 return ::
+	`fmodl
+(
+x
+, 
+y
+);
+
+1097 
+	}
+}
+
+1100 inline float 
+	Ifrexp
+(float 
+x
+, int* 
+y
+) { return 
+	`frexpf
+(x, y); 
+	}
+}
+
+1102 inline long double 
+	Ifrexp
+(long double 
+x
+, int* 
+y
+) {
+
+1103 return ::
+	`frexpl
+(
+x
+, 
+y
+);
+
+1104 
+	}
+}
+
+1107 inline float 
+	Ildexp
+(float 
+x
+, int 
+y
+) { return 
+	`ldexpf
+(x, y); 
+	}
+}
+
+1109 inline long double 
+	Ildexp
+(long double 
+x
+, int 
+y
+) {
+
+1110 return ::
+	`ldexpl
+(
+x
+, 
+y
+);
+
+1111 
+	}
+}
+
+1113 inline float 
+	Imodf
+(float 
+x
+, float* 
+y
+) { return 
+	`modff
+(x, y); 
+	}
+}
+
+1114 inline long double 
+	Imodf
+(long double 
+x
+, long double* 
+y
+) {
+
+1115 return ::
+	`modfl
+(
+x
+, 
+y
+);
+
+1116 
+	}
+}
+
+1118 inline float 
+	Isqrt
+(float 
+x
+) { return 
+	`sqrtf
+(x); 
+	}
+}
+
+1119 inline long double 
+	Isqrt
+(long double 
+x
+) { return ::
+	`sqrtl
+(x); 
+	}
+}
+
+1121 inline float 
+	Iexp
+(float 
+x
+) { return 
+	`expf
+(x); 
+	}
+}
+
+1122 inline long double 
+	Iexp
+(long double 
+x
+) { return ::
+	`expl
+(x); 
+	}
+}
+
+1124 inline float 
+	Ilog
+(float 
+x
+) { return 
+	`logf
+(x); 
+	}
+}
+
+1125 inline long double 
+	Ilog
+(long double 
+x
+) { return ::
+	`logl
+(x); 
+	}
+}
+
+1127 inline float 
+	Ilog10
+(float 
+x
+) { return 
+	`log10f
+(x); 
+	}
+}
+
+1128 inline long double 
+	Ilog10
+(long double 
+x
+) { return ::
+	`log10l
+(x); 
+	}
+}
+
+1130 inline float 
+	Ipow
+(float 
+x
+, float 
+y
+) { return 
+	`powf
+(x, y); 
+	}
+}
+
+1131 inline long double 
+	Ipow
+(long double 
+x
+, long double 
+y
+) {
+
+1132 return ::
+	`powl
+(
+x
+, 
+y
+);
+
+1133 
+	}
+}
+
+1135 inline float 
+	Ipow
+(float 
+x
+, int 
+n
+) {
+
+1136 float 
+tmp
+;
+
+1137 switch(
+n
+) {
+
+1139 return 
+x
+ * 
+	lx
+;
+
+1141 return 
+x
+ * x * 
+	lx
+;
+
+1143 return 
+tmp
+ = 
+x
+ * x, tmp * 
+	ltmp
+;
+
+1145 return 
+	`pow
+(
+x
+, (float) 
+n
+);
+
+1147 
+	}
+}
+
+1149 inline double 
+	Ipow
+(double 
+x
+, int 
+n
+) {
+
+1150 double 
+tmp
+;
+
+1151 switch(
+n
+) {
+
+1153 return 
+x
+ * 
+	lx
+;
+
+1155 return 
+x
+ * x * 
+	lx
+;
+
+1157 return 
+tmp
+ = 
+x
+ * x, tmp * 
+	ltmp
+;
+
+1159 return 
+	`pow
+(
+x
+, (double) 
+n
+);
+
+1161 
+	}
+}
+
+1163 inline long double 
+	Ipow
+(long double 
+x
+, int 
+n
+) {
+
+1164 long double 
+tmp
+;
+
+1165 switch(
+n
+) {
+
+1167 return 
+x
+ * 
+	lx
+;
+
+1169 return 
+x
+ * x * 
+	lx
+;
+
+1171 return 
+tmp
+ = 
+x
+ * x, tmp * 
+	ltmp
+;
+
+1173 return 
+	`pow
+(
+x
+, (long double) 
+n
+);
+
+1175 
+	}
+}
+
+1177 inline float 
+	Isin
+(float 
+x
+) { return 
+	`sinf
+(x); 
+	}
+}
+
+1178 inline long double 
+	Isin
+(long double 
+x
+) { return ::
+	`sinl
+(x); 
+	}
+}
+
+1180 inline float 
+	Icos
+(float 
+x
+) { return 
+	`cosf
+(x); 
+	}
+}
+
+1181 inline long double 
+	Icos
+(long double 
+x
+) { return ::
+	`cosl
+(x); 
+	}
+}
+
+1183 inline float 
+	Itan
+(float 
+x
+) { return 
+	`tanf
+(x); 
+	}
+}
+
+1184 inline long double 
+	Itan
+(long double 
+x
+) { return ::
+	`tanl
+(x); 
+	}
+}
+
+1186 inline float 
+	Iasin
+(float 
+x
+) { return 
+	`asinf
+(x); 
+	}
+}
+
+1187 inline long double 
+	Iasin
+(long double 
+x
+) { return ::
+	`asinl
+(x); 
+	}
+}
+
+1189 inline float 
+	Iacos
+(float 
+x
+) { return 
+	`acosf
+(x); 
+	}
+}
+
+1190 inline long double 
+	Iacos
+(long double 
+x
+) { return ::
+	`acosl
+(x); 
+	}
+}
+
+1192 inline float 
+	Iatan
+(float 
+x
+) { return 
+	`atanf
+(x); 
+	}
+}
+
+1193 inline long double 
+	Iatan
+(long double 
+x
+) { return ::
+	`atanl
+(x); 
+	}
+}
+
+1195 inline float 
+	Iatan2
+(float 
+x
+, float 
+y
+) { return 
+	`atan2f
+(x, y); 
+	}
+}
+
+1196 inline long double 
+	Iatan2
+(long double 
+x
+, long double 
+y
+) {
+
+1197 return ::
+	`atan2l
+(
+x
+, 
+y
+);
+
+1198 
+	}
+}
+
+1200 inline float 
+	Isinh
+(float 
+x
+) { return 
+	`sinhf
+(x); 
+	}
+}
+
+1201 inline long double 
+	Isinh
+(long double 
+x
+) { return ::
+	`sinhl
+(x); 
+	}
+}
+
+1203 inline float 
+	Icosh
+(float 
+x
+) { return 
+	`coshf
+(x); 
+	}
+}
+
+1204 inline long double 
+	Icosh
+(long double 
+x
+) { return ::
+	`coshl
+(x); 
+	}
+}
+
+1206 inline float 
+	Itanh
+(float 
+x
+) { return 
+	`tanhf
+(x); 
+	}
+}
+
+1207 inline long double 
+	Itanh
+(long double 
+x
+) { return ::
+	`tanhl
+(x); 
+	}
+}
+
+	@/usr/include/stdio.h
+
+2 #define 
+	#__STDIO_H__
+
+
+	)
+
+36 #include 
+	~/usr/include/standards.h
+>
+
+37 #include 
+	~/usr/include/sgidefs.h
+>
+
+41 #define 
+	#_SIZE_T
+
+
+	)
+
+43 typedef unsigned int 
+	tsize_t
+;
+
+46 typedef unsigned long 
+	tsize_t
+;
+
+51 #define 
+	#_SSIZE_T
+
+
+	)
+
+53 typedef int 
+	tssize_t
+;
+
+56 typedef long 
+	tssize_t
+;
+
+62 typedef 
+__int64_t
+ 
+	tfpos_t
+;
+
+64 typedef long 
+	tfpos_t
+;
+
+70 #define 
+	#_OFF64_T
+
+
+	)
+
+72 typedef 
+__int64_t
+ 
+	toff64_t
+;
+
+76 #define 
+	#_OFF_T
+
+
+	)
+
+78 typedef 
+__int64_t
+ 
+	toff_t
+;
+
+79 #elif 
+	Idefined
+(
+_STANDALONE
+)
+
+80 typedef long 
+	toff_t
+;
+
+81 #elif 
+_MIPS_SIM
+ == 
+_ABIN32
+
+
+82 typedef 
+__int64_t
+ 
+	toff_t
+;
+
+84 typedef long 
+	toff_t
+;
+
+91 typedef long 
+	tfpos64_t
+;
+
+94 typedef 
+__int64_t
+ 
+	tfpos64_t
+;
+
+102 #define 
+	#_VA_LIST_
+
+
+	)
+
+103 typedef char *
+	tva_list
+;
+
+107 #define 
+	#NULL
+ 0L
+
+	)
+
+111 #define 
+	#BUFSIZ
+ 4096
+
+	)
+
+113 #define 
+	#_NFILE
+ 100
+
+	)
+
+115 #define 
+	#_SBFSIZ
+ 8
+
+	)
+
+118 #define 
+	#_IOFBF
+ 0000
+
+	)
+
+119 #define 
+	#_IOLBF
+ 0100
+
+	)
+
+120 #define 
+	#_IONBF
+ 0004
+
+	)
+
+121 #define 
+	#_IOEOF
+ 0020
+
+	)
+
+122 #define 
+	#_IOERR
+ 0040
+
+	)
+
+124 #define 
+	#_IOREAD
+ 0001
+
+	)
+
+125 #define 
+	#_IOWRT
+ 0002
+
+	)
+
+126 #define 
+	#_IORW
+ 0200
+
+	)
+
+127 #define 
+	#_IOMYBUF
+ 0010
+
+	)
+
+131 #define 
+	#_IOFBF
+ '0000'
+x
+
+
+	)
+
+132 #define 
+	#_IOLBF
+ '0040'
+x
+
+
+	)
+
+133 #define 
+	#_IONBF
+ '0004'
+x
+
+
+	)
+
+134 #define 
+	#_IOEOF
+ '0010'
+x
+
+
+	)
+
+135 #define 
+	#_IOERR
+ '0020'
+x
+
+
+	)
+
+136 #define 
+	#_IOREAD
+ '0001'
+x
+
+
+	)
+
+137 #define 
+	#_IOWRT
+ '0002'
+x
+
+
+	)
+
+138 #define 
+	#_IORW
+ '0080'
+x
+
+
+	)
+
+139 #define 
+	#_IOMYBUF
+ '0008'
+x
+
+
+	)
+
+145 # define 
+	#EOF
+ (-1)
+
+	)
+
+148 #define 
+	#FOPEN_MAX
+ 
+_NFILE
+
+
+	)
+
+149 #define 
+	#FILENAME_MAX
+ 1024
+
+	)
+
+152 #define 
+	#SEEK_SET
+ 0
+
+	)
+
+153 #define 
+	#SEEK_CUR
+ 1
+
+	)
+
+154 #define 
+	#SEEK_END
+ 2
+
+	)
+
+156 #define 
+	#TMP_MAX
+ 17576
+
+	)
+
+159 #define 
+	#L_ctermid
+ 9
+
+	)
+
+160 #define 
+	#L_cuserid
+ 9
+
+	)
+
+164 #define 
+	#P_tmpdir
+ "/var/tmp/"
+
+	)
+
+167 #define 
+	#L_tmpnam
+ 25
+
+	)
+
+169 #define 
+	#stdin
+ (&
+__iob
+[0])
+
+	)
+
+170 #define 
+	#stdout
+ (&
+__iob
+[1])
+
+	)
+
+171 #define 
+	#stderr
+ (&
+__iob
+[2])
+
+	)
+
+183 
+__file_s
+
+
+187 int 
+_cnt
+;
+
+190 long 
+_cnt
+;
+
+192 unsigned char *
+_ptr
+;
+
+193 unsigned char *
+_base
+;
+
+195 unsigned char 
+_reserved
+[2];
+
+196 unsigned short 
+_flag
+;
+
+197 unsigned int 
+_file
+;
+
+198 #elif 
+_MIPS_SIM
+ == 
+_ABIN32
+
+
+199 unsigned char 
+_flag
+;
+
+200 unsigned char 
+_o_file
+;
+
+201 unsigned short 
+_file
+;
+
+203 unsigned char 
+_flag
+;
+
+204 unsigned char 
+_file
+;
+
+206 
+	}
+} 
+	tFILE
+;
+
+308 #include 
+	~/usr/include/getopt.h
+>
+
+370 #define 
+	#getc
+(
+p
+) 
+	`getc_locked
+(p)
+
+	)
+
+371 #define 
+	#putc
+(
+x
+, 
+p
+) 
+	`putc_locked
+((x), p)
+
+	)
+
+372 #define 
+	#getchar
+() 
+	`getc_locked
+(
+stdin
+)
+
+	)
+
+373 #define 
+	#putchar
+(
+x
+) 
+	`putc_locked
+((x), 
+stdout
+)
+
+	)
+
+376 #define 
+	#feof
+(
+p
+) 
+	`feof_unlocked
+(p)
+
+	)
+
+377 #define 
+	#ferror
+(
+p
+) 
+	`ferror_unlocked
+(p)
+
+	)
+
+378 #define 
+	#fileno
+(
+p
+) 
+	`fileno_unlocked
+(p)
+
+	)
+
+381 #define 
+	#getc_locked
+(
+p
+) (
+__us_rsthread_stdio
+ ? 
+	`__semgetc
+(p) : \
+
+382 (--(
+p
+)->
+_cnt
+ < 0 ? 
+	`__filbuf
+(p) : (int)*(p)->
+_ptr
+++))
+
+	)
+
+383 #define 
+	#putc_locked
+(
+x
+, 
+p
+) (
+__us_rsthread_stdio
+ ? 
+	`__semputc
+(x,p) : \
+
+384 (--(
+p
+)->
+_cnt
+ < 0 ? 
+	`__flsbuf
+((
+x
+), (p)) \
+
+385 : (int)(*(
+p
+)->
+_ptr
+++ = (unsigned char)(
+x
+))))
+
+	)
+
+386 #define 
+	#getchar_locked
+() 
+	`getc_locked
+(
+stdin
+)
+
+	)
+
+387 #define 
+	#putchar_locked
+(
+x
+) 
+	`putc_locked
+((x), 
+stdout
+)
+
+	)
+
+388 #define 
+	#clearerr_locked
+(
+p
+) 
+	`clearerr
+(p)
+
+	)
+
+389 #define 
+	#feof_locked
+(
+p
+) 
+	`feof_unlocked
+(p)
+
+	)
+
+390 #define 
+	#ferror_locked
+(
+p
+) 
+	`ferror_unlocked
+(p)
+
+	)
+
+391 #define 
+	#fileno_locked
+(
+p
+) 
+	`fileno_unlocked
+(p)
+
+	)
+
+394 #define 
+	#getc_unlocked
+(
+p
+) (--(p)->
+_cnt
+ < 0 ? 
+	`__filbuf
+(p) : (int)*(p)->
+_ptr
+++)
+
+	)
+
+395 #define 
+	#putc_unlocked
+(
+x
+, 
+p
+) (--(p)->
+_cnt
+ < 0 ? 
+	`__flsbuf
+((x), (p)) \
+
+396 : (int)(*(
+p
+)->
+_ptr
+++ = (unsigned char)(
+x
+)))
+
+	)
+
+397 #define 
+	#getchar_unlocked
+() 
+	`getc_unlocked
+(
+stdin
+)
+
+	)
+
+398 #define 
+	#putchar_unlocked
+(
+x
+) 
+	`putc_unlocked
+((x), 
+stdout
+)
+
+	)
+
+399 #define 
+	#clearerr_unlocked
+(
+p
+) ((void)((p)->
+_flag
+ &= ~(
+_IOERR
+ | 
+_IOEOF
+)))
+
+	)
+
+400 #define 
+	#feof_unlocked
+(
+p
+) (((int)(p)->
+_flag
+) & 
+_IOEOF
+)
+
+	)
+
+401 #define 
+	#ferror_unlocked
+(
+p
+) (((int)(p)->
+_flag
+) & 
+_IOERR
+)
+
+	)
+
+402 #define 
+	#fileno_unlocked
+(
+p
+) ((p)->
+_file
+)
+
+	)
+
+404 #elif 
+_POSIX1C
+ && 
+_NO_ANSIMODE
+
+
+408 #define 
+	#getc
+(
+p
+) (
+__us_rsthread_stdio
+ ? 
+	`__semgetc
+(p) : \
+
+409 (--(
+p
+)->
+_cnt
+ < 0 ? 
+	`__filbuf
+(p) : (int)*(p)->
+_ptr
+++))
+
+	)
+
+410 #define 
+	#putc
+(
+x
+, 
+p
+) (
+__us_rsthread_stdio
+ ? 
+	`__semputc
+(x,p) : \
+
+411 (--(
+p
+)->
+_cnt
+ < 0 ? 
+	`__flsbuf
+((
+x
+), (p)) \
+
+412 : (int)(*(
+p
+)->
+_ptr
+++ = (unsigned char)(
+x
+))))
+
+	)
+
+413 #define 
+	#getchar
+() 
+	`getc
+(
+stdin
+)
+
+	)
+
+414 #define 
+	#putchar
+(
+x
+) 
+	`putc
+((x), 
+stdout
+)
+
+	)
+
+417 #define 
+	#getc_unlocked
+(
+p
+) (--(p)->
+_cnt
+ < 0 ? 
+	`__filbuf
+(p) : (int)*(p)->
+_ptr
+++)
+
+	)
+
+418 #define 
+	#putc_unlocked
+(
+x
+, 
+p
+) (--(p)->
+_cnt
+ < 0 ? 
+	`__flsbuf
+((x), (p)) \
+
+419 : (int)(*(
+p
+)->
+_ptr
+++ = (unsigned char)(
+x
+)))
+
+	)
+
+420 #define 
+	#getchar_unlocked
+() 
+	`getc_unlocked
+(
+stdin
+)
+
+	)
+
+421 #define 
+	#putchar_unlocked
+(
+x
+) 
+	`putc_unlocked
+((x), 
+stdout
+)
+
+	)
+
+423 #define 
+	#clearerr
+(
+p
+) ((void)((p)->
+_flag
+ &= ~(
+_IOERR
+ | 
+_IOEOF
+)))
+
+	)
+
+424 #define 
+	#feof
+(
+p
+) (((int)(p)->
+_flag
+) & 
+_IOEOF
+)
+
+	)
+
+425 #define 
+	#ferror
+(
+p
+) (((int)(p)->
+_flag
+) & 
+_IOERR
+)
+
+	)
+
+426 #define 
+	#fileno
+(
+p
+) ((p)->
+_file
+)
+
+	)
+
+434 #define 
+	#getc
+(
+p
+) (--(p)->
+_cnt
+ < 0 ? 
+	`__filbuf
+(p) : (int)*(p)->
+_ptr
+++)
+
+	)
+
+435 #define 
+	#putc
+(
+x
+, 
+p
+) (--(p)->
+_cnt
+ < 0 ? 
+	`__flsbuf
+((x), (p)) \
+
+436 : (int)(*(
+p
+)->
+_ptr
+++ = (unsigned char)(
+x
+)))
+
+	)
+
+437 #define 
+	#getchar
+() 
+	`getc
+(
+stdin
+)
+
+	)
+
+438 #define 
+	#putchar
+(
+x
+) 
+	`putc
+((x), 
+stdout
+)
+
+	)
+
+439 #define 
+	#clearerr
+(
+p
+) ((void)((p)->
+_flag
+ &= ~(
+_IOERR
+ | 
+_IOEOF
+)))
+
+	)
+
+440 #define 
+	#feof
+(
+p
+) (((int)(p)->
+_flag
+) & 
+_IOEOF
+)
+
+	)
+
+441 #define 
+	#ferror
+(
+p
+) (((int)(p)->
+_flag
+) & 
+_IOERR
+)
+
+	)
+
+444 #define 
+	#fileno
+(
+p
+) ((p)->
+_file
+)
+
+	)
+
+	@/usr/include/stdlib.h
+
+2 #define 
+	#__STDLIB_H__
+
+
+	)
+
+34 #include 
+	~/usr/include/standards.h
+>
+
+35 #include 
+	~/usr/include/sgidefs.h
+>
+
+38 #define 
+	#NULL
+ 0L
+
+	)
+
+42 #define 
+	#EXIT_FAILURE
+ 1
+
+	)
+
+43 #define 
+	#EXIT_SUCCESS
+ 0
+
+	)
+
+46 #define 
+	#RAND_MAX
+ 32767
+
+	)
+
+50 #define 
+	#_QUOT_OFFSET
+ 0
+
+	)
+
+51 #define 
+	#_REM_OFFSET
+ 4
+
+	)
+
+53 #define 
+	#_LQUOT_OFFSET
+ 0
+
+	)
+
+54 #define 
+	#_LREM_OFFSET
+ 4
+
+	)
+
+57 #define 
+	#_LQUOT_OFFSET
+ 0
+
+	)
+
+58 #define 
+	#_LREM_OFFSET
+ 8
+
+	)
+
+61 #define 
+	#_LLQUOT_OFFSET
+ 0
+
+	)
+
+62 #define 
+	#_LLREM_OFFSET
+ 8
+
+	)
+
+73 #define 
+	#_W_INT
+(
+i
+) (i)
+
+	)
+
+77 #define 
+	#WUNTRACED
+ 0004
+
+	)
+
+78 #define 
+	#WNOHANG
+ 0100
+
+	)
+
+79 #define 
+	#_WSTOPPED
+ 0177
+
+	)
+
+80 #define 
+	#WIFEXITED
+(
+stat
+) ((
+	`_W_INT
+(stat)&0377)==0)
+
+	)
+
+81 #define 
+	#WIFSIGNALED
+(
+stat
+) ((
+	`_W_INT
+(stat)&0377)>0&&((_W_INT(stat)>>8)&0377)==0)
+
+	)
+
+82 #define 
+	#WIFSTOPPED
+(
+stat
+) ((
+	`_W_INT
+(stat)&0377)==
+_WSTOPPED
+&&((_W_INT(stat)>>8)&0377)!=0)
+
+	)
+
+83 #define 
+	#WEXITSTATUS
+(
+stat
+) ((
+	`_W_INT
+(stat)>>8)&0377)
+
+	)
+
+84 #define 
+	#WTERMSIG
+(
+stat
+) (
+	`_W_INT
+(stat)&0177)
+
+	)
+
+85 #define 
+	#WSTOPSIG
+(
+stat
+) ((
+	`_W_INT
+(stat)>>8)&0377)
+
+	)
+
+91 int 
+	mquot
+;
+
+92 int 
+	mrem
+;
+
+93 } 
+	tdiv_t
+;
+
+96 long 
+	mquot
+;
+
+97 long 
+	mrem
+;
+
+98 } 
+	tldiv_t
+;
+
+101 #define 
+	#_SIZE_T
+
+
+	)
+
+103 typedef unsigned int 
+	tsize_t
+;
+
+106 typedef unsigned long 
+	tsize_t
+;
+
+112 #define 
+	#_SSIZE_T
+
+
+	)
+
+114 typedef int 
+	tssize_t
+;
+
+117 typedef long 
+	tssize_t
+;
+
+123 #define 
+	#_WCHAR_T
+
+
+	)
+
+125 typedef long 
+	twchar_t
+;
+
+128 typedef 
+__int32_t
+ 
+	twchar_t
+;
+
+133 #include 
+	~/usr/include/locale_attr.h
+>
+
+135 #define 
+	#MB_CUR_MAX
+ ((int)(
+__libc_attr
+.
+_csinfo
+.
+_mb_cur_max
+))
+
+	)
+
+140 #define 
+	#MB_CUR_MAX
+ (int)
+__ctype
+[520]
+
+	)
+
+157 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+167 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+179 #define 
+	#_ABS_
+
+
+	)
+
+180 inline int 
+	Iabs
+(int 
+x
+) {return x > 0 ? x : -x;
+	}
+}
+
+185 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+193 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+239 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+250 #include 
+	~/usr/include/getopt.h
+>
+
+263 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+292 
+__int64_t
+ 
+quot
+;
+
+293 
+__int64_t
+ 
+	mrem
+;
+
+294 } 
+	tlldiv_t
+;
+
+301 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 710))
+
+308 #include 
+	~/usr/include/inttypes.h
+>
+
+329 
+defined
+(
+_MIPS_SIM
+) && _MIPS_SIM != 
+_MIPS_SIM_ABI32
+ && \
+
+330 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 720) && \
+
+331 
+defined
+(
+__LIBC_OVERLOAD__
+) && __LIBC_OVERLOAD__
+
+334 #define 
+	#__sgi_cpp_abs_long_defined
+
+
+	)
+
+335 inline long 
+	Iabs
+(long 
+x
+) {return x > 0 ? x : -x;
+	}
+}
+
+337 inline long long 
+	Iabs
+(long long 
+x
+) {return x > 0 ? x : -x;
+	}
+}
+
+341 inline 
+ldiv_t
+ 
+	Idiv
+(long 
+	lx
+, long 
+	ly
+) { return 
+	`ldiv
+(x,y); 
+	}
+}
+
+	@/usr/include/sys/fcntl.h
+
+2 #define 
+	#_SYS_FNCTL_H
+
+
+	)
+
+21 #include 
+	~/usr/include/sys/types.h
+>
+
+26 #define 
+	#_F_FLAGS
+
+
+	)
+
+30 #define 
+	#FNDELAY
+ 0x04
+
+	)
+
+31 #define 
+	#FAPPEND
+ 0x08
+
+	)
+
+32 #define 
+	#FSYNC
+ 0x10
+
+	)
+
+33 #define 
+	#FDSYNC
+ 0x20
+
+	)
+
+34 #define 
+	#FRSYNC
+ 0x40
+
+	)
+
+35 #define 
+	#FNONBLOCK
+ 0x80
+
+	)
+
+36 #define 
+	#FASYNC
+ 0x1000
+
+	)
+
+37 #define 
+	#FLARGEFILE
+ 0x2000
+
+	)
+
+38 #define 
+	#FNONBLK
+ 
+FNONBLOCK
+
+
+	)
+
+39 #define 
+	#FDIRECT
+ 0x8000
+
+	)
+
+40 #define 
+	#FBULK
+ 0x10000
+
+	)
+
+41 #define 
+	#FLCINVAL
+ 0x20000
+
+	)
+
+42 #define 
+	#FLCFLUSH
+ 0x40000
+
+	)
+
+44 #define 
+	#FDIRENT64
+ 0x8000
+
+	)
+
+50 #define 
+	#FCREAT
+ 0x0100
+
+	)
+
+51 #define 
+	#FTRUNC
+ 0x0200
+
+	)
+
+52 #define 
+	#FEXCL
+ 0x0400
+
+	)
+
+53 #define 
+	#FNOCTTY
+ 0x0800
+
+	)
+
+60 #define 
+	#O_RDONLY
+ 0
+
+	)
+
+61 #define 
+	#O_WRONLY
+ 1
+
+	)
+
+62 #define 
+	#O_RDWR
+ 2
+
+	)
+
+63 #define 
+	#O_NDELAY
+ 0x04
+
+	)
+
+64 #define 
+	#O_APPEND
+ 0x08
+
+	)
+
+65 #define 
+	#O_SYNC
+ 0x10
+
+	)
+
+66 #define 
+	#O_DSYNC
+ 0x20
+
+	)
+
+67 #define 
+	#O_RSYNC
+ 0x40
+
+	)
+
+68 #define 
+	#O_NONBLOCK
+ 0x80
+
+	)
+
+69 #define 
+	#O_LARGEFILE
+ 0x2000
+
+	)
+
+70 #define 
+	#O_DIRECT
+ 0x8000
+
+	)
+
+71 #define 
+	#O_BULK
+ 0x10000
+
+	)
+
+72 #define 
+	#O_LCINVAL
+ 0x20000
+
+	)
+
+73 #define 
+	#O_LCFLUSH
+ 0x40000
+
+	)
+
+77 #define 
+	#O_CREAT
+ 0x100
+
+	)
+
+78 #define 
+	#O_TRUNC
+ 0x200
+
+	)
+
+79 #define 
+	#O_EXCL
+ 0x400
+
+	)
+
+80 #define 
+	#O_NOCTTY
+ 0x800
+
+	)
+
+83 #define 
+	#F_DUPFD
+ 0
+
+	)
+
+84 #define 
+	#F_GETFD
+ 1
+
+	)
+
+85 #define 
+	#F_SETFD
+ 2
+
+	)
+
+86 #define 
+	#F_GETFL
+ 3
+
+	)
+
+87 #define 
+	#F_SETFL
+ 4
+
+	)
+
+89 #define 
+	#F_SETLK
+ 6
+
+	)
+
+90 #define 
+	#F_SETLKW
+ 7
+
+	)
+
+91 #define 
+	#F_CHKFL
+ 8
+
+	)
+
+93 #define 
+	#F_ALLOCSP
+ 10
+
+	)
+
+94 #define 
+	#F_FREESP
+ 11
+
+	)
+
+95 #define 
+	#F_SETBSDLK
+ 12
+
+	)
+
+96 #define 
+	#F_SETBSDLKW
+ 13
+
+	)
+
+97 #define 
+	#F_GETLK
+ 14
+
+	)
+
+98 #define 
+	#F_CHKLK
+ 15
+
+	)
+
+99 #define 
+	#F_CHKLKW
+ 16
+
+	)
+
+100 #define 
+	#F_CLNLK
+ 17
+
+	)
+
+102 #define 
+	#F_RSETLK
+ 20
+
+	)
+
+103 #define 
+	#F_RGETLK
+ 21
+
+	)
+
+104 #define 
+	#F_RSETLKW
+ 22
+
+	)
+
+105 #define 
+	#F_GETOWN
+ 23
+
+	)
+
+106 #define 
+	#F_SETOWN
+ 24
+
+	)
+
+108 #define 
+	#F_DIOINFO
+ 30
+
+	)
+
+109 #define 
+	#F_FSGETXATTR
+ 31
+
+	)
+
+110 #define 
+	#F_FSSETXATTR
+ 32
+
+	)
+
+111 #define 
+	#F_GETLK64
+ 33
+
+	)
+
+112 #define 
+	#F_SETLK64
+ 34
+
+	)
+
+113 #define 
+	#F_SETLKW64
+ 35
+
+	)
+
+114 #define 
+	#F_ALLOCSP64
+ 36
+
+	)
+
+115 #define 
+	#F_FREESP64
+ 37
+
+	)
+
+116 #define 
+	#F_GETBMAP
+ 38
+
+	)
+
+117 #define 
+	#F_FSSETDM
+ 39
+
+	)
+
+118 #define 
+	#F_RESVSP
+ 40
+
+	)
+
+121 #define 
+	#F_UNRESVSP
+ 41
+
+	)
+
+122 #define 
+	#F_RESVSP64
+ 42
+
+	)
+
+123 #define 
+	#F_UNRESVSP64
+ 43
+
+	)
+
+124 #define 
+	#F_GETBMAPA
+ 44
+
+	)
+
+125 #define 
+	#F_FSGETXATTRA
+ 45
+
+	)
+
+126 #define 
+	#F_SETBIOSIZE
+ 46
+
+	)
+
+127 #define 
+	#F_GETBIOSIZE
+ 47
+
+	)
+
+129 #define 
+	#F_GETOPS
+ 50
+
+	)
+
+130 #define 
+	#F_DMAPI
+ 51
+
+	)
+
+131 #define 
+	#F_FSYNC
+ 52
+
+	)
+
+132 #define 
+	#F_FSYNC64
+ 53
+
+	)
+
+134 #define 
+	#F_GETBDSATTR
+ 54
+
+	)
+
+135 #define 
+	#F_SETBDSATTR
+ 55
+
+	)
+
+136 #define 
+	#F_GETBMAPX
+ 56
+
+	)
+
+137 #define 
+	#F_SETPRIO
+ 57
+
+	)
+
+138 #define 
+	#F_GETPRIO
+ 58
+
+	)
+
+140 #define 
+	#F_OPLKREG
+ 59
+
+	)
+
+141 #define 
+	#F_OPLKSTAT
+ 60
+
+	)
+
+142 #define 
+	#F_OPLKACK
+ 61
+
+	)
+
+148 typedef struct 
+	sflock
+ {
+
+149 short 
+	ml_type
+;
+
+150 short 
+	ml_whence
+;
+
+151 
+off_t
+ 
+	ml_start
+;
+
+152 
+off_t
+ 
+	ml_len
+;
+
+153 long 
+	ml_sysid
+;
+
+154 
+pid_t
+ 
+	ml_pid
+;
+
+155 long 
+	ml_pad
+[4];
+
+156 } 
+	tflock_t
+;
+
+162 typedef struct 
+	sflock64
+ {
+
+163 short 
+	ml_type
+;
+
+164 short 
+	ml_whence
+;
+
+165 
+off64_t
+ 
+	ml_start
+;
+
+166 
+off64_t
+ 
+	ml_len
+;
+
+167 long 
+	ml_sysid
+;
+
+168 
+pid_t
+ 
+	ml_pid
+;
+
+169 long 
+	ml_pad
+[4];
+
+170 } 
+	tflock64_t
+;
+
+174 typedef struct 
+	so_flock
+ {
+
+175 short 
+	ml_type
+;
+
+176 short 
+	ml_whence
+;
+
+177 long 
+	ml_start
+;
+
+178 long 
+	ml_len
+;
+
+179 short 
+	ml_sysid
+;
+
+180 
+o_pid_t
+ 
+	ml_pid
+;
+
+181 } 
+	to_flock_t
+;
+
+189 #define 
+	#F_RDLCK
+ 01
+
+	)
+
+190 #define 
+	#F_WRLCK
+ 02
+
+	)
+
+191 #define 
+	#F_UNLCK
+ 03
+
+	)
+
+197 #define 
+	#O_ACCMODE
+ 3
+
+	)
+
+198 #define 
+	#FD_CLOEXEC
+ 1
+
+	)
+
+206 #define 
+	#FD_NODUP_FORK
+ 4
+
+	)
+
+208 struct 
+	sbiosize
+ {
+
+209 
+__uint32_t
+ 
+	mbiosz_flags
+;
+
+210 
+__int32_t
+ 
+	mbiosz_read
+;
+
+211 
+__int32_t
+ 
+	mbiosz_write
+;
+
+212 
+__int32_t
+ 
+	mdfl_biosz_read
+;
+
+213 
+__int32_t
+ 
+	mdfl_biosz_write
+;
+
+221 struct 
+	sdioattr
+ {
+
+222 unsigned 
+	md_mem
+;
+
+223 unsigned 
+	md_miniosz
+;
+
+224 unsigned 
+	md_maxiosz
+;
+
+230 struct 
+	sfsxattr
+ {
+
+231 
+__uint32_t
+ 
+	mfsx_xflags
+;
+
+232 
+__uint32_t
+ 
+	mfsx_extsize
+;
+
+233 
+__uint32_t
+ 
+	mfsx_nextents
+;
+
+234 char 
+	mfsx_pad
+[16];
+
+244 struct 
+	sgetbmap
+ {
+
+245 
+__int64_t
+ 
+	mbmv_offset
+;
+
+246 
+__int64_t
+ 
+	mbmv_block
+;
+
+247 
+__int64_t
+ 
+	mbmv_length
+;
+
+248 
+__int32_t
+ 
+	mbmv_count
+;
+
+249 
+__int32_t
+ 
+	mbmv_entries
+;
+
+260 struct 
+	sgetbmapx
+ {
+
+261 
+__int64_t
+ 
+	mbmv_offset
+;
+
+262 
+__int64_t
+ 
+	mbmv_block
+;
+
+263 
+__int64_t
+ 
+	mbmv_length
+;
+
+264 
+__int32_t
+ 
+	mbmv_count
+;
+
+265 
+__int32_t
+ 
+	mbmv_entries
+;
+
+266 
+__int32_t
+ 
+	mbmv_iflags
+;
+
+267 
+__int32_t
+ 
+	mbmv_oflags
+;
+
+268 
+__int32_t
+ 
+	mbmv_unused1
+;
+
+269 
+__int32_t
+ 
+	mbmv_unused2
+;
+
+274 #define 
+	#BMV_IF_ATTRFORK
+ 0x1
+
+	)
+
+275 #define 
+	#BMV_IF_NO_DMAPI_READ
+ 0x2
+
+	)
+
+276 #define 
+	#BMV_IF_PREALLOC
+ 0x4
+
+	)
+
+278 #define 
+	#BMV_IF_VALID
+ (
+BMV_IF_ATTRFORK
+|
+BMV_IF_NO_DMAPI_READ
+|
+BMV_IF_PREALLOC
+)
+
+	)
+
+282 #define 
+	#BMV_OF_PREALLOC
+ 0x1
+
+	)
+
+286 #define 
+	#GETBMAP_CONVERT
+(
+p1
+,
+p2
+) { \
+
+287 
+p2
+.
+bmv_offset
+ = 
+p1
+.bmv_offset; \
+
+288 
+p2
+.
+bmv_block
+ = 
+p1
+.bmv_block; \
+
+289 
+p2
+.
+bmv_length
+ = 
+p1
+.bmv_length; \
+
+290 
+p2
+.
+bmv_count
+ = 
+p1
+.bmv_count; \
+
+291 
+p2
+.
+bmv_entries
+ = 
+p1
+.bmv_entries; }
+
+	)
+
+296 #define 
+	#BMV_IF_EXTENDED
+ 0x40000000
+
+	)
+
+307 struct 
+	sfsdmidata
+ {
+
+308 
+__int32_t
+ 
+	mfsd_dmevmask
+;
+
+309 unsigned short 
+	mfsd_padding
+;
+
+310 unsigned short 
+	mfsd_dmstate
+;
+
+318 typedef struct 
+	soplock_stat
+ {
+
+319 
+__int32_t
+ 
+	mos_state
+;
+
+320 
+__uint32_t
+ 
+	mos_dev
+;
+
+321 
+__uint64_t
+ 
+	mos_ino
+;
+
+322 } 
+	toplock_stat_t
+;
+
+324 #define 
+	#OP_NONE
+ 0
+
+	)
+
+325 #define 
+	#OP_REVOKE
+ 1
+
+	)
+
+326 #define 
+	#OP_LEVELII
+ 2
+
+	)
+
+327 #define 
+	#OP_BREAKDOWN
+ 3
+
+	)
+
+328 #define 
+	#OP_EXCLUSIVE
+ 4
+
+	)
+
+	@/usr/include/sys/hdsp.h
+
+2 #define 
+	#__HDSP_H__
+
+
+	)
+
+16 #include 
+	~/usr/include/sys/types.h
+>
+
+27 typedef struct 
+	srbheader_s
+
+
+29 int 
+	mhead
+;
+
+30 int 
+	mtail
+;
+
+31 int 
+	mintreq
+;
+
+32 int 
+	mfillpt
+;
+
+33 }
+	trbheader_t
+;
+
+35 #define 
+	#RBHEADER_SIZE
+ (sizeof(
+rbheader_t
+)/sizeof(int))
+
+	)
+
+40 #define 
+	#HDSP_RESET
+ 0
+
+	)
+
+41 #define 
+	#HDSP_ACTIVATE
+ 1
+
+	)
+
+42 #define 
+	#HDSP_FIND_MINOR
+ 2
+
+	)
+
+43 #define 
+	#HDSP_ACQUIRE_AUDIO_RB
+ 3
+
+	)
+
+44 #define 
+	#HDSP_SET_AUDIO_PARMS
+ 4
+
+	)
+
+45 #define 
+	#HDSP_GET_AUDIO_PARMS
+ 5
+
+	)
+
+46 #define 
+	#HDSP_GET_HRBSTATUS
+ 6
+
+	)
+
+47 #define 
+	#HDSP_SET_HRBSTATUS
+ 7
+
+	)
+
+48 #define 
+	#HDSP_SET_RB_INFO
+ 8
+
+	)
+
+49 #define 
+	#HDSP_GET_ALL_RB_INFO
+ 9
+
+	)
+
+50 #define 
+	#HDSP_SET_RB_TYPE
+ 10
+
+	)
+
+51 #define 
+	#HDSP_GET_RB_MSC
+ 11
+
+	)
+
+52 #define 
+	#HDSP_FLUSH
+ 12
+
+	)
+
+53 #define 
+	#HDSP_PORTCTRL
+ 13
+
+	)
+
+54 #define 
+	#HDSP_QUERYPARAMS
+ 14
+
+	)
+
+55 #define 
+	#HDSP_GET_MINMAX
+ 15
+
+	)
+
+56 #define 
+	#HDSP_GET_NAME
+ 16
+
+	)
+
+57 #define 
+	#HDSP_GET_DEFAULT
+ 17
+
+	)
+
+58 #define 
+	#HDSP_ACQUIRE_DIRECT_AUDIO_RB
+ 18
+
+	)
+
+59 #define 
+	#HDSP_GET_RB_USTMSC
+ 19
+
+	)
+
+60 #define 
+	#HDSP_GET_RESOURCE
+ 20
+
+	)
+
+61 #define 
+	#HDSP_SET_DEVICE
+ 21
+
+	)
+
+62 #define 
+	#HDSP_CONNECT
+ 22
+
+	)
+
+63 #define 
+	#HDSP_DISCONNECT
+ 23
+
+	)
+
+64 #define 
+	#HDSP_SET_PARAMS
+ 24
+
+	)
+
+65 #define 
+	#HDSP_GET_PARAMS
+ 25
+
+	)
+
+66 #define 
+	#HDSP_QUERY_VALUES
+ 26
+
+	)
+
+67 #define 
+	#HDSP_GET_PARAM_INFO
+ 27
+
+	)
+
+68 #define 
+	#HDSP_GET_RES_BY_NAME
+ 28
+
+	)
+
+69 #define 
+	#HDSP_SET_RB_FORMAT
+ 29
+
+	)
+
+72 typedef struct 
+	shdsp_srcmask_s
+ {
+
+73 int 
+	msrc
+;
+
+74 long long 
+	mmask
+;
+
+75 void *
+	mevent
+;
+
+76 } 
+	thdsp_srcmask_t
+;
+
+78 typedef struct 
+	shdsp_connection_info_s
+ {
+
+79 int 
+	minput
+;
+
+80 int 
+	moutput
+;
+
+81 int 
+	mconnection
+;
+
+82 } 
+	thdsp_connection_info_t
+;
+
+85 #define 
+	#HDSP_MAX_EVENT_DATA
+ 8*4
+
+	)
+
+91 #define 
+	#HDSP_EVENT_GET
+ 101
+
+	)
+
+92 #define 
+	#HDSP_EVENT_PUT
+ 102
+
+	)
+
+93 #define 
+	#HDSP_EVENT_PEEK
+ 103
+
+	)
+
+94 #define 
+	#HDSP_EVENT_CHECK
+ 104
+
+	)
+
+95 #define 
+	#HDSP_EVENTQ_ALLOCATE
+ 110
+
+	)
+
+96 #define 
+	#HDSP_EVENTQ_DUMP
+ 111
+
+	)
+
+97 #define 
+	#HDSP_EVENTQ_SET_SRC_MASK
+ 112
+
+	)
+
+98 #define 
+	#HDSP_EVENTQ_UNSET_SRC_MASK
+ 113
+
+	)
+
+99 #define 
+	#HDSP_EVENTQ_FLUSH
+ 116
+
+	)
+
+100 #define 
+	#HDSP_EVENTQ_GET_INFO
+ 117
+
+	)
+
+101 #define 
+	#HDSP_EVENTQ_PENDING
+ 118
+
+	)
+
+108 #define 
+	#EVENTQ_EMPTY
+ -1
+
+	)
+
+109 #define 
+	#EVENTQ_FULL
+ -2
+
+	)
+
+112 #define 
+	#HRB_STRLEN
+ 20
+
+	)
+
+115 #define 
+	#HDSP_MAX_RESOURCE_DEPTH
+ 8
+
+	)
+
+116 #define 
+	#HDSP_LARGE_STRLEN
+ 80
+
+	)
+
+121 typedef struct 
+	shdsp_getresource_s
+
+
+123 char 
+	mname
+[80];
+
+124 int 
+	mresources
+[
+HDSP_MAX_RESOURCE_DEPTH
+];
+
+125 int 
+	mnres
+;
+
+126 } 
+	thdsp_getresource_t
+;
+
+131 typedef struct 
+	shdsp_acquireaudiorb_s
+
+
+133 int 
+	mnlocs
+;
+
+134 char 
+	mdirection
+;
+
+135 } 
+	thdsp_acquireaudiorb_t
+;
+
+140 typedef struct 
+	shdsp_setrbinfo_s
+
+
+142 char 
+	mname
+[
+HRB_STRLEN
+];
+
+143 int 
+	mversion
+;
+
+144 } 
+	thdsp_setrbinfo_t
+;
+
+149 typedef struct 
+	shdsp_getrbinfo_s
+
+
+151 char 
+	mname
+[
+HRB_STRLEN
+];
+
+152 int 
+	mpid
+;
+
+153 int 
+	mtype
+;
+
+154 int 
+	mrbid
+;
+
+155 int 
+	mversion
+;
+
+156 int 
+	merrcnt
+;
+
+157 int 
+	mnchans
+;
+
+158 int 
+	mhead
+;
+
+159 int 
+	mtail
+;
+
+160 int 
+	mnlocs
+;
+
+161 } 
+	thdsp_getrbinfo_t
+;
+
+164 long long 
+	mll
+;
+
+165 void *
+	mp
+;
+
+166 int 
+	mi
+;
+
+167 } 
+	thdsp_value_t
+;
+
+169 typedef struct 
+	shdsp_setchange_info_s
+ {
+
+170 
+hdsp_value_t
+ 
+	mval
+;
+
+171 int 
+	mtotal
+;
+
+172 int 
+	mpchange
+;
+
+173 } 
+	thdsp_setchange_info_t
+ ;
+
+176 int 
+	mparam
+;
+
+177 int 
+	mdummy
+;
+
+178 
+hdsp_value_t
+ 
+	mvalue
+;
+
+179 short 
+	msize_in
+;
+
+180 short 
+	msize2_in
+;
+
+181 short 
+	msize_out
+;
+
+182 short 
+	msize2_out
+;
+
+183 } 
+	thdsp_pv_t
+;
+
+185 typedef long long 
+	thdsp_fixed_t
+;
+
+190 typedef struct 
+	shdsp_queryset_s
+
+
+192 
+hdsp_value_t
+ 
+	mset
+;
+
+193 int 
+	mvers
+;
+
+194 int 
+	mres
+;
+
+195 int 
+	mparam
+;
+
+196 int 
+	msetsize
+;
+
+197 int 
+	mpad
+[8];
+
+198 } 
+	thdsp_queryset_t
+;
+
+203 typedef struct 
+	shdsp_rbstatus_s
+
+
+205 int 
+	merror
+;
+
+206 int 
+	mtype
+;
+
+207 int 
+	mlength
+;
+
+208 int 
+	mlocation
+[2];
+
+211 } 
+	thdsp_rbstatus_t
+;
+
+213 typedef struct 
+	shdsp_rbmsc_s
+
+
+216 unsigned long long 
+	mmsc
+;
+
+217 unsigned int 
+	mhead
+, 
+	mtail
+;
+
+218 unsigned long long 
+	must
+;
+
+219 } 
+	thdsp_rbmsc_t
+;
+
+221 typedef struct 
+	shdsp_paraminfo_s
+ {
+
+222 int 
+	mresource
+;
+
+223 int 
+	mparam
+;
+
+224 int 
+	mvalue_type
+;
+
+225 int 
+	melement_type
+;
+
+226 int 
+	mmax_elems
+;
+
+227 int 
+	mmax_elems2
+;
+
+228 char 
+	mname
+[32];
+
+229 
+hdsp_value_t
+ 
+	minitial
+;
+
+230 
+hdsp_value_t
+ 
+	mmin
+;
+
+231 
+hdsp_value_t
+ 
+	mmax
+;
+
+232 
+hdsp_value_t
+ 
+	mmin_delta
+;
+
+233 
+hdsp_value_t
+ 
+	mmax_delta
+;
+
+234 int 
+	mspecial_vals
+;
+
+235 int 
+	mops
+;
+
+236 int 
+	mspace
+[15];
+
+237 } 
+	thdsp_paraminfo_t
+;
+
+239 typedef struct 
+	shdsp_addrval_s
+
+
+242 
+caddr_t
+ 
+	maddr
+;
+
+243 int 
+	mval
+;
+
+244 } 
+	thdsp_addrval_t
+;
+
+246 typedef struct 
+	shdsp_valaddr_s
+
+
+249 int 
+	mval
+;
+
+250 
+caddr_t
+ 
+	maddr
+;
+
+251 } 
+	thdsp_valaddr_t
+;
+
+254 typedef struct 
+	sirix5_hdsp_addrval_s
+
+
+256 
+app32_ptr_t
+ 
+	maddr
+;
+
+257 int 
+	mval
+;
+
+258 } 
+	tirix5_hdsp_addrval_t
+;
+
+260 typedef struct 
+	sirix5_hdsp_valaddr_s
+
+
+262 int 
+	mval
+;
+
+263 
+app32_ptr_t
+ 
+	maddr
+;
+
+264 } 
+	tirix5_hdsp_valaddr_t
+;
+
+285 #define 
+	#HDSP_MAX_AUDIO_PARMS_LEN
+ 64
+
+	)
+
+286 #define 
+	#HDSP_INPUT_SOURCE
+ 0
+
+	)
+
+287 #define 
+	#HDSP_LEFT_INPUT_ATTEN
+ 1
+
+	)
+
+288 #define 
+	#HDSP_RIGHT_INPUT_ATTEN
+ 2
+
+	)
+
+289 #define 
+	#HDSP_LEFT1_INPUT_ATTEN
+ 1
+
+	)
+
+290 #define 
+	#HDSP_RIGHT1_INPUT_ATTEN
+ 2
+
+	)
+
+291 #define 
+	#HDSP_INPUT_RATE
+ 3
+
+	)
+
+292 #define 
+	#HDSP_OUTPUT_RATE
+ 4
+
+	)
+
+293 #define 
+	#HDSP_LEFT_SPEAKER_GAIN
+ 5
+
+	)
+
+294 #define 
+	#HDSP_RIGHT_SPEAKER_GAIN
+ 6
+
+	)
+
+295 #define 
+	#HDSP_INPUT_RBCOUNT
+ 7
+
+	)
+
+296 #define 
+	#HDSP_OUTPUT_RBCOUNT
+ 8
+
+	)
+
+297 #define 
+	#HDSP_UNUSED_RBCOUNT
+ 9
+
+	)
+
+298 #define 
+	#HDSP_MONITOR_CTL
+ 12
+
+	)
+
+299 #define 
+	#HDSP_LEFT_MONITOR_ATTEN
+ 13
+
+	)
+
+300 #define 
+	#HDSP_RIGHT_MONITOR_ATTEN
+ 14
+
+	)
+
+301 #define 
+	#HDSP_CHANNEL_MODE
+ 15
+
+	)
+
+302 #define 
+	#HDSP_SPEAKER_MUTE_CTL
+ 16
+
+	)
+
+303 #define 
+	#HDSP_MIC_MODE
+ 17
+
+	)
+
+304 #define 
+	#HDSP_LEFT2_INPUT_ATTEN
+ 18
+
+	)
+
+305 #define 
+	#HDSP_RIGHT2_INPUT_ATTEN
+ 19
+
+	)
+
+306 #define 
+	#HDSP_DIGITAL_INPUT_RATE
+ 20
+
+	)
+
+307 #define 
+	#HDSP_LOCK_STATE
+ 21
+
+	)
+
+309 #define 
+	#HDSP_RANGE_VALUE
+ 2
+
+	)
+
+310 #define 
+	#HDSP_ENUM_VALUE
+ 1
+
+	)
+
+316 #define 
+	#HDSP_NO_ELEM
+ 0
+
+	)
+
+317 #define 
+	#HDSP_INT32_ELEM
+ 0x10
+
+	)
+
+318 #define 
+	#HDSP_RESOURCE_ELEM
+ (
+HDSP_INT32_ELEM
+ | 0x1)
+
+	)
+
+319 #define 
+	#HDSP_ENUM_ELEM
+ (
+HDSP_INT32_ELEM
+ | 0x2)
+
+	)
+
+320 #define 
+	#HDSP_INT64_ELEM
+ 0x20
+
+	)
+
+321 #define 
+	#HDSP_FIXED_ELEM
+ (
+HDSP_INT64_ELEM
+ | 0x1)
+
+	)
+
+322 #define 
+	#HDSP_PTR_ELEM
+ 0x40
+
+	)
+
+323 #define 
+	#HDSP_CHAR_ELEM
+ 0x80
+
+	)
+
+328 #define 
+	#HDSP_NO_VAL
+ 0
+
+	)
+
+329 #define 
+	#HDSP_VECTOR_VAL
+ 1
+
+	)
+
+330 #define 
+	#HDSP_SCALAR_VAL
+ 2
+
+	)
+
+331 #define 
+	#HDSP_SET_VAL
+ 3
+
+	)
+
+332 #define 
+	#HDSP_STRING_VAL
+ 4
+
+	)
+
+333 #define 
+	#HDSP_MATRIX_VAL
+ 5
+
+	)
+
+343 #define 
+	#HDSP_MAX_RESOURCE_ID
+ 0x0fffffff
+
+	)
+
+344 #define 
+	#HDSP_PARAM_BIT
+ 0x10000000
+
+	)
+
+345 #define 
+	#HDSP_TYPE_BIT
+ 0x20000000
+
+	)
+
+360 #define 
+	#HDSP_RESOURCE
+ (
+HDSP_PARAM_BIT
+ | 1)
+
+	)
+
+361 #define 
+	#HDSP_INTERFACE
+ (
+HDSP_PARAM_BIT
+ | 2)
+
+	)
+
+362 #define 
+	#HDSP_CLOCK_GEN
+ (
+HDSP_PARAM_BIT
+ | 3)
+
+	)
+
+363 #define 
+	#HDSP_CHANNELS
+ (
+HDSP_PARAM_BIT
+ | 4)
+
+	)
+
+364 #define 
+	#HDSP_PORT_COUNT
+ (
+HDSP_PARAM_BIT
+ | 5)
+
+	)
+
+365 #define 
+	#HDSP_MAX_PORTS
+ (
+HDSP_PARAM_BIT
+ | 6)
+
+	)
+
+366 #define 
+	#HDSP_UNUSED_PORTS
+ (
+HDSP_PARAM_BIT
+ | 7)
+
+	)
+
+367 #define 
+	#HDSP_MAX_SETSIZE
+ (
+HDSP_PARAM_BIT
+ | 8)
+
+	)
+
+368 #define 
+	#HDSP_DEFAULT_INPUT
+ 9
+
+	)
+
+369 #define 
+	#HDSP_DEFAULT_OUTPUT
+ 10
+
+	)
+
+370 #define 
+	#HDSP_SYSTEM
+ 11
+
+	)
+
+371 #define 
+	#HDSP_DEVICES
+ (
+HDSP_PARAM_BIT
+ | 12)
+
+	)
+
+372 #define 
+	#HDSP_RATE
+ (
+HDSP_PARAM_BIT
+ | 13)
+
+	)
+
+373 #define 
+	#HDSP_RATE_FRACTION_N
+ (
+HDSP_PARAM_BIT
+ | 14)
+
+	)
+
+374 #define 
+	#HDSP_RATE_FRACTION_D
+ (
+HDSP_PARAM_BIT
+ | 15)
+
+	)
+
+375 #define 
+	#HDSP_JITTER
+ (
+HDSP_PARAM_BIT
+ | 16)
+
+	)
+
+376 #define 
+	#HDSP_MASTER_CLOCK
+ (
+HDSP_PARAM_BIT
+ | 17)
+
+	)
+
+377 #define 
+	#HDSP_TYPE
+ (
+HDSP_PARAM_BIT
+ | 18)
+
+	)
+
+378 #define 
+	#HDSP_NAME
+ (
+HDSP_PARAM_BIT
+ | 19)
+
+	)
+
+379 #define 
+	#HDSP_PARAMS
+ (
+HDSP_PARAM_BIT
+ | 20)
+
+	)
+
+380 #define 
+	#HDSP_NO_OP
+ (
+HDSP_PARAM_BIT
+ | 21)
+
+	)
+
+381 #define 
+	#HDSP_SOURCE
+ (
+HDSP_PARAM_BIT
+ | 22)
+
+	)
+
+382 #define 
+	#HDSP_DEST
+ (
+HDSP_PARAM_BIT
+ | 23)
+
+	)
+
+383 #define 
+	#HDSP_CONNECTIONS
+ (
+HDSP_PARAM_BIT
+ | 24)
+
+	)
+
+384 #define 
+	#HDSP_GAIN
+ (
+HDSP_PARAM_BIT
+ | 25)
+
+	)
+
+385 #define 
+	#HDSP_PORTS
+ (
+HDSP_PARAM_BIT
+ | 26)
+
+	)
+
+386 #define 
+	#HDSP_GAIN_REF
+ (
+HDSP_PARAM_BIT
+ | 27)
+
+	)
+
+387 #define 
+	#HDSP_WORDSIZE
+ (
+HDSP_PARAM_BIT
+ | 28)
+
+	)
+
+388 #define 
+	#HDSP_MUTE
+ (
+HDSP_PARAM_BIT
+ | 29)
+
+	)
+
+389 #define 
+	#HDSP_SUBSYSTEM
+ (
+HDSP_PARAM_BIT
+ | 30)
+
+	)
+
+390 #define 
+	#HDSP_LABEL
+ (
+HDSP_PARAM_BIT
+ | 31)
+
+	)
+
+391 #define 
+	#HDSP_INTERVAL
+ (
+HDSP_PARAM_BIT
+ | 32)
+
+	)
+
+392 #define 
+	#HDSP_SUBCODE_MASK
+ (
+HDSP_PARAM_BIT
+ | 33)
+
+	)
+
+393 #define 
+	#HDSP_SUBCODE_FRAME
+ (
+HDSP_PARAM_BIT
+ | 34)
+
+	)
+
+394 #define 
+	#HDSP_CHANS_PER_SUBCODE
+ (
+HDSP_PARAM_BIT
+ | 35)
+
+	)
+
+395 #define 
+	#HDSP_SHORT_NAME
+ (
+HDSP_PARAM_BIT
+ | 36)
+
+	)
+
+402 #define 
+	#HDSP_CONNECT_EVENT
+ (
+HDSP_PARAM_BIT
+ | 37)
+
+	)
+
+403 #define 
+	#HDSP_DISCONNECT_EVENT
+ (
+HDSP_PARAM_BIT
+ | 38)
+
+	)
+
+405 #define 
+	#HDSP_ASSOCIATE
+ (
+HDSP_PARAM_BIT
+ | 39)
+
+	)
+
+406 #define 
+	#HDSP_LOCKED
+ (
+HDSP_PARAM_BIT
+ | 40)
+
+	)
+
+407 #define 
+	#HDSP_SUBSYSTEMS
+ (
+HDSP_PARAM_BIT
+ | 41)
+
+	)
+
+408 #define 
+	#HDSP_VIDEO_SYNC
+ (
+HDSP_PARAM_BIT
+ | 42)
+
+	)
+
+409 #define 
+	#HDSP_VERSION
+ (
+HDSP_PARAM_BIT
+ | 43)
+
+	)
+
+410 #define 
+	#HDSP_SUBCODE_FRAMESIZE
+ (
+HDSP_PARAM_BIT
+ | 44)
+
+	)
+
+411 #define 
+	#HDSP_SUBCODE_FORMAT
+ (
+HDSP_PARAM_BIT
+ | 45)
+
+	)
+
+412 #define 
+	#HDSP_SUBCODE_CHANNELS
+ (
+HDSP_PARAM_BIT
+ | 46)
+
+	)
+
+419 #define 
+	#HDSP_AES_CHANNEL_STATUS
+ (
+HDSP_PARAM_BIT
+ | 47)
+
+	)
+
+420 #define 
+	#HDSP_AES_USER
+ (
+HDSP_PARAM_BIT
+ | 48)
+
+	)
+
+421 #define 
+	#HDSP_AES_VALIDITY
+ (
+HDSP_PARAM_BIT
+ | 49)
+
+	)
+
+422 #define 
+	#HDSP_ADAT_USER0
+ (
+HDSP_PARAM_BIT
+ | 50)
+
+	)
+
+423 #define 
+	#HDSP_ADAT_USER1
+ (
+HDSP_PARAM_BIT
+ | 51)
+
+	)
+
+424 #define 
+	#HDSP_ADAT_USER2
+ (
+HDSP_PARAM_BIT
+ | 52)
+
+	)
+
+425 #define 
+	#HDSP_ADAT_USER3
+ (
+HDSP_PARAM_BIT
+ | 53)
+
+	)
+
+433 #define 
+	#HDSP_RESOURCE_TYPE
+ (
+HDSP_TYPE_BIT
+ | 0)
+
+	)
+
+434 #define 
+	#HDSP_SYSTEM_TYPE
+ (
+HDSP_TYPE_BIT
+ | 1)
+
+	)
+
+435 #define 
+	#HDSP_DEVICE_TYPE
+ (
+HDSP_TYPE_BIT
+ | 2)
+
+	)
+
+436 #define 
+	#HDSP_PORT_TYPE
+ (
+HDSP_TYPE_BIT
+ | 3)
+
+	)
+
+437 #define 
+	#HDSP_CLOCKGEN_TYPE
+ (
+HDSP_TYPE_BIT
+ | 4)
+
+	)
+
+438 #define 
+	#HDSP_SUBSYS_TYPE
+ (
+HDSP_TYPE_BIT
+ | 5)
+
+	)
+
+439 #define 
+	#HDSP_CONNECTION_TYPE
+ (
+HDSP_TYPE_BIT
+ | 6)
+
+	)
+
+440 #define 
+	#HDSP_INTERFACE_TYPE
+ (
+HDSP_TYPE_BIT
+ | 7)
+
+	)
+
+441 #define 
+	#HDSP_HRB_TYPE
+ (
+HDSP_TYPE_BIT
+ | 8)
+
+	)
+
+442 #define 
+	#HDSP_MCLK_TYPE
+ (
+HDSP_TYPE_BIT
+ | 9)
+
+	)
+
+443 #define 
+	#HDSP_XTAL_MCLK_TYPE
+ (
+HDSP_TYPE_BIT
+ | 10)
+
+	)
+
+444 #define 
+	#HDSP_AES_MCLK_TYPE
+ (
+HDSP_TYPE_BIT
+ | 11)
+
+	)
+
+445 #define 
+	#HDSP_ADAT_MCLK_TYPE
+ (
+HDSP_TYPE_BIT
+ | 12)
+
+	)
+
+446 #define 
+	#HDSP_MIC_IF_TYPE
+ (
+HDSP_TYPE_BIT
+ | 13)
+
+	)
+
+447 #define 
+	#HDSP_LINE_IF_TYPE
+ (
+HDSP_TYPE_BIT
+ | 14)
+
+	)
+
+448 #define 
+	#HDSP_AES_IF_TYPE
+ (
+HDSP_TYPE_BIT
+ | 15)
+
+	)
+
+449 #define 
+	#HDSP_ADAT_IF_TYPE
+ (
+HDSP_TYPE_BIT
+ | 16)
+
+	)
+
+450 #define 
+	#HDSP_SPEAKER_IF_TYPE
+ (
+HDSP_TYPE_BIT
+ | 17)
+
+	)
+
+451 #define 
+	#HDSP_FIXED_MCLK_TYPE
+ (
+HDSP_TYPE_BIT
+ | 18)
+
+	)
+
+452 #define 
+	#HDSP_VARIABLE_MCLK_TYPE
+ (
+HDSP_TYPE_BIT
+ | 19)
+
+	)
+
+453 #define 
+	#HDSP_ANALOG_IF_TYPE
+ (
+HDSP_TYPE_BIT
+ | 20)
+
+	)
+
+454 #define 
+	#HDSP_DIGITAL_IF_TYPE
+ (
+HDSP_TYPE_BIT
+ | 21)
+
+	)
+
+455 #define 
+	#HDSP_VIDEO_MCLK_TYPE
+ (
+HDSP_TYPE_BIT
+ | 22)
+
+	)
+
+456 #define 
+	#HDSP_INPUT_PORT_TYPE
+ (
+HDSP_TYPE_BIT
+ | 23)
+
+	)
+
+457 #define 
+	#HDSP_OUTPUT_PORT_TYPE
+ (
+HDSP_TYPE_BIT
+ | 24)
+
+	)
+
+458 #define 
+	#HDSP_INPUT_HRB_TYPE
+ (
+HDSP_TYPE_BIT
+ | 25)
+
+	)
+
+459 #define 
+	#HDSP_OUTPUT_HRB_TYPE
+ (
+HDSP_TYPE_BIT
+ | 26)
+
+	)
+
+460 #define 
+	#HDSP_INPUT_DEVICE_TYPE
+ (
+HDSP_TYPE_BIT
+ | 27)
+
+	)
+
+461 #define 
+	#HDSP_OUTPUT_DEVICE_TYPE
+ (
+HDSP_TYPE_BIT
+ | 28)
+
+	)
+
+462 #define 
+	#HDSP_A2_SUBSYS_TYPE
+ (
+HDSP_TYPE_BIT
+ | 29)
+
+	)
+
+463 #define 
+	#HDSP_RAD_SUBSYS_TYPE
+ (
+HDSP_TYPE_BIT
+ | 30)
+
+	)
+
+464 #define 
+	#HDSP_A3_SUBSYS_TYPE
+ (
+HDSP_TYPE_BIT
+ | 31)
+
+	)
+
+465 #define 
+	#HDSP_TEST_IF_TYPE
+ (
+HDSP_TYPE_BIT
+ | 32)
+
+	)
+
+466 #define 
+	#HDSP_SPEAKER_PLUS_LINE_IF_TYPE
+ (
+HDSP_TYPE_BIT
+ | 33)
+
+	)
+
+467 #define 
+	#HDSP_A1_SUBSYS_TYPE
+ (
+HDSP_TYPE_BIT
+ | 34)
+
+	)
+
+468 #define 
+	#HDSP_DIVO_SUBSYS_TYPE
+ (
+HDSP_TYPE_BIT
+ | 35)
+
+	)
+
+469 #define 
+	#HDSP_SMPTE272M_IF_TYPE
+ (
+HDSP_TYPE_BIT
+ | 36)
+
+	)
+
+470 #define 
+	#HDSP_OPTICAL_IF_TYPE
+ (
+HDSP_TYPE_BIT
+ | 37)
+
+	)
+
+472 #define 
+	#HDSP_NULL_RESOURCE
+ 2
+
+	)
+
+474 #define 
+	#HDSP_ALL_INTERFACES
+ 3
+
+	)
+
+475 #define 
+	#HDSP_NULL_INTERFACE
+ 4
+
+	)
+
+481 #define 
+	#HDSP_AUDIODATA_INT32
+ 0
+
+	)
+
+482 #define 
+	#HDSP_AUDIODATA_INT32_IDX
+ 0
+
+	)
+
+483 #define 
+	#HDSP_MAXFORMATS
+ 8
+
+	)
+
+489 #define 
+	#HDSP_DEACTIVATE_PORT
+ 0
+
+	)
+
+490 #define 
+	#HDSP_ACTIVATE_PORT
+ 1
+
+	)
+
+495 #define 
+	#HDSP_MONO
+ 1
+
+	)
+
+496 #define 
+	#HDSP_STEREO
+ 2
+
+	)
+
+497 #define 
+	#HDSP_4CHANNEL
+ 4
+
+	)
+
+502 #define 
+	#HDSP_BAD_PARAM
+ -1
+
+	)
+
+503 #define 
+	#HDSP_BAD_VALUE
+ -2
+
+	)
+
+508 #define 
+	#HDSP_REF_NONE
+ 0
+
+	)
+
+509 #define 
+	#HDSP_REF_0DBV
+ 1
+
+	)
+
+514 #define 
+	#HDSP_VID_EXTERNAL
+ 0
+
+	)
+
+515 #define 
+	#HDSP_VID_INTERNAL
+ 1
+
+	)
+
+520 #define 
+	#HDSP_GET_OP
+ 0x1
+
+	)
+
+521 #define 
+	#HDSP_SET_OP
+ 0x2
+
+	)
+
+522 #define 
+	#HDSP_QUERY_OP
+ 0x4
+
+	)
+
+523 #define 
+	#HDSP_EVENT_OP
+ 0x8
+
+	)
+
+526 #define 
+	#HDSP_GQE_OP
+ (
+HDSP_GET_OP
+ | 
+HDSP_QUERY_OP
+ | 
+HDSP_EVENT_OP
+)
+
+	)
+
+527 #define 
+	#HDSP_GSQE_OP
+ (
+HDSP_GET_OP
+ | 
+HDSP_SET_OP
+ | 
+HDSP_QUERY_OP
+ | 
+HDSP_EVENT_OP
+)
+
+	)
+
+528 #define 
+	#HDSP_GSE_OP
+ (
+HDSP_GET_OP
+ | 
+HDSP_SET_OP
+ | 
+HDSP_EVENT_OP
+)
+
+	)
+
+529 #define 
+	#HDSP_GS_OP
+ (
+HDSP_GET_OP
+ | 
+HDSP_SET_OP
+)
+
+	)
+
+530 #define 
+	#HDSP_GQ_OP
+ (
+HDSP_GET_OP
+ | 
+HDSP_QUERY_OP
+)
+
+	)
+
+531 #define 
+	#HDSP_GE_OP
+ (
+HDSP_GET_OP
+ | 
+HDSP_EVENT_OP
+)
+
+	)
+
+542 #define 
+	#HDSP_C_RATE
+(
+x
+) ((x)<<1)
+
+	)
+
+543 #define 
+	#HDSP_M_RATE
+(
+x
+) ((x)<<2)
+
+	)
+
+544 #define 
+	#HDSP_S_RATE
+(
+x
+) ((x)<<4)
+
+	)
+
+546 #define 
+	#HDSP_RATE_48000
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(0))
+
+	)
+
+547 #define 
+	#HDSP_RATE_44100
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(0))
+
+	)
+
+548 #define 
+	#HDSP_RATE_32000
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(0))
+
+	)
+
+549 #define 
+	#HDSP_RATE_29400
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(0))
+
+	)
+
+550 #define 
+	#HDSP_RATE_24000
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(1))
+
+	)
+
+551 #define 
+	#HDSP_RATE_22050
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(1))
+
+	)
+
+552 #define 
+	#HDSP_RATE_16000
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(2))
+
+	)
+
+553 #define 
+	#HDSP_RATE_16000_ALT
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(1))
+
+	)
+
+554 #define 
+	#HDSP_RATE_14700
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(2))
+
+	)
+
+555 #define 
+	#HDSP_RATE_14700_ALT
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(1))
+
+	)
+
+556 #define 
+	#HDSP_RATE_12000
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(3))
+
+	)
+
+557 #define 
+	#HDSP_RATE_11025
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(3))
+
+	)
+
+558 #define 
+	#HDSP_RATE_10666_7
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(2))
+
+	)
+
+559 #define 
+	#HDSP_RATE_9800
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(2))
+
+	)
+
+560 #define 
+	#HDSP_RATE_9600
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(4))
+
+	)
+
+561 #define 
+	#HDSP_RATE_8820
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(4))
+
+	)
+
+562 #define 
+	#HDSP_RATE_8000
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(5))
+
+	)
+
+563 #define 
+	#HDSP_RATE_8000_ALT
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(3))
+
+	)
+
+564 #define 
+	#HDSP_RATE_7350
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(5))
+
+	)
+
+565 #define 
+	#HDSP_RATE_7350_ALT
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(3))
+
+	)
+
+566 #define 
+	#HDSP_RATE_6857_14
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(6))
+
+	)
+
+567 #define 
+	#HDSP_RATE_6400
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(4))
+
+	)
+
+568 #define 
+	#HDSP_RATE_6300
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(6))
+
+	)
+
+569 #define 
+	#HDSP_RATE_6000
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(7))
+
+	)
+
+570 #define 
+	#HDSP_RATE_5880
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(4))
+
+	)
+
+571 #define 
+	#HDSP_RATE_5512_5
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(7))
+
+	)
+
+572 #define 
+	#HDSP_RATE_5333_33
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(5))
+
+	)
+
+573 #define 
+	#HDSP_RATE_4900
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(5))
+
+	)
+
+574 #define 
+	#HDSP_RATE_4571_43
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(6))
+
+	)
+
+575 #define 
+	#HDSP_RATE_4200
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(6))
+
+	)
+
+576 #define 
+	#HDSP_RATE_4000
+ (
+	`HDSP_M_RATE
+(0)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(7))
+
+	)
+
+577 #define 
+	#HDSP_RATE_3675
+ (
+	`HDSP_M_RATE
+(1)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(7))
+
+	)
+
+581 #define 
+	#HDSP_RATE_AES_1
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(0))
+
+	)
+
+582 #define 
+	#HDSP_RATE_AES_2
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(1))
+
+	)
+
+583 #define 
+	#HDSP_RATE_AES_3
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(2))
+
+	)
+
+584 #define 
+	#HDSP_RATE_AES_4
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(3))
+
+	)
+
+585 #define 
+	#HDSP_RATE_AES_5
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(4))
+
+	)
+
+586 #define 
+	#HDSP_RATE_AES_6
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(5))
+
+	)
+
+587 #define 
+	#HDSP_RATE_AES_7
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(6))
+
+	)
+
+588 #define 
+	#HDSP_RATE_AES_8
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(0)|
+	`HDSP_S_RATE
+(7))
+
+	)
+
+592 #define 
+	#HDSP_RATE_AES_1s
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(0))
+
+	)
+
+593 #define 
+	#HDSP_RATE_AES_2s
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(1))
+
+	)
+
+594 #define 
+	#HDSP_RATE_AES_3s
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(2))
+
+	)
+
+595 #define 
+	#HDSP_RATE_AES_4s
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(3))
+
+	)
+
+596 #define 
+	#HDSP_RATE_AES_5s
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(4))
+
+	)
+
+597 #define 
+	#HDSP_RATE_AES_6s
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(5))
+
+	)
+
+598 #define 
+	#HDSP_RATE_AES_7s
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(6))
+
+	)
+
+599 #define 
+	#HDSP_RATE_AES_8s
+ (
+	`HDSP_M_RATE
+(3)|
+	`HDSP_C_RATE
+(1)|
+	`HDSP_S_RATE
+(7))
+
+	)
+
+601 #define 
+	#HDSP_RATE_INPUTRATE
+ 1
+
+	)
+
+602 #define 
+	#HDSP_RATE_UNDEFINED
+ (-1)
+
+	)
+
+603 #define 
+	#HDSP_RATE_NO_DIGITAL_INPUT
+ (-2)
+
+	)
+
+604 #define 
+	#HDSP_RATE_UNACQUIRED
+ (-3)
+
+	)
+
+609 #define 
+	#HDSP_INPUT_LINE
+ 0
+
+	)
+
+610 #define 
+	#HDSP_INPUT_MIC
+ 1
+
+	)
+
+611 #define 
+	#HDSP_INPUT_DIGITAL
+ 2
+
+	)
+
+616 #define 
+	#HRB_TOMIPS
+ 0
+
+	)
+
+617 #define 
+	#HRB_FROMMIPS
+ 1
+
+	)
+
+618 #define 
+	#HRB_FOLDED
+ 2
+
+	)
+
+619 #define 
+	#HRB_UNFOLDED
+ 0
+
+	)
+
+620 #define 
+	#HRB_EXTEND
+ 4
+
+	)
+
+621 #define 
+	#HRB_NOEXTEND
+ 0
+
+	)
+
+623 #define 
+	#HRB_USERSPACE
+ 8
+
+	)
+
+624 #define 
+	#HRB_KERNELSPACE
+ 0
+
+	)
+
+625 #define 
+	#HRB_SPLIT
+ 0x10
+
+	)
+
+626 #define 
+	#HRB_NODEFER
+ 0x20
+
+	)
+
+627 #define 
+	#HRB_MASTER
+ 0x40
+
+	)
+
+628 #define 
+	#HRB_DIRECT
+ 0x80
+
+	)
+
+629 #define 
+	#HRB_SERIAL
+ 0
+
+	)
+
+630 #define 
+	#HRB_DORMANT
+ 0x100
+
+	)
+
+631 #define 
+	#HRB_NOTALLOCED
+ 0x200
+
+	)
+
+632 #define 
+	#HRB_SUBCODE
+ 0x400
+
+	)
+
+633 #define 
+	#HRB_BIGSAMPS
+ 0x800
+
+	)
+
+640 #define 
+	#HDSP_NFIXED
+ 32
+
+	)
+
+641 #define 
+	#HDSP_FIXED_TO_INT
+(
+x
+) ((x) >> 
+HDSP_NFIXED
+)
+
+	)
+
+642 #define 
+	#HDSP_INT_TO_FIXED
+(
+x
+) (((
+hdsp_fixed_t
+)(x)) << 
+HDSP_NFIXED
+)
+
+	)
+
+647 #define 
+	#HDSP_DYNAMIC
+ 0xffffffffffffffffLL
+
+	)
+
+648 #define 
+	#HDSP_NO_CHANGE
+ 0xffffffffffffffffLL
+
+	)
+
+649 #define 
+	#HDSP_MINUS_INF
+ 0x8000000000000000LL
+
+	)
+
+654 #define 
+	#HDSP_NO_CHANGE_BIT
+ 0x1
+
+	)
+
+655 #define 
+	#HDSP_MINUS_INF_BIT
+ 0x2
+
+	)
+
+660 #define 
+	#HDSP_AES_SUBCODE_BLOCKSIZE
+ 18
+
+	)
+
+661 #define 
+	#HDSP_ADAT_SUBCODE_BLOCKSIZE
+ 30
+
+	)
+
+666 #define 
+	#MAXRBLEN
+ (4096*400)
+
+	)
+
+	@/usr/include/getopt.h
+
+2 #define 
+	#__GETOPT_H__
+
+
+	)
+
+27 #include 
+	~/usr/include/standards.h
+>
+
+37 #define 
+	#GETOPTDONE
+ (-1)
+
+	)
+
+43 #define 
+	#GETOPTHUH
+ '?'
+
+	)
+
+	@/usr/include/inttypes.h
+
+34 #define 
+	#__INTTYPES_H__
+
+
+	)
+
+41 #define 
+	#__INTTYPES_MAJOR
+ 0
+
+	)
+
+42 #define 
+	#__INTTYPES_MINOR
+ 1
+
+	)
+
+61 #include 
+	~/usr/include/standards.h
+>
+
+62 #include 
+	~/usr/include/sgidefs.h
+>
+
+65 #define 
+	#__inttypes_INCLUDED
+
+
+	)
+
+70 typedef signed char 
+	tint8_t
+;
+
+71 typedef unsigned char 
+	tuint8_t
+;
+
+72 typedef signed short 
+	tint16_t
+;
+
+73 typedef unsigned short 
+	tuint16_t
+;
+
+74 typedef signed int 
+	tint32_t
+;
+
+75 typedef unsigned int 
+	tuint32_t
+;
+
+76 typedef 
+__int64_t
+ 
+	tint64_t
+;
+
+77 typedef 
+__uint64_t
+ 
+	tuint64_t
+;
+
+78 typedef 
+__int64_t
+ 
+	tintmax_t
+;
+
+79 typedef 
+__uint64_t
+ 
+	tuintmax_t
+;
+
+80 typedef signed long int 
+	tintptr_t
+;
+
+81 typedef unsigned long int 
+	tuintptr_t
+;
+
+87 #define 
+	#INT8_MIN
+ (-127-1)
+
+	)
+
+88 #define 
+	#INT8_MAX
+ (127)
+
+	)
+
+89 #define 
+	#UINT8_MAX
+ (255u)
+
+	)
+
+90 #define 
+	#INT16_MIN
+ (-32767-1)
+
+	)
+
+91 #define 
+	#INT16_MAX
+ (32767)
+
+	)
+
+92 #define 
+	#UINT16_MAX
+ (65535u)
+
+	)
+
+93 #define 
+	#INT32_MIN
+ (-2147483647-1)
+
+	)
+
+94 #define 
+	#INT32_MAX
+ (2147483647)
+
+	)
+
+95 #define 
+	#UINT32_MAX
+ (4294967295u)
+
+	)
+
+96 #define 
+	#INT64_MIN
+ (-9223372036854775807LL-1)
+
+	)
+
+97 #define 
+	#INT64_MAX
+ (9223372036854775807LL)
+
+	)
+
+98 #define 
+	#UINT64_MAX
+ (18446744073709551615uLL)
+
+	)
+
+99 #define 
+	#INTMAX_MIN
+ (-9223372036854775807LL-1)
+
+	)
+
+100 #define 
+	#INTMAX_MAX
+ (9223372036854775807LL)
+
+	)
+
+101 #define 
+	#UINTMAX_MAX
+ (18446744073709551615uLL)
+
+	)
+
+135 #define 
+	#__CONCAT__
+(
+A
+,
+B
+) A ## B
+
+	)
+
+137 #define 
+	#INT8_C
+(
+c
+) ((
+int8_t
+) c)
+
+	)
+
+138 #define 
+	#UINT8_C
+(
+c
+) ((
+uint8_t
+) 
+	`__CONCAT__
+(c,
+u
+))
+
+	)
+
+139 #define 
+	#INT16_C
+(
+c
+) ((
+int16_t
+) c)
+
+	)
+
+140 #define 
+	#UINT16_C
+(
+c
+) ((
+uint16_t
+) 
+	`__CONCAT__
+(c,
+u
+))
+
+	)
+
+141 #define 
+	#INT32_C
+(
+c
+) ((
+int32_t
+) c)
+
+	)
+
+142 #define 
+	#UINT32_C
+(
+c
+) ((
+uint32_t
+) 
+	`__CONCAT__
+(c,
+u
+))
+
+	)
+
+143 #define 
+	#INT64_C
+(
+c
+) ((
+int64_t
+) 
+	`__CONCAT__
+(c,
+ll
+))
+
+	)
+
+144 #define 
+	#UINT64_C
+(
+c
+) ((
+uint64_t
+) 
+	`__CONCAT__
+(c,
+ull
+))
+
+	)
+
+145 #define 
+	#INTMAX_C
+(
+c
+) ((
+int64_t
+) 
+	`__CONCAT__
+(c,
+ll
+))
+
+	)
+
+146 #define 
+	#UINTMAX_C
+(
+c
+) ((
+uint64_t
+) 
+	`__CONCAT__
+(c,
+ull
+))
+
+	)
+
+184 #include 
+	~/usr/include/stdarg.h
+>
+
+185 #include 
+	~/usr/include/stdio.h
+>
+
+229  
+int32_t
+ 
+	mquot
+; int32_t 
+	mrem
+; } 
+	tdiv32_t
+;
+
+230  
+int64_t
+ 
+	mquot
+; int64_t 
+	mrem
+; } 
+	tdiv64_t
+;
+
+231  
+intmax_t
+ 
+	mquot
+; intmax_t 
+	mrem
+; } 
+	tdivmax_t
+;
+
+	@/usr/include/locale_attr.h
+
+14 #define 
+	#__ATTR_H__
+
+
+	)
+
+16 #include 
+	~/usr/include/sgidefs.h
+>
+
+46 unsigned int 
+	m_class
+ [ 257 ];
+
+47 signed short 
+	m_lower
+ [ 257 ];
+
+48 signed short 
+	m_upper
+ [ 257 ];
+
+50 char 
+	m_cswidth
+ [ 7 ];
+
+51 char 
+	m_fill
+ [ 1 ];
+
+55 } 
+	t__ctype_t
+;
+
+61 # define 
+	#_WINT_T
+
+
+	)
+
+63 typedef long 
+	twint_t
+;
+
+66 typedef 
+__int32_t
+ 
+	twint_t
+;
+
+73 typedef struct 
+	s__attr
+ {
+
+75 
+__ctype_t
+ * 
+	m_ctype_tbl
+;
+
+77 struct 
+	s_csinfo
+ {
+
+78 unsigned char 
+	m_eucwidth
+[3];
+
+79 unsigned char 
+	m_scrwidth
+[3];
+
+80 unsigned char 
+	m_mb_cur_max
+;
+
+81 } 
+	m_csinfo
+;
+
+83 struct 
+	s_euc_func
+ {
+
+84 int 
+	m_is_euc
+;
+
+85 
+__isset_func_t
+ 
+	m_isset2
+;
+
+86 
+__isset_func_t
+ 
+	m_isset3
+;
+
+87 
+__iscodeset_func_t
+ 
+	m_iscodeset
+;
+
+88 } 
+	m_euc_func
+;
+
+90 struct 
+	s_collate_res
+ {
+
+91 unsigned char 
+	m_coll_as_cmp
+;
+
+92 } 
+	m_collate_res
+;
+
+94 void * 
+	m_fill
+[15];
+
+95 } 
+	t__attr_t
+;
+
+97 #define 
+	#_IS_EUC_LOCALE
+ (
+__libc_attr
+.
+_euc_func
+.
+_is_euc
+)
+
+	)
+
+	@/usr/include/sgidefs.h
+
+13 #define 
+	#__SGIDEFS_H__
+
+
+	)
+
+49 #define 
+	#_MIPS_ISA_MIPS1
+ 1
+
+	)
+
+50 #define 
+	#_MIPS_ISA_MIPS2
+ 2
+
+	)
+
+51 #define 
+	#_MIPS_ISA_MIPS3
+ 3
+
+	)
+
+52 #define 
+	#_MIPS_ISA_MIPS4
+ 4
+
+	)
+
+59 #define 
+	#_MIPS_SIM_ABI32
+ 1
+
+	)
+
+60 #define 
+	#_MIPS_SIM_NABI32
+ 2
+
+	)
+
+62 #define 
+	#_MIPS_SIM_ABI64
+ 3
+
+	)
+
+130 
+ERROR
+ -- 
+the
+ 
+	gmacro
+ "_MIPS_SZINT" 
+is
+ 
+set
+ 
+to
+ 
+	g_MIPS_SZINT
+ -- 
+should
+ 
+be
+ 32
+
+132 
+	gERROR
+ -- 
+the
+ 
+	gmacro
+ "_MIPS_SZINT" 
+is
+ 
+	Iunset
+ (
+	lcurrently
+, 
+must
+ 
+be
+ 
+set
+ 
+to
+ 32)
+
+136 typedef int 
+	t__int32_t
+;
+
+137 typedef unsigned 
+	t__uint32_t
+;
+
+141 typedef long 
+	t__int64_t
+;
+
+142 typedef unsigned long 
+	t__uint64_t
+;
+
+183 typedef long long 
+	t__int64_t
+;
+
+184 typedef unsigned long long 
+	t__uint64_t
+;
+
+194 int 
+	mhi32
+;
+
+195 int 
+	mlo32
+;
+
+196 } 
+	thilo
+;
+
+197 double 
+align
+;
+
+198 
+	}
+} 
+__int64_t
+;
+
+201 unsigned int 
+	mhi32
+;
+
+202 unsigned int 
+	mlo32
+;
+
+203 } 
+	thilo
+;
+
+204 double 
+align
+;
+
+205 } 
+__uint64_t
+;
+
+210 typedef 
+__long_long
+ 
+	t__int64_t
+;
+
+211 typedef unsigned 
+	t__long_long
+ 
+	t__uint64_t
+;
+
+219 typedef 
+__int32_t
+ 
+	t__psint_t
+;
+
+220 typedef 
+__uint32_t
+ 
+	t__psunsigned_t
+;
+
+224 typedef 
+__int64_t
+ 
+	t__psint_t
+;
+
+225 typedef 
+__uint64_t
+ 
+	t__psunsigned_t
+;
+
+235 typedef 
+__int64_t
+ 
+	t__scint_t
+;
+
+236 typedef 
+__uint64_t
+ 
+	t__scunsigned_t
+;
+
+241 typedef 
+__int32_t
+ 
+	t__scint_t
+;
+
+242 typedef 
+__uint32_t
+ 
+	t__scunsigned_t
+;
+
+	@/usr/include/standards.h
+
+2 #define 
+	#__STANDARDS_H__
+
+
+	)
+
+77 #define 
+	#_ANSIMODE
+ (!
+	`defined
+(
+__EXTENSIONS__
+))
+
+	)
+
+78 #define 
+	#_NO_ANSIMODE
+ (
+	`defined
+(
+__EXTENSIONS__
+) || \
+
+79 
+	`defined
+(
+_SGI_SOURCE
+) || \
+
+80 
+	`defined
+(
+_POSIX_SOURCE
+) || \
+
+81 
+	`defined
+(
+_POSIX_C_SOURCE
+) || \
+
+82 
+	`defined
+(
+_MIPSABI_SOURCE
+) || \
+
+83 
+	`defined
+(
+_LARGEFILE64_SOURCE
+) || \
+
+84 
+	`defined
+(
+_XOPEN_SOURCE
+))
+
+	)
+
+102 #define 
+	#_POSIX90
+ (
+	`defined
+(
+_POSIX_SOURCE
+) || \
+
+103 
+	`defined
+(
+_POSIX_C_SOURCE
+) || \
+
+104 
+	`defined
+(
+_XOPEN_SOURCE
+) || \
+
+105 
+	`defined
+(
+_SGI_SOURCE
+) || \
+
+106 
+_ANSIMODE
+)
+
+	)
+
+107 #define 
+	#_POSIX2
+ ((
+	`defined
+(
+_POSIX_C_SOURCE
+) && (_POSIX_C_SOURCE+0 > 1)) ||\
+
+108 
+	`defined
+(
+_XOPEN_SOURCE
+) || \
+
+109 
+	`defined
+(
+_SGI_SOURCE
+) || \
+
+110 
+_ANSIMODE
+)
+
+	)
+
+124 #define 
+	#_POSIX93
+ \
+
+125 ((
+	`defined
+(
+_POSIX_C_SOURCE
+) && (_POSIX_C_SOURCE+0 >= 199309L)) ||\
+
+126 (
+	`defined
+(
+_SGI_SOURCE
+) && 
+_NO_XOPEN4
+ && 
+_NO_POSIX
+) || \
+
+127 (
+_ANSIMODE
+ && 
+_NO_XOPEN4
+ && 
+_NO_POSIX
+))
+
+	)
+
+128 #define 
+	#_NO_POSIX
+ (!
+	`defined
+(
+_POSIX_SOURCE
+) && !defined(
+_POSIX_C_SOURCE
+))
+
+	)
+
+137 #define 
+	#_POSIX1C
+ \
+
+138 ((
+	`defined
+(
+_POSIX_C_SOURCE
+) && (_POSIX_C_SOURCE+0 >= 199506L)) ||\
+
+139 (
+	`defined
+(
+_SGI_SOURCE
+) && 
+_NO_XOPEN4
+ && 
+_NO_POSIX
+ && 
+_NO_ABIAPI
+) || \
+
+140 
+	`defined
+(
+_SGI_REENTRANT_FUNCTIONS
+) || \
+
+141 
+_XOPEN5
+ || \
+
+142 (
+_ANSIMODE
+ && 
+_NO_XOPEN4
+ && 
+_NO_POSIX
+ && 
+_NO_ABIAPI
+))
+
+	)
+
+151 #define 
+	#_XOPEN4
+ (
+	`defined
+(
+_XOPEN_SOURCE
+) || \
+
+152 ((
+	`defined
+(
+_SGI_SOURCE
+) && 
+_NO_POSIX
+)) || \
+
+153 (
+_ANSIMODE
+ && 
+_NO_POSIX
+))
+
+	)
+
+154 #define 
+	#_NO_XOPEN4
+ (!
+	`defined
+(
+_XOPEN_SOURCE
+) || \
+
+155 (
+	`defined
+(
+_XOPEN_SOURCE
+) && \
+
+156 (
+_XOPEN_SOURCE
++0 >= 500)))
+
+	)
+
+160 #define 
+	#_XOPEN4UX
+ \
+
+161 ((
+	`defined
+(
+_XOPEN_SOURCE
+) && \
+
+162 
+	`defined
+(
+_XOPEN_SOURCE_EXTENDED
+) && \
+
+163 
+_XOPEN_SOURCE_EXTENDED
++0 == 1) || \
+
+164 (
+	`defined
+(
+_SGI_SOURCE
+) && 
+_NO_POSIX
+ && 
+_NO_XOPEN4
+) || \
+
+165 (
+_ANSIMODE
+ && 
+_NO_POSIX
+ && 
+_NO_XOPEN4
+))
+
+	)
+
+175 #define 
+	#_XOPEN5
+ ((
+	`defined
+(
+_XOPEN_SOURCE
+) && \
+
+176 (
+_XOPEN_SOURCE
++0 >= 500)) || \
+
+177 ((
+	`defined
+(
+_SGI_SOURCE
+) && 
+_NO_POSIX
+ && 
+_NO_XOPEN4
+)) || \
+
+178 (
+_ANSIMODE
+ && 
+_NO_POSIX
+))
+
+	)
+
+179 #define 
+	#_NO_XOPEN5
+ (!
+	`defined
+(
+_XOPEN_SOURCE
+) || \
+
+180 (
+	`defined
+(
+_XOPEN_SOURCE
+) && \
+
+181 (
+_XOPEN_SOURCE
++0 < 500)))
+
+	)
+
+192 #define 
+	#_SGIAPI
+ ((
+	`defined
+(
+_SGI_SOURCE
+) && \
+
+193 
+_NO_POSIX
+ && 
+_NO_XOPEN4
+ && 
+_NO_XOPEN5
+) || \
+
+194 (
+_ANSIMODE
+ && 
+_NO_POSIX
+ && 
+_NO_XOPEN4
+ && 
+_NO_XOPEN5
+))
+
+	)
+
+211 #define 
+	#_ABIAPI
+ \
+
+212 ((
+	`defined
+(
+_MIPSABI_SOURCE
+) && (_MIPSABI_SOURCE+0 >= 2)) || \
+
+213 
+	`defined
+(
+_ABI_SOURCE
+))
+
+	)
+
+214 #define 
+	#_NO_ABIAPI
+ \
+
+215 ((!
+	`defined
+(
+_MIPSABI_SOURCE
+) || (_MIPSABI_SOURCE+0 < 2)) && \
+
+216 !
+	`defined
+(
+_ABI_SOURCE
+))
+
+	)
+
+225 #define 
+	#_LFAPI
+ (
+	`defined
+(
+_LARGEFILE64_SOURCE
+) || 
+_SGIAPI
+)
+
+	)
+
+230 #define 
+	#_REENTRANT_FUNCTIONS
+ (
+	`defined
+(
+_SGI_REENTRANT_FUNCTIONS
+))
+
+	)
+
+	@/usr/include/svr4_math.h
+
+21 #define 
+	#__SVR4_MATH_H__
+
+
+	)
+
+27 #define 
+	#DOMAIN
+ 1
+
+	)
+
+28 #define 
+	#SING
+ 2
+
+	)
+
+29 #define 
+	#OVERFLOW
+ 3
+
+	)
+
+30 #define 
+	#UNDERFLOW
+ 4
+
+	)
+
+31 #define 
+	#TLOSS
+ 5
+
+	)
+
+32 #define 
+	#PLOSS
+ 6
+
+	)
+
+	@/usr/include/sys/time.h
+
+26 #define 
+	#_SYS_TIME_H
+
+
+	)
+
+32 #include 
+	~/usr/include/standards.h
+>
+
+33 #include 
+	~/usr/include/sgidefs.h
+>
+
+40 #define 
+	#_CLOCK_T
+
+
+	)
+
+42 typedef long 
+	tclock_t
+;
+
+45 typedef int 
+	tclock_t
+;
+
+51 #define 
+	#_TIME_T
+
+
+	)
+
+53 typedef long 
+	ttime_t
+;
+
+56 typedef int 
+	ttime_t
+;
+
+64 #define 
+	#_STAMP_T
+
+
+	)
+
+65 typedef 
+__int64_t
+ 
+	tstamp_t
+;
+
+67 typedef struct 
+	sUSTMSCpair
+
+
+69 
+stamp_t
+ 
+	must
+;
+
+70 
+stamp_t
+ 
+	mmsc
+;
+
+71 } 
+	tUSTMSCpair
+;
+
+82 #define 
+	#_TIMEVAL_T
+
+
+	)
+
+83 struct 
+	stimeval
+ {
+
+85 
+	m__int32_t
+ :32;
+
+87 
+time_t
+ 
+	mtv_sec
+;
+
+88 long 
+	mtv_usec
+;
+
+96 struct 
+	s__irix5_timeval
+ {
+
+97 
+__int32_t
+ 
+	mtv_sec
+;
+
+98 
+__int32_t
+ 
+	mtv_usec
+;
+
+106 #define 
+	#ITIMER_REAL
+ 0
+
+	)
+
+107 #define 
+	#ITIMER_VIRTUAL
+ 1
+
+	)
+
+108 #define 
+	#ITIMER_PROF
+ 2
+
+	)
+
+109 #define 
+	#ITIMER_MAX
+ 3
+
+	)
+
+111 struct 
+	sitimerval
+ {
+
+112 struct 
+timeval
+ 
+	mit_interval
+;
+
+113 struct 
+timeval
+ 
+	mit_value
+;
+
+120 #define 
+	#irix5_timeval
+ 
+__irix5_timeval
+
+
+	)
+
+127 #define 
+	#timerisset
+(
+tvp
+) ((tvp)->
+tv_sec
+ || (tvp)->
+tv_usec
+)
+
+	)
+
+128 #define 
+	#timercmp
+(
+tvp
+, 
+uvp
+, 
+cmp
+) \
+
+129 ((
+tvp
+)->
+tv_sec
+ 
+	`cmp
+ (
+	guvp
+)->
+	gtv_sec
+ || \
+
+130 (
+	gtvp
+)->
+	gtv_sec
+ == (
+uvp
+)->tv_sec && (tvp)->
+tv_usec
+ 
+	`cmp
+ (
+	guvp
+)->
+	gtv_usec
+)
+
+	)
+
+131 #define 
+	#timerclear
+(
+	gtvp
+) (tvp)->
+	gtv_sec
+ = (
+time_t
+)0, (tvp)->
+	gtv_usec
+ = 0L
+
+	)
+
+133 struct 
+	stimezone
+ {
+
+134 int 
+	mtz_minuteswest
+;
+
+135 int 
+	mtz_dsttime
+;
+
+138 #define 
+	#DST_NONE
+ 0
+
+	)
+
+139 #define 
+	#DST_USA
+ 1
+
+	)
+
+140 #define 
+	#DST_AUST
+ 2
+
+	)
+
+141 #define 
+	#DST_WET
+ 3
+
+	)
+
+142 #define 
+	#DST_MET
+ 4
+
+	)
+
+143 #define 
+	#DST_EET
+ 5
+
+	)
+
+144 #define 
+	#DST_CAN
+ 6
+
+	)
+
+145 #define 
+	#DST_GB
+ 7
+
+	)
+
+146 #define 
+	#DST_RUM
+ 8
+
+	)
+
+147 #define 
+	#DST_TUR
+ 9
+
+	)
+
+148 #define 
+	#DST_AUSTALT
+ 10
+
+	)
+
+153 #include 
+	~/usr/include/sys/timespec.h
+>
+
+167 #include 
+	~/usr/include/sys/select.h
+>
+
+175 static int 
+	Iselect
+(
+
+176 int 
+nfds
+,
+
+177 
+fd_set
+ *
+	lreadfds
+,
+
+178 
+fd_set
+ *
+	lwritefds
+,
+
+179 
+fd_set
+ *
+	lexceptfds
+,
+
+180 struct 
+timeval
+ *
+	ltimeout
+)
+
+182 return 
+	`__xpg4_select
+(
+	lnfds
+, 
+	lreadfds
+, 
+	lwritefds
+, 
+	lexceptfds
+, 
+	ltimeout
+);
+
+183 
+	}
+}
+
+220 #define 
+	#gettimeofday
+ 
+BSDgettimeofday
+
+
+	)
+
+221 #define 
+	#settimeofday
+ 
+BSDsettimeofday
+
+
+	)
+
+224 #include 
+	~/usr/include/sys/time.h
+>
+
+230 #include 
+	~/usr/include/sys/types.h
+"
+
+231 #include 
+	~/usr/include/sys/ktime.h
+"
+
+	@/usr/include/sys/types.h
+
+25 #define 
+	#_SYS_TYPES_H
+
+
+	)
+
+29 #include 
+	~/usr/include/standards.h
+>
+
+30 #include 
+	~/usr/include/sgidefs.h
+>
+
+33 typedef unsigned char 
+	tuchar_t
+;
+
+34 typedef unsigned short 
+	tushort_t
+;
+
+35 typedef unsigned int 
+	tuint_t
+;
+
+36 typedef unsigned long 
+	tulong_t
+;
+
+40 #include 
+	~/usr/include/sys/pthread.h
+>
+
+44 typedef char * 
+	taddr_t
+;
+
+45 typedef char * 
+	tcaddr_t
+;
+
+47 typedef 
+__int64_t
+ 
+	tdaddr_t
+;
+
+49 typedef long 
+	tdaddr_t
+;
+
+51 typedef long 
+	tpgno_t
+;
+
+52 typedef 
+__uint32_t
+ 
+	tpfn_t
+;
+
+53 typedef short 
+	tcnt_t
+;
+
+54 typedef unsigned long 
+	tbasictime_t
+;
+
+55 typedef 
+__int64_t
+ 
+	tmicro_t
+;
+
+60 typedef 
+__int32_t
+ 
+	tpgcnt_t
+;
+
+62 typedef enum 
+	e
+{ 
+	mB_FALSE
+, 
+	mB_TRUE
+ } 
+	tboolean_t
+;
+
+74 typedef long 
+	tid_t
+;
+
+81 typedef 
+__int32_t
+ 
+	tid_t
+;
+
+87 typedef 
+ulong_t
+ 
+	tmajor_t
+;
+
+88 typedef 
+ulong_t
+ 
+	tminor_t
+;
+
+91 typedef 
+__uint32_t
+ 
+	tmajor_t
+;
+
+92 typedef 
+__uint32_t
+ 
+	tminor_t
+;
+
+106 typedef 
+ushort_t
+ 
+	to_mode_t
+;
+
+107 typedef short 
+	to_dev_t
+;
+
+108 typedef 
+ushort_t
+ 
+	to_uid_t
+;
+
+109 typedef 
+o_uid_t
+ 
+	to_gid_t
+;
+
+110 typedef short 
+	to_nlink_t
+;
+
+111 typedef short 
+	to_pid_t
+;
+
+112 typedef 
+__uint32_t
+ 
+	to_ino_t
+;
+
+115 typedef unsigned long 
+	tmode_t
+;
+
+116 typedef unsigned long 
+	tdev_t
+;
+
+117 typedef long 
+	tuid_t
+;
+
+118 typedef long 
+	tgid_t
+;
+
+119 typedef unsigned long 
+	tnlink_t
+;
+
+120 typedef long 
+	tpid_t
+;
+
+123 typedef 
+__uint32_t
+ 
+	tmode_t
+;
+
+124 typedef 
+__uint32_t
+ 
+	tdev_t
+;
+
+125 typedef 
+__int32_t
+ 
+	tuid_t
+;
+
+126 typedef 
+__int32_t
+ 
+	tgid_t
+;
+
+127 typedef 
+__uint32_t
+ 
+	tnlink_t
+;
+
+128 typedef 
+__int32_t
+ 
+	tpid_t
+;
+
+131 typedef int 
+	ttid_t
+;
+
+133 typedef 
+dev_t
+ 
+	tvertex_hdl_t
+;
+
+136 typedef 
+__uint64_t
+ 
+	tino_t
+;
+
+138 typedef unsigned long 
+	tino_t
+;
+
+140 typedef 
+__uint64_t
+ 
+	tino64_t
+;
+
+143 #define 
+	#_OFF_T
+
+
+	)
+
+145 typedef 
+__int64_t
+ 
+	toff_t
+;
+
+146 #elif 
+	Idefined
+(
+_STANDALONE
+)
+
+147 typedef long 
+	toff_t
+;
+
+148 #elif 
+_MIPS_SIM
+ == 
+_ABIN32
+
+
+149 typedef 
+__int64_t
+ 
+	toff_t
+;
+
+151 typedef long 
+	toff_t
+;
+
+156 #define 
+	#_OFF64_T
+
+
+	)
+
+157 typedef 
+__int64_t
+ 
+	toff64_t
+;
+
+160 typedef 
+__scint_t
+ 
+	t__scoff_t
+;
+
+162 typedef 
+__scoff_t
+ 
+	tscoff_t
+;
+
+167 typedef 
+__int64_t
+ 
+	tblkcnt64_t
+;
+
+168 typedef 
+__uint64_t
+ 
+	tfsblkcnt64_t
+;
+
+169 typedef 
+__uint64_t
+ 
+	tfsfilcnt64_t
+;
+
+173 typedef 
+__int64_t
+ 
+	tblkcnt_t
+;
+
+174 typedef 
+__uint64_t
+ 
+	tfsblkcnt_t
+;
+
+175 typedef 
+__uint64_t
+ 
+	tfsfilcnt_t
+;
+
+177 typedef long 
+	tblkcnt_t
+;
+
+178 typedef 
+ulong_t
+ 
+	tfsblkcnt_t
+;
+
+179 typedef 
+ulong_t
+ 
+	tfsfilcnt_t
+;
+
+182 typedef long 
+	tswblk_t
+;
+
+183 typedef unsigned long 
+	tpaddr_t
+;
+
+184 typedef unsigned long 
+	tiopaddr_t
+;
+
+185 typedef int 
+	tkey_t
+;
+
+186 typedef unsigned char 
+	tuse_t
+;
+
+187 typedef long 
+	tsysid_t
+;
+
+188 typedef short 
+	tindex_t
+;
+
+190 typedef signed short 
+	tnasid_t
+;
+
+191 typedef signed short 
+	tcnodeid_t
+;
+
+192 typedef signed char 
+	tpartid_t
+;
+
+193 typedef signed short 
+	tmoduleid_t
+;
+
+194 typedef signed short 
+	tcmoduleid_t
+;
+
+195 typedef 
+uchar_t
+ 
+	tclusterid_t
+;
+
+197 typedef unsigned int 
+	tlock_t
+;
+
+198 typedef signed short 
+	tcpuid_t
+;
+
+199 typedef unsigned char 
+	tpri_t
+;
+
+200 typedef 
+__uint64_t
+ 
+	taccum_t
+;
+
+201 typedef 
+__int64_t
+ 
+	tprid_t
+;
+
+202 typedef 
+__int64_t
+ 
+	tash_t
+;
+
+203 typedef short 
+	tcell_t
+;
+
+204 typedef int 
+	tcredid_t
+;
+
+205 typedef 
+__int64_t
+ 
+	tjid_t
+;
+
+208 #define 
+	#_SIZE_T
+
+
+	)
+
+210 typedef unsigned int 
+	tsize_t
+;
+
+213 typedef unsigned long 
+	tsize_t
+;
+
+218 #define 
+	#_SSIZE_T
+
+
+	)
+
+220 typedef int 
+	tssize_t
+;
+
+223 typedef long 
+	tssize_t
+;
+
+228 #define 
+	#_TIME_T
+
+
+	)
+
+230 typedef long 
+	ttime_t
+;
+
+233 typedef int 
+	ttime_t
+;
+
+238 #define 
+	#_CLOCK_T
+
+
+	)
+
+240 typedef long 
+	tclock_t
+;
+
+243 typedef int 
+	tclock_t
+;
+
+248 #define 
+	#_WCHAR_T
+
+
+	)
+
+250 typedef long 
+	twchar_t
+;
+
+253 typedef 
+__int32_t
+ 
+	twchar_t
+;
+
+258 #define 
+	#_CLOCK_ID_T
+
+
+	)
+
+259 typedef int 
+	tclockid_t
+;
+
+262 #define 
+	#_TIMER_T
+
+
+	)
+
+263 typedef int 
+	ttimer_t
+;
+
+266 #define 
+	#_USECONDS_T
+
+
+	)
+
+272 typedef unsigned int 
+	tuseconds_t
+;
+
+279 typedef 
+__scunsigned_t
+ 
+	tbitnum_t
+;
+
+280 typedef 
+__scunsigned_t
+ 
+	tbitlen_t
+;
+
+283 typedef int 
+	tprocessorid_t
+;
+
+284 typedef int 
+	ttoid_t
+;
+
+285 typedef long *
+	tqaddr_t
+;
+
+286 typedef 
+__uint32_t
+ 
+	tinst_t
+;
+
+291 typedef unsigned 
+	tmachreg_t
+;
+
+295 typedef 
+__uint64_t
+ 
+	tmachreg_t
+;
+
+301 typedef 
+__uint32_t
+ 
+	tfpreg_t
+;
+
+305 typedef 
+__uint64_t
+ 
+	tfpreg_t
+;
+
+314 #define 
+	#__inttypes_INCLUDED
+
+
+	)
+
+316 typedef signed char 
+	tint8_t
+;
+
+317 typedef unsigned char 
+	tuint8_t
+;
+
+318 typedef signed short 
+	tint16_t
+;
+
+319 typedef unsigned short 
+	tuint16_t
+;
+
+320 typedef signed int 
+	tint32_t
+;
+
+321 typedef unsigned int 
+	tuint32_t
+;
+
+322 typedef 
+__int64_t
+ 
+	tint64_t
+;
+
+323 typedef 
+__uint64_t
+ 
+	tuint64_t
+;
+
+324 typedef 
+__int64_t
+ 
+	tintmax_t
+;
+
+325 typedef 
+__uint64_t
+ 
+	tuintmax_t
+;
+
+326 typedef signed long int 
+	tintptr_t
+;
+
+327 typedef unsigned long int 
+	tuintptr_t
+;
+
+334 typedef unsigned char 
+	tu_int8_t
+;
+
+335 typedef unsigned short 
+	tu_int16_t
+;
+
+336 typedef 
+__uint32_t
+ 
+	tu_int32_t
+;
+
+344 #define 
+	#P_MYID
+ (-1)
+
+	)
+
+348 #define 
+	#NOPID
+ (
+pid_t
+)(-1)
+
+	)
+
+351 #define 
+	#NODEV
+ (
+dev_t
+)(-1)
+
+	)
+
+354 #define 
+	#P_MYPID
+ ((
+pid_t
+)0)
+
+	)
+
+359 typedef long 
+	thostid_t
+;
+
+365 #define 
+	#P_MYHOSTID
+ (-1)
+
+	)
+
+374 #include 
+	~/usr/include/sys/bsd_types.h
+>
+
+378 typedef 
+__uint64_t
+ 
+	tk_sigset_t
+;
+
+381 
+__uint32_t
+ 
+	m__sigbits
+[2];
+
+382 } 
+	tk_sigset_t
+;
+
+384 #define 
+	#sigbits
+ 
+__sigbits
+
+
+	)
+
+390 typedef 
+__uint32_t
+ 
+	tk_fltset_t
+;
+
+409 typedef 
+__int32_t
+ 
+	tapp32_int_t
+;
+
+410 typedef 
+__uint32_t
+ 
+	tapp32_uint_t
+;
+
+411 typedef 
+__int32_t
+ 
+	tapp32_long_t
+;
+
+412 typedef 
+__uint32_t
+ 
+	tapp32_ulong_t
+;
+
+413 typedef 
+__int64_t
+ 
+	tapp32_long_long_t
+;
+
+414 typedef 
+__uint64_t
+ 
+	tapp32_ulong_long_t
+;
+
+415 typedef 
+__int32_t
+ 
+	tapp64_int_t
+;
+
+416 typedef 
+__uint32_t
+ 
+	tapp64_uint_t
+;
+
+417 typedef 
+__int64_t
+ 
+	tapp64_long_t
+;
+
+418 typedef 
+__uint64_t
+ 
+	tapp64_ulong_t
+;
+
+419 typedef 
+__uint32_t
+ 
+	tapp32_ptr_t
+;
+
+420 typedef 
+__uint64_t
+ 
+	tapp64_ptr_t
+;
+
+427 typedef 
+__int64_t
+ 
+	tsysarg_t
+;
+
+428 typedef 
+__uint64_t
+ 
+	tusysarg_t
+;
+
+430 typedef int 
+	tsysarg_t
+;
+
+431 typedef unsigned 
+	tusysarg_t
+;
+
+438 typedef 
+__int32_t
+ 
+	t__promptr_t
+;
+
+440 typedef char * 
+	t__promptr_t
+;
+
+444 typedef 
+__uint64_t
+ 
+	tk_machreg_t
+;
+
+445 typedef 
+__int64_t
+ 
+	tk_smachreg_t
+;
+
+447 typedef 
+__uint64_t
+ 
+	tk_fpreg_t
+;
+
+455 typedef struct 
+	s__userabi
+ {
+
+456 short 
+	muabi_szint
+;
+
+457 short 
+	muabi_szlong
+;
+
+458 short 
+	muabi_szptr
+;
+
+459 short 
+	muabi_szlonglong
+;
+
+460 } 
+	t__userabi_t
+;
+
+466 typedef 
+__uint32_t
+ 
+	tsm_swaphandle_t
+;
+
+467 typedef struct 
+anon
+ * 
+	tanon_hdl
+;
+
+471 typedef struct 
+__uvaddr_opaque
+ *
+	tuvaddr_t
+;
+
+473 typedef char *
+	tuvaddr_t
+;
+
+475 typedef 
+uchar_t
+ 
+	tmprot_t
+;
+
+479 typedef struct 
+__pasid_opaque
+ *
+	taspasid_t
+;
+
+481 struct 
+__as_opaque
+ *
+	mas_obj
+;
+
+482 
+aspasid_t
+ 
+	mas_pasid
+;
+
+483 
+uint64_t
+ 
+	mas_gen
+;
+
+484 } 
+	tasid_t
+;
+
+491 struct 
+	skmem_ioaddr
+ {
+
+492 unsigned long 
+	mv_base
+;
+
+493 unsigned long 
+	mv_length
+;
+
+496 #include 
+	~/usr/include/sys/cpumask.h
+>
+
+497 #include 
+	~/usr/include/sys/nodemask.h
+>
+
+	@/usr/include/stdarg.h
+
+2 #define 
+	#__STDARG_H__
+
+
+	)
+
+63 #include 
+	~/usr/include/sgidefs.h
+>
+
+64 #define 
+	#_INT
+ 0
+
+	)
+
+65 #define 
+	#_FP
+ 1
+
+	)
+
+66 #define 
+	#_STRUCT
+ 2
+
+	)
+
+70 #define 
+	#_VA_LIST_
+
+
+	)
+
+71 typedef char *
+	tva_list
+;
+
+75 #define 
+	#va_end
+(
+__list
+)
+
+	)
+
+81 # define 
+	#__VA_REGBYTES
+ 8
+
+	)
+
+88 # define 
+	#__VA_PADJUST
+(
+mode
+) \
+
+89 (
+	`__NO_CFOLD_WARNING
+( \
+
+90 ((
+	`__builtin_classof
+(
+mode
+) == 
+_INT
+) && \
+
+91 (sizeof(
+mode
+) < 
+__VA_REGBYTES
+)) \
+
+92 ? 
+__VA_REGBYTES
+-sizeof(
+mode
+) : 0 ))
+
+	)
+
+94 # define 
+	#__VA_PADJUST
+(
+mode
+) 0
+
+	)
+
+97 # define 
+	#__VA_REGBYTES
+ 4
+
+	)
+
+101 # define 
+	#__VA_PADJUST
+(
+mode
+) 0
+
+	)
+
+105 typedef unsigned long 
+	t__va_iptr_t
+;
+
+109 #define 
+	#__VA_MALIGN
+(
+mode
+) \
+
+110 (
+	`__NO_CFOLD_WARNING
+( \
+
+111 (
+	`__builtin_alignof
+(
+mode
+) > 
+__VA_REGBYTES
+) \
+
+112 ? (
+__va_iptr_t
+)
+	`__builtin_alignof
+(
+mode
+) \
+
+113 : (
+__va_iptr_t
+)
+__VA_REGBYTES
+ ))
+
+	)
+
+115 #define 
+	#__VA_PALIGN
+(
+p
+,
+mode
+) \
+
+116 ( ( ((
+__va_iptr_t
+)
+p
+)+(
+	`__VA_MALIGN
+(
+mode
+)-1) ) & (-__VA_MALIGN(mode)) )
+
+	)
+
+119 #define 
+	#va_start
+(
+vp
+, 
+parmN
+) (vp = ((
+va_list
+)&parmN + sizeof(parmN)))
+
+	)
+
+124 #define 
+	#va_arg
+(
+vp
+,
+mode
+) ((mode *)(void *)( vp = (
+va_list
+) \
+
+125 (
+	`__VA_PALIGN
+(
+vp
+,
+mode
+)+
+	`__VA_PADJUST
+(mode)+sizeof(mode)) )) [-1]
+
+	)
+
+134 #define 
+	#va_start
+(
+list
+, 
+parmN
+) (list = ((char *)&parmN + sizeof(parmN)))
+
+	)
+
+136 #define 
+	#va_start
+(
+list
+, 
+name
+) (void) (list = (void *)((char *)&...))
+
+	)
+
+141 #define 
+	#_VA_ALIGN
+(
+p
+,
+a
+) (((unsigned int)(((char *)p)+((a)>4?(a):4)-1)) & -((a)>4?(a):4))
+
+	)
+
+147 #define 
+	#__va_stack_arg
+(
+list
+,
+mode
+)\
+
+149 ((
+list
+)=(char *)
+	`_VA_ALIGN
+(list,
+	`__builtin_alignof
+(
+mode
+))+ \
+
+150 
+	`_VA_ALIGN
+(sizeof(
+mode
+),4)), \
+
+151 (((char *)
+list
+) - (
+	`_VA_ALIGN
+(sizeof(
+mode
+),4) - sizeof(mode))) \
+
+152 )
+
+	)
+
+160 #define 
+	#__va_double_arg
+(
+list
+,
+mode
+) (\
+
+161 (((long)
+list
+ & 0x1) \
+
+162 ?(
+list
+ = (char *)((long)list + 7),(char *)((long)list-6-
+_VA_FP_SAVE_AREA
+))\
+
+163 :(((long)
+list
+ & 0x2) \
+
+164 ?(
+list
+ = (char *)((long)list +10),(char *)((long)list-24-
+_VA_FP_SAVE_AREA
+)) :
+	`__va_stack_arg
+(list,
+mode
+) )))
+
+	)
+
+166 #define 
+	#va_arg
+(
+list
+,
+mode
+) ((mode*)(\
+
+167 ((
+	`__builtin_classof
+(
+mode
+)==
+_FP
+ && \
+
+168 
+	`__builtin_alignof
+(
+mode
+)==sizeof(double)) \
+
+169 ? 
+	`__va_double_arg
+(
+list
+,
+mode
+)\
+
+170 : 
+	`__va_stack_arg
+(
+list
+,
+mode
+))))[-1]
+
+	)
+
+175 #define 
+	#va_start
+(
+__list
+, 
+__parmN
+) (__list = (char *) \
+
+177 (
+	`__builtin_alignof
+(
+__parmN
+) == 8) ? \
+
+178 (((long)&
+__parmN
+ + (long)sizeof(__parmN) + 8 - 1) & -8L ) : \
+
+179 (((long)&
+__parmN
+ + (((long)sizeof(__parmN) > 4)?(long)sizeof(__parmN):4) + 4 - 1) & (unsigned long) -4L) \
+
+181 )
+
+	)
+
+183 #define 
+	#va_arg
+(
+__list
+, 
+__mode
+) ((__mode *)(__list = (char *) \
+
+185 (
+	`__builtin_alignof
+(
+__mode
+) == 8) ? \
+
+186 (((long)
+__list
+ + (long)sizeof(
+__mode
+) + 8 - 1) & -8 ) : \
+
+187 (((long)
+__list
+ + (((long)sizeof(
+__mode
+) > 4)?sizeof(__mode):4) + 4 - 1)\
+
+190 )) [-1]
+
+	)
+
+	@/usr/include/sys/bsd_types.h
+
+19 #define 
+	#_SYS_BSD_TYPES_H
+
+
+	)
+
+28  int 
+	mr
+[1]; } * 
+	tphysadr
+;
+
+29 typedef unsigned char 
+	tunchar
+;
+
+30 typedef unsigned char 
+	tu_char
+;
+
+31 typedef unsigned short 
+	tushort
+;
+
+32 typedef unsigned short 
+	tu_short
+;
+
+33 typedef unsigned int 
+	tuint
+;
+
+34 typedef unsigned int 
+	tu_int
+;
+
+35 typedef unsigned long 
+	tulong
+;
+
+36 typedef unsigned long 
+	tu_long
+;
+
+37 typedef struct 
+	s_quad
+ { long 
+	mval
+[2]; } 
+	tquad
+;
+
+41 #include 
+	~/usr/include/sys/mkdev.h
+>
+
+44 #include 
+	~/usr/include/sys/select.h
+>
+
+	@/usr/include/sys/cpumask.h
+
+19 #define 
+	#_SYS_CPUMASK_H
+
+
+	)
+
+26 #include 
+	~/usr/include/sys/SN/SN0/arch.h
+>
+
+29 #include 
+	~/usr/include/sys/SN/SN1/arch.h
+>
+
+34 #define 
+	#MAXCPUS
+ 
+MAXCPU
+
+
+	)
+
+36 #define 
+	#MAXCPUS
+ 128
+
+	)
+
+42 #define 
+	#CPUMASK_SIZE
+ (
+MAXCPUS
+ / 
+_MIPS_SZLONG
+)
+
+	)
+
+45 long 
+	m_bits
+[
+CPUMASK_SIZE
+];
+
+46 } 
+	tcpumask_t
+;
+
+56 #error 
+macros
+ 
+currently
+ 
+only
+ 
+defined
+ for 64 
+bit
+ 
+	gkernels
+
+
+60 #define 
+	#CPUMASK_CLRALL
+(
+	gp
+) (p).
+	g_bits
+[0] = 0, (
+p
+)._bits[1] = 0
+
+	)
+
+61 #define 
+	#CPUMASK_IS_ZERO
+(
+p
+) ((
+	gp
+).
+	g_bits
+[0] == 0 && (p)._bits[1] == 0)
+
+	)
+
+62 #define 
+	#CPUMASK_IS_NONZERO
+(
+p
+) ((
+	gp
+).
+	g_bits
+[0] != 0 || (p)._bits[1] != 0)
+
+	)
+
+63 #define 
+	#CPUMASK_NOTEQ
+(
+p
+, 
+	gq
+) (((
+	gp
+).
+	g_bits
+[0] != (
+q
+)._bits[0]) || \
+
+64 ((
+	gp
+).
+	g_bits
+[1] != (
+q
+)._bits[1]))
+
+	)
+
+65 #define 
+	#CPUMASK_SETM
+(
+	gp
+, 
+	gq
+) (p).
+	g_bits
+[0] |= (
+q
+)._bits[0], \
+
+66 (
+	gp
+).
+	g_bits
+[1] |= (
+q
+)._bits[1]
+
+	)
+
+67 #define 
+	#CPUMASK_CLRM
+(
+	gp
+, 
+	gq
+) (p).
+	g_bits
+[0] &= ~((
+q
+)._bits[0]), \
+
+68 (
+	gp
+).
+	g_bits
+[1] &= ~((
+q
+)._bits[1])
+
+	)
+
+69 #define 
+	#CPUMASK_ANDM
+(
+	gp
+, 
+	gq
+) (p).
+	g_bits
+[0] &= ((
+q
+)._bits[0]), \
+
+70 (
+	gp
+).
+	g_bits
+[1] &= ((
+q
+)._bits[1])
+
+	)
+
+71 #define 
+	#CPUMASK_TSTM
+(
+	gp
+, 
+	gq
+) (((p).
+	g_bits
+[0] & (q)._bits[0]) || \
+
+72 ((
+	gp
+).
+	g_bits
+[1] & (
+	gq
+)._bits[1]))
+
+	)
+
+73 #define 
+	#CPUMASK_CPYNOTM
+(
+	gp
+, 
+	gq
+) (p).
+	g_bits
+[0] = ~((
+q
+)._bits[0]), \
+
+74 (
+	gp
+).
+	g_bits
+[1] = ~((
+q
+)._bits[1])
+
+	)
+
+75 #define 
+	#CPUMASK_ORNOTM
+(
+	gp
+, 
+	gq
+) (p).
+	g_bits
+[0] |= ~((
+q
+)._bits[0]), \
+
+76 (
+	gp
+).
+	g_bits
+[1] |= ~((
+q
+)._bits[1])
+
+	)
+
+83 #define 
+	#CPUMASK_ATOMSET
+(
+	gp
+, 
+	gq
+) \
+
+85 
+	`ASSERT
+(!(
+	gq
+).
+	g_bits
+[0] || !(q)._bits[1]); \
+
+86 if ((
+q
+).
+_bits
+[0]) \
+
+87 
+	`atomicSetCpumask
+((
+cpumask_t
+ *)&(
+p
+).
+_bits
+[0], \
+
+88 (
+cpumask_t
+ *)&(
+q
+).
+_bits
+[0]); \
+
+90 
+	`atomicSetCpumask
+((
+cpumask_t
+ *)&(
+p
+).
+_bits
+[1], \
+
+91 (
+cpumask_t
+ *)&(
+q
+).
+_bits
+[1]); \
+
+92 }
+
+	)
+
+94 #define 
+	#CPUMASK_ATOMCLR
+(
+p
+, 
+q
+) \
+
+96 
+	`ASSERT
+(!(
+q
+).
+_bits
+[0] || !(q)._bits[1]); \
+
+97 if ((
+q
+).
+_bits
+[0]) \
+
+98 
+	`atomicClearCpumask
+((
+cpumask_t
+ *)&(
+p
+).
+_bits
+[0], \
+
+99 (
+cpumask_t
+ *)&(
+q
+).
+_bits
+[0]); \
+
+101 
+	`atomicClearCpumask
+((
+cpumask_t
+ *)&(
+p
+).
+_bits
+[1], \
+
+102 (
+cpumask_t
+ *)&(
+q
+).
+_bits
+[1]); \
+
+103 }
+
+	)
+
+111 #define 
+	#CPUMASK_CLRALL
+(
+p
+) { \
+
+112 int 
+i
+; \
+
+114 for (
+i
+ = 0 ; i < 
+CPUMASK_SIZE
+ ; i++) \
+
+115 (
+p
+).
+_bits
+[
+i
+] = 0; \
+
+116 }
+
+	)
+
+118 #define 
+	#CPUMASK_SETM
+(
+p
+,
+q
+) { \
+
+119 int 
+i
+; \
+
+121 for (
+i
+ = 0 ; i < 
+CPUMASK_SIZE
+ ; i++) \
+
+122 (
+p
+).
+_bits
+[
+i
+] |= ((
+q
+)._bits[i]); \
+
+123 }
+
+	)
+
+125 #define 
+	#CPUMASK_CLRM
+(
+p
+,
+q
+) { \
+
+126 int 
+i
+; \
+
+128 for (
+i
+ = 0 ; i < 
+CPUMASK_SIZE
+ ; i++) \
+
+129 (
+p
+).
+_bits
+[
+i
+] &= ~((
+q
+)._bits[i]); \
+
+130 }
+
+	)
+
+132 #define 
+	#CPUMASK_ANDM
+(
+p
+,
+q
+) { \
+
+133 int 
+i
+; \
+
+135 for (
+i
+ = 0 ; i < 
+CPUMASK_SIZE
+ ; i++) \
+
+136 (
+p
+).
+_bits
+[
+i
+] &= ((
+q
+)._bits[i]); \
+
+137 }
+
+	)
+
+139 #define 
+	#CPUMASK_CPYNOTM
+(
+p
+,
+q
+) { \
+
+140 int 
+i
+; \
+
+142 for (
+i
+ = 0 ; i < 
+CPUMASK_SIZE
+ ; i++) \
+
+143 (
+p
+).
+_bits
+[
+i
+] = ~((
+q
+)._bits[i]); \
+
+144 }
+
+	)
+
+146 #define 
+	#CPUMASK_ORNOTM
+(
+p
+,
+q
+) { \
+
+147 int 
+i
+; \
+
+149 for (
+i
+ = 0 ; i < 
+CPUMASK_SIZE
+ ; i++) \
+
+150 (
+p
+).
+_bits
+[
+i
+] |= ~((
+q
+)._bits[i]); \
+
+151 }
+
+	)
+
+153 #define 
+	#CPUMASK_ATOMSET
+(
+p
+,
+q
+) { \
+
+154 int 
+i
+; \
+
+156 for (
+i
+ = 0 ; i < 
+CPUMASK_SIZE
+ ; i++) { \
+
+157 if ((
+q
+).
+_bits
+[
+i
+]) { \
+
+158 
+	`atomicSetCpumask
+((
+cpumask_t
+ *)&(
+p
+).
+_bits
+[
+i
+], \
+
+159 (
+cpumask_t
+ *)&(
+q
+).
+_bits
+[
+i
+]); \
+
+163 }
+
+	)
+
+166 #define 
+	#CPUMASK_ATOMCLR
+(
+p
+,
+q
+) { \
+
+167 int 
+i
+; \
+
+169 for (
+i
+ = 0 ; i < 
+CPUMASK_SIZE
+ ; i++) { \
+
+170 if ((
+q
+).
+_bits
+[
+i
+]) { \
+
+171 
+	`atomicClearCpumask
+((
+cpumask_t
+ *)&(
+p
+).
+_bits
+[
+i
+], \
+
+172 (
+cpumask_t
+ *)&(
+q
+).
+_bits
+[
+i
+]); \
+
+176 }
+
+	)
+
+180 
+__inline
+ int 
+	ICPUMASK_IS_ZERO
+ (
+cpumask_t
+ 
+	lp
+)
+
+182 int 
+	li
+;
+
+184 for (
+i
+ = 0 ; i < 
+CPUMASK_SIZE
+ ; i++)
+
+185 if (
+p
+.
+_bits
+[
+i
+] != 0)
+
+188 
+	}
+}
+
+190 
+__inline
+ int 
+	ICPUMASK_IS_NONZERO
+ (
+cpumask_t
+ 
+p
+)
+
+192 int 
+	li
+;
+
+194 for (
+i
+ = 0 ; i < 
+CPUMASK_SIZE
+ ; i++)
+
+195 if (
+p
+.
+_bits
+[
+i
+] != 0)
+
+198 
+	}
+}
+
+200 
+__inline
+ int 
+	ICPUMASK_NOTEQ
+ (
+cpumask_t
+ 
+p
+, cpumask_t 
+	lq
+)
+
+202 int 
+	li
+;
+
+204 for (
+i
+ = 0 ; i < 
+CPUMASK_SIZE
+ ; i++)
+
+205 if (
+p
+.
+_bits
+[
+i
+] != 
+q
+._bits[i])
+
+208 
+	}
+}
+
+210 
+__inline
+ int 
+	ICPUMASK_TSTM
+ (
+cpumask_t
+ 
+	lp
+, cpumask_t 
+	lq
+)
+
+212 int 
+	li
+;
+
+214 for (
+i
+ = 0 ; i < 
+CPUMASK_SIZE
+ ; i++)
+
+215 if (
+p
+.
+_bits
+[
+i
+] & 
+q
+._bits[i])
+
+218 
+	}
+}
+
+230 #define 
+	#CPUMASK_SETB
+(
+p
+, 
+bit
+) { \
+
+231 if (
+	`CPUMASK_INDEX
+(
+bit
+)) \
+
+232 (
+p
+).
+_bits
+[1] |= (1ULL << 
+	`CPUMASK_SHFT
+(
+bit
+)); else \
+
+233 (
+p
+).
+_bits
+[0] |= (1ULL << 
+	`CPUMASK_SHFT
+(
+bit
+));}
+
+	)
+
+235 #define 
+	#CPUMASK_CLRB
+(
+p
+, 
+bit
+) { \
+
+236 if (
+	`CPUMASK_INDEX
+(
+bit
+)) \
+
+237 (
+p
+).
+_bits
+[1] &= ~(1ULL << 
+	`CPUMASK_SHFT
+(
+bit
+)); else \
+
+238 (
+p
+).
+_bits
+[0] &= ~(1ULL << 
+	`CPUMASK_SHFT
+(
+bit
+));}
+
+	)
+
+240 #define 
+	#CPUMASK_TSTB
+(
+p
+, 
+bit
+) \
+
+241 (
+	`CPUMASK_INDEX
+(
+bit
+) ? \
+
+242 (
+p
+).
+_bits
+[1] & (1ULL << 
+	`CPUMASK_SHFT
+(
+bit
+)) : \
+
+243 (
+p
+).
+_bits
+[0] & (1ULL << 
+	`CPUMASK_SHFT
+(
+bit
+)))
+
+	)
+
+247 #define 
+	#CPUMASK_SETB
+(
+p
+, 
+bit
+) (p).
+_bits
+[
+	`CPUMASK_INDEX
+(bit)] |= \
+
+248 (1ULL << 
+	`CPUMASK_SHFT
+(
+bit
+))
+
+	)
+
+249 #define 
+	#CPUMASK_CLRB
+(
+p
+, 
+bit
+) (p).
+_bits
+[
+	`CPUMASK_INDEX
+(bit)] &= \
+
+250 ~(1ULL << 
+	`CPUMASK_SHFT
+(
+bit
+))
+
+	)
+
+251 #define 
+	#CPUMASK_TSTB
+(
+p
+, 
+bit
+) ((p).
+_bits
+[
+	`CPUMASK_INDEX
+(bit)] & \
+
+252 (1ULL << 
+	`CPUMASK_SHFT
+(
+bit
+)))
+
+	)
+
+256 #define 
+	#CPUMASK_INDEX
+(
+bit
+) ((bit) >> 6)
+
+	)
+
+257 #define 
+	#CPUMASK_SHFT
+(
+bit
+) ((bit) & 0x3f)
+
+	)
+
+263 #define 
+	#CPUMASK_ATOMTSTSETB
+(
+p
+, 
+bit
+) \
+
+264 (
+	`atomicSetUint64
+(&(
+p
+).
+_bits
+[
+	`CPUMASK_INDEX
+(
+bit
+)], \
+
+265 (1ULL<<
+	`CPUMASK_SHFT
+(
+bit
+))) & \
+
+266 (1ULL<<
+	`CPUMASK_SHFT
+(
+bit
+)))
+
+	)
+
+268 #define 
+	#CPUMASK_ATOMTSTCLRB
+(
+p
+, 
+bit
+) \
+
+269 (
+	`atomicClearUint64
+(&(
+p
+).
+_bits
+[
+	`CPUMASK_INDEX
+(
+bit
+)], \
+
+270 (1ULL<<
+	`CPUMASK_SHFT
+(
+bit
+))) & \
+
+271 (1ULL<<
+	`CPUMASK_SHFT
+(
+bit
+)))
+
+	)
+
+273 #define 
+	#CPUMASK_ATOMSETB
+(
+p
+, 
+bit
+) \
+
+274 
+	`atomicSetUint64
+(&(
+p
+).
+_bits
+[
+	`CPUMASK_INDEX
+(
+bit
+)], \
+
+275 (1ULL<<
+	`CPUMASK_SHFT
+(
+bit
+)))
+
+	)
+
+277 #define 
+	#CPUMASK_ATOMCLRB
+(
+p
+, 
+bit
+) \
+
+278 
+	`atomicClearUint64
+(&(
+p
+).
+_bits
+[
+	`CPUMASK_INDEX
+(
+bit
+)], \
+
+279 (1ULL<<
+	`CPUMASK_SHFT
+(
+bit
+)))
+
+	)
+
+284 typedef long long 
+	tcpumask_t
+;
+
+285 #define 
+	#CPUMASK_SETB
+(
+p
+, 
+bit
+) (p) |= 1ULL << (bit)
+
+	)
+
+286 #define 
+	#CPUMASK_CLRB
+(
+p
+, 
+bit
+) (p) &= ~(1ULL << (bit))
+
+	)
+
+287 #define 
+	#CPUMASK_TSTB
+(
+p
+, 
+bit
+) ((p) & (1ULL << (bit)))
+
+	)
+
+289 #define 
+	#CPUMASK_ATOMTSTSETB
+(
+p
+, 
+bit
+) \
+
+290 (
+	`atomicSetUint64
+(&(
+p
+), (1ULL<<(
+bit
+))) & (1ULL<<(bit)))
+
+	)
+
+292 #define 
+	#CPUMASK_ATOMTSTCLRB
+(
+p
+, 
+bit
+) \
+
+293 (
+	`atomicClearUint64
+(&(
+p
+), (1ULL<<(
+bit
+)) & (1ULL<<(bit))))
+
+	)
+
+295 #define 
+	#CPUMASK_ATOMSETB
+(
+p
+, 
+bit
+) \
+
+296 
+	`atomicSetUint64
+(&(
+p
+), (1ULL<<(
+bit
+)))
+
+	)
+
+298 #define 
+	#CPUMASK_ATOMCLRB
+(
+p
+, 
+bit
+) \
+
+299 
+	`atomicClearUint64
+(&(
+p
+), (1ULL<<(
+bit
+)))
+
+	)
+
+302 typedef unsigned int 
+	tcpumask_t
+;
+
+303 #define 
+	#CPUMASK_SETB
+(
+p
+, 
+bit
+) (p) |= 1 << (bit)
+
+	)
+
+304 #define 
+	#CPUMASK_CLRB
+(
+p
+, 
+bit
+) (p) &= ~(1 << (bit))
+
+	)
+
+305 #define 
+	#CPUMASK_TSTB
+(
+p
+, 
+bit
+) ((p) & (1 << (bit)))
+
+	)
+
+307 #define 
+	#CPUMASK_ATOMTSTSETB
+(
+p
+, 
+bit
+) \
+
+308 (
+	`atomicSetUint
+(&(
+p
+), (1<<(
+bit
+))) & (1<<(bit)))
+
+	)
+
+310 #define 
+	#CPUMASK_ATOMTSTCLRB
+(
+p
+, 
+bit
+) \
+
+311 (
+	`atomicClearUint
+(&(
+p
+), (1<<(
+bit
+))) & (1<<(bit)))
+
+	)
+
+313 #define 
+	#CPUMASK_ATOMSETB
+(
+p
+, 
+bit
+) \
+
+314 
+	`atomicSetUint
+(&(
+p
+), (1<<(
+bit
+)))
+
+	)
+
+316 #define 
+	#CPUMASK_ATOMCLRB
+(
+p
+, 
+bit
+) \
+
+317 
+	`atomicClearUint
+(&(
+p
+), (1<<(
+bit
+)))
+
+	)
+
+321 #define 
+	#CPUMASK_CLRALL
+(
+p
+) (p) = 0
+
+	)
+
+322 #define 
+	#CPUMASK_IS_ZERO
+(
+p
+) ((p) == 0)
+
+	)
+
+323 #define 
+	#CPUMASK_IS_NONZERO
+(
+p
+) ((p) != 0)
+
+	)
+
+324 #define 
+	#CPUMASK_NOTEQ
+(
+p
+, 
+q
+) ((p) != (q))
+
+	)
+
+326 #define 
+	#CPUMASK_SETM
+(
+p
+, 
+q
+) (p) |= (q)
+
+	)
+
+327 #define 
+	#CPUMASK_CLRM
+(
+p
+, 
+q
+) (p) &= ~(q)
+
+	)
+
+328 #define 
+	#CPUMASK_ANDM
+(
+p
+, 
+q
+) (p) &= (q)
+
+	)
+
+329 #define 
+	#CPUMASK_TSTM
+(
+p
+, 
+q
+) ((p) & (q))
+
+	)
+
+331 #define 
+	#CPUMASK_CPYNOTM
+(
+p
+, 
+q
+) (p) = ~(q)
+
+	)
+
+332 #define 
+	#CPUMASK_ORNOTM
+(
+p
+, 
+q
+) (p) |= ~(q)
+
+	)
+
+334 #define 
+	#CPUMASK_ATOMSET
+(
+p
+, 
+q
+) 
+	`atomicSetCpumask
+((
+cpumask_t
+ *)&(p), \
+
+335 (
+cpumask_t
+ *)&(
+q
+))
+
+	)
+
+336 #define 
+	#CPUMASK_ATOMCLR
+(
+p
+, 
+q
+) 
+	`atomicClearCpumask
+((
+cpumask_t
+ *)&(p), \
+
+337 (
+cpumask_t
+ *)&(
+q
+))
+
+	)
+
+	@/usr/include/sys/ktime.h
+
+13 #define 
+	#_SYS_KTIME_H
+
+
+	)
+
+19 #include 
+	~/usr/include/sys/time.h
+"
+
+20 #include 
+	~/usr/include/sys/sema.h
+"
+
+21 #include 
+	~/usr/include/sys/capability.h
+"
+
+22 #include 
+	~/usr/include/sys/xlate.h
+>
+
+39 struct 
+	sirix5_itimerval
+ {
+
+40 struct 
+irix5_timeval
+ 
+	mit_interval
+;
+
+41 struct 
+irix5_timeval
+ 
+	mit_value
+;
+
+45 #define 
+	#timeval_to_irix5
+(
+t
+,
+i5
+) \
+
+46 (
+i5
+)->
+tv_sec
+ = (
+app32_long_t
+)(
+t
+)->tv_sec; \
+
+47 (
+i5
+)->
+tv_usec
+ = (
+app32_long_t
+)(
+t
+)->tv_usec;
+
+	)
+
+49 #define 
+	#irix5_to_timeval
+(
+t
+,
+i5
+) \
+
+50 (
+t
+)->
+tv_sec
+ = (
+i5
+)->tv_sec; \
+
+51 (
+t
+)->
+tv_usec
+ = (
+i5
+)->tv_usec;
+
+	)
+
+52 #define 
+	#TIMESPEC_TO_IRIX5
+(
+t
+,
+i5
+) \
+
+53 (
+i5
+)->
+tv_sec
+ = (
+t
+)->tv_sec; \
+
+54 (
+i5
+)->
+tv_nsec
+ = (
+t
+)->tv_nsec;
+
+	)
+
+56 #define 
+	#IRIX5_TO_TIMESPEC
+(
+i5
+,
+t
+) \
+
+57 (
+t
+)->
+tv_sec
+ = (
+i5
+)->tv_sec; \
+
+58 (
+t
+)->
+tv_nsec
+ = (
+i5
+)->tv_nsec;
+
+	)
+
+60 typedef 
+app32_long_t
+ 
+	tirix5_time_t
+;
+
+61 typedef 
+app64_int_t
+ 
+	tirix5_64_time_t
+;
+
+63 typedef struct 
+	sirix5_timespec
+ {
+
+64 
+irix5_time_t
+ 
+	mtv_sec
+;
+
+65 
+app32_long_t
+ 
+	mtv_nsec
+;
+
+66 } 
+	tirix5_timespec_t
+;
+
+68 typedef struct 
+	sirix5_64_timespec
+ {
+
+69 
+app64_int_t
+ 
+	mtv_sec
+;
+
+70 
+app64_long_t
+ 
+	mtv_nsec
+;
+
+71 } 
+	tirix5_64_timespec_t
+;
+
+73 #define 
+	#USEC_PER_SEC
+ 1000000L
+
+	)
+
+74 #define 
+	#NSEC_PER_SEC
+ 1000000000L
+
+	)
+
+75 #define 
+	#USEC_PER_TICK
+ (
+USEC_PER_SEC
+/
+HZ
+)
+
+	)
+
+76 #define 
+	#NSEC_PER_TICK
+ (
+NSEC_PER_SEC
+/
+HZ
+)
+
+	)
+
+77 #define 
+	#NSEC_PER_USEC
+ 1000L
+
+	)
+
+81 #define 
+	#have_fastpriv
+(
+pp
+) (
+	`KT_ISBASERT
+(
+	`UT_TO_KT
+(pp->
+p_proxy
+.
+prxy_threads
+)) && \
+
+82 !
+	`KT_ISNBASEPRMPT
+(
+	`UT_TO_KT
+(
+pp
+->
+p_proxy
+.
+prxy_threads
+)))
+
+	)
+
+84 #define 
+	#kt_has_fastpriv
+(
+kt
+) (
+	`KT_ISBASERT
+(kt) && !
+	`KT_ISNBASEPRMPT
+(kt))
+
+	)
+
+90 #define 
+	#need_fastimer
+(
+tvp
+, 
+pp
+) (
+	`have_fastpriv
+(pp))
+
+	)
+
+91 #define 
+	#kt_needs_fastimer
+(
+tvp
+, 
+kt
+) (
+	`kt_has_fastpriv
+(kt))
+
+	)
+
+93 #define 
+	#capable_of_fastimer
+(
+kt
+) (
+	`kt_has_fastpriv
+(kt) || 
+	`cap_able
+(
+CAP_TIME_MGT
+))
+
+	)
+
+99 #define 
+	#RNDTIMVAL
+(
+t
+) \
+
+101 register struct 
+timeval
+ *
+	gtp
+ = (
+t
+); \
+
+102 long 
+round
+; \
+
+103 if( 
+tp
+->
+tv_usec
+ >= 
+USEC_PER_SEC
+ ) \
+
+105 
+round
+ = 
+tp
+->
+tv_usec
+ / 
+USEC_PER_SEC
+; \
+
+106 
+tp
+->
+tv_usec
+ =tp->tv_usec - 
+round
+ * 
+	gUSEC_PER_SEC
+; \
+
+107 
+tp
+->
+tv_sec
+ += 
+round
+; \
+
+109 }
+
+	)
+
+111 #define 
+	#RND_TIMESPEC_VAL
+(
+t
+) \
+
+113 register 
+timespec_t
+ *
+	gtp
+ = (
+t
+); \
+
+114 long 
+round
+; \
+
+115 if(
+tp
+->
+tv_nsec
+ >= 
+NSEC_PER_SEC
+){ \
+
+116 
+round
+ = 
+tp
+->
+tv_nsec
+ / 
+NSEC_PER_SEC
+; \
+
+117 
+tp
+->
+tv_sec
+ += 
+round
+; \
+
+118 
+tp
+->
+tv_nsec
+ = tp->tv_nsec - 
+round
+* 
+	gNSEC_PER_SEC
+; \
+
+120 }
+
+	)
+
+125 #define 
+	#TIMESPEC_TO_TIMEVAL
+(
+ts
+, 
+tv
+) \
+
+127 (
+tv
+)->
+tv_sec
+ = (
+ts
+)->tv_sec; \
+
+128 (
+tv
+)->
+tv_usec
+ = (
+ts
+)->
+tv_nsec
+/1000; \
+
+129 }
+
+	)
+
+130 #define 
+	#TIMEVAL_TO_TIMESPEC
+(
+tv
+, 
+ts
+) \
+
+132 (
+ts
+)->
+tv_sec
+ = (
+tv
+)->tv_sec; \
+
+133 (
+ts
+)->
+tv_nsec
+ = (
+tv
+)->
+tv_usec
+*1000; \
+
+134 }
+
+	)
+
+136 struct 
+proc
+;
+
+137 struct 
+eframe_s
+;
+
+138 struct 
+rusage
+;
+
+140 struct 
+timespec
+;
+
+141 struct 
+timeval
+;
+
+142 struct 
+itimerval
+;
+
+143 struct 
+callout
+;
+
+144 struct 
+uthread_s
+;
+
+145 struct 
+callout_info
+;
+
+150 #define 
+	#DIDADJTIME
+ (3600*
+HZ
+)
+
+	)
+
+186 struct 
+uthread_s
+ *);
+
+198 #define 
+	#TIME_REL
+ 0
+
+	)
+
+199 #define 
+	#TIME_ABS
+ 1
+
+	)
+
+220 int, struct 
+xlate_info_s
+ *);
+
+231 #define 
+	#FASTICK_CALLBACK_REQUIRED_PRF_MASK
+ 0x00000001
+
+	)
+
+232 #define 
+	#FASTICK_CALLBACK_REQUIRED_KDSP_MASK
+ 0x00000002
+
+	)
+
+233 #define 
+	#FASTICK_CALLBACK_REQUIRED_ISDNAUDIO_MASK
+ 0x00000004
+
+	)
+
+234 #define 
+	#FASTICK_CALLBACK_REQUIRED_MIDI_MASK
+ 0x00000008
+
+	)
+
+235 #define 
+	#FASTICK_CALLBACK_REQUIRED_TSERIALIO_MASK
+ 0x00000010
+
+	)
+
+	@/usr/include/sys/nodemask.h
+
+2 #define 
+	#_SYS_NODEMASK_H
+
+
+	)
+
+43 #include 
+	~/usr/include/sys/SN/SN0/arch.h
+>
+
+46 #include 
+	~/usr/include/sys/SN/SN1/arch.h
+>
+
+49 #define 
+	#CNODEMASK_BOOTED_MASK
+ 
+boot_cnodemask
+
+
+	)
+
+50 #define 
+	#CNODEMASK_BIPW
+ 64
+
+	)
+
+54 #define 
+	#CNODEMASK_SIZE
+ 1
+
+	)
+
+55 typedef 
+__uint64_t
+ 
+	tcnodemask_t
+;
+
+57 #define 
+	#CNODEMASK_WORD
+(
+p
+,
+w
+) (p)
+
+	)
+
+58 #define 
+	#CNODEMASK_SET_WORD
+(
+p
+,
+w
+,
+val
+) (p) = 
+	)
+val
+
+59 #define 
+	#CNODEMASK_CLRALL
+(
+p
+) (p) = 0
+
+	)
+
+60 #define 
+	#CNODEMASK_SETALL
+(
+p
+) (p) = ~((
+cnodemask_t
+)0)
+
+	)
+
+61 #define 
+	#CNODEMASK_IS_ZERO
+(
+p
+) ((p) == 0)
+
+	)
+
+62 #define 
+	#CNODEMASK_IS_NONZERO
+(
+p
+) ((p) != 0)
+
+	)
+
+63 #define 
+	#CNODEMASK_NOTEQ
+(
+p
+, 
+q
+) ((p) != (q))
+
+	)
+
+64 #define 
+	#CNODEMASK_EQ
+(
+p
+, 
+q
+) ((p) == (q))
+
+	)
+
+65 #define 
+	#CNODEMASK_LSB_ISONE
+(
+p
+) ((p) & 0x1ULL)
+
+	)
+
+67 #define 
+	#CNODEMASK_ZERO
+() ((
+cnodemask_t
+)0)
+
+	)
+
+68 #define 
+	#CNODEMASK_CVTB
+(
+bit
+) (1ULL << (bit))
+
+	)
+
+69 #define 
+	#CNODEMASK_SETB
+(
+p
+, 
+bit
+) ((p) |= 1ULL << (bit))
+
+	)
+
+70 #define 
+	#CNODEMASK_CLRB
+(
+p
+, 
+bit
+) ((p) &= ~(1ULL << (bit)))
+
+	)
+
+71 #define 
+	#CNODEMASK_TSTB
+(
+p
+, 
+bit
+) ((p) & (1ULL << (bit)))
+
+	)
+
+73 #define 
+	#CNODEMASK_SETM
+(
+p
+, 
+q
+) ((p) |= (q))
+
+	)
+
+74 #define 
+	#CNODEMASK_CLRM
+(
+p
+, 
+q
+) ((p) &= ~(q))
+
+	)
+
+75 #define 
+	#CNODEMASK_ANDM
+(
+p
+, 
+q
+) ((p) &= (q))
+
+	)
+
+76 #define 
+	#CNODEMASK_TSTM
+(
+p
+, 
+q
+) ((p) & (q))
+
+	)
+
+78 #define 
+	#CNODEMASK_CPYNOTM
+(
+p
+, 
+q
+) ((p) = ~(q))
+
+	)
+
+79 #define 
+	#CNODEMASK_CPY
+(
+p
+, 
+q
+) ((p) = (q))
+
+	)
+
+80 #define 
+	#CNODEMASK_ORNOTM
+(
+p
+, 
+q
+) ((p) |= ~(q))
+
+	)
+
+81 #define 
+	#CNODEMASK_SHIFTL
+(
+p
+) ((p) <<= 1)
+
+	)
+
+82 #define 
+	#CNODEMASK_SHIFTR
+(
+p
+) ((p) >>= 1)
+
+	)
+
+83 #define 
+	#CNODEMASK_SHIFTL_PTR
+(
+p
+) (*(p) <<= 1)
+
+	)
+
+84 #define 
+	#CNODEMASK_SHIFTR_PTR
+(
+p
+) (*(p) >>= 1)
+
+	)
+
+87 #define 
+	#CNODEMASK_ATOMSET_BIT
+(
+p
+, 
+bit
+) 
+	`atomicSetUlong
+((
+cnodemask_t
+ *)&(p), (1ULL<<(bit)))
+
+	)
+
+88 #define 
+	#CNODEMASK_ATOMCLR_BIT
+(
+p
+, 
+bit
+) 
+	`atomicClearUlong
+((
+cnodemask_t
+ *)&(p), (1ULL<<(bit)))
+
+	)
+
+91 #define 
+	#CNODEMASK_ATOMSET
+(
+p
+, 
+q
+) 
+	`atomicSetUlong
+((
+cnodemask_t
+ *)&(p), q)
+
+	)
+
+92 #define 
+	#CNODEMASK_ATOMCLR
+(
+p
+, 
+q
+) 
+	`atomicClearUlong
+((
+cnodemask_t
+ *)&(p), q)
+
+	)
+
+95 #define 
+	#CNODEMASK_ATOMSET_MASK
+(
+__old
+, 
+p
+, 
+q
+) { \
+
+96 (
+__old
+) = 
+	`atomicSetUlong
+((
+cnodemask_t
+ *)&(
+p
+), 
+q
+); \
+
+97 }
+
+	)
+
+98 #define 
+	#CNODEMASK_ATOMCLR_MASK
+(
+__old
+, 
+p
+, 
+q
+) { \
+
+99 (
+__old
+) = 
+	`atomicClearUlong
+((
+cnodemask_t
+ *)&(
+p
+),
+q
+); \
+
+100 }
+
+	)
+
+102 #define 
+	#CNODEMASK_FROM_NUMNODES
+(
+n
+) ((~(
+cnodemask_t
+)0)>>(
+CNODEMASK_BIPW
+-(n)))
+
+	)
+
+106 #define 
+	#CNODEMASK_SIZE
+ (
+MAX_COMPACT_NODES
+ / 
+CNODEMASK_BIPW
+)
+
+	)
+
+109 
+__uint64_t
+ 
+	m_bits
+[
+	gCNODEMASK_SIZE
+];
+
+110 } 
+	tcnodemask_t
+;
+
+112 #define 
+	#CNODEMASK_WORD
+(
+p
+,
+w
+) \
+
+113 ((
+w
+ >= 0 && w < 
+CNODEMASK_SIZE
+) ? (
+p
+).
+_bits
+[(w)] : 0)
+
+	)
+
+114 #define 
+	#CNODEMASK_SET_WORD
+(
+p
+,
+w
+,
+val
+) { \
+
+115 if (
+w
+ >= 0 && w < 
+CNODEMASK_SIZE
+) \
+
+116 (
+p
+).
+_bits
+[(
+w
+)] = 
+val
+; \
+
+117 }
+
+	)
+
+119 #define 
+	#CNODEMASK_CLRALL
+(
+p
+) { \
+
+120 int 
+i
+; \
+
+122 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++) \
+
+123 (
+p
+).
+_bits
+[
+i
+] = 0; \
+
+124 }
+
+	)
+
+126 #define 
+	#CNODEMASK_SETALL
+(
+p
+) { \
+
+127 int 
+i
+; \
+
+129 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++) \
+
+130 (
+p
+).
+_bits
+[
+i
+] = ~(0); \
+
+131 }
+
+	)
+
+133 #define 
+	#CNODEMASK_LSB_ISONE
+(
+p
+) ((p).
+_bits
+[0] & 0x1ULL)
+
+	)
+
+136 #define 
+	#CNODEMASK_SETM
+(
+p
+,
+q
+) { \
+
+137 int 
+i
+; \
+
+139 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++) \
+
+140 (
+p
+).
+_bits
+[
+i
+] |= ((
+q
+)._bits[i]); \
+
+141 }
+
+	)
+
+143 #define 
+	#CNODEMASK_CLRM
+(
+p
+,
+q
+) { \
+
+144 int 
+i
+; \
+
+146 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++) \
+
+147 (
+p
+).
+_bits
+[
+i
+] &= ~((
+q
+)._bits[i]); \
+
+148 }
+
+	)
+
+150 #define 
+	#CNODEMASK_ANDM
+(
+p
+,
+q
+) { \
+
+151 int 
+i
+; \
+
+153 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++) \
+
+154 (
+p
+).
+_bits
+[
+i
+] &= ((
+q
+)._bits[i]); \
+
+155 }
+
+	)
+
+157 #define 
+	#CNODEMASK_CPY
+(
+p
+, 
+q
+) { \
+
+158 int 
+i
+; \
+
+160 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++) \
+
+161 (
+p
+).
+_bits
+[
+i
+] = (
+q
+)._bits[i]; \
+
+162 }
+
+	)
+
+164 #define 
+	#CNODEMASK_CPYNOTM
+(
+p
+,
+q
+) { \
+
+165 int 
+i
+; \
+
+167 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++) \
+
+168 (
+p
+).
+_bits
+[
+i
+] = ~((
+q
+)._bits[i]); \
+
+169 }
+
+	)
+
+171 #define 
+	#CNODEMASK_ORNOTM
+(
+p
+,
+q
+) { \
+
+172 int 
+i
+; \
+
+174 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++) \
+
+175 (
+p
+).
+_bits
+[
+i
+] |= ~((
+q
+)._bits[i]); \
+
+176 }
+
+	)
+
+178 #define 
+	#CNODEMASK_INDEX
+(
+bit
+) ((bit) >> 6)
+
+	)
+
+179 #define 
+	#CNODEMASK_SHFT
+(
+bit
+) ((bit) & 0x3f)
+
+	)
+
+182 #define 
+	#CNODEMASK_SETB
+(
+p
+, 
+bit
+) \
+
+183 (
+p
+).
+_bits
+[
+	`CNODEMASK_INDEX
+(
+bit
+)] |= (1ULL << 
+	`CNODEMASK_SHFT
+(bit))
+
+	)
+
+186 #define 
+	#CNODEMASK_CLRB
+(
+p
+, 
+bit
+) \
+
+187 (
+p
+).
+_bits
+[
+	`CNODEMASK_INDEX
+(
+bit
+)] &= ~(1ULL << 
+	`CNODEMASK_SHFT
+(bit))
+
+	)
+
+190 #define 
+	#CNODEMASK_TSTB
+(
+p
+, 
+bit
+) \
+
+191 ((
+p
+).
+_bits
+[
+	`CNODEMASK_INDEX
+(
+bit
+)] & (1ULL << 
+	`CNODEMASK_SHFT
+(bit)))
+
+	)
+
+196 #define 
+	#CNODEMASK_ATOMSET_BIT
+(
+p
+, 
+bit
+) \
+
+197 (
+	`atomicSetUlong
+((unsigned long *)&(
+p
+).
+_bits
+[
+	`CNODEMASK_INDEX
+(
+bit
+)], (1ULL << 
+	`CNODEMASK_SHFT
+(bit))));
+
+	)
+
+198 #define 
+	#CNODEMASK_ATOMCLR_BIT
+(
+p
+, 
+bit
+) \
+
+199 (
+	`atomicClearUlong
+((unsigned long *)&(
+p
+).
+_bits
+[
+	`CNODEMASK_INDEX
+(
+bit
+)], (1ULL << 
+	`CNODEMASK_SHFT
+(bit))));
+
+	)
+
+202 #define 
+	#CNODEMASK_ATOMSET
+(
+p
+, 
+q
+) { \
+
+203 int 
+i
+; \
+
+205 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++) { \
+
+206 
+	`atomicSetUlong
+((unsigned long *)&(
+p
+).
+_bits
+[
+i
+], (
+q
+)._bits[i]); \
+
+208 }
+
+	)
+
+209 #define 
+	#CNODEMASK_ATOMCLR
+(
+p
+, 
+q
+) { \
+
+210 int 
+i
+; \
+
+212 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++) { \
+
+213 
+	`atomicClearUlong
+((unsigned long *)&(
+p
+).
+_bits
+[
+i
+], (
+q
+)._bits[i]); \
+
+215 }
+
+	)
+
+218 #define 
+	#CNODEMASK_ATOMSET_MASK
+(
+__old
+, 
+p
+, 
+q
+) { \
+
+219 int 
+i
+; \
+
+221 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++) { \
+
+222 (
+__old
+).
+_bits
+[
+i
+] = \
+
+223 
+	`atomicSetUlong
+((unsigned long *)&(
+p
+).
+_bits
+[
+i
+], (
+q
+)._bits[i]); \
+
+225 }
+
+	)
+
+226 #define 
+	#CNODEMASK_ATOMCLR_MASK
+(
+__old
+, 
+p
+, 
+q
+) { \
+
+227 int 
+i
+; \
+
+229 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++) { \
+
+230 (
+__old
+).
+_bits
+[
+i
+] = \
+
+231 
+	`atomicClearUlong
+((unsigned long *)&(
+p
+).
+_bits
+[
+i
+], (
+q
+)._bits[i]); \
+
+233 }
+
+	)
+
+235 
+__inline
+ static 
+cnodemask_t
+ 
+	ICNODEMASK_CVTB
+(int 
+	lbit
+)
+
+237 
+cnodemask_t
+ 
+	l__tmp
+;
+
+238 
+	`CNODEMASK_CLRALL
+(
+__tmp
+);
+
+239 
+	`CNODEMASK_SETB
+(
+__tmp
+,
+bit
+);
+
+240 return(
+__tmp
+);
+
+241 
+	}
+}
+
+244 
+__inline
+ static 
+cnodemask_t
+ 
+	ICNODEMASK_ZERO
+(void)
+
+246 
+cnodemask_t
+ 
+	l__tmp
+;
+
+247 
+	`CNODEMASK_CLRALL
+(
+__tmp
+);
+
+248 return(
+__tmp
+);
+
+249 
+	}
+}
+
+251 
+__inline
+ static int 
+	ICNODEMASK_IS_ZERO
+ (
+cnodemask_t
+ 
+	lp
+)
+
+253 int 
+	li
+;
+
+255 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++)
+
+256 if (
+p
+.
+_bits
+[
+i
+] != 0)
+
+259 
+	}
+}
+
+261 
+__inline
+ static int 
+	ICNODEMASK_IS_NONZERO
+ (
+cnodemask_t
+ 
+p
+)
+
+263 int 
+	li
+;
+
+265 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++)
+
+266 if (
+p
+.
+_bits
+[
+i
+] != 0)
+
+269 
+	}
+}
+
+271 
+__inline
+ static int 
+	ICNODEMASK_NOTEQ
+ (
+cnodemask_t
+ 
+p
+, cnodemask_t 
+	lq
+)
+
+273 int 
+	li
+;
+
+275 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++)
+
+276 if (
+p
+.
+_bits
+[
+i
+] != 
+q
+._bits[i])
+
+279 
+	}
+}
+
+281 
+__inline
+ static int 
+	ICNODEMASK_EQ
+ (
+cnodemask_t
+ 
+	lp
+, cnodemask_t 
+	lq
+)
+
+283 int 
+	li
+;
+
+285 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++)
+
+286 if (
+p
+.
+_bits
+[
+i
+] != 
+q
+._bits[i])
+
+289 
+	}
+}
+
+292 
+__inline
+ static int 
+	ICNODEMASK_TSTM
+ (
+cnodemask_t
+ 
+	lp
+, cnodemask_t 
+	lq
+)
+
+294 int 
+	li
+;
+
+296 for (
+i
+ = 0 ; i < 
+CNODEMASK_SIZE
+ ; i++)
+
+297 if (
+p
+.
+_bits
+[
+i
+] & 
+q
+._bits[i])
+
+300 
+	}
+}
+
+302 
+__inline
+ static void 
+	ICNODEMASK_SHIFTL_PTR
+ (
+cnodemask_t
+ *
+	lp
+)
+
+304 int 
+	li
+;
+
+305 
+__uint64_t
+ 
+	lupper
+;
+
+313 for (
+i
+=(
+CNODEMASK_SIZE
+-1); i > 0; --i) {
+
+314 
+upper
+ = (
+p
+->
+_bits
+[
+i
+-1] & (1ULL<<(
+CNODEMASK_BIPW
+-1))) ? 1 : 0;
+
+315 
+p
+->
+_bits
+[
+i
+] <<= 1;
+
+316 
+p
+->
+_bits
+[
+i
+] |= 
+upper
+;
+
+318 
+p
+->
+_bits
+[
+i
+] <<= 1;
+
+319 
+	}
+}
+
+321 
+__inline
+ static void 
+	ICNODEMASK_SHIFTR_PTR
+ (
+cnodemask_t
+ *
+p
+)
+
+323 int 
+	li
+;
+
+324 
+__uint64_t
+ 
+	llower
+;
+
+332 for (
+i
+=0; i < (
+CNODEMASK_SIZE
+-2); ++i) {
+
+333 
+lower
+ = (
+p
+->
+_bits
+[
+i
++1] & (0x1)) ? 1 : 0;
+
+334 
+p
+->
+_bits
+[
+i
+] >>= 1;
+
+335 
+p
+->
+_bits
+[
+i
+] |= (
+lower
+<<((
+CNODEMASK_BIPW
+-1)));
+
+337 
+p
+->
+_bits
+[
+i
+] >>= 1;
+
+338 
+	}
+}
+
+340 
+__inline
+ static 
+cnodemask_t
+ 
+	ICNODEMASK_FROM_NUMNODES
+(int 
+n
+)
+
+342 
+cnodemask_t
+ 
+	l__tmp
+;
+
+343 int 
+i
+;
+
+344 
+	`CNODEMASK_CLRALL
+(
+__tmp
+);
+
+345 for (
+i
+=0; i<
+n
+; i++) {
+
+346 
+	`CNODEMASK_SETB
+(
+__tmp
+, 
+i
+);
+
+348 return(
+__tmp
+);
+
+349 
+	}
+}
+
+	@/usr/include/sys/pthread.h
+
+2 #define 
+	#_SYS_PTHREAD_H_
+
+
+	)
+
+11 typedef unsigned int 
+	tpthread_t
+;
+
+14  long 
+	m__D
+[5]; } 
+	tpthread_attr_t
+;
+
+15  long 
+	m__D
+[8]; } 
+	tpthread_mutex_t
+;
+
+16  long 
+	m__D
+[2]; } 
+	tpthread_mutexattr_t
+;
+
+17  long 
+	m__D
+[8]; } 
+	tpthread_cond_t
+;
+
+18  long 
+	m__D
+[2]; } 
+	tpthread_condattr_t
+;
+
+19  long 
+	m__D
+[16]; } 
+	tpthread_rwlock_t
+;
+
+20  long 
+	m__D
+[4]; } 
+	tpthread_rwlockattr_t
+;
+
+21 typedef int 
+	tpthread_key_t
+;
+
+22 typedef int 
+	tpthread_once_t
+;
+
+	@/usr/include/sys/select.h
+
+27 #define 
+	#_SYS_SELECT_H
+
+
+	)
+
+35 #include 
+	~/usr/include/standards.h
+>
+
+49 #define 
+	#FD_SETSIZE
+ 1024
+
+	)
+
+52 #define 
+	#__NBBY
+ 8
+
+	)
+
+55 typedef long 
+	tfd_mask_t
+;
+
+56 typedef unsigned long 
+	tufd_mask_t
+;
+
+59 typedef int 
+	tfd_mask_t
+;
+
+60 typedef unsigned int 
+	tufd_mask_t
+;
+
+63 #define 
+	#__NFDBITS
+ (int)(sizeof(
+fd_mask_t
+) * 
+__NBBY
+)
+
+	)
+
+64 #define 
+	#__howmany
+(
+x
+, 
+y
+) (((x)+((y)-1))/(y))
+
+	)
+
+67 typedef struct 
+	sfd_set
+ {
+
+71 
+fd_mask_t
+ 
+	mfds_bits
+[
+__howmany
+(
+	gFD_SETSIZE
+, 
+	g__NFDBITS
+)];
+
+72 } 
+	tfd_set
+;
+
+74 #define 
+	#FD_SET
+(
+n
+, 
+p
+) ((p)->
+fds_bits
+[(n)/
+__NFDBITS
+] |= (
+fd_mask_t
+) (1 << ((n) % __NFDBITS)))
+
+	)
+
+75 #define 
+	#FD_CLR
+(
+n
+, 
+p
+) ((p)->
+fds_bits
+[(n)/
+__NFDBITS
+] &= (
+fd_mask_t
+) ~(1 << ((n) % __NFDBITS)))
+
+	)
+
+76 #define 
+	#FD_ISSET
+(
+n
+, 
+p
+) ((p)->
+fds_bits
+[(n)/
+__NFDBITS
+] & (
+fd_mask_t
+) (1 << ((n) % __NFDBITS)))
+
+	)
+
+80 #include 
+	~/usr/include/string.h
+>
+
+84 #define 
+	#_SIZE_T
+
+
+	)
+
+86 typedef unsigned int 
+	tsize_t
+;
+
+89 typedef unsigned long 
+	tsize_t
+;
+
+95 #define 
+	#FD_ZERO
+(
+p
+) 
+	`memset
+((void *)(p), 0, sizeof(*(p)))
+
+	)
+
+98 #define 
+	#FD_ZERO
+(
+p
+) 
+	`__memset
+((void *)(p), 0, sizeof(*(p)))
+
+	)
+
+107 #define 
+	#NBBY
+ 8
+
+	)
+
+111 #define 
+	#howmany
+(
+x
+, 
+y
+) (((x)+((y)-1))/(y))
+
+	)
+
+114 #define 
+	#NFDBITS
+ 
+__NFDBITS
+
+
+	)
+
+117 typedef long 
+	tfd_mask
+;
+
+120 typedef int 
+	tfd_mask
+;
+
+	@/usr/include/sys/timespec.h
+
+18 #define 
+	#_SYS_TIMESPEC_H
+
+
+	)
+
+38 #include 
+	~/usr/include/standards.h
+>
+
+39 #include 
+	~/usr/include/sys/types.h
+>
+
+43 #define 
+	#__timespec
+ 
+timespec
+
+
+	)
+
+46 typedef struct 
+	s__timespec
+ {
+
+48 
+time_t
+ 
+	m__tv_sec
+;
+
+50 
+time_t
+ 
+	mtv_sec
+;
+
+53 long 
+	m__tv_nsec
+;
+
+55 long 
+	mtv_nsec
+;
+
+57 } 
+	ttimespec_t
+;
+
+	@/usr/include/string.h
+
+2 #define 
+	#__STRING_H__
+
+
+	)
+
+38 #include 
+	~/usr/include/standards.h
+>
+
+41 #define 
+	#_SIZE_T
+
+
+	)
+
+43 typedef unsigned int 
+	tsize_t
+;
+
+46 typedef unsigned long 
+	tsize_t
+;
+
+51 #define 
+	#NULL
+ 0L
+
+	)
+
+55 
+defined
+(
+_MIPS_SIM
+) && _MIPS_SIM != 
+_MIPS_SIM_ABI32
+ && \
+
+56 
+defined
+(
+_COMPILER_VERSION
+) && (_COMPILER_VERSION >= 720) && \
+
+57 
+defined
+(
+__LIBC_OVERLOAD__
+) && __LIBC_OVERLOAD__
+
+59 #define 
+	#__cpp_string_h
+
+
+	)
+
+151 
+namespace
+ 
+	g__sgilib
+ {
+
+162 #define 
+	#__sgi_cpp_memchr_defined
+
+
+	)
+
+164 inline const void* 
+	Imemchr
+(const void* 
+	ls
+, int 
+	lc
+, 
+size_t
+ 
+	ln
+) {
+
+165 return 
+__sgilib
+::
+	`memchr
+(
+	ls
+, 
+	lc
+, 
+	ln
+);
+
+166 
+	}
+}
+
+168 inline void* 
+	Imemchr
+(void* 
+s
+, int 
+c
+, 
+size_t
+ 
+	ln
+) {
+
+169 return 
+__sgilib
+::
+	`memchr
+(
+	ls
+, 
+	lc
+, 
+	ln
+);
+
+170 
+	}
+}
+
+173 inline const char* 
+	Istrchr
+(const char* 
+s
+, int 
+c
+) {
+
+174 return 
+__sgilib
+::
+	`strchr
+(
+s
+, 
+c
+);
+
+175 
+	}
+}
+
+177 inline char* 
+	Istrchr
+(char* 
+s
+, int 
+c
+) {
+
+178 return 
+__sgilib
+::
+	`strchr
+(
+s
+, 
+c
+);
+
+179 
+	}
+}
+
+181 inline const char* 
+	Istrpbrk
+(const char* 
+s1
+, const char* 
+s2
+) {
+
+182 return 
+__sgilib
+::
+	`strpbrk
+(
+s1
+, 
+s2
+);
+
+183 
+	}
+}
+
+185 inline char* 
+	Istrpbrk
+(char* 
+s1
+, const char* 
+s2
+) {
+
+186 return 
+__sgilib
+::
+	`strpbrk
+(
+s1
+, 
+s2
+);
+
+187 
+	}
+}
+
+189 inline const char* 
+	Istrrchr
+(const char* 
+s
+, int 
+c
+) {
+
+190 return 
+__sgilib
+::
+	`strrchr
+(
+s
+, 
+c
+);
+
+191 
+	}
+}
+
+193 inline char* 
+	Istrrchr
+(char* 
+s
+, int 
+c
+) {
+
+194 return 
+__sgilib
+::
+	`strrchr
+(
+s
+, 
+c
+);
+
+195 
+	}
+}
+
+197 inline const char* 
+	Istrstr
+(const char* 
+s1
+, const char* 
+s2
+) {
+
+198 return 
+__sgilib
+::
+	`strstr
+(
+s1
+, 
+s2
+);
+
+199 
+	}
+}
+
+201 inline char* 
+	Istrstr
+(char* 
+s1
+, const char* 
+s2
+) {
+
+202 return 
+__sgilib
+::
+	`strstr
+(
+s1
+, 
+s2
+);
+
+203 
+	}
+}
+
+	@/usr/include/sys/SN/SN0/arch.h
+
+14 #define 
+	#__SYS_SN_SN0_ARCH_H__
+
+
+	)
+
+23 #define 
+	#MAX_COMPACT_NODES
+ 64
+
+	)
+
+29 #define 
+	#MAXCPUS
+ 128
+
+	)
+
+33 #define 
+	#MAX_COMPACT_NODES
+ 256
+
+	)
+
+34 #define 
+	#MAXCPUS
+ 512
+
+	)
+
+42 #define 
+	#MAX_NASIDS
+ 256
+
+	)
+
+47 #define 
+	#MAX_REGIONS
+ 64
+
+	)
+
+48 #define 
+	#MAX_NONPREMIUM_REGIONS
+ 16
+
+	)
+
+49 #define 
+	#MAX_PREMIUM_REGIONS
+ 
+MAX_REGIONS
+
+
+	)
+
+55 #define 
+	#MAX_PARTITIONS
+ 
+MAX_REGIONS
+
+
+	)
+
+60 #define 
+	#MAX_COMPACT_NODES
+ 4
+
+	)
+
+61 #define 
+	#MAX_NASIDS
+ 4
+
+	)
+
+62 #define 
+	#MAXCPUS
+ 8
+
+	)
+
+66 #define 
+	#NASID_MASK_BYTES
+ ((
+MAX_NASIDS
+ + 7) / 8)
+
+	)
+
+72 #define 
+	#MAX_MEM_SLOTS
+ 16
+
+	)
+
+74 #define 
+	#MAX_MEM_SLOTS
+ 32
+
+	)
+
+78 #define 
+	#SLOT_SHIFT
+ (28)
+
+	)
+
+79 #define 
+	#SLOT_MIN_MEM_SIZE
+ (16*1024*1024)
+
+	)
+
+81 #define 
+	#SLOT_SHIFT
+ (27)
+
+	)
+
+82 #define 
+	#SLOT_MIN_MEM_SIZE
+ (32*1024*1024)
+
+	)
+
+88 #define 
+	#NUM_SUBNODES
+ 1
+
+	)
+
+89 #define 
+	#SUBNODE_SHFT
+ 0
+
+	)
+
+90 #define 
+	#SUBNODE_MASK
+ 0
+
+	)
+
+91 #define 
+	#LOCALCPU_SHFT
+ 0
+
+	)
+
+92 #define 
+	#LOCALCPU_MASK
+ (0x1 << 
+LOCALCPU_SHFT
+)
+
+	)
+
+93 #define 
+	#SUBNODE
+(
+slice
+) (0)
+
+	)
+
+94 #define 
+	#LOCALCPU
+(
+slice
+) (slice)
+
+	)
+
+95 #define 
+	#TO_SLICE
+(
+subn
+, 
+local
+) (local)
+
+	)
+
+	@/usr/include/sys/SN/SN1/arch.h
+
+14 #define 
+	#__SYS_SN_SN1_ARCH_H__
+
+
+	)
+
+24 #define 
+	#MAX_NASIDS
+ 128
+
+	)
+
+30 #define 
+	#MAXCPUS
+ 512
+
+	)
+
+37 #define 
+	#MAX_COMPACT_NODES
+ 128
+
+	)
+
+42 #define 
+	#MAX_REGIONS
+ 64
+
+	)
+
+43 #define 
+	#MAX_NONPREMIUM_REGIONS
+ 16
+
+	)
+
+44 #define 
+	#MAX_PREMIUM_REGIONS
+ 
+MAX_REGIONS
+
+
+	)
+
+51 #define 
+	#MAX_PARTITIONS
+ 
+MAX_REGIONS
+
+
+	)
+
+54 #define 
+	#NASID_MASK_BYTES
+ ((
+MAX_NASIDS
+ + 7) / 8)
+
+	)
+
+60 #define 
+	#MAX_MEM_SLOTS
+ 8
+
+	)
+
+66 #define 
+	#SLOT_SHIFT
+ (30)
+
+	)
+
+67 #define 
+	#SLOT_MIN_MEM_SIZE
+ (64*1024*1024)
+
+	)
+
+72 #define 
+	#NUM_SUBNODES
+ 2
+
+	)
+
+73 #define 
+	#SUBNODE_SHFT
+ 1
+
+	)
+
+74 #define 
+	#SUBNODE_MASK
+ (0x1 << 
+SUBNODE_SHFT
+)
+
+	)
+
+75 #define 
+	#LOCALCPU_SHFT
+ 0
+
+	)
+
+76 #define 
+	#LOCALCPU_MASK
+ (0x1 << 
+LOCALCPU_SHFT
+)
+
+	)
+
+77 #define 
+	#SUBNODE
+(
+slice
+) (((slice) & 
+SUBNODE_MASK
+) >> 
+SUBNODE_SHFT
+)
+
+	)
+
+78 #define 
+	#LOCALCPU
+(
+slice
+) (((slice) & 
+LOCALCPU_MASK
+) >> 
+LOCALCPU_SHFT
+)
+
+	)
+
+79 #define 
+	#TO_SLICE
+(
+subn
+, 
+local
+) (((subn) << 
+SUBNODE_SHFT
+) | \
+
+80 ((
+local
+) << 
+LOCALCPU_SHFT
+))
+
+	)
+
+	@/usr/include/sys/capability.h
+
+14 #define 
+	#__SYS_CAPABILITY_H__
+
+
+	)
+
+28 #define 
+	#SGI_CAP_FILE
+ "SGI_CAP_FILE"
+
+	)
+
+29 #define 
+	#SGI_CAP_PROCESS
+ "SGI_CAP_PROCESS"
+
+	)
+
+30 #define 
+	#SGI_CAP_PROCESS_FLAGS
+ "SGI_CAP_PROCESS_FLAGS"
+
+	)
+
+31 #define 
+	#SGI_CAP_REQUEST
+ "SGI_CAP_REQUEST"
+
+	)
+
+32 #define 
+	#SGI_CAP_SURRENDER
+ "SGI_CAP_SURRENDER"
+
+	)
+
+33 #define 
+	#SGI_CAP_DISABLED
+ "SGI_CAP_DISABLED"
+
+	)
+
+34 #define 
+	#SGI_CAP_SUPERUSER
+ "SGI_CAP_SUPERUSER"
+
+	)
+
+35 #define 
+	#SGI_CAP_NO_SUPERUSER
+ "SGI_CAP_NO_SUPERUSER"
+
+	)
+
+37 #define 
+	#SGI_CAP_FILE_SIZE
+ (sizeof (
+SGI_CAP_FILE
+) - 1)
+
+	)
+
+38 #define 
+	#SGI_CAP_PROCESS_SIZE
+ (sizeof (
+SGI_CAP_PROCESS
+) - 1)
+
+	)
+
+39 #define 
+	#SGI_CAP_PROCESS_FLAGS_SIZE
+ (sizeof (
+SGI_CAP_PROCESS_FLAGS
+) - 1)
+
+	)
+
+40 #define 
+	#SGI_CAP_REQUEST_SIZE
+ (sizeof (
+SGI_CAP_REQUEST
+) - 1)
+
+	)
+
+41 #define 
+	#SGI_CAP_SURRENDER_SIZE
+ (sizeof (
+SGI_CAP_SURRENDER
+) - 1)
+
+	)
+
+46 #define 
+	#CAP_SYS_DISABLED
+ 0
+
+	)
+
+47 #define 
+	#CAP_SYS_SUPERUSER
+ 1
+
+	)
+
+48 #define 
+	#CAP_SYS_NO_SUPERUSER
+ 2
+
+	)
+
+53 #define 
+	#CAP_NOT_A_CID
+ 0LL
+
+	)
+
+54 #define 
+	#CAP_CHOWN
+ (0x01LL << 1)
+
+	)
+
+55 #define 
+	#CAP_DAC_WRITE
+ (0x01LL << 2)
+
+	)
+
+56 #define 
+	#CAP_DAC_READ_SEARCH
+ (0x01LL << 3)
+
+	)
+
+57 #define 
+	#CAP_FOWNER
+ (0x01LL << 4)
+
+	)
+
+62 #define 
+	#CAP_DAC_OVERRIDE
+ (
+CAP_DAC_WRITE
+|
+CAP_DAC_READ_SEARCH
+|
+CAP_FOWNER
+)
+
+	)
+
+63 #define 
+	#CAP_FSETID
+ (0x01LL << 5)
+
+	)
+
+64 #define 
+	#CAP_KILL
+ (0x01LL << 6)
+
+	)
+
+65 #define 
+	#CAP_LINK_DIR
+ (0x01LL << 7)
+
+	)
+
+66 #define 
+	#CAP_SETFPRIV
+ (0x01LL << 8)
+
+	)
+
+67 #define 
+	#CAP_SETFCAP
+ 
+CAP_SETFPRIV
+
+
+	)
+
+68 #define 
+	#CAP_SETPPRIV
+ (0x01LL << 9)
+
+	)
+
+69 #define 
+	#CAP_SETPCAP
+ 
+CAP_SETPPRIV
+
+
+	)
+
+70 #define 
+	#CAP_SETGID
+ (0x01LL << 10)
+
+	)
+
+71 #define 
+	#CAP_SETUID
+ (0x01LL << 11)
+
+	)
+
+73 #define 
+	#CAP_MAC_DOWNGRADE
+ (0x01LL << 12)
+
+	)
+
+74 #define 
+	#CAP_MAC_READ
+ (0x01LL << 13)
+
+	)
+
+75 #define 
+	#CAP_MAC_RELABEL_SUBJ
+ (0x01LL << 14)
+
+	)
+
+76 #define 
+	#CAP_MAC_WRITE
+ (0x01LL << 15)
+
+	)
+
+77 #define 
+	#CAP_MAC_UPGRADE
+ (0x01LL << 16)
+
+	)
+
+79 #define 
+	#CAP_INF_NOFLOAT_OBJ
+ (0x01LL << 17)
+
+	)
+
+80 #define 
+	#CAP_INF_NOFLOAT_SUBJ
+ (0x01LL << 18)
+
+	)
+
+81 #define 
+	#CAP_INF_DOWNGRADE
+ (0x01LL << 19)
+
+	)
+
+82 #define 
+	#CAP_INF_UPGRADE
+ (0x01LL << 20)
+
+	)
+
+83 #define 
+	#CAP_INF_RELABEL_SUBJ
+ (0x01LL << 21)
+
+	)
+
+85 #define 
+	#CAP_AUDIT_CONTROL
+ (0x01LL << 22)
+
+	)
+
+86 #define 
+	#CAP_AUDIT_WRITE
+ (0x01LL << 23)
+
+	)
+
+88 #define 
+	#CAP_MAC_MLD
+ (0x01LL << 24)
+
+	)
+
+89 #define 
+	#CAP_MEMORY_MGT
+ (0x01LL << 25)
+
+	)
+
+90 #define 
+	#CAP_SWAP_MGT
+ (0x01LL << 26)
+
+	)
+
+91 #define 
+	#CAP_TIME_MGT
+ (0x01LL << 27)
+
+	)
+
+92 #define 
+	#CAP_SYSINFO_MGT
+ (0x01LL << 28)
+
+	)
+
+93 #define 
+	#CAP_NVRAM_MGT
+ 
+CAP_SYSINFO_MGT
+
+
+	)
+
+94 #define 
+	#CAP_MOUNT_MGT
+ (0x01LL << 29)
+
+	)
+
+95 #define 
+	#CAP_QUOTA_MGT
+ (0x01LL << 30)
+
+	)
+
+96 #define 
+	#CAP_PRIV_PORT
+ (0x01LL << 31)
+
+	)
+
+97 #define 
+	#CAP_STREAMS_MGT
+ (0x01LL << 32)
+
+	)
+
+98 #define 
+	#CAP_SCHED_MGT
+ (0x01LL << 33)
+
+	)
+
+99 #define 
+	#CAP_PROC_MGT
+ (0x01LL << 34)
+
+	)
+
+100 #define 
+	#CAP_SVIPC_MGT
+ (0x01LL << 35)
+
+	)
+
+101 #define 
+	#CAP_NETWORK_MGT
+ (0x01LL << 36)
+
+	)
+
+102 #define 
+	#CAP_DEVICE_MGT
+ (0x01LL << 37)
+
+	)
+
+103 #define 
+	#CAP_MKNOD
+ 
+CAP_DEVICE_MGT
+
+
+	)
+
+104 #define 
+	#CAP_ACCT_MGT
+ (0x01LL << 38)
+
+	)
+
+105 #define 
+	#CAP_SHUTDOWN
+ (0x01LL << 39)
+
+	)
+
+106 #define 
+	#CAP_CHROOT
+ (0x01LL << 40)
+
+	)
+
+108 #define 
+	#CAP_DAC_EXECUTE
+ (0x01LL << 41)
+
+	)
+
+109 #define 
+	#CAP_MAC_RELABEL_OPEN
+ (0x01LL << 42)
+
+	)
+
+111 #define 
+	#CAP_SIGMASK
+ (0x01LL << 43)
+
+	)
+
+113 #define 
+	#CAP_XTCB
+ (0x01LL << 44)
+
+	)
+
+115 #define 
+	#CAP_MAX_ID
+ 44
+
+	)
+
+117 #define 
+	#CAP_FLAG_PURE_RECALC
+ (0x01LL << 63)
+
+	)
+
+122 #define 
+	#CAP_FLAGS
+ 0xf000000000000000LL
+
+	)
+
+123 #define 
+	#CAP_ALL_ON
+ 0x0ffffffffffffffeLL
+
+	)
+
+124 #define 
+	#CAP_INVALID
+ 0x0000000000000001LL
+
+	)
+
+125 #define 
+	#CAP_ALL_OFF
+ 0x0000000000000000LL
+
+	)
+
+127 typedef 
+__uint64_t
+ 
+	tcap_value_t
+;
+
+128 typedef 
+__uint64_t
+ 
+	tcap_flag_t
+;
+
+129 typedef 
+__uint64_t
+ 
+	tcap_flag_value_t
+;
+
+131 struct 
+	scap_set
+ {
+
+132 
+cap_value_t
+ 
+	mcap_effective
+;
+
+133 
+cap_value_t
+ 
+	mcap_permitted
+;
+
+134 
+cap_value_t
+ 
+	mcap_inheritable
+;
+
+136 typedef struct 
+cap_set
+ 
+	tcap_set_t
+;
+
+137 typedef struct 
+cap_set
+ * 
+	tcap_t
+;
+
+142 #define 
+	#CAP_EFFECTIVE
+ 0
+
+	)
+
+143 #define 
+	#CAP_PERMITTED
+ 1
+
+	)
+
+144 #define 
+	#CAP_INHERITABLE
+ 2
+
+	)
+
+149 #define 
+	#CAP_CLEAR
+ 0
+
+	)
+
+150 #define 
+	#CAP_SET
+ 1
+
+	)
+
+156 #define 
+	#CAP_ID_CLEAR
+(
+c
+,
+s
+) ((s) &= (~(c)))
+
+	)
+
+157 #define 
+	#CAP_ID_SET
+(
+c
+,
+s
+) ((s) |= (c))
+
+	)
+
+158 #define 
+	#CAP_ID_ISSET
+(
+c
+,
+s
+) (((s) & (c)) == c)
+
+	)
+
+160 #define 
+	#_CAP_NUM
+(
+c
+) (sizeof(c)/sizeof(
+cap_value_t
+))
+
+	)
+
+165 #define 
+	#CAP_ENV_SETUID
+ 0x001
+
+	)
+
+166 #define 
+	#CAP_ENV_RECALC
+ 0x002
+
+	)
+
+171 struct 
+vfs
+;
+
+172 struct 
+vnode
+;
+
+173 struct 
+proc
+;
+
+174 struct 
+cred
+;
+
+175 struct 
+xfs_inode
+;
+
+194 #define 
+	#_CAP_ABLE
+(
+c
+) (
+	`cap_able
+(c))
+
+	)
+
+195 #define 
+	#_CAP_CRABLE
+(
+cr
+,
+c
+) (
+	`cap_able_cred
+(cr,c))
+
+	)
+
+200 int 
+cap_clear
+ (
+cap_t
+);
+
+201 
+ssize_t
+ 
+cap_copy_ext
+ (void *, 
+	gcap_t
+, 
+	gssize_t
+);
+
+202 
+cap_t
+ 
+cap_copy_int
+ (const void *);
+
+203 
+cap_t
+ 
+cap_dup
+ (
+	gcap_t
+);
+
+204 int 
+cap_free
+ (void *);
+
+205 
+cap_t
+ 
+cap_from_text
+ (const char *);
+
+206 
+cap_t
+ 
+cap_get_fd
+ (int);
+
+207 
+cap_t
+ 
+cap_get_file
+ (const char *);
+
+208 int 
+cap_get_flag
+ (
+cap_t
+, 
+cap_value_t
+, 
+cap_flag_t
+, 
+cap_flag_value_t
+ *);
+
+209 
+cap_t
+ 
+cap_get_proc
+ (void);
+
+210 
+cap_t
+ 
+cap_init
+ (void);
+
+211 int 
+cap_set_fd
+ (int, 
+cap_t
+);
+
+212 int 
+cap_set_file
+ (const char *, 
+cap_t
+);
+
+213 int 
+cap_set_flag
+ (
+cap_t
+, 
+cap_flag_t
+, int, 
+cap_value_t
+ *, 
+cap_flag_value_t
+);
+
+214 int 
+cap_set_proc
+ (
+cap_t
+);
+
+215 int 
+cap_set_proc_flags
+ (
+cap_value_t
+);
+
+216 
+ssize_t
+ 
+cap_size
+ (
+	gcap_t
+);
+
+217 char *
+cap_to_text
+ (
+cap_t
+, 
+size_t
+ *);
+
+220 
+cap_t
+ 
+cap_acquire
+ (int, const 
+	gcap_value_t
+ *);
+
+221 void 
+cap_surrender
+ (
+cap_t
+);
+
+222 char *
+cap_value_to_text
+ (
+cap_value_t
+);
+
+223 int 
+cap_envl
+ (int, ...);
+
+224 int 
+cap_envp
+ (int, 
+size_t
+, const 
+cap_value_t
+ *);
+
+	@/usr/include/sys/mkdev.h
+
+11 #define 
+	#_SYS_MKDEV_H
+
+
+	)
+
+19 #define 
+	#ONBITSMAJOR
+ 7
+
+	)
+
+20 #define 
+	#ONBITSMINOR
+ 8
+
+	)
+
+21 #define 
+	#OMAXMAJ
+ 0x7f
+
+	)
+
+22 #define 
+	#OMAXMIN
+ 0xff
+
+	)
+
+25 #define 
+	#NBITSMAJOR
+ 14
+
+	)
+
+26 #define 
+	#NBITSMINOR
+ 18
+
+	)
+
+27 #define 
+	#MAXMAJ
+ 0x1ff
+
+	)
+
+30 #define 
+	#MAXMIN
+ 0x3ffff
+
+	)
+
+41 
+dev_t
+ 
+makedev
+(const 
+	gmajor_t
+, const 
+	gminor_t
+);
+
+42 
+major_t
+ 
+major
+(const 
+	gdev_t
+);
+
+43 
+minor_t
+ 
+minor
+(const 
+	gdev_t
+);
+
+44 
+dev_t
+ 
+__makedev
+(const int, const 
+	gmajor_t
+, const 
+	gminor_t
+);
+
+45 
+major_t
+ 
+__major
+(const int, const 
+	gdev_t
+);
+
+46 
+minor_t
+ 
+__minor
+(const int, const 
+	gdev_t
+);
+
+48 #define 
+	#OLDDEV
+ 0
+
+	)
+
+49 #define 
+	#NEWDEV
+ 1
+
+	)
+
+51 #define 
+	#MKDEV_VER
+ 
+NEWDEV
+
+
+	)
+
+54 #define 
+	#makedev
+(
+maj
+, 
+min
+) 
+	`__makedev
+(
+MKDEV_VER
+, maj, min)
+
+	)
+
+56 #define 
+	#STRING_SPEC_DEV
+ 
+	`__makedev
+(
+MKDEV_VER
+, 0, 0)
+
+	)
+
+57 #define 
+	#IS_STRING_SPEC_DEV
+(
+x
+) ((
+dev_t
+)(x)==
+	`__makedev
+(
+MKDEV_VER
+, 0, 0))
+
+	)
+
+59 #define 
+	#major
+(
+dev
+) 
+	`__major
+(
+MKDEV_VER
+, dev)
+
+	)
+
+61 #define 
+	#minor
+(
+dev
+) 
+	`__minor
+(
+MKDEV_VER
+, dev)
+
+	)
+
+	@/usr/include/sys/sema.h
+
+13 #define 
+	#__SYS_SEMA_H__
+
+
+	)
+
+17 #include 
+	~/usr/include/sys/types.h
+>
+
+18 #include 
+	~/usr/include/sys/timespec.h
+>
+
+19 #include 
+	~/usr/include/sys/param.h
+>
+
+21 struct 
+kthread
+;
+
+22 struct 
+proc
+;
+
+23 struct 
+uthread_s
+;
+
+47 typedef struct 
+	smutex
+ {
+
+49 void *
+	mm_info
+;
+
+51 
+__psunsigned_t
+ 
+	mm_bits
+;
+
+52 struct 
+kthread
+ *
+	mm_queue
+;
+
+53 } 
+	tmutex_t
+;
+
+58 #define 
+	#MUTEX_DEFAULT
+ 0x0
+
+	)
+
+74 #define 
+	#METER_NAMSZ
+ 16
+
+	)
+
+75 #define 
+	#METER_NO_SEQ
+ -1
+
+	)
+
+89 #define 
+	#mutex_init
+(
+mp
+, 
+type
+, 
+name
+) 
+	`init_mutex
+(mp, type, name, -1)
+
+	)
+
+179 #define 
+	#mutex_spinlock
+(
+l
+) 
+	`splhi
+()
+
+	)
+
+180 #define 
+	#mutex_spintrylock
+(
+l
+) 
+	`splhi
+()
+
+	)
+
+181 #define 
+	#mutex_spinunlock
+(
+l
+,
+x
+) 
+	`splx
+(x)
+
+	)
+
+182 #define 
+	#mutex_spinlock_spl
+(
+x
+,
+y
+) 
+	`y
+()
+
+	)
+
+183 #define 
+	#mutex_spintrylock_spl
+(
+x
+,
+y
+) 
+	`y
+()
+
+	)
+
+185 #define 
+	#spinlock_islocked
+(
+l
+) (!
+	`isspl0
+(
+	`getsr
+()))
+
+	)
+
+186 #define 
+	#spinlock_initialized
+(
+l
+) 1
+
+	)
+
+196 typedef struct 
+	ssv
+ {
+
+198 void *
+	msv_info
+;
+
+200 
+__psunsigned_t
+ 
+	msv_queue
+;
+
+201 } 
+	tsv_t
+;
+
+235 void (*)(struct 
+kthread
+ *, void *), void *);
+
+250 #define 
+	#sv_init
+(
+svp
+, 
+type
+, 
+name
+) 
+	`init_sv
+(svp, type, name, -1)
+
+	)
+
+253 #define 
+	#SV_FIFO
+ 0x0
+
+	)
+
+254 #define 
+	#SV_LIFO
+ 0x2
+
+	)
+
+255 #define 
+	#SV_PRIO
+ 0x4
+
+	)
+
+256 #define 
+	#SV_KEYED
+ 0x6
+
+	)
+
+257 #define 
+	#SV_DEFAULT
+ 
+SV_FIFO
+
+
+	)
+
+315 typedef struct 
+	ssema_s
+ {
+
+317 void *
+	ms_info
+;
+
+321 short 
+	mcount
+;
+
+322 short 
+	mflags
+;
+
+323 } 
+	ts_st
+;
+
+324 
+uint_t
+ 
+	ls_lock
+;
+
+325 
+	}
+} 
+s_un
+;
+
+326 struct 
+kthread
+ *
+	gs_queue
+;
+
+327 } 
+sema_t
+;
+
+332 #define 
+	#SEMA_NOHIST
+ 0x0001
+
+	)
+
+333 #define 
+	#SEMA_LOCK
+ 0x0004
+
+	)
+
+346 #define 
+	#initsema
+(
+sp
+, 
+val
+) 
+	`init_sema
+(sp, val, 
+NULL
+, -1)
+
+	)
+
+347 #define 
+	#initnsema
+(
+sp
+, 
+val
+, 
+name
+) 
+	`init_sema
+(sp, val, name, -1)
+
+	)
+
+354 #define 
+	#initnsema_mutex
+(
+S
+, 
+N
+) 
+	`initnsema
+(S, 1, N)
+
+	)
+
+355 #define 
+	#initnsema_synch
+(
+S
+, 
+N
+) 
+	`initnsema
+(S, 0, N)
+
+	)
+
+457 #define 
+	#NSCHEDCLASS
+ (-(
+PWEIGHTLESS
+)+1)
+
+	)
+
+459 typedef struct 
+	spriq_s
+ {
+
+460 struct 
+mri_s
+ *
+	mpq_pq
+[
+	gNSCHEDCLASS
+];
+
+462 short 
+	mpq_pri
+;
+
+464 } 
+	tpriq_t
+;
+
+474 typedef struct 
+	skpriq_s
+ {
+
+475 struct 
+kthread
+ *
+	mpq_pq
+[
+	gNSCHEDCLASS
+];
+
+477 short 
+	mpq_pri
+;
+
+479 } 
+	tkpriq_t
+;
+
+484 typedef struct 
+	smrlock_s
+ {
+
+486 void *
+	mmr_info
+;
+
+488 
+uint_t
+ 
+	mmr_lbits
+;
+
+491 short 
+	mqcount
+;
+
+492 short 
+	mqflags
+;
+
+493 } 
+	tmr_st
+;
+
+494 
+uint_t
+ 
+	gqbits
+;
+
+495 } 
+mr_un
+;
+
+497 
+kpriq_t
+ 
+	gmr_waiters
+;
+
+498 
+priq_t
+ 
+	gmr_holders
+;
+
+500 int 
+mr_nholders
+;
+
+502 } 
+mrlock_t
+;
+
+504 #define 
+	#mr_pcnt
+ 
+mr_un
+.
+mr_st
+.
+qcount
+
+
+	)
+
+505 #define 
+	#mr_qbits
+ 
+mr_un
+.
+qbits
+
+
+	)
+
+506 #define 
+	#mr_qlock
+ 
+mr_un
+.
+qbits
+
+
+	)
+
+515 #define 
+	#MR_ACCESS
+ 1
+
+	)
+
+516 #define 
+	#MR_UPDATE
+ 2
+
+	)
+
+528 #define 
+	#MRLOCK_BARRIER
+ 0x1
+
+	)
+
+529 #define 
+	#MRLOCK_BEHAVIOR
+ 0x2
+
+	)
+
+530 #define 
+	#MRLOCK_DBLTRIPPABLE
+ 0x4
+
+	)
+
+531 #define 
+	#MRLOCK_ALLOW_EQUAL_PRI
+ 0x8
+
+	)
+
+532 #define 
+	#MRLOCK_DIVEST_PRI_INHERIT
+ 0x10
+
+	)
+
+533 #define 
+	#MRLOCK_BACKOFF
+ 0x20
+
+	)
+
+535 #define 
+	#MRLOCK_DEFAULT
+ 
+MRLOCK_BARRIER
+
+
+	)
+
+538 #define 
+	#mrinit
+(
+mrp
+, 
+name
+) 
+	`mrlock_init
+(mrp, 
+MRLOCK_BARRIER
+, name, -1)
+
+	)
+
+539 #define 
+	#mrbhinit
+(
+mrp
+, 
+name
+) 
+	`mrlock_init
+(mrp, 
+MRLOCK_BARRIER
+|
+MRLOCK_BEHAVIOR
+|
+MRLOCK_DBLTRIPPABLE
+|
+MRLOCK_DIVEST_PRI_INHERIT
+, name, -1)
+
+	)
+
+561 #define 
+	#mraccess
+(
+mrp
+) 
+	`mraccessf
+(mrp, 0)
+
+	)
+
+562 #define 
+	#mrupdate
+(
+mrp
+) 
+	`mrupdatef
+(mrp, 0)
+
+	)
+
+631 #define 
+	#mp_mutex_lock
+(
+m
+,
+f
+) 
+	`mutex_lock
+(m,f)
+
+	)
+
+632 #define 
+	#mp_mutex_unlock
+(
+m
+) 
+	`mutex_unlock
+(m)
+
+	)
+
+633 #define 
+	#mp_mutex_trylock
+(
+m
+) 
+	`mutex_trylock
+(m)
+
+	)
+
+634 #define 
+	#mp_sv_wait
+(
+sv
+,
+f
+,
+m
+,
+s
+) 
+	`sv_wait
+(sv,f,m,s)
+
+	)
+
+635 #define 
+	#mp_sv_wait_sig
+(
+sv
+,
+f
+,
+m
+,
+s
+) 
+	`sv_wait_sig
+(sv,f,m,s)
+
+	)
+
+636 #define 
+	#mp_mutex_spinlock
+(
+m
+) 
+	`mutex_spinlock
+(m)
+
+	)
+
+637 #define 
+	#mp_mutex_spinunlock
+(
+m
+,
+s
+) 
+	`mutex_spinunlock
+(m,s)
+
+	)
+
+699 #define 
+	#mutex_bitlock
+(
+l
+,
+b
+) 
+	`splhi
+()
+
+	)
+
+700 #define 
+	#mutex_bittrylock
+(
+l
+,
+b
+) 
+	`splhi
+()
+
+	)
+
+701 #define 
+	#mutex_bitunlock
+(
+l
+,
+b
+,
+x
+) 
+	`splx
+(x)
+
+	)
+
+703 #define 
+	#mutex_64bitlock
+(
+l
+,
+b
+) 
+	`splhi
+()
+
+	)
+
+704 #define 
+	#mutex_64bittrylock
+(
+l
+,
+b
+) 
+	`splhi
+()
+
+	)
+
+705 #define 
+	#mutex_64bitunlock
+(
+l
+,
+b
+,
+x
+) 
+	`splx
+(x)
+
+	)
+
+707 #define 
+	#nested_bitlock
+(
+l
+,
+b
+) ((void)0)
+
+	)
+
+708 #define 
+	#nested_bittrylock
+(
+l
+,
+b
+) 1
+
+	)
+
+709 #define 
+	#nested_bitunlock
+(
+l
+,
+b
+) ((void)0)
+
+	)
+
+711 #define 
+	#nested_64bitlock
+(
+l
+,
+b
+) ((void)0)
+
+	)
+
+712 #define 
+	#nested_64bittrylock
+(
+l
+,
+b
+) 1
+
+	)
+
+713 #define 
+	#nested_64bitunlock
+(
+l
+,
+b
+) ((void)0)
+
+	)
+
+715 #define 
+	#bitlock_islocked
+(
+l
+,
+b
+) 
+	`issplhi
+(
+	`getsr
+())
+
+	)
+
+716 #define 
+	#mutex_bitlock_spl
+(
+x
+,
+b
+,
+y
+) 
+	`y
+()
+
+	)
+
+720 #define 
+	#mp_mutex_bitlock
+(
+l
+,
+b
+) 
+	`mutex_bitlock
+(l,b)
+
+	)
+
+721 #define 
+	#mp_mutex_bitunlock
+(
+l
+,
+b
+,
+x
+) 
+	`mutex_bitunlock
+(l,b,x)
+
+	)
+
+724 #define 
+	#mutex_psbitlock
+(
+L
+,
+B
+) 
+	`mutex_bitlock
+(L,B)
+
+	)
+
+725 #define 
+	#mutex_psbittrylock
+(
+L
+,
+B
+) 
+	`mutex_bittrylock
+(L,B)
+
+	)
+
+726 #define 
+	#mutex_psbitunlock
+(
+L
+,
+B
+,
+X
+) 
+	`mutex_bitunlock
+(L,B,X)
+
+	)
+
+727 #define 
+	#nested_psbitlock
+(
+L
+,
+B
+) 
+	`nested_bitlock
+(L,B)
+
+	)
+
+728 #define 
+	#nested_psbittrylock
+(
+L
+,
+B
+) 
+	`nested_bittrylock
+(L,B)
+
+	)
+
+729 #define 
+	#nested_psbitunlock
+(
+L
+,
+B
+) 
+	`nested_bitunlock
+(L,B)
+
+	)
+
+733 #define 
+	#mutex_psbitlock
+(
+L
+,
+B
+) 
+	`mutex_64bitlock
+(L,B)
+
+	)
+
+734 #define 
+	#mutex_psbittrylock
+(
+L
+,
+B
+) 
+	`mutex_64bittrylock
+(L,B)
+
+	)
+
+735 #define 
+	#mutex_psbitunlock
+(
+L
+,
+B
+,
+X
+) 
+	`mutex_64bitunlock
+(L,B,X)
+
+	)
+
+736 #define 
+	#nested_psbitlock
+(
+L
+,
+B
+) 
+	`nested_64bitlock
+(L,B)
+
+	)
+
+737 #define 
+	#nested_psbittrylock
+(
+L
+,
+B
+) 
+	`nested_64bittrylock
+(L,B)
+
+	)
+
+738 #define 
+	#nested_psbitunlock
+(
+L
+,
+B
+) 
+	`nested_64bitunlock
+(L,B)
+
+	)
+
+771 #define 
+	#mp_sv_bitlock_wait
+(
+s
+,
+f
+,
+l
+,
+b
+,
+x
+) 
+	`sv_bitlock_wait
+(s,f,l,b,x)
+
+	)
+
+772 #define 
+	#mp_sv_bitlock_wait_sig
+(
+s
+,
+f
+,
+l
+,
+b
+,
+x
+) 
+	`sv_bitlock_wait_sig
+(s,f,l,b,x)
+
+	)
+
+775 #include 
+	~/usr/include/sys/mon.h
+>
+
+780 typedef struct 
+	sk_mrreader
+ {
+
+781 
+uint64_t
+ 
+	mmr_tid
+;
+
+785 
+uint_t
+ 
+	mmr_ts
+;
+
+786 struct 
+k_mrmeter
+ *
+	mthe_meter
+;
+
+787 struct 
+k_mrreader
+ *
+	mnext
+;
+
+788 } 
+	tk_mrreader_t
+;
+
+790 #define 
+	#MR_READER_BUCKETS
+ 13
+
+	)
+
+800 #define 
+	#spsema
+(
+x
+) 
+	`nested_spinlock
+(&(x))
+
+	)
+
+801 #define 
+	#svsema
+(
+x
+) 
+	`nested_spinunlock
+(&(x))
+
+	)
+
+803 #define 
+	#initlock
+(
+l
+) 
+	`spinlock_init
+(l,0)
+
+	)
+
+804 #define 
+	#initnlock
+(
+l
+,
+n
+) 
+	`spinlock_init
+(l,n)
+
+	)
+
+805 #define 
+	#freesplock
+(
+l
+) 
+	`spinlock_destroy
+(&(l))
+
+	)
+
+808 #define 
+	#ownlock
+(
+l
+) 
+	`spinlock_islocked
+(&(l))
+
+	)
+
+810 #define 
+	#_trylock
+(
+l
+,
+f
+) 
+	`mutex_spintrylock_spl
+(&(l),f)
+
+	)
+
+812 #define 
+	#ownlock
+(
+x
+) 1
+
+	)
+
+813 #define 
+	#mutex_io_spinunlock
+(
+l
+,
+y
+) 
+	`splx
+(y)
+
+	)
+
+814 #define 
+	#_trylock
+(
+l
+,
+y
+) 
+	`y
+()
+
+	)
+
+817 #define 
+	#splockspl
+(
+l
+,
+f
+) 
+	`mutex_spinlock_spl
+(&(l),f)
+
+	)
+
+818 #define 
+	#spunlockspl
+(
+l
+,
+s
+) 
+	`mutex_spinunlock
+(&(l),s)
+
+	)
+
+819 #define 
+	#splock
+(
+l
+) 
+	`mutex_spinlock
+(&(l))
+
+	)
+
+820 #define 
+	#spunlock
+(
+l
+,
+s
+) 
+	`mutex_spinunlock
+(&(l),s)
+
+	)
+
+823 #define 
+	#io_splock
+(
+l
+) 
+	`mutex_spinlock
+(&(l))
+
+	)
+
+824 #define 
+	#io_spunlock
+(
+l
+,
+s
+) 
+	`mutex_io_spinunlock
+(&(l),s)
+
+	)
+
+825 #define 
+	#io_splockspl
+(
+l
+,
+f
+) 
+	`mutex_spinlock_spl
+(&(l),f)
+
+	)
+
+826 #define 
+	#io_spunlockspl
+(
+l
+,
+s
+) 
+	`mutex_io_spinunlock
+(&(l),s)
+
+	)
+
+835 
+timespec_t
+ *, timespec_t *);
+
+837 
+timespec_t
+ *, timespec_t *);
+
+839 
+timespec_t
+ *, timespec_t *);
+
+841 struct 
+timespec
+ *, struct timespec *);
+
+843 struct 
+timespec
+ *, struct timespec *);
+
+854 #define 
+	#SVTIMER_FAST
+ 0x001
+
+	)
+
+855 #define 
+	#SVTIMER_TRUNC
+ 0x002
+
+	)
+
+861 #define 
+	#kmutex_t
+ 
+mutex_t
+
+
+	)
+
+862 #define 
+	#mutex_enter
+(
+m
+) 
+	`mutex_lock
+(m, 
+PZERO
+)
+
+	)
+
+863 #define 
+	#mutex_tryenter
+(
+m
+) 
+	`mutex_trylock
+(m)
+
+	)
+
+864 #define 
+	#mutex_exit
+(
+m
+) 
+	`mutex_unlock
+(m)
+
+	)
+
+866 #define 
+	#kcondvar_t
+ 
+sv_t
+
+
+	)
+
+867 #define 
+	#cv_init
+(
+cv
+, 
+nm
+, 
+f
+, 
+i
+) 
+	`sv_init
+(cv, 
+SV_DEFAULT
+, nm)
+
+	)
+
+868 #define 
+	#cv_wait
+(
+cv
+, 
+mp
+) { \
+
+869 
+	`sv_wait
+(
+cv
+, 
+PZERO
+, 
+mp
+, 0); \
+
+870 
+	`mutex_lock
+(
+mp
+, 
+PZERO
+); \
+
+871 }
+
+	)
+
+872 #define 
+	#cv_signal
+(
+cv
+) 
+	`sv_signal
+(cv)
+
+	)
+
+873 #define 
+	#cv_wait_sig
+(
+cv
+,
+mp
+) 
+	`sv_wait_sig
+(cv,
+PZERO
+,mp,0)
+
+	)
+
+874 #define 
+	#cv_broadcast
+(
+cv
+) 
+	`sv_broadcast
+(cv)
+
+	)
+
+875 #define 
+	#cv_destroy
+(
+cv
+) 
+	`sv_destroy
+(cv)
+
+	)
+
+881 #define 
+	#RW_READER
+ 
+MR_ACCESS
+
+
+	)
+
+882 #define 
+	#RW_WRITER
+ 
+MR_UPDATE
+
+
+	)
+
+884 #define 
+	#krwlock_t
+ 
+mrlock_t
+
+
+	)
+
+886 #define 
+	#rw_init
+(
+r
+, 
+nm
+, 
+f
+, 
+i
+) 
+	`mrinit
+(r, nm)
+
+	)
+
+887 #define 
+	#rw_enter
+(
+r
+, 
+a
+) 
+	`mrlock
+(r, a, 
+PZERO
+)
+
+	)
+
+888 #define 
+	#rw_exit
+(
+r
+) 
+	`mrunlock
+(r)
+
+	)
+
+889 #define 
+	#rw_tryupgrade
+(
+r
+) 
+	`mrtrypromote
+(r)
+
+	)
+
+890 #define 
+	#rw_downgrade
+(
+r
+) 
+	`mrdemote
+(r)
+
+	)
+
+891 #define 
+	#rw_destroy
+(
+r
+) 
+	`mrfree
+(r)
+
+	)
+
+892 #define 
+	#RW_WRITE_HELD
+(
+r
+) 
+	`ismrlocked
+(r, 
+MR_UPDATE
+)
+
+	)
+
+893 #define 
+	#RW_READ_HELD
+(
+r
+) 
+	`ismrlocked
+(r, 
+MR_ACCESS
+)
+
+	)
+
+899 short 
+	mms_mode
+;
+
+900 int 
+	mms_cnt
+;
+
+901 
+sv_t
+ 
+	mms_sv
+;
+
+902 } 
+	tmslock_t
+;
+
+904 #define 
+	#MS_FREE
+ 0
+
+	)
+
+905 #define 
+	#MS_UPD
+ 1
+
+	)
+
+906 #define 
+	#MS_ACC
+ 2
+
+	)
+
+907 #define 
+	#MS_WAITERS
+ 4
+
+	)
+
+	@/usr/include/sys/xlate.h
+
+29 #define 
+	#_SYS_XLATE_H
+
+
+	)
+
+37 typedef struct 
+	sxlate_info_s
+ {
+
+38 int 
+	minbufsize
+;
+
+39 int 
+	mcopysize
+;
+
+40 void *
+	msmallbuf
+;
+
+41 void *
+	mcopybuf
+;
+
+43 int 
+	mabi
+;
+
+45 } 
+	txlate_info_t
+;
+
+53 enum 
+	exlate_mode
+ { 
+	mSETUP_BUFFER
+, 
+	mDO_XLATE
+ };
+
+59 
+xlate_out_func_t
+, int, int, int);
+
+61 
+xlate_in_func_t
+, int, int, int);
+
+64 #define 
+	#XLATE_COPYOUT
+(
+from
+,
+to
+,
+size
+,
+func
+,
+abi
+,
+count
+) \
+
+65 
+	`xlate_copyout
+(
+from
+,
+to
+,
+size
+,
+func
+,
+abi
+,
+ABI_IRIX5_64
+,
+count
+)
+
+	)
+
+67 #define 
+	#COPYIN_XLATE
+(
+from
+,
+to
+,
+size
+,
+func
+,
+abi
+,
+count
+) \
+
+68 
+	`copyin_xlate
+(
+from
+,
+to
+,
+size
+,
+func
+,
+abi
+,
+ABI_IRIX5_64
+,
+count
+)
+
+	)
+
+70 #define 
+	#XLATE_FROM_IRIX5
+(
+_xlate_func
+, 
+_user_struct
+, 
+_native_struct
+) \
+
+71 
+_user_struct
+ = 
+	`_xlate_func
+(_user_struct, 
+_native_struct
+)
+
+	)
+
+73 #define 
+	#XLATE_TO_IRIX5
+(
+_xlate_func
+, 
+_user_struct
+, 
+_native_struct
+) \
+
+74 (void)
+	`_xlate_func
+(
+_native_struct
+, 
+_user_struct
+)
+
+	)
+
+77 #define 
+	#XLATE_COPYOUT
+(
+from
+,
+to
+,
+size
+,
+f
+,
+a
+,
+c
+) \
+
+78 (
+	`copyout
+((
+from
+), (
+to
+), (
+size
+)) ? 
+EFAULT
+ : 0)
+
+	)
+
+79 #define 
+	#COPYIN_XLATE
+(
+from
+,
+to
+,
+size
+,
+f
+,
+a
+,
+c
+) \
+
+80 (
+	`copyin
+((
+from
+), (
+to
+), (
+size
+)) ? 
+EFAULT
+ : 0)
+
+	)
+
+81 #define 
+	#XLATE_FROM_IRIX5
+(
+_xlate_func
+, 
+_uap
+, 
+_native_uap
+)
+
+	)
+
+82 #define 
+	#XLATE_TO_IRIX5
+(
+_xlate_func
+, 
+_user_struct
+, 
+_native_struct
+)
+
+	)
+
+87 #define 
+	#COPYIN_XLATE_PROLOGUE
+(
+SOURCE_STRUCT
+, 
+TARGET_STRUCT
+) \
+
+88 struct 
+SOURCE_STRUCT
+ *
+	gsource
+; \
+
+89 struct 
+TARGET_STRUCT
+ *
+	gtarget
+; \
+
+91 
+	`ASSERT
+(
+info
+->
+smallbuf
+ != 
+NULL
+); \
+
+92 
+	`ASSERT
+(
+mode
+ == 
+SETUP_BUFFER
+ || mode == 
+DO_XLATE
+); \
+
+94 if (
+mode
+ == 
+SETUP_BUFFER
+) \
+
+95 { 
+	`ASSERT
+(
+info
+->
+copybuf
+ == 
+NULL
+); \
+
+96 
+	`ASSERT
+(
+info
+->
+copysize
+ == 0); \
+
+97 if (sizeof(struct 
+SOURCE_STRUCT
+) <= 
+info
+->
+inbufsize
+) \
+
+98 
+info
+->
+copybuf
+ = info->
+smallbuf
+; \
+
+100 
+info
+->
+copybuf
+ = 
+	`kern_malloc
+(sizeof(struct 
+SOURCE_STRUCT
+)); \
+
+101 
+info
+->
+copysize
+ = sizeof(struct 
+SOURCE_STRUCT
+); \
+
+105 
+	`ASSERT
+(
+info
+->
+copysize
+ == sizeof(struct 
+SOURCE_STRUCT
+)); \
+
+106 
+	`ASSERT
+(
+info
+->
+copybuf
+ != 
+NULL
+); \
+
+108 
+target
+ = 
+to
+; \
+
+109 
+source
+ = 
+info
+->
+copybuf
+;
+
+	)
+
+112 #define 
+	#COPYIN_XLATE_VARYING_PROLOGUE
+(
+SOURCE_STRUCT
+, 
+TARGET_STRUCT
+, 
+SRC_SIZE
+) \
+
+113 struct 
+SOURCE_STRUCT
+ *
+	gsource
+; \
+
+114 struct 
+TARGET_STRUCT
+ *
+	gtarget
+; \
+
+115 
+size_t
+ 
+	gsize
+; \
+
+117 
+	`ASSERT
+(
+info
+->
+smallbuf
+ != 
+NULL
+); \
+
+118 
+	`ASSERT
+(
+mode
+ == 
+SETUP_BUFFER
+ || mode == 
+DO_XLATE
+); \
+
+120 
+size
+ = 
+SRC_SIZE
+; \
+
+121 if (
+mode
+ == 
+SETUP_BUFFER
+) \
+
+122 { 
+	`ASSERT
+(
+info
+->
+copybuf
+ == 
+NULL
+); \
+
+123 
+	`ASSERT
+(
+info
+->
+copysize
+ == 0); \
+
+124 if (
+size
+ <= 
+info
+->
+inbufsize
+) \
+
+125 
+info
+->
+copybuf
+ = info->
+smallbuf
+; \
+
+127 
+info
+->
+copybuf
+ = 
+	`kern_malloc
+(
+size
+); \
+
+128 
+info
+->
+copysize
+ = 
+size
+; \
+
+132 
+	`ASSERT
+(
+info
+->
+copysize
+ == 
+size
+); \
+
+133 
+	`ASSERT
+(
+info
+->
+copybuf
+ != 
+NULL
+); \
+
+135 
+target
+ = 
+to
+; \
+
+136 
+source
+ = 
+info
+->
+copybuf
+;
+
+	)
+
+139 #define 
+	#XLATE_COPYOUT_PROLOGUE
+(
+SOURCE_STRUCT
+, 
+TARGET_STRUCT
+) \
+
+140 struct 
+SOURCE_STRUCT
+ *
+	gsource
+; \
+
+141 struct 
+TARGET_STRUCT
+ *
+	gtarget
+; \
+
+143 
+	`ASSERT
+(
+info
+->
+smallbuf
+ != 
+NULL
+); \
+
+144 if ( (sizeof(struct 
+TARGET_STRUCT
+)) <= 
+info
+->
+inbufsize
+) \
+
+145 
+info
+->
+copybuf
+ = info->
+smallbuf
+; \
+
+147 
+info
+->
+copybuf
+ = 
+	`kern_malloc
+(sizeof(struct 
+TARGET_STRUCT
+)); \
+
+149 
+info
+->
+copysize
+ = sizeof(struct 
+TARGET_STRUCT
+); \
+
+150 
+target
+ = (struct 
+TARGET_STRUCT
+ *)
+info
+->
+copybuf
+; \
+
+151 
+source
+ = (struct 
+SOURCE_STRUCT
+ *)
+from
+;
+
+	)
+
+154 #define 
+	#XLATE_COPYOUT_VARYING_PROLOGUE
+(
+SOURCE_STRUCT
+, 
+TARGET_STRUCT
+, 
+SRC_SIZE
+) \
+
+155 struct 
+SOURCE_STRUCT
+ *
+	gsource
+; \
+
+156 struct 
+TARGET_STRUCT
+ *
+	gtarget
+; \
+
+157 
+size_t
+ 
+	gsize
+; \
+
+159 
+size
+ = 
+SRC_SIZE
+; \
+
+160 
+	`ASSERT
+(
+info
+->
+smallbuf
+ != 
+NULL
+); \
+
+161 if (
+size
+ <= 
+info
+->
+inbufsize
+) \
+
+162 
+info
+->
+copybuf
+ = info->
+smallbuf
+; \
+
+164 
+info
+->
+copybuf
+ = 
+	`kern_malloc
+(
+size
+); \
+
+166 
+info
+->
+copysize
+ = 
+size
+; \
+
+167 
+target
+ = (struct 
+TARGET_STRUCT
+ *)
+info
+->
+copybuf
+; \
+
+168 
+source
+ = (struct 
+SOURCE_STRUCT
+ *)
+from
+;
+
+	)
+
+170 #define 
+	#XLATE_COPYOUT_ERROR
+(
+errno
+) \
+
+172 if (
+info
+->
+copysize
+ <= info->
+inbufsize
+) \
+
+173 
+	`ASSERT
+(
+info
+->
+copybuf
+ == info->
+smallbuf
+);\
+
+175 
+	`kern_free
+(
+info
+->
+copybuf
+); \
+
+176 
+info
+->
+copybuf
+ = 
+NULL
+; \
+
+177 return (
+errno
+); \
+
+178 }
+
+	)
+
+	@/usr/include/sys/mon.h
+
+13 #define 
+	#__SYS_MON_H__
+
+
+	)
+
+18 struct 
+monitor
+;
+
+19 struct 
+mon_state
+;
+
+21 typedef struct 
+	smon_func
+ {
+
+22 void (*
+	mmf_init
+)(struct 
+	mmonitor
+ *);
+
+23 void (*
+	mmf_service
+)(void *);
+
+24 void (*
+	mmf_p_mon
+)(struct 
+	mmonitor
+ *);
+
+25 void (*
+	mmf_v_mon
+)(struct 
+	mmonitor
+ *);
+
+26 void (*
+	mmf_q_mon_sav
+)(struct 
+	mmonitor
+ *, void **);
+
+27 void (*
+	mmf_q_mon_rst
+)(struct 
+	mmonitor
+ *, void *);
+
+28 void (*
+	mmf_r_mon
+)(struct 
+	mmonitor
+ *, struct 
+	mmon_state
+ *);
+
+29 void (*
+	mmf_a_mon
+)(struct 
+	mmonitor
+ *, struct 
+	mmon_state
+ *);
+
+30 } 
+	tmon_func_t
+;
+
+32 #define 
+	#MON_LOCKED
+ 0x01
+
+	)
+
+33 #define 
+	#MON_WAITING
+ 0x02
+
+	)
+
+34 #define 
+	#MON_TIMEOUT
+ 0x04
+
+	)
+
+35 #define 
+	#MON_DOSRV
+ 0x08
+
+	)
+
+36 #define 
+	#MON_RUN
+ 0x10
+
+	)
+
+38 typedef struct 
+	smonitor
+ {
+
+39 struct 
+monitor
+ *
+	mmon_next
+;
+
+40 struct 
+monitor
+ *
+	mmon_prev
+;
+
+41 
+lock_t
+ 
+	mmon_lock
+;
+
+42 
+uchar_t
+ 
+	mmon_lock_flags
+;
+
+43 
+sv_t
+ 
+	mmon_wait
+;
+
+44 struct 
+monitor
+ **
+	mmon_monpp
+;
+
+45 
+lock_t
+ *
+	mmon_monp_lock
+;
+
+46 
+uint64_t
+ 
+	mmon_id
+;
+
+47 int 
+	mmon_trips
+;
+
+48 void *
+	mmon_p_arg
+;
+
+49 void **
+	mmon_queue
+;
+
+50 
+mon_func_t
+ *
+	mmon_funcp
+;
+
+51 void *
+	mmon_private
+;
+
+52 
+sv_t
+ 
+	mmon_sv
+;
+
+53 } 
+	tmon_t
+;
+
+55 typedef struct 
+	smon_state
+ {
+
+56 
+mon_t
+ *
+	mms_mon
+;
+
+57 
+mon_t
+ **
+	mms_monpp
+;
+
+58 
+lock_t
+ *
+	mms_monp_lock
+;
+
+59 
+uint64_t
+ 
+	mms_id
+;
+
+60 int 
+	mms_trips
+;
+
+61 void *
+	mms_p_arg
+;
+
+63 } 
+	tmon_state_t
+;
+
+	@/usr/include/sys/param.h
+
+34 #define 
+	#_SYS_PARAM_H
+
+
+	)
+
+39 #include 
+	~/usr/include/sys/types.h
+>
+
+40 #include 
+	~/usr/include/sys/signal.h
+>
+
+51 #define 
+	#_POSIX_VERSION
+ 199506L
+
+	)
+
+55 #define 
+	#_POSIX_VERSION
+ 199506
+
+	)
+
+60 #define 
+	#_POSIX_VDISABLE
+ 0
+
+	)
+
+64 #define 
+	#MAX_INPUT
+ 512
+
+	)
+
+68 #define 
+	#MAX_CANON
+ 256
+
+	)
+
+71 #define 
+	#UID_NOBODY
+ 60001
+
+	)
+
+72 #define 
+	#GID_NOBODY
+ 
+UID_NOBODY
+
+
+	)
+
+74 #define 
+	#UID_NOACCESS
+ 60002
+
+	)
+
+75 #define 
+	#GID_NOACCESS
+ 
+UID_NOACCESS
+
+
+	)
+
+82 #define 
+	#MAXPID
+ 0x7ffffff0
+
+	)
+
+85 #define 
+	#MAXUID
+ 0x7fffffff
+
+	)
+
+88 #define 
+	#MAXUID
+ $7fffffff
+
+	)
+
+90 #define 
+	#MAXLINK
+ 30000
+
+	)
+
+92 #define 
+	#SSIZE
+ 1
+
+	)
+
+93 #define 
+	#SINCR
+ 1
+
+	)
+
+95 #define 
+	#KSTKSIZE
+ 1
+
+	)
+
+98 #define 
+	#EXTKSTKSIZE
+ 1
+
+	)
+
+99 #define 
+	#KSTKIDX
+ 0
+
+	)
+
+100 #define 
+	#KSTEIDX
+ 1
+
+	)
+
+102 #define 
+	#EXTKSTKSIZE
+ 0
+
+	)
+
+103 #define 
+	#KSTKIDX
+ 0
+
+	)
+
+106 #define 
+	#CANBSIZ
+ 256
+
+	)
+
+107 #define 
+	#HZ
+ 100
+
+	)
+
+108 #define 
+	#TICK
+ 10000000
+
+	)
+
+110 #define 
+	#NOFILE
+ 20
+
+	)
+
+119 #define 
+	#NGROUPS_UMIN
+ 0
+
+	)
+
+120 #define 
+	#NGROUPS_UMAX
+ 32
+
+	)
+
+126 #define 
+	#NGROUPS
+ 16
+
+	)
+
+133 #define 
+	#PMASK
+ 0177
+
+	)
+
+134 #define 
+	#PCATCH
+ 0400
+
+	)
+
+135 #define 
+	#PLTWAIT
+ 01000
+
+	)
+
+136 #define 
+	#PRECALC
+ 01000
+
+	)
+
+139 #define 
+	#PMASK
+ 
+O
+'0177'
+
+	)
+
+140 #define 
+	#PCATCH
+ 
+O
+'0400'
+
+	)
+
+141 #define 
+	#PLTWAIT
+ 
+O
+'01000'
+
+	)
+
+142 #define 
+	#PRECALC
+ 
+O
+'01000'
+
+	)
+
+144 #define 
+	#PSWP
+ 0
+
+	)
+
+145 #define 
+	#PINOD
+ 10
+
+	)
+
+146 #define 
+	#PSNDD
+ 
+PINOD
+
+
+	)
+
+147 #define 
+	#PRIBIO
+ 20
+
+	)
+
+148 #define 
+	#PZERO
+ 25
+
+	)
+
+149 #define 
+	#PMEM
+ 0
+
+	)
+
+151 #define 
+	#NZERO
+ 20
+
+	)
+
+153 #define 
+	#PPIPE
+ 26
+
+	)
+
+154 #define 
+	#PVFS
+ 27
+
+	)
+
+155 #define 
+	#PWAIT
+ 30
+
+	)
+
+156 #define 
+	#PSLEP
+ 39
+
+	)
+
+157 #define 
+	#PUSER
+ 60
+
+	)
+
+162 #define 
+	#PBATCH_CRITICAL
+ -1
+
+	)
+
+163 #define 
+	#PTIME_SHARE
+ -2
+
+	)
+
+164 #define 
+	#PTIME_SHARE_OVER
+ -3
+
+	)
+
+165 #define 
+	#PBATCH
+ -4
+
+	)
+
+166 #define 
+	#PWEIGHTLESS
+ -5
+
+	)
+
+168 #define 
+	#PIDLE
+ (
+PWEIGHTLESS
+ + 
+NDPLOMAX
+ - 
+NDPLOMIN
+ - 1)
+
+	)
+
+176 #define 
+	#NBPS
+ (
+NCPS
+*
+	gNBPC
+)
+
+	)
+
+177 #define 
+	#NBPW
+ sizeof(int)
+
+	)
+
+178 #define 
+	#NCPS
+ (
+	gNBPC
+/(sizeof(
+	gpte_t
+)))
+
+	)
+
+182 #define 
+	#IO_NBPC
+ 4096
+
+	)
+
+183 #define 
+	#IO_BPCSHIFT
+ 12
+
+	)
+
+185 #define 
+	#MIN_NBPC
+ 4096
+
+	)
+
+186 #define 
+	#MIN_BPCSHIFT
+ 12
+
+	)
+
+187 #define 
+	#MIN_CPSSHIFT
+ 10
+
+	)
+
+189 #define 
+	#NBPC
+ 
+	g_PAGESZ
+
+
+	)
+
+192 #define 
+	#BPCSHIFT
+ 12
+
+	)
+
+193 #define 
+	#CPSSHIFT
+ 10
+
+	)
+
+196 #define 
+	#BPCSHIFT
+ 14
+
+	)
+
+198 #define 
+	#CPSSHIFT
+ 12
+
+	)
+
+200 #define 
+	#CPSSHIFT
+ 11
+
+	)
+
+204 #define 
+	#BPSSHIFT
+ (
+	gBPCSHIFT
++
+	gCPSSHIFT
+)
+
+	)
+
+207 #define 
+	#NULL
+ 0L
+
+	)
+
+210 #define 
+	#CMASK
+ 022
+
+	)
+
+211 #define 
+	#NODEV
+ (
+	gdev_t
+)(-1)
+
+	)
+
+212 #define 
+	#NOPAGE
+ ((unsigned int)-1)
+
+	)
+
+215 #define 
+	#CMASK
+ 
+	gO
+'022'
+
+	)
+
+216 #define 
+	#NODEV
+ (-1)
+
+	)
+
+217 #define 
+	#NOPAGE
+ (-1)
+
+	)
+
+223 #define 
+	#NBPSCTR
+ 512
+
+	)
+
+224 #define 
+	#SCTRSHFT
+ 9
+
+	)
+
+230 #define 
+	#BASEPRI
+(
+	gpsw
+) (((psw) & 
+	gSR_IMASK
+) == 
+SR_IMASK0
+)
+
+	)
+
+232 #define 
+	#BASEPRI
+(
+	gpsw
+) (((psw) & 
+	gSR_IMASK
+) == 
+SR_IMASK
+)
+
+	)
+
+235 #define 
+	#USERMODE
+(
+	gpsw
+) (((psw) & 
+	gSR_KSU_MSK
+) == 
+SR_KSU_USR
+)
+
+	)
+
+238 struct 
+	sparamconst
+ {
+
+239 int 
+	mp_usize
+;
+
+240 int 
+	mp_extusize
+;
+
+245 #define 
+	#lobyte
+(
+X
+) (((unsigned char *)&X)[1])
+
+	)
+
+246 #define 
+	#hibyte
+(
+X
+) (((unsigned char *)&X)[0])
+
+	)
+
+247 #define 
+	#loword
+(
+X
+) (((
+ushort
+ *)&X)[1])
+
+	)
+
+248 #define 
+	#hiword
+(
+X
+) (((
+ushort
+ *)&X)[0])
+
+	)
+
+250 #define 
+	#lobyte
+(
+X
+) (((unsigned char *)&X)[0])
+
+	)
+
+251 #define 
+	#hibyte
+(
+X
+) (((unsigned char *)&X)[1])
+
+	)
+
+252 #define 
+	#loword
+(
+X
+) (((
+ushort
+ *)&X)[0])
+
+	)
+
+253 #define 
+	#hiword
+(
+X
+) (((
+ushort
+ *)&X)[1])
+
+	)
+
+267 #define 
+	#MAXPATHLEN
+ 1024
+
+	)
+
+268 #define 
+	#MAXSYMLINKS
+ 30
+
+	)
+
+269 #define 
+	#MAXNAMELEN
+ 256
+
+	)
+
+277 #define 
+	#PIPE_BUF
+ 10240
+
+	)
+
+281 #define 
+	#PIPE_MAX
+ 10240
+
+	)
+
+285 #define 
+	#NBBY
+ 8
+
+	)
+
+294 #define 
+	#BBSHIFT
+ 9
+
+	)
+
+295 #define 
+	#BBSIZE
+ (1<<
+BBSHIFT
+)
+
+	)
+
+296 #define 
+	#BBMASK
+ (
+BBSIZE
+-1)
+
+	)
+
+297 #define 
+	#BTOBB
+(
+bytes
+) (((unsigned long)(bytes) + 
+BBSIZE
+ - 1) >> 
+BBSHIFT
+)
+
+	)
+
+298 #define 
+	#BTOBBT
+(
+bytes
+) ((unsigned long)(bytes) >> 
+BBSHIFT
+)
+
+	)
+
+299 #define 
+	#BBTOB
+(
+bbs
+) ((bbs) << 
+BBSHIFT
+)
+
+	)
+
+300 #define 
+	#OFFTOBB
+(
+bytes
+) (((
+__uint64_t
+)(bytes) + 
+BBSIZE
+ - 1) >> 
+BBSHIFT
+)
+
+	)
+
+301 #define 
+	#OFFTOBBT
+(
+bytes
+) ((
+off_t
+)(bytes) >> 
+BBSHIFT
+)
+
+	)
+
+302 #define 
+	#BBTOOFF
+(
+bbs
+) ((
+off_t
+)(bbs) << 
+BBSHIFT
+)
+
+	)
+
+306 #define 
+	#SEEKLIMIT32
+ 0x7fffffff
+
+	)
+
+307 #define 
+	#BBSEEKLIMIT32
+ 
+	`BTOBBT
+(
+SEEKLIMIT32
+)
+
+	)
+
+308 #define 
+	#SEEKLIMIT
+ 0x7fffffffffffffffLL
+
+	)
+
+309 #define 
+	#BBSEEKLIMIT
+ 
+	`OFFTOBBT
+(
+SEEKLIMIT
+)
+
+	)
+
+312 #define 
+	#SEEKLIMIT32
+ $7fffffff
+
+	)
+
+313 #define 
+	#SEEKLIMIT
+ $7fffffffffffffff
+
+	)
+
+331 #define 
+	#MAXBSIZE
+ 8192
+
+	)
+
+332 #define 
+	#DEV_BSIZE
+ 
+BBSIZE
+
+
+	)
+
+333 #define 
+	#DEV_BSHIFT
+ 
+BBSHIFT
+
+
+	)
+
+335 #define 
+	#btodb
+(
+bytes
+) \
+
+336 ((
+uint64_t
+)(
+bytes
+) >> 
+DEV_BSHIFT
+)
+
+	)
+
+337 #define 
+	#dbtob
+(
+db
+) \
+
+338 ((
+uint64_t
+)(
+db
+) << 
+DEV_BSHIFT
+)
+
+	)
+
+344 #define 
+	#BLKDEV_IOSHIFT
+ 
+BPCSHIFT
+
+
+	)
+
+345 #define 
+	#BLKDEV_IOSIZE
+ (1<<
+BLKDEV_IOSHIFT
+)
+
+	)
+
+348 #define 
+	#BLKDEV_OFF
+(
+off
+) ((off) & (
+BLKDEV_IOSIZE
+ - 1))
+
+	)
+
+351 #define 
+	#BLKDEV_LBN
+(
+off
+) ((off) >> 
+BLKDEV_IOSHIFT
+)
+
+	)
+
+354 #define 
+	#BLKDEV_BB
+ 
+	`BTOBB
+(
+BLKDEV_IOSIZE
+)
+
+	)
+
+357 #define 
+	#BLKDEV_LTOP
+(
+bn
+) ((bn) * 
+BLKDEV_BB
+)
+
+	)
+
+365 #define 
+	#MAXHOSTNAMELEN
+ 256
+
+	)
+
+371 #define 
+	#MIN
+(
+a
+,
+b
+) (((a)<(b))?(a):(b))
+
+	)
+
+372 #define 
+	#MAX
+(
+a
+,
+b
+) (((a)>(b))?(a):(b))
+
+	)
+
+380 #define 
+	#howmany
+(
+x
+, 
+y
+) (((x)+((y)-1))/(y))
+
+	)
+
+382 #define 
+	#roundup
+(
+x
+, 
+y
+) ((((x)+((y)-1))/(y))*(y))
+
+	)
+
+389 #define 
+	#DELAY
+(
+n
+) 
+	`us_delay
+(n)
+
+	)
+
+391 #define 
+	#DELAYBUS
+(
+n
+) 
+	`us_delaybus
+(n)
+
+	)
+
+395 #define 
+	#TIMEPOKE_NOW
+ -100L
+
+	)
+
+	@/usr/include/sys/signal.h
+
+20 #define 
+	#_SYS_SIGNAL_H
+
+
+	)
+
+25 #include 
+	~/usr/include/standards.h
+>
+
+36 #define 
+	#SIGHUP
+ 1
+
+	)
+
+37 #define 
+	#SIGINT
+ 2
+
+	)
+
+38 #define 
+	#SIGQUIT
+ 3
+
+	)
+
+39 #define 
+	#SIGILL
+ 4
+
+	)
+
+40 #define 
+	#SIGTRAP
+ 5
+
+	)
+
+41 #define 
+	#SIGIOT
+ 6
+
+	)
+
+42 #define 
+	#SIGABRT
+ 6
+
+	)
+
+43 #define 
+	#SIGEMT
+ 7
+
+	)
+
+44 #define 
+	#SIGFPE
+ 8
+
+	)
+
+45 #define 
+	#SIGKILL
+ 9
+
+	)
+
+46 #define 
+	#SIGBUS
+ 10
+
+	)
+
+47 #define 
+	#SIGSEGV
+ 11
+
+	)
+
+48 #define 
+	#SIGSYS
+ 12
+
+	)
+
+49 #define 
+	#SIGPIPE
+ 13
+
+	)
+
+50 #define 
+	#SIGALRM
+ 14
+
+	)
+
+51 #define 
+	#SIGTERM
+ 15
+
+	)
+
+52 #define 
+	#SIGUSR1
+ 16
+
+	)
+
+53 #define 
+	#SIGUSR2
+ 17
+
+	)
+
+54 #define 
+	#SIGCLD
+ 18
+
+	)
+
+55 #define 
+	#SIGCHLD
+ 18
+
+	)
+
+56 #define 
+	#SIGPWR
+ 19
+
+	)
+
+57 #define 
+	#SIGWINCH
+ 20
+
+	)
+
+58 #define 
+	#SIGURG
+ 21
+
+	)
+
+59 #define 
+	#SIGPOLL
+ 22
+
+	)
+
+60 #define 
+	#SIGIO
+ 22
+
+	)
+
+61 #define 
+	#SIGSTOP
+ 23
+
+	)
+
+62 #define 
+	#SIGTSTP
+ 24
+
+	)
+
+63 #define 
+	#SIGCONT
+ 25
+
+	)
+
+64 #define 
+	#SIGTTIN
+ 26
+
+	)
+
+65 #define 
+	#SIGTTOU
+ 27
+
+	)
+
+66 #define 
+	#SIGVTALRM
+ 28
+
+	)
+
+67 #define 
+	#SIGPROF
+ 29
+
+	)
+
+68 #define 
+	#SIGXCPU
+ 30
+
+	)
+
+69 #define 
+	#SIGXFSZ
+ 31
+
+	)
+
+70 #define 
+	#SIGK32
+ 32
+
+	)
+
+71 #define 
+	#SIGCKPT
+ 33
+
+	)
+
+72 #define 
+	#SIGRESTART
+ 34
+
+	)
+
+73 #define 
+	#SIGUME
+ 35
+
+	)
+
+75 #define 
+	#SIGPTINTR
+ 47
+
+	)
+
+76 #define 
+	#SIGPTRESCHED
+ 48
+
+	)
+
+78 #define 
+	#SIGRTMIN
+ 49
+
+	)
+
+79 #define 
+	#SIGRTMAX
+ 64
+
+	)
+
+82 #include 
+	~/usr/include/sys/types.h
+>
+
+87 #define 
+	#__sigargs
+ int
+
+	)
+
+89 #define 
+	#__sigargs
+
+
+	)
+
+97 #define 
+	#__sigret_t
+ void
+
+	)
+
+104 #define 
+	#SIG_ERR
+ ((
+SIG_PF
+)-1L)
+
+	)
+
+105 #define 
+	#SIG_IGN
+ ((
+SIG_PF
+)1L)
+
+	)
+
+106 #define 
+	#SIG_DFL
+ ((
+SIG_PF
+)0L)
+
+	)
+
+108 #define 
+	#SIG_HOLD
+ ((
+SIG_PF
+)2L)
+
+	)
+
+114 #include 
+	~/usr/include/sys/sigevent.h
+>
+
+121 #include 
+	~/usr/include/sys/siginfo.h
+>
+
+128 #define 
+	#_SIGSET_T
+
+
+	)
+
+130 
+__uint32_t
+ 
+	m__sigbits
+[4];
+
+131 } 
+	tsigset_t
+;
+
+135 typedef union 
+	u__sighandler
+ {
+
+136 
+__sigret_t
+ (*
+sa_handler1
+)(
+	m__sigargs
+);
+
+138 void (*
+	tsa_sigaction1
+)(int, 
+	tsiginfo_t
+ *, void *);
+
+140 
+	}
+} 
+__sighandler_t
+;
+
+142 #define 
+	#__sa_handler
+ 
+sa_handler1
+
+
+	)
+
+143 #define 
+	#__sa_sigaction
+ 
+sa_sigaction1
+
+
+	)
+
+146 typedef struct 
+	ssigaction
+ {
+
+147 int 
+	msa_flags
+;
+
+148 
+__sighandler_t
+ 
+	msa_sighandler
+;
+
+149 
+sigset_t
+ 
+	msa_mask
+;
+
+151 int 
+	msa_resv
+[2];
+
+152 } 
+	tsigaction_t
+;
+
+158 #define 
+	#sa_handler
+ 
+sa_sighandler
+.
+sa_handler1
+
+
+	)
+
+159 #define 
+	#sa_sigaction
+ 
+sa_sighandler
+.
+sa_sigaction1
+
+
+	)
+
+168 #define 
+	#SIG_NOP
+ 0
+
+	)
+
+169 #define 
+	#SIG_BLOCK
+ 1
+
+	)
+
+170 #define 
+	#SIG_UNBLOCK
+ 2
+
+	)
+
+171 #define 
+	#SIG_SETMASK
+ 3
+
+	)
+
+172 #define 
+	#SIG_SETMASK32
+ 256
+
+	)
+
+179 #define 
+	#SA_ONSTACK
+ 0x00000001
+
+	)
+
+180 #define 
+	#SA_RESETHAND
+ 0x00000002
+
+	)
+
+181 #define 
+	#SA_RESTART
+ 0x00000004
+
+	)
+
+182 #define 
+	#SA_SIGINFO
+ 0x00000008
+
+	)
+
+183 #define 
+	#SA_NODEFER
+ 0x00000010
+
+	)
+
+185 #define 
+	#SA_NOCLDWAIT
+ 0x00010000
+
+	)
+
+186 #define 
+	#SA_NOCLDSTOP
+ 0x00020000
+
+	)
+
+190 #define 
+	#_SA_BSDCALL
+ 0x10000000
+
+	)
+
+198 struct 
+	ssigstack
+ {
+
+199 void *
+	mss_sp
+;
+
+200 int 
+	mss_onstack
+;
+
+204 #define 
+	#MINSIGSTKSZ
+ 512
+
+	)
+
+205 #define 
+	#SIGSTKSZ
+ 8192
+
+	)
+
+213 #define 
+	#SS_ONSTACK
+ 0x00000001
+
+	)
+
+214 #define 
+	#SS_DISABLE
+ 0x00000002
+
+	)
+
+216 #include 
+	~/usr/include/sys/ucontext.h
+>
+
+240 struct 
+	ssigvec
+ {
+
+241 
+__sigret_t
+ (*
+sv_handler
+)(
+	m__sigargs
+);
+
+242 int 
+	msv_mask
+;
+
+243 int 
+	msv_flags
+;
+
+247 #define 
+	#SV_ONSTACK
+ 0x0001
+
+	)
+
+248 #define 
+	#SV_INTERRUPT
+ 0x0002
+
+	)
+
+249 #define 
+	#sv_onstack
+ 
+sv_flags
+
+
+	)
+
+251 #define 
+	#NUMBSDSIGS
+ (32)
+
+	)
+
+253 #define 
+	#sigmask
+(
+sig
+) (1L << ((sig)-1))
+
+	)
+
+255 #define 
+	#signal
+ 
+BSDsignal
+
+
+	)
+
+256 #define 
+	#sigpause
+ 
+BSDsigpause
+
+
+	)
+
+272 #define 
+	#sigmask
+(
+	gsig
+) (1L << ((sig)-1))
+
+	)
+
+305 typedef struct 
+	ssigcontext
+ {
+
+306 
+__uint32_t
+ 
+	msc_regmask
+;
+
+307 
+__uint32_t
+ 
+	msc_status
+;
+
+308 
+__uint64_t
+ 
+	msc_pc
+;
+
+312 
+__uint64_t
+ 
+	msc_regs
+[32];
+
+316 
+__uint64_t
+ 
+	msc_fpregs
+[32];
+
+317 
+__uint32_t
+ 
+	msc_ownedfp
+;
+
+318 
+__uint32_t
+ 
+	msc_fpc_csr
+;
+
+319 
+__uint32_t
+ 
+	msc_fpc_eir
+;
+
+321 
+__uint32_t
+ 
+	msc_ssflags
+;
+
+322 
+__uint64_t
+ 
+	msc_mdhi
+;
+
+323 
+__uint64_t
+ 
+	msc_mdlo
+;
+
+327 
+__uint64_t
+ 
+	msc_cause
+;
+
+328 
+__uint64_t
+ 
+	msc_badvaddr
+;
+
+329 
+__uint64_t
+ 
+	msc_triggersave
+;
+
+330 
+sigset_t
+ 
+	msc_sigset
+;
+
+331 
+__uint64_t
+ 
+	msc_fp_rounded_result
+;
+
+332 
+__uint64_t
+ 
+	msc_pad
+[31];
+
+333 } 
+	tsigcontext_t
+;
+
+339 #define 
+	#SC_CAUSE_BD
+ 0x8000000080000000LL
+
+	)
+
+344 #define 
+	#sc_mask
+ 
+sc_sigset
+.
+__sigbits
+[0]
+
+	)
+
+349 #define 
+	#SIG_ERR
+ (void(*)())0
+
+	)
+
+351 #define 
+	#SIG_IGN
+ (void (*)())0
+
+	)
+
+353 #define 
+	#SIG_HOLD
+ (void (*)())0
+
+	)
+
+361 #define 
+	#SIG_ERR
+ (-1)
+
+	)
+
+362 #define 
+	#SIG_IGN
+ (1)
+
+	)
+
+363 #define 
+	#SIG_HOLD
+ (2)
+
+	)
+
+364 #define 
+	#SIG_DFL
+ (0)
+
+	)
+
+369 #define 
+	#NSIG
+ 65
+
+	)
+
+370 #define 
+	#MAXSIG
+ (
+NSIG
+-1)
+
+	)
+
+371 #define 
+	#NUMSIGS
+ (
+NSIG
+-1)
+
+	)
+
+373 #define 
+	#BRK_USERBP
+ 0
+
+	)
+
+374 #define 
+	#BRK_KERNELBP
+ 1
+
+	)
+
+375 #define 
+	#BRK_ABORT
+ 2
+
+	)
+
+376 #define 
+	#BRK_BD_TAKEN
+ 3
+
+	)
+
+377 #define 
+	#BRK_BD_NOTTAKEN
+ 4
+
+	)
+
+378 #define 
+	#BRK_SSTEPBP
+ 5
+
+	)
+
+379 #define 
+	#BRK_OVERFLOW
+ 6
+
+	)
+
+380 #define 
+	#BRK_DIVZERO
+ 7
+
+	)
+
+381 #define 
+	#BRK_RANGE
+ 8
+
+	)
+
+383 #define 
+	#BRK_PSEUDO_OP_BIT
+ 0x80
+
+	)
+
+384 #define 
+	#BRK_PSEUDO_OP_MAX
+ 0x3
+
+	)
+
+386 #define 
+	#BRK_CACHE_SYNC
+ 0x80
+
+	)
+
+388 #define 
+	#BRK_MULOVF
+ 1023
+
+	)
+
+	@/usr/include/sys/sigevent.h
+
+19 #define 
+	#_SYS_SIGEVENT_H
+
+
+	)
+
+33 #include 
+	~/usr/include/standards.h
+>
+
+34 #include 
+	~/usr/include/sys/types.h
+>
+
+35 #include 
+	~/usr/include/sys/pthread.h
+>
+
+38 typedef union 
+	usigval
+ {
+
+39 int 
+	msival_int
+;
+
+40 void *
+	msival_ptr
+;
+
+41 } 
+	tsigval_t
+;
+
+44 typedef union 
+	usigval
+ {
+
+45 long 
+	msival_int
+;
+
+46 void *
+	msival_ptr
+;
+
+47 } 
+	tsigval_t
+;
+
+51 #define 
+	#__notifyinfo
+ 
+notifyinfo
+
+
+	)
+
+52 #define 
+	#__nisigno
+ 
+nisigno
+
+
+	)
+
+53 #define 
+	#__nifunc
+ 
+nifunc
+
+
+	)
+
+55 typedef union 
+	u__notifyinfo
+ {
+
+56 int 
+	m__nisigno
+;
+
+57 void (*
+	m__nifunc
+) (
+	msigval_t
+);
+
+58 } 
+	tnotifyinfo_t
+;
+
+60 typedef struct 
+	ssigevent
+ {
+
+61 int 
+	msigev_notify
+;
+
+62 
+notifyinfo_t
+ 
+	msigev_notifyinfo
+;
+
+63 
+sigval_t
+ 
+	msigev_value
+;
+
+64 void (*
+	msigev_notify_function
+) (
+	msigval_t
+);
+
+65 
+pthread_attr_t
+ *
+	msigev_notify_attributes
+;
+
+66 unsigned long 
+	msigev_reserved
+[11];
+
+67 unsigned long 
+	msigev_pad
+[6];
+
+68 } 
+	tsigevent_t
+;
+
+69 #define 
+	#sigev_func
+ 
+sigev_notifyinfo
+.
+__nifunc
+
+
+	)
+
+70 #define 
+	#sigev_signo
+ 
+sigev_notifyinfo
+.
+__nisigno
+
+
+	)
+
+72 #define 
+	#SIGEV_NONE
+ 128
+
+	)
+
+73 #define 
+	#SIGEV_SIGNAL
+ 129
+
+	)
+
+74 #define 
+	#SIGEV_CALLBACK
+ 130
+
+	)
+
+75 #define 
+	#SIGEV_THREAD
+ 131
+
+	)
+
+	@/usr/include/sys/siginfo.h
+
+22 #define 
+	#_SYS_SIGINFO_H
+
+
+	)
+
+29 #include 
+	~/usr/include/standards.h
+>
+
+31 #include 
+	~/usr/include/sys/sigevent.h
+>
+
+48 #define 
+	#SI_MAXSZ
+ 128
+
+	)
+
+49 #define 
+	#SI_PAD
+ ((
+SI_MAXSZ
+ / sizeof(
+__int32_t
+)) - 3)
+
+	)
+
+52 #define 
+	#siginfo
+ 
+__siginfo
+
+
+	)
+
+59 typedef struct 
+	s__siginfo
+ {
+
+60 int 
+	msi_signo
+;
+
+61 int 
+	msi_code
+;
+
+62 int 
+	msi_errno
+;
+
+65 int 
+	msi_pad
+[
+SI_PAD
+];
+
+68 
+pid_t
+ 
+	m__pid
+;
+
+71 
+uid_t
+ 
+	m__uid
+;
+
+72 } 
+	t__kill
+;
+
+74 
+clock_t
+ 
+	m__utime
+;
+
+75 int 
+	m__status
+;
+
+76 
+clock_t
+ 
+	m__stime
+;
+
+77 int 
+	m__swap
+;
+
+78 } 
+__cld
+;
+
+79 } 
+__pdata
+;
+
+80 } 
+__proc
+;
+
+83 void *
+	m__addr
+;
+
+84 } 
+__fault
+;
+
+88 int 
+	m__fd
+;
+
+89 long 
+	m__band
+;
+
+90 } 
+__file
+;
+
+92 union 
+sigval
+ 
+	g__value
+;
+
+93 #define 
+	#si_value
+ 
+__data
+.
+__value
+
+
+	)
+
+96 } 
+__data
+;
+
+98 } 
+siginfo_t
+;
+
+100 #define 
+	#si_pid
+ 
+__data
+.
+__proc
+.
+__pid
+
+
+	)
+
+101 #define 
+	#si_status
+ 
+__data
+.
+__proc
+.
+__pdata
+.
+__cld
+.
+__status
+
+
+	)
+
+102 #define 
+	#si_stime
+ 
+__data
+.
+__proc
+.
+__pdata
+.
+__cld
+.
+__stime
+
+
+	)
+
+103 #define 
+	#si_utime
+ 
+__data
+.
+__proc
+.
+__pdata
+.
+__cld
+.
+__utime
+
+
+	)
+
+104 #define 
+	#si_swap
+ 
+__data
+.
+__proc
+.
+__pdata
+.
+__cld
+.
+__swap
+
+
+	)
+
+105 #define 
+	#si_uid
+ 
+__data
+.
+__proc
+.
+__pdata
+.
+__kill
+.
+__uid
+
+
+	)
+
+106 #define 
+	#si_addr
+ 
+__data
+.
+__fault
+.
+__addr
+
+
+	)
+
+107 #define 
+	#si_fd
+ 
+__data
+.
+__file
+.
+__fd
+
+
+	)
+
+108 #define 
+	#si_band
+ 
+__data
+.
+__file
+.
+__band
+
+
+	)
+
+111 #define 
+	#SI_USER
+ 0
+
+	)
+
+112 #define 
+	#SI_KILL
+ 
+SI_USER
+
+
+	)
+
+113 #define 
+	#SI_QUEUE
+ -1
+
+	)
+
+114 #define 
+	#SI_ASYNCIO
+ -2
+
+	)
+
+115 #define 
+	#SI_TIMER
+ -3
+
+	)
+
+116 #define 
+	#SI_MESGQ
+ -4
+
+	)
+
+122 #define 
+	#SI_FROMUSER
+(
+__sip
+) ((__sip)->
+si_code
+ <= 0)
+
+	)
+
+123 #define 
+	#SI_FROMKERNEL
+(
+__sip
+) ((__sip)->
+si_code
+ > 0)
+
+	)
+
+129 #define 
+	#ILL_ILLOPC
+ 1
+
+	)
+
+130 #define 
+	#ILL_ILLOPN
+ 2
+
+	)
+
+131 #define 
+	#ILL_ILLADR
+ 3
+
+	)
+
+132 #define 
+	#ILL_ILLTRP
+ 4
+
+	)
+
+133 #define 
+	#ILL_PRVOPC
+ 5
+
+	)
+
+134 #define 
+	#ILL_PRVREG
+ 6
+
+	)
+
+135 #define 
+	#ILL_COPROC
+ 7
+
+	)
+
+136 #define 
+	#ILL_BADSTK
+ 8
+
+	)
+
+138 #define 
+	#NSIGILL
+ 8
+
+	)
+
+144 #define 
+	#FPE_INTDIV
+ 1
+
+	)
+
+145 #define 
+	#FPE_INTOVF
+ 2
+
+	)
+
+146 #define 
+	#FPE_FLTDIV
+ 3
+
+	)
+
+147 #define 
+	#FPE_FLTOVF
+ 4
+
+	)
+
+148 #define 
+	#FPE_FLTUND
+ 5
+
+	)
+
+149 #define 
+	#FPE_FLTRES
+ 6
+
+	)
+
+150 #define 
+	#FPE_FLTINV
+ 7
+
+	)
+
+151 #define 
+	#FPE_FLTSUB
+ 8
+
+	)
+
+153 #define 
+	#NSIGFPE
+ 8
+
+	)
+
+159 #define 
+	#SEGV_MAPERR
+ 1
+
+	)
+
+160 #define 
+	#SEGV_ACCERR
+ 2
+
+	)
+
+162 #define 
+	#NSIGSEGV
+ 2
+
+	)
+
+168 #define 
+	#BUS_ADRALN
+ 1
+
+	)
+
+169 #define 
+	#BUS_ADRERR
+ 2
+
+	)
+
+170 #define 
+	#BUS_OBJERR
+ 3
+
+	)
+
+172 #define 
+	#NSIGBUS
+ 3
+
+	)
+
+178 #define 
+	#TRAP_BRKPT
+ 1
+
+	)
+
+179 #define 
+	#TRAP_TRACE
+ 2
+
+	)
+
+181 #define 
+	#NSIGTRAP
+ 2
+
+	)
+
+187 #define 
+	#CLD_EXITED
+ 1
+
+	)
+
+188 #define 
+	#CLD_KILLED
+ 2
+
+	)
+
+189 #define 
+	#CLD_DUMPED
+ 3
+
+	)
+
+190 #define 
+	#CLD_TRAPPED
+ 4
+
+	)
+
+191 #define 
+	#CLD_STOPPED
+ 5
+
+	)
+
+192 #define 
+	#CLD_CONTINUED
+ 6
+
+	)
+
+194 #define 
+	#NSIGCLD
+ 6
+
+	)
+
+200 #define 
+	#POLL_IN
+ 1
+
+	)
+
+201 #define 
+	#POLL_OUT
+ 2
+
+	)
+
+202 #define 
+	#POLL_MSG
+ 3
+
+	)
+
+203 #define 
+	#POLL_ERR
+ 4
+
+	)
+
+204 #define 
+	#POLL_PRI
+ 5
+
+	)
+
+205 #define 
+	#POLL_HUP
+ 6
+
+	)
+
+207 #define 
+	#NSIGPOLL
+ 6
+
+	)
+
+214 #define 
+	#UME_ECCERR
+ 1
+
+	)
+
+215 #define 
+	#NSIGUME
+ 1
+
+	)
+
+	@/usr/include/sys/ucontext.h
+
+25 #define 
+	#_SYS__UCONTEXT_H
+
+
+	)
+
+32 #include 
+	~/usr/include/standards.h
+>
+
+33 #include 
+	~/usr/include/sgidefs.h
+>
+
+36 #define 
+	#fpregset
+ 
+__fpregset
+
+
+	)
+
+37 #define 
+	#fp_r
+ 
+__fp_r
+
+
+	)
+
+38 #define 
+	#fp_dregs
+ 
+__fp_dregs
+
+
+	)
+
+39 #define 
+	#fp_fregs
+ 
+__fp_fregs
+
+
+	)
+
+40 #define 
+	#fp_regs
+ 
+__fp_regs
+
+
+	)
+
+41 #define 
+	#fp_csr
+ 
+__fp_csr
+
+
+	)
+
+42 #define 
+	#fp_pad
+ 
+__fp_pad
+
+
+	)
+
+43 #define 
+	#gregs
+ 
+__gregs
+
+
+	)
+
+44 #define 
+	#fpregs
+ 
+__fpregs
+
+
+	)
+
+45 #define 
+	#ucontext
+ 
+__ucontext
+
+
+	)
+
+46 #define 
+	#sigaltstack
+ 
+_sigaltstack
+
+
+	)
+
+50 #include 
+	~/usr/include/sys/types.h
+>
+
+53 #define 
+	#_SIGSET_T
+
+
+	)
+
+55 
+__uint32_t
+ 
+	m__sigbits
+[4];
+
+56 } 
+	tsigset_t
+;
+
+60 typedef struct 
+	s_sigaltstack
+ {
+
+61 void *
+	mss_sp
+;
+
+62 
+size_t
+ 
+	mss_size
+;
+
+63 int 
+	mss_flags
+;
+
+64 } 
+	tstack_t
+;
+
+67 typedef struct 
+	s_sigaltstack
+ {
+
+68 void *
+	mss_sp
+;
+
+69 
+__uint32_t
+ 
+	mss_size
+;
+
+70 int 
+	mss_flags
+;
+
+71 } 
+	tstack_t
+;
+
+78 
+_MIPS_FPSET
+ == 16) && !
+	Idefined
+(
+_EXTENDED_CONTEXT
+)
+
+80 typedef unsigned int 
+	tgreg_t
+;
+
+83 #define 
+	#NGREG
+ 36
+
+	)
+
+84 typedef 
+greg_t
+ 
+	tgregset_t
+[
+	lNGREG
+];
+
+86 typedef 
+greg_t
+ 
+	tgregset_t
+[36];
+
+89 typedef struct 
+	s__fpregset
+ {
+
+91 double 
+	m__fp_dregs
+[16];
+
+92 float 
+	m__fp_fregs
+[32];
+
+93 unsigned int 
+	m__fp_regs
+[32];
+
+94 } 
+	t__fp_r
+;
+
+95 unsigned int 
+__fp_csr
+;
+
+96 unsigned int 
+__fp_pad
+;
+
+97 
+	}
+} 
+fpregset_t
+;
+
+100 
+gregset_t
+ 
+	m__gregs
+;
+
+101 
+fpregset_t
+ 
+	m__fpregs
+;
+
+102 } 
+	tmcontext_t
+;
+
+104 typedef struct 
+	s__ucontext
+ {
+
+105 unsigned long 
+	muc_flags
+;
+
+106 struct 
+__ucontext
+ *
+	muc_link
+;
+
+107 
+sigset_t
+ 
+	muc_sigmask
+;
+
+108 
+stack_t
+ 
+	muc_stack
+;
+
+109 
+mcontext_t
+ 
+	muc_mcontext
+;
+
+111 long 
+	muc_filler
+[47];
+
+113 int 
+	muc_triggersave
+;
+
+115 unsigned long 
+	muc_filler
+[48];
+
+117 } 
+	tucontext_t
+;
+
+128 (
+_MIPS_FPSET
+ == 32)) || 
+	Idefined
+(
+_EXTENDED_CONTEXT
+)
+
+130 typedef 
+machreg_t
+ 
+	tgreg_t
+;
+
+134 #define 
+	#NGREG
+ 37
+
+	)
+
+135 typedef 
+greg_t
+ 
+	tgregset_t
+[
+	lNGREG
+];
+
+137 typedef 
+greg_t
+ 
+	tgregset_t
+[37];
+
+140 typedef struct 
+	s__fpregset
+ {
+
+142 double 
+	m__fp_dregs
+[32];
+
+145 
+__uint32_t
+ 
+	m_fp_fill
+;
+
+146 float 
+	m_fp_fregs
+;
+
+147 } 
+	t__fp_fregs
+[32];
+
+150 float 
+_fp_fregs
+;
+
+151 
+__uint32_t
+ 
+	l_fp_fill
+;
+
+152 
+	}
+} 
+__fp_fregs
+[32];
+
+154 
+machreg_t
+ 
+	g__fp_regs
+[32];
+
+155 } 
+__fp_r
+;
+
+156 
+__uint32_t
+ 
+	g__fp_csr
+;
+
+157 
+__uint32_t
+ 
+	g__fp_pad
+;
+
+158 } 
+fpregset_t
+;
+
+161 
+gregset_t
+ 
+	m__gregs
+;
+
+162 
+fpregset_t
+ 
+	m__fpregs
+;
+
+163 } 
+	tmcontext_t
+;
+
+165 typedef struct 
+	s__ucontext
+ {
+
+166 unsigned long 
+	muc_flags
+;
+
+167 struct 
+__ucontext
+ *
+	muc_link
+;
+
+168 
+sigset_t
+ 
+	muc_sigmask
+;
+
+169 
+stack_t
+ 
+	muc_stack
+;
+
+170 
+mcontext_t
+ 
+	muc_mcontext
+;
+
+171 long 
+	muc_filler
+[49];
+
+172 } 
+	tucontext_t
+;
+
+177 #define 
+	#GETCONTEXT
+ 0
+
+	)
+
+178 #define 
+	#SETCONTEXT
+ 1
+
+	)
+
+191 #define 
+	#UC_SIGMASK
+ 001
+
+	)
+
+192 #define 
+	#UC_STACK
+ 002
+
+	)
+
+193 #define 
+	#UC_CPU
+ 004
+
+	)
+
+194 #define 
+	#UC_MAU
+ 010
+
+	)
+
+196 #define 
+	#UC_MCONTEXT
+ (
+UC_CPU
+|
+UC_MAU
+)
+
+	)
+
+202 #define 
+	#UC_ALL
+ (
+UC_SIGMASK
+|
+UC_STACK
+|
+UC_MCONTEXT
+)
+
+	)
+
+206 #define 
+	#CTX_R0
+ 0
+
+	)
+
+207 #define 
+	#CTX_AT
+ 1
+
+	)
+
+208 #define 
+	#CTX_V0
+ 2
+
+	)
+
+209 #define 
+	#CTX_V1
+ 3
+
+	)
+
+210 #define 
+	#CTX_A0
+ 4
+
+	)
+
+211 #define 
+	#CTX_A1
+ 5
+
+	)
+
+212 #define 
+	#CTX_A2
+ 6
+
+	)
+
+213 #define 
+	#CTX_A3
+ 7
+
+	)
+
+215 #define 
+	#CTX_T0
+ 8
+
+	)
+
+216 #define 
+	#CTX_T1
+ 9
+
+	)
+
+217 #define 
+	#CTX_T2
+ 10
+
+	)
+
+218 #define 
+	#CTX_T3
+ 11
+
+	)
+
+219 #define 
+	#CTX_T4
+ 12
+
+	)
+
+220 #define 
+	#CTX_T5
+ 13
+
+	)
+
+221 #define 
+	#CTX_T6
+ 14
+
+	)
+
+222 #define 
+	#CTX_T7
+ 15
+
+	)
+
+223 #elif (
+_MIPS_SIM
+ == 
+_ABI64
+ || _MIPS_SIM == 
+_ABIN32
+)
+
+224 #define 
+	#CTX_A4
+ 8
+
+	)
+
+225 #define 
+	#CTX_A5
+ 9
+
+	)
+
+226 #define 
+	#CTX_A6
+ 10
+
+	)
+
+227 #define 
+	#CTX_A7
+ 11
+
+	)
+
+228 #define 
+	#CTX_T0
+ 12
+
+	)
+
+229 #define 
+	#CTX_T1
+ 13
+
+	)
+
+230 #define 
+	#CTX_T2
+ 14
+
+	)
+
+231 #define 
+	#CTX_T3
+ 15
+
+	)
+
+233 #define 
+	#CTX_S0
+ 16
+
+	)
+
+234 #define 
+	#CTX_S1
+ 17
+
+	)
+
+235 #define 
+	#CTX_S2
+ 18
+
+	)
+
+236 #define 
+	#CTX_S3
+ 19
+
+	)
+
+237 #define 
+	#CTX_S4
+ 20
+
+	)
+
+238 #define 
+	#CTX_S5
+ 21
+
+	)
+
+239 #define 
+	#CTX_S6
+ 22
+
+	)
+
+240 #define 
+	#CTX_S7
+ 23
+
+	)
+
+241 #define 
+	#CTX_T8
+ 24
+
+	)
+
+242 #define 
+	#CTX_T9
+ 25
+
+	)
+
+243 #define 
+	#CTX_K0
+ 26
+
+	)
+
+244 #define 
+	#CTX_K1
+ 27
+
+	)
+
+245 #define 
+	#CTX_GP
+ 28
+
+	)
+
+246 #define 
+	#CTX_SP
+ 29
+
+	)
+
+247 #define 
+	#CTX_S8
+ 30
+
+	)
+
+248 #define 
+	#CTX_RA
+ 31
+
+	)
+
+249 #define 
+	#CTX_MDLO
+ 32
+
+	)
+
+250 #define 
+	#CTX_MDHI
+ 33
+
+	)
+
+251 #define 
+	#CTX_CAUSE
+ 34
+
+	)
+
+252 #define 
+	#CTX_EPC
+ 35
+
+	)
+
+253 #define 
+	#CTX_SR
+ 36
+
+	)
+
+256 #define 
+	#CXT_R0
+ 
+CTX_R0
+
+
+	)
+
+257 #define 
+	#CXT_AT
+ 
+CTX_AT
+
+
+	)
+
+258 #define 
+	#CXT_V0
+ 
+CTX_V0
+
+
+	)
+
+259 #define 
+	#CXT_V1
+ 
+CTX_V1
+
+
+	)
+
+260 #define 
+	#CXT_A0
+ 
+CTX_A0
+
+
+	)
+
+261 #define 
+	#CXT_A1
+ 
+CTX_A1
+
+
+	)
+
+262 #define 
+	#CXT_A2
+ 
+CTX_A2
+
+
+	)
+
+263 #define 
+	#CXT_A3
+ 
+CTX_A3
+
+
+	)
+
+264 #define 
+	#CXT_T0
+ 
+CTX_T0
+
+
+	)
+
+265 #define 
+	#CXT_T1
+ 
+CTX_T1
+
+
+	)
+
+266 #define 
+	#CXT_T2
+ 
+CTX_T2
+
+
+	)
+
+267 #define 
+	#CXT_T3
+ 
+CTX_T3
+
+
+	)
+
+268 #define 
+	#CXT_T4
+ 
+CTX_T4
+
+
+	)
+
+269 #define 
+	#CXT_T5
+ 
+CTX_T5
+
+
+	)
+
+270 #define 
+	#CXT_T6
+ 
+CTX_T6
+
+
+	)
+
+271 #define 
+	#CXT_T7
+ 
+CTX_T7
+
+
+	)
+
+272 #define 
+	#CXT_S0
+ 
+CTX_S0
+
+
+	)
+
+273 #define 
+	#CXT_S1
+ 
+CTX_S1
+
+
+	)
+
+274 #define 
+	#CXT_S2
+ 
+CTX_S2
+
+
+	)
+
+275 #define 
+	#CXT_S3
+ 
+CTX_S3
+
+
+	)
+
+276 #define 
+	#CXT_S4
+ 
+CTX_S4
+
+
+	)
+
+277 #define 
+	#CXT_S5
+ 
+CTX_S5
+
+
+	)
+
+278 #define 
+	#CXT_S6
+ 
+CTX_S6
+
+
+	)
+
+279 #define 
+	#CXT_S7
+ 
+CTX_S7
+
+
+	)
+
+280 #define 
+	#CXT_T8
+ 
+CTX_T8
+
+
+	)
+
+281 #define 
+	#CXT_T9
+ 
+CTX_T9
+
+
+	)
+
+282 #define 
+	#CXT_K0
+ 
+CTX_K0
+
+
+	)
+
+283 #define 
+	#CXT_K1
+ 
+CTX_K1
+
+
+	)
+
+284 #define 
+	#CXT_GP
+ 
+CTX_GP
+
+
+	)
+
+285 #define 
+	#CXT_SP
+ 
+CTX_SP
+
+
+	)
+
+286 #define 
+	#CXT_S8
+ 
+CTX_S8
+
+
+	)
+
+287 #define 
+	#CXT_RA
+ 
+CTX_RA
+
+
+	)
+
+288 #define 
+	#CXT_MDLO
+ 
+CTX_MDLO
+
+
+	)
+
+289 #define 
+	#CXT_MDHI
+ 
+CTX_MDHI
+
+
+	)
+
+290 #define 
+	#CXT_CAUSE
+ 
+CTX_CAUSE
+
+
+	)
+
+291 #define 
+	#CXT_EPC
+ 
+CTX_EPC
+
+
+	)
+
+292 #define 
+	#CXT_SR
+ 
+CTX_SR
+
+
+	)
+
+295 #define 
+	#CTX_FV0
+ 0
+
+	)
+
+296 #define 
+	#CTX_FV1
+ 2
+
+	)
+
+297 #define 
+	#CTX_FA0
+ 12
+
+	)
+
+298 #define 
+	#CTX_FA1
+ 13
+
+	)
+
+299 #define 
+	#CTX_FA2
+ 14
+
+	)
+
+300 #define 
+	#CTX_FA3
+ 15
+
+	)
+
+301 #define 
+	#CTX_FA4
+ 16
+
+	)
+
+302 #define 
+	#CTX_FA5
+ 17
+
+	)
+
+303 #define 
+	#CTX_FA6
+ 18
+
+	)
+
+304 #define 
+	#CTX_FA7
+ 19
+
+	)
+
+305 #define 
+	#CTX_FT0
+ 4
+
+	)
+
+306 #define 
+	#CTX_FT1
+ 5
+
+	)
+
+307 #define 
+	#CTX_FT2
+ 6
+
+	)
+
+308 #define 
+	#CTX_FT3
+ 7
+
+	)
+
+309 #define 
+	#CTX_FT4
+ 8
+
+	)
+
+310 #define 
+	#CTX_FT5
+ 9
+
+	)
+
+311 #define 
+	#CTX_FT6
+ 10
+
+	)
+
+312 #define 
+	#CTX_FT7
+ 11
+
+	)
+
+314 #define 
+	#CTX_FT8
+ 20
+
+	)
+
+315 #define 
+	#CTX_FT9
+ 21
+
+	)
+
+316 #define 
+	#CTX_FT10
+ 22
+
+	)
+
+317 #define 
+	#CTX_FT11
+ 23
+
+	)
+
+318 #define 
+	#CTX_FT12
+ 1
+
+	)
+
+319 #define 
+	#CTX_FT13
+ 3
+
+	)
+
+320 #define 
+	#CTX_FS0
+ 24
+
+	)
+
+321 #define 
+	#CTX_FS1
+ 25
+
+	)
+
+322 #define 
+	#CTX_FS2
+ 26
+
+	)
+
+323 #define 
+	#CTX_FS3
+ 27
+
+	)
+
+324 #define 
+	#CTX_FS4
+ 28
+
+	)
+
+325 #define 
+	#CTX_FS5
+ 29
+
+	)
+
+326 #define 
+	#CTX_FS6
+ 30
+
+	)
+
+327 #define 
+	#CTX_FS7
+ 31
+
+	)
+
+330 #define 
+	#CTX_FT8
+ 21
+
+	)
+
+331 #define 
+	#CTX_FT9
+ 23
+
+	)
+
+332 #define 
+	#CTX_FT10
+ 25
+
+	)
+
+333 #define 
+	#CTX_FT11
+ 27
+
+	)
+
+334 #define 
+	#CTX_FT12
+ 29
+
+	)
+
+335 #define 
+	#CTX_FT13
+ 31
+
+	)
+
+336 #define 
+	#CTX_FT14
+ 1
+
+	)
+
+337 #define 
+	#CTX_FT15
+ 3
+
+	)
+
+338 #define 
+	#CTX_FS0
+ 20
+
+	)
+
+339 #define 
+	#CTX_FS1
+ 22
+
+	)
+
+340 #define 
+	#CTX_FS2
+ 24
+
+	)
+
+341 #define 
+	#CTX_FS3
+ 26
+
+	)
+
+342 #define 
+	#CTX_FS4
+ 28
+
+	)
+
+343 #define 
+	#CTX_FS5
+ 30
+
+	)
+
+	@
+0
+0
+36
+/home/tulip13/bipin/code/buf_viz.c
+/usr/include/dmedia/audio.h
+/usr/include/math.h
+/usr/include/stdio.h
+/usr/include/stdlib.h
+/usr/include/sys/fcntl.h
+/usr/include/sys/hdsp.h
+/usr/include/getopt.h
+/usr/include/inttypes.h
+/usr/include/locale_attr.h
+/usr/include/sgidefs.h
+/usr/include/standards.h
+/usr/include/svr4_math.h
+/usr/include/sys/time.h
+/usr/include/sys/types.h
+/usr/include/stdarg.h
+/usr/include/sys/bsd_types.h
+/usr/include/sys/cpumask.h
+/usr/include/sys/ktime.h
+/usr/include/sys/nodemask.h
+/usr/include/sys/pthread.h
+/usr/include/sys/select.h
+/usr/include/sys/timespec.h
+/usr/include/string.h
+/usr/include/sys/SN/SN0/arch.h
+/usr/include/sys/SN/SN1/arch.h
+/usr/include/sys/capability.h
+/usr/include/sys/mkdev.h
+/usr/include/sys/sema.h
+/usr/include/sys/xlate.h
+/usr/include/sys/mon.h
+/usr/include/sys/param.h
+/usr/include/sys/signal.h
+/usr/include/sys/sigevent.h
+/usr/include/sys/siginfo.h
+/usr/include/sys/ucontext.h

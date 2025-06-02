@@ -1,0 +1,28 @@
+This directory contains the example program vidtonet, that captures 
+frames from a video source into dmbuffers and sends them over the 
+network using dmnet, and nettovid, that receives dmbuffers from dmnet
+and sends them to video out. Note that these are simple examples to
+illustrate the use of dmnet with vl, so no buffering is done to avoid
+jitter, lost frames, etc.
+
+nettovid (the server) must be invoked before vidtonet.
+
+Under Irix 6.3 (uname -a), DMEDIA_6_3 must be defined (this is commented
+out in the Makefile).
+
+Typical usage :
+<server> nettovid &
+<client> vidtonet -T <my_machine>
+
+disktonet and nettotex are similar to vidtonet and nettovid. disktonet
+opens a movie file, captures frames into DMbuffers and streams them to
+nettotex, which displays the frames on graphics. disktonet is multithreaded,
+and accesses movie library and direct I/O routines. You should run disktonet 
+as root to get real time performance. nettotex uses OpenGL and XWindows for
+display. These pair of programs were mainly intended to be used for streaming
+film resolution content (the default frame for nettotex is 1280x720x3). To
+get 24 frames/sec, you should use a disk array and a fibre based network, with
+an available bandwidth of at least 70 MB/sec. 
+
+dmttcp is derived from the original ttcp, and helps you determine the
+maximum achievable throughput with dmNet.

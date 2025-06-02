@@ -1,0 +1,63 @@
+LTC (longitudinal time code) is a scheme for encoding SMPTE time code 
+information in an audio signal. LTC is the format used to stripe 
+SMPTE timecode onto an audio tape or onto a longitudinal audio track on 
+a video tape. For in-depth information about various time code formats
+and their encoding, consult a reference such as ``Timecode: A User's
+Guide'' by John Ratcliff, published by Focal Press, ISBN 0 240 51334 7.
+
+There are two example programs in this directory, readltc and dmltc.
+
+The dmltc example makes use of the LTC and time code support functions
+in the Digital Media Library (libdmedia).  These are described in the
+man pages dmLTC(3dm), dmTCAddTC(3dm), dmTCAddFrames(3dm),
+dmTCFramesBetween(3dm), dmTCFramesPerDay(3dm), dmTCToSeconds(3dm),
+dmTCFromSeconds(3dm), dmTCToString(3dm), and dmTCFromString(3dm).  The
+dmltc program reads from an audio port via the audio library (AL) and
+attempts to decode an LTC sequence in it.
+
+The readltc program does not use the Digital Media library's supporting
+functions, rather it has all of the decode logic right in it.
+
+There are two ways in which readltc may be run.
+
+If invoked as:  readltc filename.aiff
+   readltc will read the file into memory, then decode the memory image as
+   quickly as it can (much faster than real time).
+
+Alternately if invoked w/o arguments:  readltc
+   It will open a mono audio library input and decode ltc from that
+   stream in real time.  A suggested test would be to use apanel to
+   configure digital loopthrough, and to use playaifc to play the
+   supplied aiff file:
+
+   Make sure that nothing is plugged into the digital audio port, then
+   type:
+
+      apanel -source digital -outrate 22050
+      readltc
+      soundplayer smpte.aifc  (then hit the play button)
+
+   Timecode should now be scrolling.  Experiment by changing the
+   output rate up and down.  This corresponds to non-realtime
+   cueing modes on a deck.  The audio file may be played repeatedly
+   by selecting the play button on the soundplayer panel.
+
+The timecode fields are displayed in the output from "readltc":
+
+	forward/reverse:
+		indicates direction of tape movement
+
+	hours : minutes : seconds : frames
+
+	ug:	user group bits 
+
+                There are 8 user groups in an LTC time-
+                code, each 4 bits long. User group bits are displayed
+                in the order ug0 ... ug7.
+
+	df:	drop flag bit value
+
+	cf:	color lock flag bit value
+
+	ua:    	unassigned bits from positions 27, 43, 58, 59 in the
+                80-bit LTC timecode word

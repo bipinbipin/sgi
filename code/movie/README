@@ -1,0 +1,216 @@
+ 		     SGI Movie Library Example Programs
+		     --- ----- ------- ------- --------
+
+This directory, /usr/share/src/dmedia/movie, contains source code 
+using the SGI Movie File and Playback Libraries. Programs for creating, editing, playing, and 
+displaying the parameters of movie files are included. The source code for each
+program resides in the subdirectory of the same name, except as noted.
+
+
+
+                       		Creating Movies
+				-------- ------	
+
+createmovie [-f format] [-c compression] [-l loopMode] [ -r frameRate] 
+            [-s xsize,ysize] [-o outMovie] [-k keyFrameRate] [-t] 
+            [-p paramType,userParam,userParamVal] file . . .
+
+	    format = sgi or qt.  Default is qt.
+            compression = none, mvc1, mvc2, rle, jpeg, 8rgb, qtvideo,
+                          qtanim, qtcvid, or indeo.  Default is qtvideo.
+            loopMode = once, loop, or swing. Default is once.
+	    paramType = movie, image, or audio.
+
+Createmovie is a program for creating SGI or QuickTime movies. The source
+material may be image files, image and audio files, other movie files, or a
+combination thereof.  If one or more movie files are included in the source
+material, "file . . ."  above, the frame rate will be that of the first
+movie file on the command line.  Otherwise, if the frame rate is not set
+explicitly, the default is 15.0 frames per second. Frame size may be set
+explicitly, resulting in images being enlarged or reduced as
+required. Aspect ratios are preserved, so that the resulting images may be
+letter-boxed if the aspect ratio of the source image is different from that
+specified. The default frame size is that of the first file on the command
+line containing frame size information, which may be either an image or
+movie file. A user parameter may be defined and set as a movie, audio, or
+image parameter. Createmovie may also be used to convert a movie file from
+one compression scheme to another, by creating a new movie in the specified
+compression scheme from the old movie. A name for the new movie must be
+supplied using the -o option.
+
+
+img-to-movie imagefile newmoviefile
+
+This is a very simple program for creating a movie file from an image
+file. The image file may contain a single image, in which case the movie
+file will contain a single frame, or a sequence of images. The resulting
+movie file will have a frame rate of 15.0 frames per second, and will use
+MVC1 compression. The source code is in the "misc" subdirectory.
+
+aud-to-movie audiofile moviefile
+
+This simple program adds an audio track to an existing movie file. If the movie
+file has an audio track, it is replaced. The source code is in the "misc" sub-
+directory.
+
+
+				Editing Movies
+			  	------- ------
+
+editmovie -e editMovie,trackType,firstEditFrame,numFrames
+          [ -c copyFile [ -f imageFormat ] ] [ -d ]
+          [ -s sourceMovie,firstSrcFrame [ -i ] [ -p ] ]
+          [ -m ] [-o outMovie ]
+
+Editmovie is a simple command line program for editing movies. The editing
+operations available are insert, delete, paste, and copy. Insert, -i, inserts 
+frames from "sourceMovie" into "editMovie". Delete, -d, deletes frames from 
+"editMovie". Paste, -p, pastes frames from "sourceMovie" into "editMovie".
+-m causes the editing to be performed on an in-memory copy of the movie.
+Copy, -c, copies data from the track as specified using -e, to a new file
+which will be either an image or an audio file, depending on the type of
+track selected. If the audio track is selected, the new file will be in
+AIFFC format. If the image track is selected, format of the new file can
+be specified using -f, where imageFormat may be sgi, fit, or tiff for ilSGI,
+ilFIT, or ilTIFF formats, respectively. The ilSGI and ilFIT formats are
+uncompressed, while the ilTIFF file will use LZW compression. If the format
+is not specified, the output image file format defaults to ilSGI. Optimize,
+-o, optimizes the edited movie for playback and places it in 
+"outMovie".
+
+The name of the movie to be edited along with the track and frames to edit
+are specified by -e. The "trackType" must be "image" or "audio". The value
+of "firstEditFrame" and "firstSrcFrame" must be >= 0. The number of frames
+to be edited is specified by "numFrames". For insert and paste, "numFrames"
++ "firstSrcFrame" must not exceed the last frame number in
+"sourceMovie". For delete, "numFrames" + "firstEditFrame" must not exceed
+the last frame number in "editMovie". Insert and paste require the -s
+option, which is used to specify the movie to copy from and the first frame
+to copy. Only one editing operation may be selected at a time. Use of the
+-m option requires the -o option, as well. When both -m and -o are used,
+the original movie, "editMovie" will be unaltered. Otherwise, "editMovie"
+will be changed. If all frames in a track are deleted, using -d, then the
+track itself will be removed from the movie.
+
+
+			   Displaying Movie Parameters
+			   ---------- ----- ----------
+
+mvinfo moviefile
+
+Mvinfo is a program for displaying information about the movie, including the
+image track and audio track (if present) parameters. The source code is in the
+"misc" subdirectory.
+
+mvtimeframe -f frameNum moviefile
+
+Mvtimeframe produces the SMPTE time code corresponding to frame "frameNum"
+of movie "moviefile". Several time code utility functions are declared in 
+mvPlayTimeUtils.h. Their source code is in mvPlayTimeUtils.c.
+
+
+				Playing Movies
+				------- ------
+
+simplemovieGL [ -mem ] moviefile
+
+SimplemovieGL is a command line program with a keyboard interface for playing a
+movie. The source code is in the "miscGL" subdirectory. The -mem option causes
+the movie to be mapped into memory before playback starts. The interface is as
+follows:
+
+         KEY       ACTION 
+         ---       ------ 
+        p or P    play the movie 
+
+        s or S    stop playback
+
+        r or R    rewind the movie
+
+        m or M    toggle audio muting
+
+        l or L    toggle loop state
+
+        b or B    play backward
+
+        f or F    play fast
+
+        h or H    play slow
+
+          3       loop 3 times
+
+        e or E    play every frame
+
+        q or Q    quit simplemovieGL
+
+
+manymovieGL [ -one ] <moviefile1> [moviefile2 ...]
+
+ManymovieGL is a command line program for playing up to 4 movies
+simultaneously.  By default, the movies will each appear in a separate
+window. To play all movies in a single window, use the "-one" command line
+option. Note that the 4 movie limitation is not related to the SGI Movie
+Library, but rather is due to the very simple layout scheme used in
+manymovie for placing all movies in one window.  The movies may have
+different frame sizes.
+
+Manymovie uses the following keyboard interface:
+
+         Key       Action
+	 ---       ------
+
+        p or P     play the movie
+
+        s or S     stop the movie
+
+        r or R     rewind to the beginning
+
+        m or M     toggle audio muting
+
+        l or L     change looping state
+
+        q or Q     quit manymovie
+
+If the -one option is used, all keyboard commands apply simultaneously to
+all movies. If each movie is played in a separate window, then the commands
+apply only to the current window, except for the quit command, which always
+exits from manymovieGL.
+
+motifmovie [ -videoOut ] [ -videoAndGfx ] [ -doubleBuffer ] <moviefile1> 
+
+motifmovie is a command line program for playing a single movie in a Motif
+widget.  motifmovie also plays movie to video out.
+
+motifmovie uses the following keyboard interface:
+
+         Key       Action
+	 ---       ------
+
+          p        play the movie
+
+          t        play the movie starting in 3 seconds
+
+          s        stop the movie
+  
+          r        rewind to the beginning
+
+          m        toggle audio muting
+
+          l        change looping state
+
+          +        move one frame forward
+
+          -        move one frame backward
+
+          b        play backwards
+
+          a        change video-out display mode
+
+          c        change view background color
+
+          q        quit manymovieGL
+
+QuickTime is a registered trademark of Apple Computer Inc.
+
+For additional information about the above programs, refer to the source code,
+and to the comments at the beginning of each source file.

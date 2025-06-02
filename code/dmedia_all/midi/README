@@ -1,0 +1,21 @@
+This is the root directory for the MIDI library example programs.
+
+
+simple/ 
+	some simple example programs written in C that illustrate
+	basic principles of the MIDI library.
+
+
+syncrecord/
+
+	 demonstrates synchronized audio/MIDI recording to disk
+
+
+../soundplayer/
+
+	source code for the IRIX Sound Player application, which includes
+	support for Standard MIDI File playback
+
+../libmidifile/
+
+	source code for a MIDI file I/O toolkit written in C++

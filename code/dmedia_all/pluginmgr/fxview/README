@@ -1,0 +1,11 @@
+fxview: test harness for special-effect plug-ins
+------------------------------------------------
+
+To use this program, compile it and run it.  It will load all of the
+available filters and transitions using the plug-in manager
+(libfxplugmgr).
+
+To load plugins from a different directory, set the environment
+variable PREMIERE_PLUGIN_DIR.
+
+

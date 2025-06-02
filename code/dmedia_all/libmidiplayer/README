@@ -1,0 +1,7 @@
+Libmidiplayer:
+
+This is a relatively complete example of how to play back a MIDI file
+using a generic API.  While the bulk of this library is built in 
+C++, the core playback engine (see the _transmitEvents function
+in src/MidiPlayer.c++) should be relatively easy to recode in C.
+

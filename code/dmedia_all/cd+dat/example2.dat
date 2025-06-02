@@ -1,0 +1,11 @@
+#
+# This is an example of extracting a program from the tape onto disk.
+#
+seek bot			# go to the beginning of the tape
+seek pn 1			# find the first program
+#
+# the next command will read from the current position to the beginning
+# of track 2, i.e. the whole first program on the tape goes into the file.
+#
+read /usr/tmp/track1.aiff 2
+quit

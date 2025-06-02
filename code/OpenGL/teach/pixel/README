@@ -1,0 +1,18 @@
+This directory contains very simple programs which illustrate
+how to use various aspects of the OpenGL pixel processing functionality
+
+convolve.c	- convolution demo program.  allows the user to convolve
+		  an input image with full control over all of the convolution
+		  parameters.
+
+colormatrix.c	- colormatrix demo program. 'a' rotates RGBA to ABGR, 'b'
+		  converts to black and white (luminance), 'n' turns off
+		  the colormatrix, 'r' nulls out the G,B, and A channels,
+		  's' increases the saturation and 'S' decreases the
+		  saturation.
+
+laplace.c	- simple demo which convolves the input image with the
+		  3x3 laplace operator  0 -1  0 .  the 'l' key toggles whether
+				       -1  4 -1
+				        0 -1  0
+		  the filter is enabled or not.

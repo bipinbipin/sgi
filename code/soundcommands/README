@@ -1,0 +1,119 @@
+README for soundcommands programming examples
+
+playaifc / sfplay
+-----------------
+
+Playaifc parses AIFF-C, AIFF, WAVE, Sun/NeXT, MPEG-1 layer I and II
+audio bitstream, IRCAM BICSF, Audio Visual Research, VOC, Sound Designer II,
+IFF/8SVX, Sample Vision, and SoundFont2 file(s)
+and plays the samples through the audio hardware.
+
+Sfplay supports decompression of CCITT G.722, CCITT G.726, CCITT G.728,
+CCITT G.711 u-law, GSM, DVI ADPCM (in WAVE files), FS1016, MPEG-1 layers 
+I and II, and Aware MultiRate data stored in various file formats.  Playaifc
+supports a subset of these, and only in AIFF-C file format.
+
+Please see the man page for more details.
+
+Previous IRIX releases included two slightly different command-line
+programs for playing back audio data: "playaifc" and "sfplay". 
+The former program played back only AIFF-C and AIFF files, but was
+written on top of the Audio File Library and was capable of handling
+AIFF-C files containing compressed data. The latter program was not
+written on top of the Audio File Library, but handled Sun/NeXT and WAVE
+files (as well as raw audio data files).
+
+For IRIX 6.2 and later releases, the two programs have been merged into a 
+single program which is written on top of the Audio File Library. The 
+Audio File Library now supports all the formats described in the first 
+paragraph above.  The combined program understands both the "playaifc" 
+command-line syntax and the "sfplay" command-line syntax.
+
+
+recordaifc / sfrecord:
+----------
+
+Recordaifc creates an AIFF-C (or AIFF) output file 
+containing audio stereo sample data recorded 
+through the audio hardware.  Recordaifc records 
+audio input until the user sends it an interrupt. 
+It writes the current hardware input sample rate 
+into the appropriate location in the AIFF Common 
+chunk.  When recordaiff receives a user interrupt, 
+it writes all sample data
+currently in the audio buffer out to disk before it
+exits. 
+
+Recordaifc supports CCITT G.722 4:1, CCITT G.711 
+u-law 2:1, and Aware MultiRate compression for the 
+AIFF-C file format.
+
+Sfrecord supports all that recordaifc does, with the addition of the ability
+to write files in any file format supported by the Audio File Library and in 
+any supported compression (see the list in the sfplay description near the
+top).
+
+Please see the man page for more details.
+
+
+aifcinfo:    
+--------
+
+Parses an AIFF or AIFF-C file and prints out a 
+detailed description of the audio data and header
+information inside the file.
+
+NOTE: The source file "aifcinfo" included here is no longer the
+source code for the actual "aifcinfo" 
+executable which is shipped in /usr/sbin. Starting with IRIX 6.2,
+the "aifcinfo" command is a wrapper around the general-purpose
+"dminfo" command. This wrapper translates from "dminfo" style output
+to the older "aifcinfo" output format.  The source for the pre-6.2 
+version of "aifcinfo" is still included here as an Audio File Library
+programming example.
+
+aiff2aifc, aifc2aiff, aifccompress, aifcdecompress:
+---------------------------------------------------
+
+These sample programs are all generated from the same
+source file:   aifcconvert.c
+
+NOTE: The source file "aifcconvert.c" included here is no longer the
+source code for the actual "aiff2aifc", "aifc2aiff", "aifccompress", and
+"aifcdecompress" executables which are shipped in /usr/sbin. Starting with
+IRIX 6.2, these commands are implemented as wrappers around the general-purpose
+"dmconvert" command. These wrappers translate between "dmconvert" command-line
+arguments and output format and their native command-line arguments and
+output formats. The source for the pre-6.2 version of "aifcconvert" is
+still included here as an Audio File Library programming example.
+
+aiff2aifc: 
+    Converts an AIFF file to the newer AIFF-C standard
+    format. Preserves all header and auxiliary information
+    (strings, MIDI exclusive data, etc) during the conversion.
+
+aifc2aiff:
+    Converts an AIFF-C file to the older AIFF format.
+    Preserves all header and auxiliary data chunks (strings,
+    MIDI exclusive data, etc) common to both formats.
+
+    Provides backward compatability for applications which
+    do not support the newer AIFF-C format. Applications 
+    linked with the SGI Audio File Library can automatically
+    parse files in either format. 
+
+aifccompress:
+    Converts an AIFF-C file which contains uncompressed audio data to
+    an AIFF-C file which contains compressed data. Nonaudio and 
+    auxiliary header information is preserved.
+
+    Compression algorithms supported by the SGI Audio File Library are:
+    CCITT G.722 ADPCM, CCITT G.711 mu-law, CCITT G.722 A-law, and
+    Aware MPEG and MultiRate algorithms.
+    The SGI Audio File Library does not support Apple proprietary
+    compression schemes. 
+
+aifcdecompress:
+    Converts an AIFF-C file which contains compressed audio data to
+    an AIFF-C file which contains uncompressed data. Nonaudio and
+    auxiliary header information is preserved.

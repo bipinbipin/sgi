@@ -1,0 +1,8 @@
+This directory contains simple programs which illustrate
+how to use OpenGL and stereo.  This includes both quad-buffer
+stereo and the SGIFullScreenStereo extension.
+
+glwstereo.c	- a motif program which uses the GLw widget.  Uses
+		  quad-buffer stereo if a suitable visual can be
+		  found, otherwise tries to use the SGIFullScreenStereo
+		  extension.

@@ -1,0 +1,221 @@
+!! This resource file is unusual in that it is shared by both datplayer and cdplayer.
+!! The MainWindow class name used by both apps is "ScsiPlayer".  Hence, any
+!! resource prefixed by "*ScsiPlayer*" is shared.
+
+
+!! General: Note that resources above the MainWindow level must be prefixed by
+!!	    the application name.
+
+CdPlayer*sgiMode: True
+DatPlayer*sgiMode: True
+*ScsiPlayer*XmTextField.marginHeight: 0
+DatPlayer*keyboardFocusPolicy: explicit
+CdPlayer*keyboardFocusPolicy: explicit
+ScsiPlayer*progressDialog*XmScale*foreground:	SGI_DYNAMIC HighlightColor2
+
+!! from ScsiPlayerApp.c++
+
+*ScsiPlayer*exportingDataMsg:  Exporting Data
+*ScsiPlayer*usageMsg: Usage: %s [-sm] [-nofork] [-device]\n
+*ScsiPlayer*unsucessfulForkMsg: Attempt to fork failed
+*ScsiPlayer*priorityBoostFailedMsg: Priority Boost (schedctl) failed... not running as root.
+*ScsiPlayer*noMediaMsg: No media in drive.
+*ScsiPlayer*dataMediaMsg: Data media in drive.
+*ScsiPlayer*blankMediaMsg: Blank or unrecognized media.
+CdPlayer*noCdromDriveMsg:  Could not find specified CDROM drive.  Exiting...
+
+DatPlayer*noAudioModeMsg: Couldn't put DAT into audio mode.
+DatPlayer*openErrorMsg: Couldn't open
+
+!! from MainWindow.c++
+
+*ScsiPlayer*filePane.labelString:  File
+*ScsiPlayer*filePane.mnemonic:  F
+*ScsiPlayer*ejectItem.labelString:  Eject
+*ScsiPlayer*ejectItem.mnemonic:		E
+*ScsiPlayer*ejectItem.accelerator:	Ctrl<Key>E
+*ScsiPlayer*ejectItem.acceleratorText:	Ctrl+E
+*ScsiPlayer*exitItem.labelString:  Exit
+*ScsiPlayer*exitItem.mnemonic:  x
+*ScsiPlayer*exitItem.accelerator:  Ctrl<Key>Q
+*ScsiPlayer*exitItem.acceleratorText:  Ctrl+Q
+*ScsiPlayer*editPane.labelString:  Edit
+*ScsiPlayer*editPane.mnemonic:  E
+*ScsiPlayer*copyItem.labelString:	Copy Selection
+*ScsiPlayer*copyItem.accelerator:	Ctrl<Key>C
+*ScsiPlayer*copyItem.acceleratorText:	Ctrl+C
+*ScsiPlayer*copyItem.mnemonic:		C
+*ScsiPlayer*selectAllItem.labelString: Select All
+*ScsiPlayer*selectAllItem.accelerator: Ctrl<Key>A
+*ScsiPlayer*selectAllItem.acceleratorText: Ctrl+A
+*ScsiPlayer*selectAllItem.mnemonic: A
+*ScsiPlayer*selectNoneItem.labelString: Select None
+*ScsiPlayer*selectNoneItem.mnemonic: N
+*ScsiPlayer*extendSelectionRightItem.labelString: Extend Selection Right
+*ScsiPlayer*extendSelectionRightItem.accelerator: Shift<Key>Right
+*ScsiPlayer*extendSelectionRightItem.acceleratorText: Shift+->
+*ScsiPlayer*extendSelectionLeftItem.labelString: Extend Selection Left
+*ScsiPlayer*extendSelectionLeftItem.accelerator: Shift<Key>Left
+*ScsiPlayer*extendSelectionLeftItem.acceleratorText: Shift+<-
+
+*ScsiPlayer*viewPane.labelString:  View
+*ScsiPlayer*viewPane.mnemonic:  V
+*ScsiPlayer*viewPane*trackList.labelString: Track List
+*ScsiPlayer*scanDat.labelString:  Continue Scanning DAT
+*ScsiPlayer*rescanDat.labelString:  Rescan DAT
+
+*ScsiPlayer*helpPane.labelString:  Help
+*ScsiPlayer*helpPane.mnemonic:  H
+*ScsiPlayer*help_click_for_help.labelString:  Click For Help
+*ScsiPlayer*help_click_for_help.mnemonic:  C
+*ScsiPlayer*help_click_for_help.accelerator:  Shift<Key>F1
+*ScsiPlayer*help_click_for_help.acceleratorText:  Shift+F1
+*ScsiPlayer*help_overview.labelString:  Overview
+*ScsiPlayer*help_overview.mnemonic:  O
+*ScsiPlayer*help_index.labelString:  Index
+*ScsiPlayer*help_index.mnemonic:  I
+*ScsiPlayer*help_keys_and_short.labelString:  Keys and Shortcuts
+*ScsiPlayer*help_keys_and_short.mnemonic:  K
+*ScsiPlayer*help_prod_info.labelString:  Product Information
+*ScsiPlayer*help_prod_info.mnemonic:  P
+*ScsiPlayer*saveTrackAsItem.labelString:  Save Track As...
+*ScsiPlayer*saveSelectionAsItem.labelString:  Save Selection As...
+*ScsiPlayer*saveSelectionAsItem.accelerator:  Ctrl<Key>S
+*ScsiPlayer*saveSelectionAsItem.acceleratorText:  Ctrl+S
+*ScsiPlayer*saveSelectionAsItem.mnemonic:  S
+*ScsiPlayer*fileSelectionDialog.applyLabelString:  Filter
+*ScsiPlayer*fileSelectionDialog.fileListLabelString:  Files
+*ScsiPlayer*fileSelectionDialog.selectionLabelString: Selection
+
+
+*ScsiPlayer*optionsPane.labelString:  Options
+*ScsiPlayer*optionsPane.mnemonic:  O
+*ScsiPlayer*loopSelection.labelString:  Loop Selection
+*ScsiPlayer*playSelection.labelString:  Play Selection
+*ScsiPlayer*headphones.labelString:  Headphones...
+*ScsiPlayer*repeatOptionsSubMenu.labelString: Repeat Options
+*ScsiPlayer*noRepeatToggle.labelString: No Repeat
+CdPlayer*repeatCdToggle.labelString: Repeat CD
+DatPlayer*repeatCdToggle.labelString: Repeat DAT
+*ScsiPlayer*repeatTrackToggle.labelString: Repeat Track
+
+*ScsiPlayer*headphonesMsg: \
+This option launches an older version of cdplayer which plays through the\n\
+headphone jack of those CDROM drives which have one.\n\n\
+If you select \"OK\", the current application will exit.
+
+!! from NumberDisplay.++
+
+CdPlayer*ScsiPlayer*numberDisplayLabel.fontList:  -*-helvetica-medium-r-normal-*-12-*-*-*-*-*-iso8859-1
+DatPlayer*ScsiPlayer*numberDisplayLabel.fontList:  -*-helvetica-medium-r-normal-*-12-*-*-*-*-*-iso8859-1
+*ScsiPlayer*trackNumberDisplay.numberDisplayLabel.labelString: Track
+*ScsiPlayer*indexNumberDisplay.numberDisplayLabel.labelString: Index
+*ScsiPlayer*absoluteTimeDisplay.numberDisplayLabel.labelString: Absolute
+*ScsiPlayer*remainingTimeDisplay.numberDisplayLabel.labelString: Remaining
+
+!! from PlayerPanel.c++
+
+*ScsiPlayer*indexNumberDisplay.leftOffset: 10
+*ScsiPlayer*absoluteTimeDisplay.leftOffset: 6
+
+!! I have NO idea why the following require the app name to be stuck on the front.
+
+CdPlayer*ScsiPlayer*titleTextF.height: 27
+CdPlayer*ScsiPlayer*titleTextF.marginHeight: 0
+CdPlayer*ScsiPlayer*artistTextF.height: 27
+CdPlayer*ScsiPlayer*artistTextF.marginHeight: 0
+CdPlayer*ScsiPlayer*titleLabel.fontList:  -*-helvetica-medium-r-normal-*-12-*-*-*-*-*-iso8859-1
+CdPlayer*ScsiPlayer*artistLabel.fontList:  -*-helvetica-medium-r-normal-*-12-*-*-*-*-*-iso8859-1
+
+DatPlayer*ScsiPlayer*titleTextF.height: 27
+DatPlayer*ScsiPlayer*titleTextF.marginHeight: 0
+DatPlayer*ScsiPlayer*artistTextF.height: 27
+DatPlayer*ScsiPlayer*artistTextF.marginHeight: 0
+DatPlayer*ScsiPlayer*titleLabel.fontList:  -*-helvetica-medium-r-normal-*-12-*-*-*-*-*-iso8859-1
+DatPlayer*ScsiPlayer*artistLabel.fontList:  -*-helvetica-medium-r-normal-*-12-*-*-*-*-*-iso8859-1
+
+!! These values are actually the default for textfields, but probably need to be
+!! changed for localization if the font widths change.
+
+CdPlayer*ScsiPlayer*titleTextF.columns: 20
+CdPlayer*ScsiPlayer*artistTextF.columns: 20
+DatPlayer*ScsiPlayer*titleTextF.columns: 20
+DatPlayer*ScsiPlayer*artistTextF.columns: 20
+
+*ScsiPlayer*titleLabel.labelString: Title 
+*ScsiPlayer*artistLabel.labelString: Artist
+*ScsiPlayer*trackGridFrame.topOffset: 6
+*ScsiPlayer*timeline*topOffset: 4
+*ScsiPlayer*programTimeDisplay*AvTimeFont: -*-helvetica-medium-r-*-*-24-*-*-*-*-*-*-*
+*ScsiPlayer*logoLabel.topOffset: 3
+
+*ScsiPlayer*buttonSpringBox*topOffset: 4
+
+!! from CdPlayer.c++
+
+*writingTrack: Writing Track %d [%02d:%02d.%d - %02d:%02d.%d] to %s.
+*ScsiPlayer*noSelectionMsg:  You haven't specified a selection.
+*ScsiPlayer*noOutputFileMsg: Unable to open output file.
+*ScsiPlayer*invalidProgramNumberMsg: Invalid program number
+*ScsiPlayer*invalidProgramNumberMsg: Invalid program number
+CdPlayer*cdromBusyMsg: The CDROM drive is busy.
+*ScsiPlayer*writingTrackAsFormatString: Writing Track %d to %s.
+*ScsiPlayer*notEnoughDiskSpaceForSaveMsg: Not enough disk space available for save operation.\nExiting...
+
+!! from DatPlayer.c++
+DatPlayer*datScanningMsg: Scanning the DAT for track Information. \nThis takes about 5 seconds per track.\n\nScanning for Track %d.
+DatPlayer*datScanningButtonLabel: Stop Scan
+DatPlayer*noDatDriveMsg:  Could not find a DAT drive.  Exiting...
+DatPlayer*noDatDriveFromMediadMsg:  Could not obtain exclusive use for DAT drive.  Exiting...
+DatPlayer*couldntOpenDatDriveMsg:  Could not open Dat Drive at %s.\n%s.\n\nExiting...
+DatPlayer*noRewindMsg:  Couldn't rewind.
+DatPlayer*failedProgramSeekMsg: Couldn't seek to program
+!! from TrackBin.c++
+
+DatPlayer*noDragOutMsg:  DragOut not yet implemented for DAT tracks.\nUse \"Save Track As...\" instead.
+*TrackBin*trackTitleString: Track
+*TrackBin*titleTitleString: Title
+*TrackBin*startTitleString: Start
+*TrackBin*durationTitleString: Duration
+*TrackBin*titleFont:  -*-helvetica-medium-r-normal-*-10-*-*-*-*-*-iso8859-1
+*TrackBin*fieldFont:  -*-helvetica-medium-r-normal-*-12-*-*-*-*-*-iso8859-1
+
+CdPlayer*TrackBin*textField.fontList:  -*-helvetica-medium-r-normal-*-12-*-*-*-*-*-iso8859-1
+DatPlayer*TrackBin*textField.fontList:  -*-helvetica-medium-r-normal-*-12-*-*-*-*-*-iso8859-1
+
+!! from Database.c++
+
+*ScsiPlayer*unknownString: <Unknown>
+*ScsiPlayer*unknownTitleString: <Unknown Title>
+*ScsiPlayer*unknownArtistString: <Unknown Artist>
+*ScsiPlayer*unknownTracksString: <Unknown Number of Tracks>
+*ScsiPlayer*unknownTitleString:	<Unknown Title>
+*ScsiPlayer*unknownArtistString: <Unknown Artist>
+*ScsiPlayer*unknownDurationString: <Unknown Album Duration>
+*ScsiPlayer*unknownTrackNameString: <Unknown Track Name>
+*ScsiPlayer*unknownTrackStartString: <Unknown Track Start>
+*ScsiPlayer*unknownTrackDurationString: <Unknown Track Duration>
+
+!! Used by the WorldView folks, but otherwise defaulted.
+
+!! *cancelLabelString:
+!! *fileSelectionDialog*selectionLabelString:
+!! *fileSelectionDialog.applyLabelString:
+!! *fileSelectionDialog.fileListLabelString:
+!! *filterDialog*selection.labelString:
+!! *filterDialog.applyLabelString:
+!! *helpMenu.helpIndexMenuItem.labelString:
+!! *helpMenu.helpIndexMenuItem.mnemonic:
+!! *helpMenu.helpKeysMenuItem.labelString:
+!! *helpMenu.helpKeysMenuItem.mnemonic:
+!! *helpMenu.helpOnContextMenuItem.accelerator:
+!! *helpMenu.helpOnContextMenuItem.acceleratorText:
+!! *helpMenu.helpOnContextMenuItem.labelString:
+!! *helpMenu.helpOnContextMenuItem.mnemonic:
+!! *helpMenu.helpOverviewMenuItem.labelString:
+!! *helpMenu.helpOverviewMenuItem.mnemonic:
+!! *helpMenu.helpVersionMenuItem.labelString:
+!! *helpMenu.helpVersionMenuItem.mnemonic:
+!! *helpMenu.labelString:
+!! *helpMenu.mnemonic:
+!! *ScsiPlayer*Track List.labelString:

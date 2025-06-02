@@ -1,0 +1,22 @@
+static char *ejectPixmap[] = {
+/* width height ncolors chars_per_pixel */
+"18 10 4 1",
+/* colors */
+/*"` c #8A8A8A s fillcolor",*/
+"` c #000000 s fillcolor",
+"a c #999999 s background",
+"b c #333333 s darkShadow",
+"c c #DDDDDD s lightShadow",
+/* pixels */
+"aaaaaaaaaaaaaaaaaa",
+"aaaaaaab`aaaaaaaaa",
+"aaaaaab```aaaaaaaa",
+"aaaaab`````aaaaaaa",
+"aaaab```````aaaaaa",
+"aaab`````````aaaaa",
+"aab```````````aaaa",
+"ab`````````````aaa",
+"bcccccccccccccccaa",
+"aaaaaaaaaaaaaaaaaa",
+};
+

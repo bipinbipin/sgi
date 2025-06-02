@@ -1,0 +1,14 @@
+compdecomp: compress and decompress realtime example
+----------------------------------------------------
+
+JPEG compresses video from the default video input port (as 
+specified on vcp) into main memory, then decompresses that
+data out of main memory to the default video output port.
+
+Presents a slider bar on the graphics monitor that allows 
+the user to select the compression ratio, in the range 
+2:1 (best) to 75:1 (poor).
+
+The video output display is how the source data would look
+compressed and decompressed at the specified compression
+ratio.

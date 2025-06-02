@@ -1,0 +1,4 @@
+"movie2ps" is a program that converts a movie into a PostScript file
+that can be printed.  The movie frames are arrayed in a grid, 48 per
+page.  This program is ideal for printing movies from the
+"sceneDetector" program (in /usr/share/src/dmedia/movie/sceneDetector).

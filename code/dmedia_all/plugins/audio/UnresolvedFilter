@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+
+while ( <> ) {
+    $skip = 0;
+
+    $skip = 1  if ( /^PRX_GetData$/ );
+    $skip = 1  if ( /^PRX_SetData$/ );
+    $skip = 1  if ( /^PRX_InitData$/ );
+    $skip = 1  if ( /^PRX_GetState$/ );
+    $skip = 1  if ( /^PRX_GetAudioFromClip$/ );
+    $skip = 1  if ( /^PRX_GetVideoFromClip$/ );
+    $skip = 1  if ( /^PRX_GetVideoFromTrack$/ );
+    $skip = 1  if ( /^PRX_GetAppShell$/ );
+    $skip = 1  if ( /^PRX_DispatchEvent$/ );
+    $skip = 1  if ( /NON-QUICKSTART/ );
+
+    if ( ! $skip ) {
+	print;
+    }
+}

@@ -1,0 +1,7057 @@
+%!PS-Adobe-3.0
+%%BoundingBox: (atend)
+%%Pages: (atend)
+%%PageOrder: (atend)
+%%DocumentFonts: (atend)
+%%Creator: Frame 5.0
+%%DocumentData: Clean7Bit
+%%EndComments
+%%BeginProlog
+%
+% Frame ps_prolog 5.0, for use with Frame 5.0 products
+% This ps_prolog file is Copyright (c) 1986-1995 Frame Technology
+% Corporation.  All rights reserved.  This ps_prolog file may be
+% freely copied and distributed in conjunction with documents created
+% using FrameMaker, FrameMaker/SGML and FrameViewer as long as this 
+% copyright notice is preserved.
+%
+% FrameMaker users specify the proper paper size for each print job in the
+% "Print" dialog's "Printer Paper Size" "Width" and "Height~ fields.  If the
+% printer that the PS file is sent to does not support the requested paper
+% size, or if there is no paper tray of the proper size currently installed, 
+% then the job will not be printed.  The following flag, if set to true, will
+% cause the job to print on the default paper in such cases.
+/FMAllowPaperSizeMismatch            false def
+%
+% Frame products normally print colors as their true color on a color printer
+% or as shades of gray, based on luminance, on a black-and white printer. The
+% following flag, if set to true, forces all non-white colors to print as pure
+% black. This has no effect on bitmap images.
+/FMPrintAllColorsAsBlack             false def
+%
+% Frame products can either set their own line screens or use a printer's 
+% default settings. Three flags below control this separately for no 
+% separations, spot separations and process separations. If a flag
+% is true, then the default printer settings will not be changed. If it is
+% false, Frame products will use their own settings from a table based on
+% the printer's resolution.
+/FMUseDefaultNoSeparationScreen      true  def
+/FMUseDefaultSpotSeparationScreen    true  def
+/FMUseDefaultProcessSeparationScreen false def
+%
+% For any given PostScript printer resolution, Frame products have two sets of 
+% screen angles and frequencies for printing process separations, which are 
+% recomended by Adobe. The following variable chooses the higher frequencies
+% when set to true or the lower frequencies when set to false. This is only
+% effective if the appropriate FMUseDefault...SeparationScreen flag is false.
+/FMUseHighFrequencyScreens true def
+%
+% The following is a set of predefined optimal frequencies and angles for various
+% common dpi settings. This is taken from "Advances in Color Separation Using
+% PostScript Software Technology," from Adobe Systems (3/13/89 P.N. LPS 0043)
+% and corrolated with information which is in various PPD (4.0) files.
+%
+% The "dpiranges" figure is the minimum dots per inch device resolution which
+% can support this setting. The "low" and "high" values are controlled by the
+% setting of the FMUseHighFrequencyScreens flag above. The "TDot" flags control
+% the use of the "Yellow Triple Dot" feature whereby the frequency id divided by
+% three, but the dot function is "trippled" giving a block of 3x3 dots per cell.
+%
+% PatFreq is a compromise pattern frequency for ps Level 2 printers which is close
+% to the ideal WYSIWYG pattern frequency of 9 repetitions/inch but does not beat
+% (too badly) against the screen frequencies of any separations for that DPI.
+/dpiranges   [  2540    2400    1693     1270    1200     635      600      0      ] def
+/CMLowFreqs  [ 100.402  94.8683 89.2289 100.402  94.8683  66.9349  63.2456 47.4342 ] def
+/YLowFreqs   [  95.25   90.0    84.65    95.25   90.0     70.5556  66.6667 50.0    ] def
+/KLowFreqs   [  89.8026 84.8528 79.8088  89.8026 84.8528  74.8355  70.7107 53.033  ] def
+/CLowAngles  [  71.5651 71.5651 71.5651 71.5651  71.5651  71.5651  71.5651 71.5651 ] def
+/MLowAngles  [  18.4349 18.4349 18.4349 18.4349  18.4349  18.4349  18.4349 18.4349 ] def
+/YLowTDot    [  true    true    false    true    true     false    false   false   ] def
+/CMHighFreqs [ 133.87  126.491 133.843  108.503 102.523  100.402   94.8683 63.2456 ] def
+/YHighFreqs  [ 127.0   120.0   126.975  115.455 109.091   95.25    90.0    60.0    ] def
+/KHighFreqs  [ 119.737 113.137 119.713  128.289 121.218   89.8026  84.8528 63.6395 ] def
+/CHighAngles [  71.5651 71.5651 71.5651  70.0169 70.0169  71.5651  71.5651 71.5651 ] def
+/MHighAngles [  18.4349 18.4349 18.4349  19.9831 19.9831  18.4349  18.4349 18.4349 ] def
+/YHighTDot   [  false   false   true     false   false    true     true    false   ] def
+/PatFreq     [	10.5833 10.0     9.4055  10.5833 10.0	  10.5833  10.0	   9.375   ] def
+%
+% PostScript Level 2 printers contain an "Accurate Screens" feature which can
+% improve process separation rendering at the expense of compute time. This 
+% flag is ignored by PostScript Level 1 printers.
+/FMUseAcccurateScreens true def
+%
+% The following PostScript procedure defines the spot function that Frame
+% products will use for process separations. You may un-comment-out one of
+% the alternative functions below, or use your own.
+%
+% Dot function
+/FMSpotFunction {abs exch abs 2 copy add 1 gt 
+		{1 sub dup mul exch 1 sub dup mul add 1 sub }
+		{dup mul exch dup mul add 1 exch sub }ifelse } def
+%
+% Line function
+% /FMSpotFunction { pop } def
+%
+% Elipse function
+% /FMSpotFunction { dup 5 mul 8 div mul exch dup mul exch add 
+%		sqrt 1 exch sub } def
+%
+%
+/FMversion (5.0) def 
+/fMLevel1 /languagelevel where {pop languagelevel} {1} ifelse 2 lt def
+/FMPColor
+	fMLevel1 {
+		false
+		/colorimage where {pop pop true} if
+	} {
+		true
+	} ifelse
+def
+/FrameDict 400 dict def 
+systemdict /errordict known not {/errordict 10 dict def
+		errordict /rangecheck {stop} put} if
+% The readline in PS 23.0 doesn't recognize cr's as nl's on AppleTalk
+FrameDict /tmprangecheck errordict /rangecheck get put 
+errordict /rangecheck {FrameDict /bug true put} put 
+FrameDict /bug false put 
+mark 
+% Some PS machines read past the CR, so keep the following 3 lines together!
+currentfile 5 string readline
+00
+0000000000
+cleartomark 
+errordict /rangecheck FrameDict /tmprangecheck get put 
+FrameDict /bug get { 
+	/readline {
+		/gstring exch def
+		/gfile exch def
+		/gindex 0 def
+		{
+			gfile read pop 
+			dup 10 eq {exit} if 
+			dup 13 eq {exit} if 
+			gstring exch gindex exch put 
+			/gindex gindex 1 add def 
+		} loop
+		pop 
+		gstring 0 gindex getinterval true 
+		} bind def
+	} if
+/FMshowpage /showpage load def
+/FMquit /quit load def
+/FMFAILURE { 
+	dup = flush 
+	FMshowpage 
+	/Helvetica findfont 12 scalefont setfont
+	72 200 moveto show
+	72 220 moveto show
+	FMshowpage 
+	FMquit 
+	} def 
+/FMVERSION {
+	FMversion ne {
+		(Frame product version does not match ps_prolog!  Check installation;)
+		(also check ~/fminit and ./fminit for old versions) FMFAILURE
+		} if
+	} def 
+/FMBADEPSF { 
+	(Adobe's PostScript Language Reference Manual, 2nd Edition, section H.2.4)
+	(says your EPS file is not valid, as it calls X              )
+	dup dup (X) search pop exch pop exch pop length 
+	5 -1 roll 
+	putinterval 
+	FMFAILURE
+	} def
+/fmConcatProcs
+	{
+	/proc2 exch cvlit def/proc1 exch cvlit def/newproc proc1 length proc2 length add array def
+	newproc 0 proc1 putinterval newproc proc1 length proc2 putinterval newproc cvx
+}def
+FrameDict begin [
+	/ALDsave
+	/FMdicttop
+	/FMoptop
+	/FMpointsize
+	/FMsaveobject
+	/b
+	/bitmapsave
+	/blut
+	/bpside
+	/bs
+	/bstring
+	/bwidth
+	/c
+	/cf
+	/cs
+	/cynu
+	/depth
+	/edown
+	/fh
+	/fillvals
+	/fw
+	/fx
+	/fy
+	/g
+	/gfile
+	/gindex
+	/grnt
+	/gryt
+	/gstring
+	/height
+	/hh
+	/i
+	/im
+	/indx
+	/is
+	/k
+	/kk
+	/landscape
+	/lb
+	/len
+	/llx
+	/lly
+	/m
+	/magu
+	/manualfeed
+	/n
+	/offbits
+	/onbits
+	/organgle
+	/orgbangle
+	/orgbfreq
+	/orgbproc
+	/orgbxfer
+	/orgfreq
+	/orggangle
+	/orggfreq
+	/orggproc
+	/orggxfer
+	/orgmatrix
+	/orgproc
+	/orgrangle
+	/orgrfreq
+	/orgrproc
+	/orgrxfer
+	/orgxfer
+	/pagesave
+	/paperheight
+	/papersizedict
+	/paperwidth
+	/pos
+	/pwid
+	/r
+	/rad
+	/redt
+	/sl
+	/str
+	/tran
+	/u
+	/urx
+	/ury
+	/val
+	/width
+	/width
+	/ws
+	/ww
+	/x
+	/x1
+	/x2
+	/xindex
+	/xpoint
+	/xscale
+	/xx
+	/y
+	/y1
+	/y2
+	/yelu
+	/yindex
+	/ypoint
+	/yscale
+	/yy
+] { 0 def } forall
+/FmBD {bind def} bind def
+systemdict /pdfmark known {
+	/fMAcrobat true def
+	
+	/FmPD /pdfmark load def
+	
+	
+	/FmPT /show load def
+	
+	
+	currentdistillerparams /CoreDistVersion get 2000 ge {
+	
+		
+		/FmPD2 /pdfmark load def
+		
+		
+		
+		
+		
+		/FmPA { mark exch /Dest exch 5 3 roll 
+				/View [ /XYZ null 6 -2 roll FmDC exch pop null] /DEST FmPD 
+		}FmBD
+	} {
+		
+		/FmPD2 /cleartomark load def
+		/FmPA {pop pop pop}FmBD
+	} ifelse
+} {
+	
+	/fMAcrobat false def
+	/FmPD /cleartomark load def
+	/FmPD2 /cleartomark load def
+	/FmPT /pop load def
+	/FmPA {pop pop pop}FmBD
+} ifelse
+/FmDC {
+	transform fMDefaultMatrix itransform cvi exch cvi exch
+}FmBD
+/FmBx {
+	dup 3 index lt {3 1 roll exch} if 
+	1 index 4 index lt {4 -1 roll 3 1 roll exch 4 1 roll} if
+}FmBD
+/FMnone 0 def
+/FMcyan 1 def
+/FMmagenta 2 def
+/FMyellow 3 def
+/FMblack 4 def
+/FMcustom 5 def
+/fMNegative false def 
+/FrameSepIs FMnone def 
+/FrameSepBlack 0 def
+/FrameSepYellow 0 def
+/FrameSepMagenta 0 def
+/FrameSepCyan 0 def
+/FrameSepRed 1 def
+/FrameSepGreen 1 def
+/FrameSepBlue 1 def
+/FrameCurGray 1 def
+/FrameCurPat null def
+/FrameCurColors [ 0 0 0 1 0 0 0 ] def 
+/FrameColorEpsilon .001 def	
+/eqepsilon {		
+	sub dup 0 lt {neg} if
+	FrameColorEpsilon le
+} bind def
+/FrameCmpColorsCMYK { 
+	2 copy 0 get exch 0 get eqepsilon {
+		2 copy 1 get exch 1 get eqepsilon {
+			2 copy 2 get exch 2 get eqepsilon {
+				3 get exch 3 get eqepsilon
+			} {pop pop false} ifelse
+		}{pop pop false} ifelse
+	} {pop pop false} ifelse
+} bind def
+/FrameCmpColorsRGB { 
+	2 copy 4 get exch 0 get eqepsilon {
+		2 copy 5 get exch 1 get eqepsilon {
+			6 get exch 2 get eqepsilon
+		}{pop pop false} ifelse
+	} {pop pop false} ifelse
+} bind def
+/RGBtoCMYK { 
+	1 exch sub 
+	3 1 roll 
+	1 exch sub 
+	3 1 roll 
+	1 exch sub 
+	3 1 roll 
+	3 copy 
+	2 copy 
+	le { pop } { exch pop } ifelse 
+	2 copy 
+	le { pop } { exch pop } ifelse 
+	dup dup dup 
+	6 1 roll 
+	4 1 roll 
+	7 1 roll 
+	sub 
+	6 1 roll 
+	sub 
+	5 1 roll 
+	sub 
+	4 1 roll 
+} bind def
+/CMYKtoRGB { 
+	dup dup 4 -1 roll add 						  
+	5 1 roll 3 -1 roll add 						  
+	4 1 roll add 								  
+	1 exch sub dup 0 lt {pop 0} if 3 1 roll 	  
+	1 exch sub dup 0 lt {pop 0} if exch 	      
+	1 exch sub dup 0 lt {pop 0} if exch	  		  
+} bind def
+/FrameSepInit {
+	1.0 RealSetgray
+} bind def
+/FrameSetSepColor { 
+	/FrameSepBlue exch def
+	/FrameSepGreen exch def
+	/FrameSepRed exch def
+	/FrameSepBlack exch def
+	/FrameSepYellow exch def
+	/FrameSepMagenta exch def
+	/FrameSepCyan exch def
+	/FrameSepIs FMcustom def
+	setCurrentScreen	
+} bind def
+/FrameSetCyan {
+	/FrameSepBlue 1.0 def
+	/FrameSepGreen 1.0 def
+	/FrameSepRed 0.0 def
+	/FrameSepBlack 0.0 def
+	/FrameSepYellow 0.0 def
+	/FrameSepMagenta 0.0 def
+	/FrameSepCyan 1.0 def
+	/FrameSepIs FMcyan def
+	setCurrentScreen	
+} bind def
+ 
+/FrameSetMagenta {
+	/FrameSepBlue 1.0 def
+	/FrameSepGreen 0.0 def
+	/FrameSepRed 1.0 def
+	/FrameSepBlack 0.0 def
+	/FrameSepYellow 0.0 def
+	/FrameSepMagenta 1.0 def
+	/FrameSepCyan 0.0 def
+	/FrameSepIs FMmagenta def
+	setCurrentScreen
+} bind def
+ 
+/FrameSetYellow {
+	/FrameSepBlue 0.0 def
+	/FrameSepGreen 1.0 def
+	/FrameSepRed 1.0 def
+	/FrameSepBlack 0.0 def
+	/FrameSepYellow 1.0 def
+	/FrameSepMagenta 0.0 def
+	/FrameSepCyan 0.0 def
+	/FrameSepIs FMyellow def
+	setCurrentScreen
+} bind def
+ 
+/FrameSetBlack {
+	/FrameSepBlue 0.0 def
+	/FrameSepGreen 0.0 def
+	/FrameSepRed 0.0 def
+	/FrameSepBlack 1.0 def
+	/FrameSepYellow 0.0 def
+	/FrameSepMagenta 0.0 def
+	/FrameSepCyan 0.0 def
+	/FrameSepIs FMblack def
+	setCurrentScreen
+} bind def
+ 
+/FrameNoSep { 
+	/FrameSepIs FMnone def
+	setCurrentScreen
+} bind def
+/FrameSetSepColors { 
+	FrameDict begin
+	[ exch 1 add 1 roll ]
+	/FrameSepColors  
+	exch def end
+	} bind def
+/FrameColorInSepListCMYK { 
+	FrameSepColors {  
+       		exch dup 3 -1 roll 
+       		FrameCmpColorsCMYK 
+       		{ pop true exit } if
+    	} forall 
+	dup true ne {pop false} if
+	} bind def
+/FrameColorInSepListRGB { 
+	FrameSepColors {  
+       		exch dup 3 -1 roll 
+       		FrameCmpColorsRGB 
+       		{ pop true exit } if
+    	} forall 
+	dup true ne {pop false} if
+	} bind def
+/RealSetgray /setgray load def
+/RealSetrgbcolor /setrgbcolor load def
+/RealSethsbcolor /sethsbcolor load def
+end 
+/setgray { 
+	FrameDict begin
+	FrameSepIs FMnone eq
+		{ RealSetgray } 
+		{ 
+		FrameSepIs FMblack eq 
+			{ RealSetgray } 
+			{ FrameSepIs FMcustom eq 
+			  FrameSepRed 0 eq and
+			  FrameSepGreen 0 eq and
+			  FrameSepBlue 0 eq and {
+			  	RealSetgray
+			  } {
+				1 RealSetgray pop 
+			  } ifelse
+			} ifelse
+		} ifelse
+	end
+} bind def
+/setrgbcolor { 
+	FrameDict begin
+	FrameSepIs FMnone eq
+	{  RealSetrgbcolor }
+	{
+		3 copy [ 4 1 roll ] 
+		FrameColorInSepListRGB
+		{
+				FrameSepBlue eq exch 
+			 	FrameSepGreen eq and exch 
+			 	FrameSepRed eq and
+			 	{ 0 } { 1 } ifelse
+		}
+		{
+			FMPColor {
+				RealSetrgbcolor
+				currentcmykcolor
+			} {
+				RGBtoCMYK
+			} ifelse
+			FrameSepIs FMblack eq
+			{1.0 exch sub 4 1 roll pop pop pop} {
+			FrameSepIs FMyellow eq
+			{pop 1.0 exch sub 3 1 roll pop pop} {
+			FrameSepIs FMmagenta eq
+			{pop pop 1.0 exch sub exch pop } {
+			FrameSepIs FMcyan eq
+			{pop pop pop 1.0 exch sub } 
+			{pop pop pop pop 1} ifelse } ifelse } ifelse } ifelse 
+		} ifelse
+		RealSetgray
+	} 
+	ifelse
+	end
+} bind def
+/sethsbcolor {
+	FrameDict begin
+	FrameSepIs FMnone eq 
+	{ RealSethsbcolor } 
+	{
+		RealSethsbcolor 
+		currentrgbcolor  
+		setrgbcolor 
+	} 
+	ifelse
+	end
+} bind def
+FrameDict begin
+/setcmykcolor where {
+	pop /RealSetcmykcolor /setcmykcolor load def
+} {
+	/RealSetcmykcolor {
+		4 1 roll
+		3 { 3 index add 0 max 1 min 1 exch sub 3 1 roll} repeat 
+		RealSetrgbcolor pop
+	} bind def
+} ifelse
+userdict /setcmykcolor { 
+		FrameDict begin
+		FrameSepIs FMnone eq
+		{ RealSetcmykcolor } 
+		{
+			4 copy [ 5 1 roll ]
+			FrameColorInSepListCMYK
+			{
+				FrameSepBlack eq exch 
+				FrameSepYellow eq and exch 
+				FrameSepMagenta eq and exch 
+				FrameSepCyan eq and 
+				{ 0 } { 1 } ifelse
+			}
+			{
+				FrameSepIs FMblack eq
+				{1.0 exch sub 4 1 roll pop pop pop} {
+				FrameSepIs FMyellow eq
+				{pop 1.0 exch sub 3 1 roll pop pop} {
+				FrameSepIs FMmagenta eq
+				{pop pop 1.0 exch sub exch pop } {
+				FrameSepIs FMcyan eq
+				{pop pop pop 1.0 exch sub } 
+				{pop pop pop pop 1} ifelse } ifelse } ifelse } ifelse 
+			} ifelse
+			RealSetgray
+		}
+		ifelse
+		end
+	} bind put
+fMLevel1 { 
+	
+	
+	
+	/patScreenDict 7 dict dup begin
+		<0f1e3c78f0e1c387> [ 45  { pop } {exch pop} 		.5   2 sqrt] FmBD
+		<0f87c3e1f0783c1e> [ 135 { pop } {exch pop}			.5   2 sqrt] FmBD
+		<cccccccccccccccc> [ 0   { pop } dup				.5   2	   ] FmBD
+		<ffff0000ffff0000> [ 90  { pop } dup				.5   2	   ] FmBD
+		<8142241818244281> [ 45  { 2 copy lt {exch} if pop}	dup .75  2 sqrt] FmBD
+		<03060c183060c081> [ 45  { pop } {exch pop}			.875 2 sqrt] FmBD
+		<8040201008040201> [ 135 { pop } {exch pop}			.875 2 sqrt] FmBD
+	end def
+} { 
+	
+	/patProcDict 5 dict dup begin
+		<0f1e3c78f0e1c387> { 3 setlinewidth -1 -1 moveto 9 9 lineto stroke 
+											4 -4 moveto 12 4 lineto stroke
+											-4 4 moveto 4 12 lineto stroke} bind def
+		<0f87c3e1f0783c1e> { 3 setlinewidth -1 9 moveto 9 -1 lineto stroke 
+											-4 4 moveto 4 -4 lineto stroke
+											4 12 moveto 12 4 lineto stroke} bind def
+		<8142241818244281> { 1 setlinewidth -1 9 moveto 9 -1 lineto stroke
+											-1 -1 moveto 9 9 lineto stroke } bind def
+		<03060c183060c081> { 1 setlinewidth -1 -1 moveto 9 9 lineto stroke 
+											4 -4 moveto 12 4 lineto stroke
+											-4 4 moveto 4 12 lineto stroke} bind def
+		<8040201008040201> { 1 setlinewidth -1 9 moveto 9 -1 lineto stroke 
+											-4 4 moveto 4 -4 lineto stroke
+											4 12 moveto 12 4 lineto stroke} bind def
+	end def
+	/patDict 15 dict dup begin
+		/PatternType 1 def		
+		/PaintType 2 def		
+		/TilingType 3 def		
+		/BBox [ 0 0 8 8 ] def 	
+		/XStep 8 def			
+		/YStep 8 def			
+		/PaintProc {
+			begin
+			patProcDict bstring known {
+				patProcDict bstring get exec
+			} {
+				8 8 true [1 0 0 -1 0 8] bstring imagemask
+			} ifelse
+			end
+		} bind def
+	end def
+} ifelse
+/combineColor {
+    FrameSepIs FMnone eq
+	{
+		graymode fMLevel1 or not {
+			
+			[/Pattern [/DeviceCMYK]] setcolorspace
+			FrameCurColors 0 4 getinterval aload pop FrameCurPat setcolor
+		} {
+			FrameCurColors 3 get 1.0 ge {
+				FrameCurGray RealSetgray
+			} {
+				fMAcrobat not FMPColor graymode and and {
+					0 1 3 { 
+						FrameCurColors exch get
+						1 FrameCurGray sub mul
+					} for
+					RealSetcmykcolor
+				} {
+					4 1 6 {
+						FrameCurColors exch get
+						graymode {
+							1 exch sub 1 FrameCurGray sub mul 1 exch sub
+						} {
+							1.0 lt {FrameCurGray} {1} ifelse
+						} ifelse
+					} for
+					RealSetrgbcolor
+				} ifelse
+			} ifelse
+		} ifelse
+	} { 
+		FrameCurColors 0 4 getinterval aload
+		FrameColorInSepListCMYK {
+			FrameSepBlack eq exch 
+			FrameSepYellow eq and exch 
+			FrameSepMagenta eq and exch 
+			FrameSepCyan eq and
+			FrameSepIs FMcustom eq and
+			{ FrameCurGray } { 1 } ifelse
+		} {
+			FrameSepIs FMblack eq
+			{FrameCurGray 1.0 exch sub mul 1.0 exch sub 4 1 roll pop pop pop} {
+			FrameSepIs FMyellow eq
+			{pop FrameCurGray 1.0 exch sub mul 1.0 exch sub 3 1 roll pop pop} {
+			FrameSepIs FMmagenta eq
+			{pop pop FrameCurGray 1.0 exch sub mul 1.0 exch sub exch pop } {
+			FrameSepIs FMcyan eq
+			{pop pop pop FrameCurGray 1.0 exch sub mul 1.0 exch sub } 
+			{pop pop pop pop 1} ifelse } ifelse } ifelse } ifelse 
+		} ifelse
+		graymode fMLevel1 or not {
+			
+			[/Pattern [/DeviceGray]] setcolorspace
+			FrameCurPat setcolor
+		} { 
+			graymode not fMLevel1 and {
+				
+				dup 1 lt {pop FrameCurGray} if
+			} if
+			RealSetgray
+		} ifelse
+	} ifelse
+} bind def
+/savematrix {
+	orgmatrix currentmatrix pop
+	} bind def
+/restorematrix {
+	orgmatrix setmatrix
+	} bind def
+/fMDefaultMatrix matrix defaultmatrix def
+/fMatrix2 matrix def
+/dpi    72 0 fMDefaultMatrix dtransform
+    dup mul exch   dup mul add   sqrt def
+	
+/freq dpi dup 72 div round dup 0 eq {pop 1} if 8 mul div def
+/sangle 1 0 fMDefaultMatrix dtransform exch atan def
+	sangle fMatrix2 rotate 
+	fMDefaultMatrix fMatrix2 concatmatrix 
+	dup 0 get /sflipx exch def
+	    3 get /sflipy exch def
+/screenIndex {
+	0 1 dpiranges length 1 sub { dup dpiranges exch get 1 sub dpi le {exit} {pop} ifelse } for
+} bind def
+/getCyanScreen {
+	FMUseHighFrequencyScreens { CHighAngles CMHighFreqs} {CLowAngles CMLowFreqs} ifelse
+		screenIndex dup 3 1 roll get 3 1 roll get /FMSpotFunction load
+} bind def
+/getMagentaScreen {
+	FMUseHighFrequencyScreens { MHighAngles CMHighFreqs } {MLowAngles CMLowFreqs} ifelse
+		screenIndex dup 3 1 roll get 3 1 roll get /FMSpotFunction load
+} bind def
+/getYellowScreen {
+	FMUseHighFrequencyScreens { YHighTDot YHighFreqs} { YLowTDot YLowFreqs } ifelse
+		screenIndex dup 3 1 roll get 3 1 roll get { 3 div
+			{2 { 1 add 2 div 3 mul dup floor sub 2 mul 1 sub exch} repeat
+			FMSpotFunction } } {/FMSpotFunction load } ifelse
+			0.0 exch
+} bind def
+/getBlackScreen  {
+	FMUseHighFrequencyScreens { KHighFreqs } { KLowFreqs } ifelse
+		screenIndex get 45.0 /FMSpotFunction load 
+} bind def
+/getSpotScreen {
+	getBlackScreen
+} bind def
+/getCompositeScreen {
+	getBlackScreen
+} bind def
+/FMSetScreen 
+	fMLevel1 { /setscreen load 
+	}{ {
+		8 dict begin
+		/HalftoneType 1 def
+		/SpotFunction exch def
+		/Angle exch def
+		/Frequency exch def
+		/AccurateScreens FMUseAcccurateScreens def
+		currentdict end sethalftone
+	} bind } ifelse
+def
+/setDefaultScreen {
+	FMPColor {
+		orgrxfer cvx orggxfer cvx orgbxfer cvx orgxfer cvx setcolortransfer
+	}
+	{
+		orgxfer cvx settransfer
+	} ifelse
+	orgfreq organgle orgproc cvx setscreen
+} bind def
+/setCurrentScreen {
+	FrameSepIs FMnone eq {
+		FMUseDefaultNoSeparationScreen {
+			setDefaultScreen
+		} {
+			getCompositeScreen FMSetScreen
+		} ifelse
+	} {
+		FrameSepIs FMcustom eq {
+			FMUseDefaultSpotSeparationScreen {
+				setDefaultScreen
+			} {
+				getSpotScreen FMSetScreen
+			} ifelse
+		} {
+			FMUseDefaultProcessSeparationScreen {
+				setDefaultScreen
+			} {
+				FrameSepIs FMcyan eq {
+					getCyanScreen FMSetScreen
+				} {
+					FrameSepIs FMmagenta eq {
+						getMagentaScreen FMSetScreen
+					} {
+						FrameSepIs FMyellow eq {
+							getYellowScreen FMSetScreen
+						} {
+							getBlackScreen FMSetScreen
+						} ifelse
+					} ifelse
+				} ifelse
+			} ifelse
+		} ifelse
+	} ifelse 
+} bind def
+end
+	
+/FMDOCUMENT { 
+	array /FMfonts exch def 
+	/#copies exch def
+	FrameDict begin
+	0 ne /manualfeed exch def
+	/paperheight exch def
+	/paperwidth exch def
+	0 ne /fMNegative exch def 
+	0 ne /edown exch def 
+	/yscale exch def
+	/xscale exch def
+	fMLevel1 {
+		manualfeed {setmanualfeed} if
+		/FMdicttop countdictstack 1 add def 
+		/FMoptop count def 
+		setpapername 
+		manualfeed {true} {papersize} ifelse 
+		{manualpapersize} {false} ifelse 
+		{desperatepapersize} {false} ifelse 
+		{papersizefailure} if
+		count -1 FMoptop {pop pop} for
+		countdictstack -1 FMdicttop {pop end} for 
+		}
+		{2 dict
+		 dup /PageSize [paperwidth paperheight] put
+		 manualfeed {dup /ManualFeed manualfeed put} if
+		 {setpagedevice} stopped {papersizefailure} if
+		}
+	ifelse 
+	
+	FMPColor {
+		currentcolorscreen
+			cvlit /orgproc exch def
+				  /organgle exch def 
+				  /orgfreq exch def
+			cvlit /orgbproc exch def
+				  /orgbangle exch def 
+				  /orgbfreq exch def
+			cvlit /orggproc exch def
+				  /orggangle exch def 
+				  /orggfreq exch def
+			cvlit /orgrproc exch def
+				  /orgrangle exch def 
+				  /orgrfreq exch def
+			currentcolortransfer 
+			fMNegative {
+				1 1 4 { 
+					pop { 1 exch sub } fmConcatProcs 4 1 roll
+				} for
+				4 copy
+				setcolortransfer
+			} if
+			cvlit /orgxfer exch def
+			cvlit /orgbxfer exch def
+			cvlit /orggxfer exch def
+			cvlit /orgrxfer exch def
+	} {
+		currentscreen 
+			cvlit /orgproc exch def
+				  /organgle exch def 
+				  /orgfreq exch def
+				  
+		currenttransfer 
+		fMNegative {
+			{ 1 exch sub } fmConcatProcs
+			dup settransfer
+		} if 
+		cvlit /orgxfer exch def
+	} ifelse
+	end 
+} def 
+/FMBEGINPAGE { 
+	FrameDict begin 
+	/pagesave save def
+	3.86 setmiterlimit
+	/landscape exch 0 ne def
+	landscape { 
+		90 rotate 0 exch dup /pwid exch def neg translate pop 
+	}{
+		pop /pwid exch def
+	} ifelse
+	edown { [-1 0 0 1 pwid 0] concat } if
+	0 0 moveto paperwidth 0 lineto paperwidth paperheight lineto 
+	0 paperheight lineto 0 0 lineto 1 setgray fill
+	xscale yscale scale
+	/orgmatrix matrix def
+	gsave 
+} def 
+/FMENDPAGE {
+	grestore 
+	pagesave restore
+	end 
+	showpage
+	} def 
+/FMFONTDEFINE { 
+	FrameDict begin
+	findfont 
+	ReEncode 
+	1 index exch 
+	definefont 
+	FMfonts 3 1 roll 
+	put
+	end 
+	} def 
+/FMFILLS {
+	FrameDict begin dup
+	array /fillvals exch def
+	dict /patCache exch def
+	end 
+	} def 
+/FMFILL {
+	FrameDict begin
+	 fillvals 3 1 roll put
+	end 
+	} def 
+/FMNORMALIZEGRAPHICS { 
+	newpath
+	1 setlinewidth
+	0 setlinecap
+	0 0 0 sethsbcolor
+	0 setgray 
+	} bind def
+/FMBEGINEPSF { 
+	end 
+	/FMEPSF save def 
+	/showpage {} def 
+% See Adobe's "PostScript Language Reference Manual, 2nd Edition", page 714.
+% "...the following operators MUST NOT be used in an EPS file:" (emphasis ours)
+	/banddevice {(banddevice) FMBADEPSF} def
+	/clear {(clear) FMBADEPSF} def
+	/cleardictstack {(cleardictstack) FMBADEPSF} def 
+	/copypage {(copypage) FMBADEPSF} def
+	/erasepage {(erasepage) FMBADEPSF} def
+	/exitserver {(exitserver) FMBADEPSF} def
+	/framedevice {(framedevice) FMBADEPSF} def
+	/grestoreall {(grestoreall) FMBADEPSF} def
+	/initclip {(initclip) FMBADEPSF} def
+	/initgraphics {(initgraphics) FMBADEPSF} def
+	/quit {(quit) FMBADEPSF} def
+	/renderbands {(renderbands) FMBADEPSF} def
+	/setglobal {(setglobal) FMBADEPSF} def
+	/setpagedevice {(setpagedevice) FMBADEPSF} def
+	/setshared {(setshared) FMBADEPSF} def
+	/startjob {(startjob) FMBADEPSF} def
+	/lettertray {(lettertray) FMBADEPSF} def
+	/letter {(letter) FMBADEPSF} def
+	/lettersmall {(lettersmall) FMBADEPSF} def
+	/11x17tray {(11x17tray) FMBADEPSF} def
+	/11x17 {(11x17) FMBADEPSF} def
+	/ledgertray {(ledgertray) FMBADEPSF} def
+	/ledger {(ledger) FMBADEPSF} def
+	/legaltray {(legaltray) FMBADEPSF} def
+	/legal {(legal) FMBADEPSF} def
+	/statementtray {(statementtray) FMBADEPSF} def
+	/statement {(statement) FMBADEPSF} def
+	/executivetray {(executivetray) FMBADEPSF} def
+	/executive {(executive) FMBADEPSF} def
+	/a3tray {(a3tray) FMBADEPSF} def
+	/a3 {(a3) FMBADEPSF} def
+	/a4tray {(a4tray) FMBADEPSF} def
+	/a4 {(a4) FMBADEPSF} def
+	/a4small {(a4small) FMBADEPSF} def
+	/b4tray {(b4tray) FMBADEPSF} def
+	/b4 {(b4) FMBADEPSF} def
+	/b5tray {(b5tray) FMBADEPSF} def
+	/b5 {(b5) FMBADEPSF} def
+	FMNORMALIZEGRAPHICS 
+	[/fy /fx /fh /fw /ury /urx /lly /llx] {exch def} forall 
+	fx fw 2 div add fy fh 2 div add  translate
+	rotate
+	fw 2 div neg fh 2 div neg translate
+	fw urx llx sub div fh ury lly sub div scale 
+	llx neg lly neg translate 
+	/FMdicttop countdictstack 1 add def 
+	/FMoptop count def 
+	} bind def
+/FMENDEPSF {
+	count -1 FMoptop {pop pop} for 
+	countdictstack -1 FMdicttop {pop end} for 
+	FMEPSF restore
+	FrameDict begin 
+	} bind def
+FrameDict begin 
+/setmanualfeed {
+%%BeginFeature *ManualFeed True
+	 statusdict /manualfeed true put
+%%EndFeature
+	} bind def
+/max {2 copy lt {exch} if pop} bind def
+/min {2 copy gt {exch} if pop} bind def
+/inch {72 mul} def
+/pagedimen { 
+	paperheight sub abs 16 lt exch 
+	paperwidth sub abs 16 lt and
+	{/papername exch def} {pop} ifelse
+	} bind def
+/setpapername { 
+	/papersizedict 14 dict def 
+	papersizedict begin
+	/papername /unknown def 
+		/Letter 8.5 inch 11.0 inch pagedimen
+		/LetterSmall 7.68 inch 10.16 inch pagedimen
+		/Tabloid 11.0 inch 17.0 inch pagedimen
+		/Ledger 17.0 inch 11.0 inch pagedimen
+		/Legal 8.5 inch 14.0 inch pagedimen
+		/Statement 5.5 inch 8.5 inch pagedimen
+		/Executive 7.5 inch 10.0 inch pagedimen
+		/A3 11.69 inch 16.5 inch pagedimen
+		/A4 8.26 inch 11.69 inch pagedimen
+		/A4Small 7.47 inch 10.85 inch pagedimen
+		/B4 10.125 inch 14.33 inch pagedimen
+		/B5 7.16 inch 10.125 inch pagedimen
+	end
+	} bind def
+/papersize {
+	papersizedict begin
+		/Letter {lettertray letter} def
+		/LetterSmall {lettertray lettersmall} def
+		/Tabloid {11x17tray 11x17} def
+		/Ledger {ledgertray ledger} def
+		/Legal {legaltray legal} def
+		/Statement {statementtray statement} def
+		/Executive {executivetray executive} def
+		/A3 {a3tray a3} def
+		/A4 {a4tray a4} def
+		/A4Small {a4tray a4small} def
+		/B4 {b4tray b4} def
+		/B5 {b5tray b5} def
+		/unknown {unknown} def
+	papersizedict dup papername known {papername} {/unknown} ifelse get
+	end
+	statusdict begin stopped end 
+	} bind def
+/manualpapersize {
+	papersizedict begin
+		/Letter {letter} def
+		/LetterSmall {lettersmall} def
+		/Tabloid {11x17} def
+		/Ledger {ledger} def
+		/Legal {legal} def
+		/Statement {statement} def
+		/Executive {executive} def
+		/A3 {a3} def
+		/A4 {a4} def
+		/A4Small {a4small} def
+		/B4 {b4} def
+		/B5 {b5} def
+		/unknown {unknown} def
+	papersizedict dup papername known {papername} {/unknown} ifelse get
+	end
+	stopped 
+	} bind def
+/desperatepapersize {
+	statusdict /setpageparams known
+		{
+		paperwidth paperheight 0 1 
+		statusdict begin
+		{setpageparams} stopped 
+		end
+		} {true} ifelse 
+	} bind def
+/papersizefailure {
+	FMAllowPaperSizeMismatch not
+		{
+(The requested paper size is not available in any currently-installed tray)
+(Edit the PS file to "FMAllowPaperSizeMismatch true" to use default tray)
+		 FMFAILURE } if
+	} def
+/DiacriticEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /space /exclam /quotedbl
+/numbersign /dollar /percent /ampersand /quotesingle /parenleft
+/parenright /asterisk /plus /comma /hyphen /period /slash /zero /one
+/two /three /four /five /six /seven /eight /nine /colon /semicolon
+/less /equal /greater /question /at /A /B /C /D /E /F /G /H /I /J /K
+/L /M /N /O /P /Q /R /S /T /U /V /W /X /Y /Z /bracketleft /backslash
+/bracketright /asciicircum /underscore /grave /a /b /c /d /e /f /g /h
+/i /j /k /l /m /n /o /p /q /r /s /t /u /v /w /x /y /z /braceleft /bar
+/braceright /asciitilde /.notdef /Adieresis /Aring /Ccedilla /Eacute
+/Ntilde /Odieresis /Udieresis /aacute /agrave /acircumflex /adieresis
+/atilde /aring /ccedilla /eacute /egrave /ecircumflex /edieresis
+/iacute /igrave /icircumflex /idieresis /ntilde /oacute /ograve
+/ocircumflex /odieresis /otilde /uacute /ugrave /ucircumflex
+/udieresis /dagger /.notdef /cent /sterling /section /bullet
+/paragraph /germandbls /registered /copyright /trademark /acute
+/dieresis /.notdef /AE /Oslash /.notdef /.notdef /.notdef /.notdef
+/yen /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/ordfeminine /ordmasculine /.notdef /ae /oslash /questiondown
+/exclamdown /logicalnot /.notdef /florin /.notdef /.notdef
+/guillemotleft /guillemotright /ellipsis /.notdef /Agrave /Atilde
+/Otilde /OE /oe /endash /emdash /quotedblleft /quotedblright
+/quoteleft /quoteright /.notdef /.notdef /ydieresis /Ydieresis
+/fraction /currency /guilsinglleft /guilsinglright /fi /fl /daggerdbl
+/periodcentered /quotesinglbase /quotedblbase /perthousand
+/Acircumflex /Ecircumflex /Aacute /Edieresis /Egrave /Iacute
+/Icircumflex /Idieresis /Igrave /Oacute /Ocircumflex /.notdef /Ograve
+/Uacute /Ucircumflex /Ugrave /dotlessi /circumflex /tilde /macron
+/breve /dotaccent /ring /cedilla /hungarumlaut /ogonek /caron
+] def
+/ReEncode { 
+	dup 
+	length 
+	dict begin 
+	{
+	1 index /FID ne 
+		{def} 
+		{pop pop} ifelse 
+	} forall 
+	0 eq {/Encoding DiacriticEncoding def} if 
+	currentdict 
+	end 
+	} bind def
+FMPColor 
+	
+	{
+	/BEGINBITMAPCOLOR { 
+		BITMAPCOLOR} def
+	/BEGINBITMAPCOLORc { 
+		BITMAPCOLORc} def
+	/BEGINBITMAPTRUECOLOR { 
+		BITMAPTRUECOLOR } def
+	/BEGINBITMAPTRUECOLORc { 
+		BITMAPTRUECOLORc } def
+	/BEGINBITMAPCMYK { 
+		BITMAPCMYK } def
+	/BEGINBITMAPCMYKc { 
+		BITMAPCMYKc } def
+	}
+	
+	{
+	/BEGINBITMAPCOLOR { 
+		BITMAPGRAY} def
+	/BEGINBITMAPCOLORc { 
+		BITMAPGRAYc} def
+	/BEGINBITMAPTRUECOLOR { 
+		BITMAPTRUEGRAY } def
+	/BEGINBITMAPTRUECOLORc { 
+		BITMAPTRUEGRAYc } def
+	/BEGINBITMAPCMYK { 
+		BITMAPCMYKGRAY } def
+	/BEGINBITMAPCMYKc { 
+		BITMAPCMYKGRAYc } def
+	}
+ifelse
+/K { 
+	FMPrintAllColorsAsBlack {
+		dup 1 eq 2 index 1 eq and 3 index 1 eq and not
+			{7 {pop} repeat 0 0 0 1 0 0 0} if
+	} if 
+	FrameCurColors astore 
+	pop combineColor
+} bind def
+/graymode true def
+fMLevel1 {
+	/fmGetFlip {
+		fMatrix2 exch get mul 0 lt { -1 } { 1 } ifelse
+	} FmBD
+} if
+/setPatternMode {
+	fMLevel1 {
+		2 index patScreenDict exch known {
+			pop pop
+			patScreenDict exch get aload pop 
+			freq 								
+			mul									
+			5 2 roll							
+			fMatrix2 currentmatrix 1 get 0 ne {
+				3 -1 roll 90 add 3 1 roll 		
+				sflipx 1 fmGetFlip sflipy 2 fmGetFlip neg mul
+			} {  								
+				sflipx 0 fmGetFlip sflipy 3 fmGetFlip mul 
+			} ifelse
+			0 lt {exch pop} {pop} ifelse 		
+			fMNegative { 
+				{neg} fmConcatProcs 			
+			} if
+			bind
+			
+			
+			
+			systemdict /setscreen get exec		
+			/FrameCurGray exch def
+		} {
+			/bwidth  exch def
+			/bpside  exch def
+			/bstring exch def
+			/onbits 0 def  /offbits 0 def
+			freq sangle landscape {90 add} if 
+				{/ypoint exch def
+				 /xpoint exch def
+				 /xindex xpoint 1 add 2 div bpside mul cvi def
+				 /yindex ypoint 1 add 2 div bpside mul cvi def
+				 bstring yindex bwidth mul xindex 8 idiv add get
+				 1 7 xindex 8 mod sub bitshift and 0 ne fMNegative {not} if
+				 {/onbits  onbits  1 add def 1}
+				 {/offbits offbits 1 add def 0}
+				 ifelse
+				}
+				setscreen
+			offbits offbits onbits add div fMNegative {1.0 exch sub} if
+			/FrameCurGray exch def
+		} ifelse
+	} { 
+		pop pop
+		dup patCache exch known {
+			patCache exch get
+		} { 
+			dup
+			patDict /bstring 3 -1 roll put
+			patDict 
+			9 PatFreq screenIndex get div dup matrix scale
+			makepattern
+			dup 
+			patCache 4 -1 roll 3 -1 roll put
+		} ifelse
+		/FrameCurGray 0 def
+		/FrameCurPat exch def
+	} ifelse
+	/graymode false def
+	combineColor
+} bind def
+/setGrayScaleMode {
+	graymode not {
+		/graymode true def
+		fMLevel1 {
+			setCurrentScreen
+		} if
+	} if
+	/FrameCurGray exch def
+	combineColor
+} bind def
+/normalize {
+	transform round exch round exch itransform
+	} bind def
+/dnormalize {
+	dtransform round exch round exch idtransform
+	} bind def
+/lnormalize { 
+	0 dtransform exch cvi 2 idiv 2 mul 1 add exch idtransform pop
+	} bind def
+/H { 
+	lnormalize setlinewidth
+	} bind def
+/Z {
+	setlinecap
+	} bind def
+	
+/PFill {
+	graymode fMLevel1 or not {
+		gsave 1 setgray eofill grestore
+	} if
+} bind def
+/PStroke {
+	graymode fMLevel1 or not {
+		gsave 1 setgray stroke grestore
+	} if
+	stroke
+} bind def
+/X { 
+	fillvals exch get
+	dup type /stringtype eq
+	{8 1 setPatternMode} 
+	{setGrayScaleMode}
+	ifelse
+	} bind def
+/V { 
+	PFill gsave eofill grestore
+	} bind def
+/Vclip {
+	clip
+	} bind def
+/Vstrk {
+	currentlinewidth exch setlinewidth PStroke setlinewidth
+	} bind def
+/N { 
+	PStroke
+	} bind def
+/Nclip {
+	strokepath clip newpath
+	} bind def
+/Nstrk {
+	currentlinewidth exch setlinewidth PStroke setlinewidth
+	} bind def
+/M {newpath moveto} bind def
+/E {lineto} bind def
+/D {curveto} bind def
+/O {closepath} bind def
+/L { 
+ 	/n exch def
+	newpath
+	normalize
+	moveto 
+	2 1 n {pop normalize lineto} for
+	} bind def
+/Y { 
+	L 
+	closepath
+	} bind def
+/R { 
+	/y2 exch def
+	/x2 exch def
+	/y1 exch def
+	/x1 exch def
+	x1 y1
+	x2 y1
+	x2 y2
+	x1 y2
+	4 Y 
+	} bind def
+/rarc 
+	{rad 
+	 arcto
+	} bind def
+/RR { 
+	/rad exch def
+	normalize
+	/y2 exch def
+	/x2 exch def
+	normalize
+	/y1 exch def
+	/x1 exch def
+	mark
+	newpath
+	{
+	x1 y1 rad add moveto
+	x1 y2 x2 y2 rarc
+	x2 y2 x2 y1 rarc
+	x2 y1 x1 y1 rarc
+	x1 y1 x1 y2 rarc
+	closepath
+	} stopped {x1 y1 x2 y2 R} if 
+	cleartomark
+	} bind def
+/RRR { 
+	/rad exch def
+	normalize /y4 exch def /x4 exch def
+	normalize /y3 exch def /x3 exch def
+	normalize /y2 exch def /x2 exch def
+	normalize /y1 exch def /x1 exch def
+	newpath
+	normalize moveto 
+	mark
+	{
+	x2 y2 x3 y3 rarc
+	x3 y3 x4 y4 rarc
+	x4 y4 x1 y1 rarc
+	x1 y1 x2 y2 rarc
+	closepath
+	} stopped
+	 {x1 y1 x2 y2 x3 y3 x4 y4 newpath moveto lineto lineto lineto closepath} if
+	cleartomark
+	} bind def
+/C { 
+	grestore
+	gsave
+	R 
+	clip
+	setCurrentScreen
+} bind def
+/CP { 
+	grestore
+	gsave
+	Y 
+	clip
+	setCurrentScreen
+} bind def
+/F { 
+	FMfonts exch get
+	FMpointsize scalefont
+	setfont
+	} bind def
+/Q { 
+	/FMpointsize exch def
+	F 
+	} bind def
+/T { 
+	moveto show
+	} bind def
+/RF { 
+	rotate
+	0 ne {-1 1 scale} if
+	} bind def
+/TF { 
+	gsave
+	moveto 
+	RF
+	show
+	grestore
+	} bind def
+/P { 
+	moveto
+	0 32 3 2 roll widthshow
+	} bind def
+/PF { 
+	gsave
+	moveto 
+	RF
+	0 32 3 2 roll widthshow
+	grestore
+	} bind def
+/S { 
+	moveto
+	0 exch ashow
+	} bind def
+/SF { 
+	gsave
+	moveto
+	RF
+	0 exch ashow
+	grestore
+	} bind def
+/B { 
+	moveto
+	0 32 4 2 roll 0 exch awidthshow
+	} bind def
+/BF { 
+	gsave
+	moveto
+	RF
+	0 32 4 2 roll 0 exch awidthshow
+	grestore
+	} bind def
+/G { 
+	gsave
+	newpath
+	normalize translate 0.0 0.0 moveto 
+	dnormalize scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	closepath 
+	PFill fill
+	grestore
+	} bind def
+/Gstrk {
+	savematrix
+    newpath
+    2 index 2 div add exch 3 index 2 div sub exch 
+    normalize 2 index 2 div sub exch 3 index 2 div add exch 
+    translate
+    scale 
+    0.0 0.0 1.0 5 3 roll arc 
+    restorematrix
+    currentlinewidth exch setlinewidth PStroke setlinewidth
+    } bind def
+/Gclip { 
+	newpath
+	savematrix
+	normalize translate 0.0 0.0 moveto 
+	dnormalize scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	closepath 
+	clip newpath
+	restorematrix
+	} bind def
+/GG { 
+	gsave
+	newpath
+	normalize translate 0.0 0.0 moveto 
+	rotate 
+	dnormalize scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	closepath
+	PFill
+	fill
+	grestore
+	} bind def
+/GGclip { 
+	savematrix
+	newpath
+    normalize translate 0.0 0.0 moveto 
+    rotate 
+    dnormalize scale 
+    0.0 0.0 1.0 5 3 roll arc 
+    closepath
+	clip newpath
+	restorematrix
+	} bind def
+/GGstrk { 
+	savematrix
+    newpath
+    normalize translate 0.0 0.0 moveto 
+    rotate 
+    dnormalize scale 
+    0.0 0.0 1.0 5 3 roll arc 
+    closepath 
+	restorematrix
+    currentlinewidth exch setlinewidth PStroke setlinewidth
+	} bind def
+/A { 
+	gsave
+	savematrix
+	newpath
+	2 index 2 div add exch 3 index 2 div sub exch 
+	normalize 2 index 2 div sub exch 3 index 2 div add exch 
+	translate 
+	scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	restorematrix
+	PStroke
+	grestore
+	} bind def
+/Aclip {
+	newpath
+	savematrix
+	normalize translate 0.0 0.0 moveto 
+	dnormalize scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	closepath 
+	strokepath clip newpath
+	restorematrix
+} bind def
+/Astrk {
+	Gstrk
+} bind def
+/AA { 
+	gsave
+	savematrix
+	newpath
+	
+	3 index 2 div add exch 4 index 2 div sub exch 
+	
+	normalize 3 index 2 div sub exch 4 index 2 div add exch
+	translate 
+	rotate 
+	scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	restorematrix
+	PStroke
+	grestore
+	} bind def
+/AAclip {
+	savematrix
+	newpath
+    normalize translate 0.0 0.0 moveto 
+    rotate 
+    dnormalize scale 
+    0.0 0.0 1.0 5 3 roll arc 
+    closepath
+	strokepath clip newpath
+	restorematrix
+} bind def
+/AAstrk {
+	GGstrk
+} bind def
+/BEGINPRINTCODE { 
+	/FMdicttop countdictstack 1 add def 
+	/FMoptop count 7 sub def 
+	/FMsaveobject save def
+	userdict begin 
+	/showpage {} def 
+	FMNORMALIZEGRAPHICS 
+	3 index neg 3 index neg translate
+	} bind def
+/ENDPRINTCODE {
+	count -1 FMoptop {pop pop} for 
+	countdictstack -1 FMdicttop {pop end} for 
+	FMsaveobject restore 
+	} bind def
+/gn { 
+	0 
+	{	46 mul 
+		cf read pop 
+		32 sub 
+		dup 46 lt {exit} if 
+		46 sub add 
+		} loop
+	add 
+	} bind def
+/cfs { 
+	/str sl string def 
+	0 1 sl 1 sub {str exch val put} for 
+	str def 
+	} bind def
+/ic [ 
+	0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0223
+	0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0223
+	0
+	{0 hx} {1 hx} {2 hx} {3 hx} {4 hx} {5 hx} {6 hx} {7 hx} {8 hx} {9 hx}
+	{10 hx} {11 hx} {12 hx} {13 hx} {14 hx} {15 hx} {16 hx} {17 hx} {18 hx}
+	{19 hx} {gn hx} {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12}
+	{13} {14} {15} {16} {17} {18} {19} {gn} {0 wh} {1 wh} {2 wh} {3 wh}
+	{4 wh} {5 wh} {6 wh} {7 wh} {8 wh} {9 wh} {10 wh} {11 wh} {12 wh}
+	{13 wh} {14 wh} {gn wh} {0 bl} {1 bl} {2 bl} {3 bl} {4 bl} {5 bl} {6 bl}
+	{7 bl} {8 bl} {9 bl} {10 bl} {11 bl} {12 bl} {13 bl} {14 bl} {gn bl}
+	{0 fl} {1 fl} {2 fl} {3 fl} {4 fl} {5 fl} {6 fl} {7 fl} {8 fl} {9 fl}
+	{10 fl} {11 fl} {12 fl} {13 fl} {14 fl} {gn fl}
+	] def
+/ms { 
+	/sl exch def 
+	/val 255 def 
+	/ws cfs 
+	/im cfs 
+	/val 0 def 
+	/bs cfs 
+	/cs cfs 
+	} bind def
+400 ms 
+/ip { 
+	is 
+	0 
+	cf cs readline pop 
+	{	ic exch get exec 
+		add 
+		} forall 
+	pop 
+	
+	} bind def
+/rip { 
+	   
+	  
+	  bis ris copy pop 
+      is
+      0
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+	  pop pop 
+	  ris gis copy pop 
+	  dup is exch 
+	  
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+	  pop pop
+	  gis bis copy pop 
+	  dup add is exch 
+	  
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+      pop 
+      
+      } bind def
+/rip4 { 
+	   
+	  
+	  kis cis copy pop 
+      is
+      0
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+	  pop pop 
+	  cis mis copy pop 
+	  dup is exch 
+	  
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+	  pop pop
+	  mis yis copy pop 
+	  dup dup add is exch 
+	  
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+	  pop pop
+	  yis kis copy pop 
+	  3 mul is exch 
+	  
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+      pop 
+      
+      } bind def
+/wh { 
+	/len exch def 
+	/pos exch def 
+	ws 0 len getinterval im pos len getinterval copy pop
+	pos len 
+	} bind def
+/bl { 
+	/len exch def 
+	/pos exch def 
+	bs 0 len getinterval im pos len getinterval copy pop
+	pos len 
+	} bind def
+/s1 1 string def
+/fl { 
+	/len exch def 
+	/pos exch def 
+	/val cf s1 readhexstring pop 0 get def
+	pos 1 pos len add 1 sub {im exch val put} for
+	pos len 
+	} bind def
+/hx { 
+	3 copy getinterval 
+	cf exch readhexstring pop pop 
+	} bind def
+/wbytes { 
+      dup dup
+      8 gt { pop 8 idiv mul }
+      { 8 eq {pop} {1 eq {7 add 8 idiv} {3 add 4 idiv} ifelse} ifelse } ifelse
+	} bind def
+/BEGINBITMAPBWc { 
+	1 {} COMMONBITMAPc
+	} bind def
+/BEGINBITMAPGRAYc { 
+	8 {} COMMONBITMAPc
+	} bind def
+/BEGINBITMAP2BITc { 
+	2 {} COMMONBITMAPc
+	} bind def
+/COMMONBITMAPc { 
+		 
+	/cvtProc exch def
+	/depth exch def
+	gsave
+	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/lb width depth wbytes def 
+	sl lb lt {lb ms} if 
+	/bitmapsave save def 
+	cvtProc                
+	/is im 0 lb getinterval def 
+	ws 0 lb getinterval is copy pop 
+	/cf currentfile def 
+	width height depth [width 0 0 height neg 0 height] 
+	{ip} image 
+	bitmapsave restore 
+	grestore
+	} bind def
+/BEGINBITMAPBW { 
+	1 {} COMMONBITMAP
+	} bind def
+/BEGINBITMAPGRAY { 
+	8 {} COMMONBITMAP
+	} bind def
+/BEGINBITMAP2BIT { 
+	2 {} COMMONBITMAP
+	} bind def
+/COMMONBITMAP { 
+	/cvtProc exch def
+	/depth exch def
+	gsave
+	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/bitmapsave save def 
+	cvtProc              
+	/is width depth wbytes string def
+	/cf currentfile def 
+	width height depth [width 0 0 height neg 0 height] 
+	{cf is readhexstring pop} image
+	bitmapsave restore 
+	grestore
+	} bind def
+/ngrayt 256 array def
+/nredt 256 array def
+/nbluet 256 array def
+/ngreent 256 array def
+fMLevel1 {
+/colorsetup {
+	currentcolortransfer
+	/gryt exch def
+	/blut exch def
+	/grnt exch def
+	/redt exch def
+	0 1 255 {
+		/indx exch def
+		/cynu 1 red indx get 255 div sub def
+		/magu 1 green indx get 255 div sub def
+		/yelu 1 blue indx get 255 div sub def
+		/kk cynu magu min yelu min def
+		/u kk currentundercolorremoval exec def
+%		/u 0 def
+		nredt indx 1 0 cynu u sub max sub redt exec put
+		ngreent indx 1 0 magu u sub max sub grnt exec put
+		nbluet indx 1 0 yelu u sub max sub blut exec put
+		ngrayt indx 1 kk currentblackgeneration exec sub gryt exec put
+	} for
+	{255 mul cvi nredt exch get}
+	{255 mul cvi ngreent exch get}
+	{255 mul cvi nbluet exch get}
+	{255 mul cvi ngrayt exch get}
+	setcolortransfer
+	{pop 0} setundercolorremoval
+	{} setblackgeneration
+	} bind def
+}
+{
+/colorSetup2 {
+	[ /Indexed /DeviceRGB 255 
+		{dup red exch get 255 div 
+		 exch dup green exch get 255 div 
+		 exch blue exch get 255 div}
+	] setcolorspace
+} bind def
+} ifelse
+/fakecolorsetup {
+	/tran 256 string def
+	0 1 255 {/indx exch def 
+		tran indx
+		red indx get 77 mul
+		green indx get 151 mul
+		blue indx get 28 mul
+		add add 256 idiv put} for
+	currenttransfer
+	{255 mul cvi tran exch get 255.0 div}
+	exch fmConcatProcs settransfer
+} bind def
+/BITMAPCOLOR { 
+	/depth 8 def
+	gsave
+	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/bitmapsave save def
+	fMLevel1 {	
+		colorsetup
+		/is width depth wbytes string def
+		/cf currentfile def 
+		width height depth [width 0 0 height neg 0 height] 
+		{cf is readhexstring pop} {is} {is} true 3 colorimage 
+	} {
+		colorSetup2
+		/is width depth wbytes string def
+		/cf currentfile def 
+		7 dict dup begin
+			/ImageType 1 def
+			/Width width def
+			/Height height def
+			/ImageMatrix [width 0 0 height neg 0 height] def
+			/DataSource {cf is readhexstring pop} bind def
+			/BitsPerComponent depth def
+			/Decode [0 255] def
+		end image	
+	} ifelse
+	bitmapsave restore 
+	grestore
+	} bind def
+/BITMAPCOLORc { 
+	/depth 8 def
+	gsave
+	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/lb width depth wbytes def 
+	sl lb lt {lb ms} if 
+	/bitmapsave save def 
+	fMLevel1 {	
+		colorsetup
+		/is im 0 lb getinterval def 
+		ws 0 lb getinterval is copy pop 
+		/cf currentfile def 
+		width height depth [width 0 0 height neg 0 height] 
+		{ip} {is} {is} true 3 colorimage
+	} {
+		colorSetup2
+		/is im 0 lb getinterval def 
+		ws 0 lb getinterval is copy pop 
+		/cf currentfile def 
+		7 dict dup begin
+			/ImageType 1 def
+			/Width width def
+			/Height height def
+			/ImageMatrix [width 0 0 height neg 0 height] def
+			/DataSource {ip} bind def
+			/BitsPerComponent depth def
+			/Decode [0 255] def
+		end image	
+	} ifelse
+	bitmapsave restore 
+	grestore
+	} bind def
+/BITMAPTRUECOLORc { 
+	/depth 24 def
+        gsave
+ 	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/lb width depth wbytes def 
+	sl lb lt {lb ms} if 
+	/bitmapsave save def 
+        
+	/is im 0 lb getinterval def	
+	/ris im 0 width getinterval def	
+	/gis im width width getinterval def	
+	/bis im width 2 mul width getinterval def 
+        
+	ws 0 lb getinterval is copy pop 
+	/cf currentfile def 
+	width height 8 [width 0 0 height neg 0 height] 
+	{width rip pop ris} {gis} {bis} true 3 colorimage
+	bitmapsave restore 
+	grestore
+	} bind def
+/BITMAPCMYKc { 
+	/depth 32 def
+        gsave
+ 	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/lb width depth wbytes def 
+	sl lb lt {lb ms} if 
+	/bitmapsave save def 
+        
+	/is im 0 lb getinterval def	
+	/cis im 0 width getinterval def	
+	/mis im width width getinterval def	
+	/yis im width 2 mul width getinterval def 
+	/kis im width 3 mul width getinterval def 
+        
+	ws 0 lb getinterval is copy pop 
+	/cf currentfile def 
+	width height 8 [width 0 0 height neg 0 height] 
+	{width rip4 pop cis} {mis} {yis} {kis} true 4 colorimage
+	bitmapsave restore 
+	grestore
+	} bind def
+/BITMAPTRUECOLOR { 
+        gsave
+		
+		3 index 2 div add exch	
+		4 index 2 div add exch	
+		translate		
+		rotate			
+		1 index 2 div neg	
+		1 index 2 div neg	
+		translate		
+		scale			
+		/height exch def /width exch def
+        /bitmapsave save def 
+        /is width string def
+        /gis width string def
+        /bis width string def
+        /cf currentfile def 
+        width height 8 [width 0 0 height neg 0 height] 
+        { cf is readhexstring pop } 
+        { cf gis readhexstring pop } 
+        { cf bis readhexstring pop } 
+        true 3 colorimage 
+        bitmapsave restore 
+        grestore
+        } bind def
+/BITMAPCMYK { 
+        gsave
+		
+		3 index 2 div add exch	
+		4 index 2 div add exch	
+		translate		
+		rotate			
+		1 index 2 div neg	
+		1 index 2 div neg	
+		translate		
+		scale			
+		/height exch def /width exch def
+        /bitmapsave save def 
+        /is width string def
+        /mis width string def
+        /yis width string def
+        /kis width string def
+        /cf currentfile def 
+        width height 8 [width 0 0 height neg 0 height] 
+        { cf is readhexstring pop } 
+        { cf mis readhexstring pop } 
+        { cf yis readhexstring pop } 
+        { cf kis readhexstring pop } 
+        true 4 colorimage 
+        bitmapsave restore 
+        grestore
+        } bind def
+/BITMAPTRUEGRAYc { 
+	/depth 24 def
+        gsave
+	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/lb width depth wbytes def 
+	sl lb lt {lb ms} if 
+        /bitmapsave save def 
+        
+	/is im 0 lb getinterval def	
+	/ris im 0 width getinterval def	
+	/gis im width width getinterval def	
+	/bis im width 2 mul width getinterval def 
+        ws 0 lb getinterval is copy pop 
+        /cf currentfile def 
+        width height 8 [width 0 0 height neg 0 height] 
+        {width rip pop ris gis bis width gray} image
+        bitmapsave restore 
+        grestore
+        } bind def
+/BITMAPCMYKGRAYc { 
+	/depth 32 def
+        gsave
+	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/lb width depth wbytes def 
+	sl lb lt {lb ms} if 
+        /bitmapsave save def 
+        
+	/is im 0 lb getinterval def	
+	/cis im 0 width getinterval def	
+	/mis im width width getinterval def	
+	/yis im width 2 mul width getinterval def 
+	/kis im width 3 mul width getinterval def 
+        ws 0 lb getinterval is copy pop 
+        /cf currentfile def 
+        width height 8 [width 0 0 height neg 0 height] 
+        {width rip pop cis mis yis kis width cgray} image
+        bitmapsave restore 
+        grestore
+        } bind def
+/cgray { 
+        /ww exch def
+        /k exch def
+        /y exch def
+        /m exch def
+        /c exch def
+        0 1 ww 1 sub { /i exch def c i get m i get y i get k i get CMYKtoRGB
+				.144 mul 3 1 roll .587 mul 3 1 roll .299 mul add add
+				c i 3 -1 roll floor cvi put } for
+        c
+ 		} bind def
+/gray { 
+        /ww exch def
+        /b exch def
+        /g exch def
+        /r exch def
+        0 1 ww 1 sub { /i exch def r i get .299 mul g i get .587 mul
+			b i get .114 mul add add r i 3 -1 roll floor cvi put } for
+        r
+        } bind def
+/BITMAPTRUEGRAY { 
+        gsave
+		
+		3 index 2 div add exch	
+		4 index 2 div add exch	
+		translate		
+		rotate			
+		1 index 2 div neg	
+		1 index 2 div neg	
+		translate		
+		scale			
+		/height exch def /width exch def
+        /bitmapsave save def 
+        /is width string def
+        /gis width string def
+        /bis width string def
+        /cf currentfile def 
+        width height 8 [width 0 0 height neg 0 height] 
+        { cf is readhexstring pop 
+          cf gis readhexstring pop 
+          cf bis readhexstring pop width gray}  image
+        bitmapsave restore 
+        grestore
+        } bind def
+/BITMAPCMYKGRAY { 
+        gsave
+		
+		3 index 2 div add exch	
+		4 index 2 div add exch	
+		translate		
+		rotate			
+		1 index 2 div neg	
+		1 index 2 div neg	
+		translate		
+		scale			
+		/height exch def /width exch def
+        /bitmapsave save def 
+        /is width string def
+        /yis width string def
+        /mis width string def
+        /kis width string def
+        /cf currentfile def 
+        width height 8 [width 0 0 height neg 0 height] 
+        { cf is readhexstring pop 
+          cf mis readhexstring pop 
+          cf yis readhexstring pop 
+          cf kis readhexstring pop width cgray}  image
+        bitmapsave restore 
+        grestore
+        } bind def
+/BITMAPGRAY { 
+	8 {fakecolorsetup} COMMONBITMAP
+	} bind def
+/BITMAPGRAYc { 
+	8 {fakecolorsetup} COMMONBITMAPc
+	} bind def
+/ENDBITMAP {
+	} bind def
+end 
+	/ALDmatrix matrix def ALDmatrix currentmatrix pop
+/StartALD {
+	/ALDsave save def
+	 savematrix
+	 ALDmatrix setmatrix
+	} bind def
+/InALD {
+	 restorematrix
+	} bind def
+/DoneALD {
+	 ALDsave restore
+	} bind def
+/I { setdash } bind def
+/J { [] 0 setdash } bind def
+%%EndProlog
+%%BeginSetup
+(5.0) FMVERSION
+1 1 0 0 612 792 0 1 13 FMDOCUMENT
+0 0 /Palatino-Roman FMFONTDEFINE
+1 0 /Times-Roman FMFONTDEFINE
+2 0 /Palatino-Bold FMFONTDEFINE
+3 0 /Palatino-Italic FMFONTDEFINE
+4 1 /Symbol FMFONTDEFINE
+32 FMFILLS
+0 0 FMFILL
+1 0.1 FMFILL
+2 0.3 FMFILL
+3 0.5 FMFILL
+4 0.7 FMFILL
+5 0.9 FMFILL
+6 0.97 FMFILL
+7 1 FMFILL
+8 <0f1e3c78f0e1c387> FMFILL
+9 <0f87c3e1f0783c1e> FMFILL
+10 <cccccccccccccccc> FMFILL
+11 <ffff0000ffff0000> FMFILL
+12 <8142241818244281> FMFILL
+13 <03060c183060c081> FMFILL
+14 <8040201008040201> FMFILL
+16 1 FMFILL
+17 0.9 FMFILL
+18 0.7 FMFILL
+19 0.5 FMFILL
+20 0.3 FMFILL
+21 0.1 FMFILL
+22 0.03 FMFILL
+23 0 FMFILL
+24 <f0e1c3870f1e3c78> FMFILL
+25 <f0783c1e0f87c3e1> FMFILL
+26 <3333333333333333> FMFILL
+27 <0000ffff0000ffff> FMFILL
+28 <7ebddbe7e7dbbd7e> FMFILL
+29 <fcf9f3e7cf9f3f7e> FMFILL
+30 <7fbfdfeff7fbfdfe> FMFILL
+%%EndSetup
+%%Page: "1" 1
+%%BeginPaperSize: Letter
+%%EndPaperSize
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+J
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 24 Q
+0 X
+0 0 0 1 0 0 0 K
+(The OpenGL\252 Character Render) 115.5 704 T
+(er:) 469.52 704 T
+(A Speci\336cation) 226.06 674 T
+0 14 Q
+(Craig Dunwoody) 251.73 638.67 T
+(Silicon Graphics) 255.46 618.67 T
+(V) 233.09 586.67 T
+(ersion 0.2 \320 2 Feb 1998) 241.64 586.67 T
+FMENDPAGE
+%%EndPage: "1" 1
+%%Page: "2" 2
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(2) 303.5 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+2 14 Q
+(Contents) 72 710.67 T
+0 10 Q
+(1) 72 689.33 T
+(Intr) 90 689.33 T
+(oduction) 106.22 689.33 T
+(......................................................) 147.5 689.33 T
+(5) 283 689.33 T
+(1.1) 90 669.33 T
+(Overview) 117 669.33 T
+(................................................) 162.5 669.33 T
+(5) 283 669.33 T
+(1.2) 90 649.33 T
+(Examples) 117 649.33 T
+(................................................) 162.5 649.33 T
+(6) 283 649.33 T
+(1.3) 90 629.33 T
+(GLC vs. Other Services) 117 629.33 T
+(.........................) 220 629.33 T
+(6) 283 629.33 T
+(2) 72 609.33 T
+(Machine De\336nition) 90 609.33 T
+(..........................................) 177.5 609.33 T
+(7) 283 609.33 T
+(2.1) 90 589.33 T
+(Data T) 117 589.33 T
+(ypes) 145.73 589.33 T
+(..............................................) 167.5 589.33 T
+(7) 283 589.33 T
+(2.2) 90 569.33 T
+(Err) 117 569.33 T
+(ors) 130.83 569.33 T
+(.......................................................) 145 569.33 T
+(7) 283 569.33 T
+(2.3) 90 549.33 T
+(Contexts) 117 549.33 T
+(..................................................) 157.5 549.33 T
+(7) 283 549.33 T
+(2.4) 90 529.33 T
+(Character codes) 117 529.33 T
+(.....................................) 190 529.33 T
+(8) 283 529.33 T
+(2.5) 90 509.33 T
+(Constants) 117 509.33 T
+(................................................) 162.5 509.33 T
+(8) 283 509.33 T
+(2.6) 90 489.33 T
+(Masters) 117 489.33 T
+(....................................................) 152.5 489.33 T
+(8) 283 489.33 T
+(2.7) 90 469.33 T
+(Fonts) 117 469.33 T
+(........................................................) 142.5 469.33 T
+(9) 283 469.33 T
+(2.8) 90 449.33 T
+(Rendering) 117 449.33 T
+(...............................................) 165 449.33 T
+(9) 283 449.33 T
+(2.9) 90 429.33 T
+(Measur) 117 429.33 T
+(ement) 150.29 429.33 T
+(.........................................) 180 429.33 T
+(9) 283 429.33 T
+(3) 72 409.33 T
+(API De\336nition) 90 409.33 T
+(...................................................) 155 409.33 T
+(9) 283 409.33 T
+(3.1) 90 389.33 T
+(Err) 117 389.33 T
+(ors) 130.83 389.33 T
+(.......................................................) 145 389.33 T
+(9) 283 389.33 T
+(3.2) 90 369.33 T
+(Character codes) 117 369.33 T
+(.....................................) 190 369.33 T
+(9) 283 369.33 T
+(3.3) 90 349.33 T
+(Strings) 117 349.33 T
+(.....................................................) 150 349.33 T
+(9) 283 349.33 T
+(3.4) 90 329.33 T
+(Global commands) 117 329.33 T
+(.................................) 200 329.33 T
+(9) 283 329.33 T
+(glcContext 9) 117 309.33 T
+(glcDeleteContext 10) 117 289.33 T
+(glcGenContext 10) 117 269.33 T
+(glcGetAllContexts 10) 117 249.33 T
+(glcGetCurr) 117 229.33 T
+(entContext 10) 166.43 229.33 T
+(glcGetErr) 117 209.33 T
+(or 10) 159.42 209.33 T
+(glcIsContext 1) 117 189.33 T
+(1) 179.31 189.33 T
+(3.5) 90 169.33 T
+(Context commands) 117 169.33 T
+(.............................) 205 169.33 T
+(1) 278.55 169.33 T
+(1) 283 169.33 T
+(glcCallbackFunc 1) 117 149.33 T
+(1) 197.15 149.33 T
+(glcDataPointer 1) 117 129.33 T
+(1) 190.09 129.33 T
+(glcDeleteGLObjects 1) 117 109.33 T
+(1) 211.34 109.33 T
+(glcDisable 12) 117 89.33 T
+FMENDPAGE
+%%EndPage: "2" 2
+%%Page: "3" 3
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(3) 303.5 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+0 F
+(glcEnable 12) 117 713.33 T
+(glcGetCallbackFunc 12) 117 693.33 T
+(glcGetListc 12) 117 673.33 T
+(glcGetListi 12) 117 653.33 T
+(glcGetPointer 13) 117 633.33 T
+(glcGetc 13) 117 613.33 T
+(glcGetf 13) 117 593.33 T
+(glcGetfv 14) 117 573.33 T
+(glcGeti 14) 117 553.33 T
+(glcIsEnabled 15) 117 533.33 T
+(glcStringT) 117 513.33 T
+(ype 15) 161.89 513.33 T
+(3.6) 90 493.33 T
+(Master commands) 117 493.33 T
+(...............................) 200 493.33 T
+(15) 278 493.33 T
+(glcAppendCatalog 15) 117 473.33 T
+(glcGetMasterListc 15) 117 453.33 T
+(glcGetMasterMap 16) 117 433.33 T
+(glcGetMaster) 117 413.33 T
+(c 16) 176.11 413.33 T
+(glcGetMasteri 16) 117 393.33 T
+(glcPr) 117 373.33 T
+(ependCatalog 16) 139.72 373.33 T
+(glcRemoveCatalog 17) 117 353.33 T
+(3.7) 90 333.33 T
+(Font commands) 117 333.33 T
+(...................................) 190 333.33 T
+(17) 278 333.33 T
+(glcAppendFont 17) 117 313.33 T
+(glcDeleteFont 17) 117 293.33 T
+(glcFont 17) 117 273.33 T
+(glcFontFace 17) 117 253.33 T
+(glcFontMap 18) 117 233.33 T
+(glcGenFontID 18) 117 213.33 T
+(glcGetFontFace 18) 117 193.33 T
+(glcGetFontListc 18) 117 173.33 T
+(glcGetFontMap 18) 117 153.33 T
+(glcGetFontc 18) 117 133.33 T
+(glcGetFonti 19) 117 113.33 T
+(glcIsFont 19) 117 93.33 T
+FMENDPAGE
+%%EndPage: "3" 3
+%%Page: "4" 4
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(4) 303.5 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+0 F
+(glcNewFontFr) 117 713.33 T
+(omFamily 19) 180.78 713.33 T
+(glcNewFontFr) 117 693.33 T
+(omMaster 19) 180.78 693.33 T
+(3.8) 90 673.33 T
+(T) 117 673.33 T
+(ransformation commands) 122.23 673.33 T
+(................) 237.5 673.33 T
+(19) 278 673.33 T
+(glcLoadIdentity 20) 117 653.33 T
+(glcLoadMatrix 20) 117 633.33 T
+(glcMultMatrix 20) 117 613.33 T
+(glcRotate 20) 117 593.33 T
+(glcScale 20) 117 573.33 T
+(3.9) 90 553.33 T
+(Rendering commands) 117 553.33 T
+(.........................) 215 553.33 T
+(20) 278 553.33 T
+(glcRenderChar 23) 117 533.33 T
+(glcRenderCountedString 24) 117 513.33 T
+(glcRenderString 24) 117 493.33 T
+(glcRenderStyle 24) 117 473.33 T
+(glcReplacementCode 24) 117 453.33 T
+(glcResolution 25) 117 433.33 T
+(3.10) 90 413.33 T
+(Measur) 117 413.33 T
+(ement commands) 150.29 413.33 T
+(...................) 230 413.33 T
+(25) 278 413.33 T
+(glcGetCharMetric 25) 117 393.33 T
+(glcGetMaxCharMetric 25) 117 373.33 T
+(glcGetStringCharMetric 26) 117 353.33 T
+(glcGetStringMetric 26) 117 333.33 T
+(glcMeasur) 117 313.33 T
+(eCountedString 26) 163.2 313.33 T
+(glcMeasur) 117 293.33 T
+(eString 27) 163.2 293.33 T
+(4) 72 273.33 T
+(Extensions) 90 273.33 T
+(.......................................................) 140 273.33 T
+(27) 278 273.33 T
+FMENDPAGE
+%%EndPage: "4" 4
+%%Page: "5" 5
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(5) 303.5 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+2 14 Q
+(1) 72 710.67 T
+(Introduction) 93 710.67 T
+0 10 Q
+-0.29 (This document de\336nes the OpenGL) 72 691.33 P
+1 14 Q
+-0.41 (\252) 228.56 691.33 P
+0 10 Q
+-0.29 ( Character Render) 242.28 691.33 P
+-0.29 (er \050GLC\051, a state machine that pr) 321.95 691.33 P
+-0.29 (ovides OpenGL) 464.21 691.33 P
+0 8 Q
+-0.23 (1) 533.79 695.33 P
+0 10 Q
+(pr) 72 679.33 T
+(ograms with character r) 81.78 679.33 T
+(endering services via an application pr) 187.07 679.33 T
+(ogramming interface \050API\051. This docu-) 358.22 679.33 T
+(ment is written with the assumption that the r) 72 667.33 T
+(eader understands the OpenGL speci\336cation.) 275.16 667.33 T
+-0.14 (This section pr) 72 645.33 P
+-0.14 (ovides an overview of GLC, examples of its use, and a comparison with other character r) 136.51 645.33 P
+-0.14 (en-) 526.06 645.33 P
+-0.36 (dering services. Section) 72 633.33 P
+-0.36 (2 de\336nes the GLC machine, Section) 177.36 633.33 P
+-0.36 (3 de\336nes the GLC API, and Section) 334.1 633.33 P
+-0.36 (4 covers fu-) 489.5 633.33 P
+(tur) 72 621.33 T
+(e extensions to GLC.) 85.06 621.33 T
+2 14 Q
+(1.1) 72 592.67 T
+(Overview) 103.5 592.67 T
+0 10 Q
+(A GLC) 72 573.33 T
+3 F
+(client) 105.61 573.33 T
+0 F
+( is a pr) 128.02 573.33 T
+(ogram that uses OpenGL \050henceforth, \322GL\323\051 and GLC. A GLC) 157.45 573.33 T
+3 F
+(library) 435.36 573.33 T
+0 F
+( is a subr) 462.77 573.33 T
+(outine) 501.99 573.33 T
+-0.03 (library that implements GLC. Figur) 72 561.33 P
+-0.03 (e) 228.57 561.33 P
+-0.03 (1 shows that like the GL Utilities \050GLU\051, GLC is implemented on the) 235.86 561.33 P
+(client side of the GL client-server connection and performs all of its r) 72 385.33 T
+(endering by issuing GL commands.) 374.91 385.33 T
+-0.35 (A GLC) 72 363.33 P
+3 F
+-0.35 (context) 104.9 363.33 P
+0 F
+-0.35 ( is an instantiation of GLC. When a client thr) 134.52 363.33 P
+-0.35 (ead issues a GLC command, the thr) 328.01 363.33 P
+-0.35 (ead\325s) 482.78 363.33 P
+3 F
+-0.35 (curr) 507.84 363.33 P
+-0.35 (ent) 525.07 363.33 P
+0 F
+(GLC context executes the command.) 72 351.33 T
+-0.29 (A client can r) 72 329.33 P
+-0.29 (ender a character by issuing the command) 129.58 329.33 P
+2 F
+-0.29 (glcRenderChar \050 GLint inCode \051) 317.34 329.33 P
+0 F
+-0.29 (. GLC \336nds a) 462.27 329.33 P
+3 F
+-0.29 (font) 521.68 329.33 P
+0 F
+-0.5 (that) 72 317.33 P
+3 F
+-0.5 (map) 91.34 317.33 P
+0 F
+-0.5 (s) 108.56 317.33 P
+2 F
+-0.5 (inCode) 114.81 317.33 P
+0 F
+-0.5 ( to a character such as LA) 148.14 317.33 P
+-0.5 (TIN CAPIT) 257.44 317.33 P
+-0.5 (AL LETTER A, then uses one or mor) 306.93 317.33 P
+-0.5 (e) 464.92 317.33 P
+3 F
+-0.5 (glyph) 471.71 317.33 P
+0 F
+-0.5 (s fr) 494.49 317.33 P
+-0.5 (om the) 507.83 317.33 P
+(font to cr) 72 305.33 T
+(eate a graphical) 111.8 305.33 T
+3 F
+(layout) 183.74 305.33 T
+0 F
+( that r) 209.29 305.33 T
+(epr) 235.4 305.33 T
+(esents the character) 249.97 305.33 T
+(. Finally) 335.89 305.33 T
+(, GLC issues a sequence of GL com-) 370.45 305.33 T
+-0.49 (mands to draw the layout. Glyph coor) 72 293.33 P
+-0.49 (dinates ar) 237.85 293.33 P
+-0.49 (e de\336ned in) 280.76 293.33 P
+3 F
+-0.49 (em units) 333.99 293.33 P
+0 F
+-0.49 ( and ar) 368.79 293.33 P
+-0.49 (e transformed during r) 398.52 293.33 P
+-0.49 (endering) 498.24 293.33 P
+(to pr) 72 281.33 T
+(oduce the desir) 93 281.33 T
+(ed mapping of the glyph shape into the GL window coor) 160.52 281.33 T
+(dinate system.) 412.11 281.33 T
+-0.38 (In addition to commands for r) 72 259.33 P
+-0.38 (endering, the GLC API includes measur) 203.35 259.33 P
+-0.38 (ement commands that r) 378.03 259.33 P
+-0.38 (eturn certain) 481.73 259.33 P
+3 F
+(metrics) 72 247.33 T
+0 F
+( \050e.g., bounding box\051 for a layout. Since the focus of GLC is on) 101.63 247.33 T
+3 F
+(r) 377.62 247.33 T
+(endering) 381.33 247.33 T
+0 F
+( and not) 416.9 247.33 T
+3 F
+(modeling) 455.87 247.33 T
+0 F
+(, the GLC) 493.1 247.33 T
+(API does not pr) 72 235.33 T
+(ovide access to glyph shape data.) 141.61 235.33 T
+-0.04 (A font is a stylistically consistent set of glyphs that can be used to r) 72 213.33 P
+-0.04 (ender some set of characters. Each font) 366.31 213.33 P
+(has a) 72 201.33 T
+3 F
+(family) 97.06 201.33 T
+0 F
+( name \050e.g. Palatino\051 and a state variable that selects one of the) 122.62 201.33 T
+3 F
+(face) 400.93 201.33 T
+0 F
+(s \050e.g. Regular) 416.11 201.33 T
+(, Italic, Bold,) 478.21 201.33 T
+(Bold Italic\051 that the font contains. A) 72 189.33 T
+3 F
+(typeface) 231.62 189.33 T
+0 F
+( is the combination of a family and a face \050e.g. Palatino Bold\051.) 264.02 189.33 T
+-0.15 (A font is an instantiation of a) 72 167.33 P
+3 F
+-0.15 (master) 201.51 167.33 P
+0 F
+-0.15 (, which is a r) 227.99 167.33 P
+-0.15 (epr) 283.12 167.33 P
+-0.15 (esentation of the font that is stor) 297.69 167.33 P
+-0.15 (ed outside of GLC in a) 438.87 167.33 P
+-0.57 (standar) 72 155.33 P
+-0.57 (d format such as T) 105.2 155.33 P
+-0.57 (r) 183.84 155.33 P
+-0.57 (ueT) 187.71 155.33 P
+-0.57 (ype) 203.76 155.33 P
+0 8 Q
+-0.46 (2) 220.12 159.33 P
+0 10 Q
+-0.57 ( or T) 224.12 155.33 P
+-0.57 (ype1) 242.61 155.33 P
+0 8 Q
+-0.46 (3) 263.97 159.33 P
+0 10 Q
+-0.57 (. A) 267.97 155.33 P
+3 F
+-0.57 (catalog) 282.1 155.33 P
+0 F
+-0.57 ( is a named list of masters, which may be implement-) 310.6 155.33 P
+(ed as a \336le system dir) 72 143.33 T
+(ectory containing master \336les. A list of catalog names de\336nes the list of masters that) 167.1 143.33 T
+(can be instantiated in a GLC context.) 72 131.33 T
+-0.41 (Befor) 72 109.33 P
+-0.41 (e issuing a GLC r) 95.46 109.33 P
+-0.41 (endering command a client must issue GL commands dir) 169.91 109.33 P
+-0.41 (ectly to establish a GL state) 419.81 109.33 P
+(such that the GL commands issued by GLC pr) 72 97.33 T
+(oduce the desir) 276.23 97.33 T
+(ed r) 343.75 97.33 T
+(esult. For example, befor) 360.92 97.33 T
+(e issuing a) 469.99 97.33 T
+2 F
+-0.54 (glcRenderChar) 72 85.33 P
+0 F
+-0.54 ( command a client may issue) 140.88 85.33 P
+2 F
+-0.54 (glColor) 267.89 85.33 P
+0 F
+-0.54 ( and) 302.34 85.33 P
+2 F
+-0.54 (glRasterPos) 323.2 85.33 P
+0 F
+-0.54 ( commands to establish the color and) 377.08 85.33 P
+(Figur) 208.12 409.33 T
+(e 1: Relationship between GLC and GL) 231.96 409.33 T
+72 542 540 542 2 L
+V
+0.25 H
+0 Z
+N
+72 424 540 424 2 L
+V
+N
+72 424 540 542 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+261 488 360 533 R
+7 X
+0 0 0 1 0 0 0 K
+V
+0.25 H
+0 Z
+0 X
+N
+0 10 Q
+(GLC client) 286.77 517.83 T
+255.93 497 255.93 499.78 260.75 497 255.93 494.22 4 Y
+N
+255.93 497 255.93 499.78 260.75 497 255.93 494.22 4 Y
+V
+243 497 255.8 497 2 L
+2 Z
+N
+261 488 324 506 R
+7 X
+V
+0 Z
+0 X
+N
+(GLC library) 265.93 493.39 T
+198 488 243 506 R
+7 X
+V
+0 X
+N
+(Masters) 203.03 493.39 T
+261 470 360 488 R
+7 X
+V
+0 X
+N
+(GL client library) 274.16 475.39 T
+310.5 457.07 313.28 457.07 310.5 452.25 307.72 457.07 4 Y
+N
+310.5 457.07 313.28 457.07 310.5 452.25 307.72 457.07 4 Y
+V
+310.5 470 310.5 457.2 2 L
+7 X
+V
+2 Z
+0 X
+N
+261 434 360 452 R
+7 X
+V
+0 Z
+0 X
+N
+(GL server) 288.69 439.39 T
+0 0 612 792 C
+FMENDPAGE
+%%EndPage: "5" 5
+%%Page: "6" 6
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(6) 303.5 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+0 F
+(origin of the r) 72 713.33 T
+(esulting layout.) 132.54 713.33 T
+2 14 Q
+(1.2) 72 684.67 T
+(Examples) 103.5 684.67 T
+0 10 Q
+(At this point some examples of the use of GLC may be helpful to the r) 72 665.33 T
+(eader) 380.49 665.33 T
+(, even though the GLC com-) 404.39 665.33 T
+(mands used ther) 72 653.33 T
+(ein have not yet been de\336ned. The following ISO C code fragment uses GL and GLC to) 145.81 653.33 T
+(r) 72 641.33 T
+(ender the character LA) 75.77 641.33 T
+(TIN CAPIT) 176.4 641.33 T
+(AL LETTER A in r) 226.38 641.33 T
+(ed at \050100, 100\051 using a default typeface at a scale of) 307.82 641.33 T
+(24 pixels per em. In this example, GLC issues a) 72 629.33 T
+2 F
+(glBitmap) 281.58 629.33 T
+0 F
+( command to draw the layout.) 323.8 629.33 T
+2 F
+(glcContext \050 glcGenContext \050\051 \051;) 90 607.33 T
+(glcScale \050 24.f, 24.f \051;) 90 595.33 T
+(glColor3f \050 1.f, 0.f, 0.f \051;) 90 583.33 T
+(glRasterPos2f \050 100.f, 100.f \051;) 90 571.33 T
+(glcRenderChar \050 \324A) 90 559.33 T
+(\325 \051;) 176.85 559.33 T
+0 F
+-0.31 (In the following example, GLC r) 72 537.33 P
+-0.31 (enders the string \322Hello, world!\323 in r) 213.28 537.33 P
+-0.31 (ed 24 pixel Palatino Bold at a r) 374.64 537.33 P
+-0.31 (otation) 506.64 537.33 P
+(of 30 degr) 72 525.33 T
+(ees, starting at \050100, 100\051.) 116.02 525.33 T
+2 F
+(glcContext \050 glcGenContext \050\051 \051;) 90 503.33 T
+(glcFont \050 glcNewFontFromFamily \050 1, \322Palatino\323 \051 \051;) 90 491.33 T
+(glcFontFace \050 1, \322Bold\323 \051;) 90 479.33 T
+(glcScale \050 24.f, 24.f \051;) 90 467.33 T
+(glcRotate \050 30.f \051;) 90 455.33 T
+(glColor3f \050 1.f, 0.f, 0.f \051;) 90 443.33 T
+(glRasterPos2f \050 100.f, 100.f \051;) 90 431.33 T
+(glcRenderString \050 \322Hello, world!\323 \051;) 90 419.33 T
+2 14 Q
+(1.3) 72 390.67 T
+(GLC vs. Other Services) 103.5 390.67 T
+0 10 Q
+-0.33 (A GL implementation may support a platform speci\336c interface \050PSI\051 such as GLX or WGL. A PSI may pr) 72 371.33 P
+-0.33 (o-) 531.21 371.33 P
+-0.43 (vide character r) 72 359.33 P
+-0.43 (endering services. For example, the command) 140.01 359.33 P
+2 F
+-0.43 (glXUseXFont) 343 359.33 P
+0 F
+-0.43 ( extracts glyphs fr) 403.01 359.33 P
+-0.43 (om an X W) 480.51 359.33 P
+-0.43 (in-) 527.94 359.33 P
+-0.01 (dow System font object, cr) 72 347.33 P
+-0.01 (eating for each glyph a GL list object containing a) 188.19 347.33 P
+2 F
+-0.01 (glBitmap) 408.93 347.33 P
+0 F
+-0.01 ( command. A client) 451.15 347.33 P
+(can then issue the command) 72 335.33 T
+2 F
+(glCallLists) 200.02 335.33 T
+0 F
+( to r) 249.44 335.33 T
+(ender characters using the extracted glyphs.) 266.93 335.33 T
+(The character r) 72 313.33 T
+(endering services pr) 138.16 313.33 T
+(ovided by GLC ar) 227.7 313.33 T
+(e superior in many ways to those pr) 306.92 313.33 T
+(ovided by PSIs.) 465.7 313.33 T
+(The most signi\336cant advantages of GLC over PSI character r) 72 301.33 T
+(endering services ar) 338.02 301.33 T
+(e as follows:) 426.55 301.33 T
+(1.) 90 279.33 T
+(The GLC API is platform independent. Since most nontrivial GL applications r) 108 279.33 T
+(ender characters,) 455.06 279.33 T
+(GLC is an important step towar) 108 267.33 T
+(d the goal of tr) 247.93 267.33 T
+(uly portable GL applications.) 312.76 267.33 T
+(2.) 90 245.33 T
+(The GLC r) 108 245.33 T
+(efer) 154.34 245.33 T
+(ence implementation is platform independent. GLC implementations and futur) 171.02 245.33 T
+(e) 521.11 245.33 T
+(extensions can be made available on all GL platforms with little ef) 108 233.33 T
+(fort.) 399.14 233.33 T
+(3.) 90 211.33 T
+(GLC is simpler to use. Only two lines of GLC commands ar) 108 211.33 T
+(e r) 370.4 211.33 T
+(equir) 381.46 211.33 T
+(ed to pr) 404.56 211.33 T
+(epar) 438.96 211.33 T
+(e for r) 458.53 211.33 T
+(endering) 484.83 211.33 T
+(characters.) 108 199.33 T
+(4.) 90 177.33 T
+(GLC pr) 108 177.33 T
+(ovides mor) 141.11 177.33 T
+(e ways to exploit the r) 190.83 177.33 T
+(endering power of GL. For example, a glyph can be) 288.12 177.33 T
+(drawn as a bitmap, a set of lines, a set of triangles, or a textur) 108 165.33 T
+(ed r) 377.45 165.33 T
+(ectangle.) 394.62 165.33 T
+(5.) 90 143.33 T
+(GLC pr) 108 143.33 T
+(ovides better support for glyph transformations. For example, GLC supports r) 141.11 143.33 T
+(otated text,) 486.2 143.33 T
+(which is unavailable in GLX.) 108 131.33 T
+(6.) 90 109.33 T
+(GLC pr) 108 109.33 T
+(ovides better support for the lar) 141.11 109.33 T
+(ge coded character set de\336ned by the standar) 281.6 109.33 T
+(ds ISO/IEC) 481.13 109.33 T
+(10646-1:1993) 108 97.33 T
+0 8 Q
+(4) 163.83 101.33 T
+0 10 Q
+( and Unicode 1.1) 167.83 97.33 T
+0 8 Q
+(5,) 242.07 101.33 T
+(6,) 248.07 101.33 T
+(7) 254.07 101.33 T
+0 10 Q
+(.) 258.07 97.33 T
+(7.) 90 75.33 T
+-0.06 (GLC commands can be r) 108 75.33 P
+-0.06 (epr) 216.66 75.33 P
+-0.06 (esented in GLS) 231.23 75.33 P
+0 8 Q
+-0.05 (8) 297.63 79.33 P
+0 10 Q
+-0.06 ( str) 301.63 75.33 P
+-0.06 (eams. This will enable r) 315.34 75.33 P
+-0.06 (esolution independent cap-) 419.23 75.33 P
+FMENDPAGE
+%%EndPage: "6" 6
+%%Page: "7" 7
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(7) 303.5 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+0 F
+(tur) 108 713.33 T
+(e, inter) 121.06 713.33 T
+(change, and printing of GL pictur) 151.4 713.33 T
+(es containing text.) 299.95 713.33 T
+2 14 Q
+(2) 72 684.67 T
+(Machine De\336nition) 93 684.67 T
+(2.1) 72 654.67 T
+(Data T) 103.5 654.67 T
+(ypes) 145.4 654.67 T
+0 10 Q
+(GLC uses GL data types and de\336nes additional types, which ar) 72 635.33 T
+(e listed in T) 350.78 635.33 T
+(able) 401.23 635.33 T
+(1.) 421.96 635.33 T
+2 14 Q
+(2.2) 72 512.67 T
+(Errors) 103.5 512.67 T
+0 10 Q
+-0.58 (Each client thr) 72 493.33 P
+-0.58 (ead has a private GLC err) 134.2 493.33 P
+-0.58 (or code variable of type) 244.69 493.33 P
+2 F
+-0.58 (GLCenum) 348.66 493.33 P
+0 F
+-0.58 (. The initial value of this variable) 396.43 493.33 P
+-0.02 (is) 72 481.33 P
+2 F
+-0.02 (GLC_NONE) 81.63 481.33 P
+0 F
+-0.02 (. If a GLC command raises an err) 139.39 481.33 P
+-0.02 (or) 284.74 481.33 P
+-0.02 (, and the value of this variable is) 293.41 481.33 P
+2 F
+-0.02 (GLC_NONE) 438.85 481.33 P
+0 F
+-0.02 (, the com-) 496.61 481.33 P
+(mand stor) 72 469.33 T
+(es the err) 116.99 469.33 T
+(or) 157.4 469.33 T
+(\325s code in the variable.) 167.55 469.33 T
+-0.62 (If a GLC command raises an err) 72 447.33 P
+-0.62 (or) 208.78 447.33 P
+-0.62 (, the command will have no ef) 217.45 447.33 P
+-0.62 (fect except the possible storing of the err) 347.16 447.33 P
+-0.62 (or) 520.95 447.33 P
+-0.62 (\325s) 531.1 447.33 P
+(code. GLC err) 72 435.33 T
+(or semantics apply only to GLC err) 133.64 435.33 T
+(ors and not to GL err) 288.88 435.33 T
+(ors or system err) 381.47 435.33 T
+(ors \050e.g., memory) 455.46 435.33 T
+(access err) 72 423.33 T
+(ors\051 that occur during GLC command execution.) 114.16 423.33 T
+-0.6 (Every GLC command execution begins with a test to determine if the command parameters ar) 72 401.33 P
+-0.6 (e valid. If this) 479.58 401.33 P
+-0.25 (test fails, the command raises) 72 389.33 P
+2 F
+-0.25 (GLC_P) 203.15 389.33 P
+-0.25 (ARAMETER_ERROR) 235.18 389.33 P
+0 F
+-0.25 (. Otherwise, GLC performs a test to determine) 335.17 389.33 P
+(if its state is such that the command is valid. If this test fails, the command raises) 72 377.33 T
+2 F
+(GLC_ST) 430.17 377.33 T
+(A) 468.69 377.33 T
+(TE_ERROR) 475.55 377.33 T
+0 F
+(.) 529.43 377.33 T
+(Otherwise, command execution pr) 72 365.33 T
+(oceeds. If at any point during command execution a needed r) 224.89 365.33 T
+(esour) 495.73 365.33 T
+(ce) 520.02 365.33 T
+(\050e.g., memory\051 is unavailable, the command raises) 72 353.33 T
+2 F
+(GLC_RESOURCE_ERROR) 296.12 353.33 T
+0 F
+(.) 419.98 353.33 T
+2 14 Q
+(2.3) 72 324.67 T
+(Contexts) 103.5 324.67 T
+0 10 Q
+(Each GLC context has a nonzer) 72 305.33 T
+(o ID of type) 209.61 305.33 T
+2 F
+(GLint) 264.59 305.33 T
+0 F
+(. When a client is linked with a GLC library) 291.8 305.33 T
+(, the library) 482.47 305.33 T
+-0.6 (maintains a list of IDs that contains one entry for each of the client\325s GLC contexts. This list is initially empty) 72 293.33 P
+-0.6 (.) 537.5 293.33 P
+-0.27 (Each client thr) 72 271.33 P
+-0.27 (ead has a private GLC context ID variable that always contains either the value zer) 134.8 271.33 P
+-0.27 (o, indicat-) 496.03 271.33 P
+(ing that the thr) 72 259.33 T
+(ead has no curr) 137.85 259.33 T
+(ent GLC context, or the ID of the thr) 205.78 259.33 T
+(ead\325s curr) 365.07 259.33 T
+(ent GLC context. The initial) 408.68 259.33 T
+(value of this variable is zer) 72 247.33 T
+(o.) 190.35 247.33 T
+-0.24 (When the ID of a GLC context is stor) 72 225.33 P
+-0.24 (ed in the GLC context ID variable of a client thr) 232.15 225.33 P
+-0.24 (ead, the context is said) 438.85 225.33 P
+(to be curr) 72 213.33 T
+(ent to the thr) 114.23 213.33 T
+(ead. It is not possible for a GLC context to be curr) 171.04 213.33 T
+(ent simultaneously to multiple) 389.34 213.33 T
+(thr) 72 201.33 T
+(eads.) 84.85 201.33 T
+-0.41 (W) 72 179.33 P
+-0.41 (ith the exception of the per) 81.45 179.33 P
+-0.41 (-thr) 197.61 179.33 P
+-0.41 (ead GLC err) 213.79 179.33 P
+-0.41 (or code and context ID variables, all of the GLC state variables) 267.2 179.33 P
+(that ar) 72 167.33 T
+(e used during the execution of a GLC command ar) 100.61 167.33 T
+(e stor) 323.86 167.33 T
+(ed in the issuing thr) 347.88 167.33 T
+(ead\325s curr) 435.94 167.33 T
+(ent GLC con-) 479.55 167.33 T
+(text.) 72 155.33 T
+-0.25 (Each GLC command belongs to one of the following categories: Global, Context, Master) 72 133.33 P
+-0.25 (, Font, T) 456.26 133.33 P
+-0.25 (ransforma-) 491.09 133.33 P
+(tion, Rendering, and Measur) 72 121.33 T
+(ement. Global commands do not use GLC context state variables and can) 198.6 121.33 T
+(ther) 72 109.33 T
+(efor) 89.64 109.33 T
+(e be executed successfully if the issuing thr) 106.99 109.33 T
+(ead has no curr) 296.8 109.33 T
+(ent GLC context. All other GLC com-) 364.73 109.33 T
+(mands raise) 72 97.33 T
+2 F
+(GLC_ST) 127.89 97.33 T
+(A) 166.41 97.33 T
+(TE_ERROR) 173.27 97.33 T
+0 F
+( if the issuing thr) 227.15 97.33 T
+(ead has no curr) 301.82 97.33 T
+(ent GLC context.) 369.75 97.33 T
+(This document identi\336es explicitly the situations in which GLC may issue GL commands. In some GL im-) 72 75.33 T
+(T) 209.23 607.33 T
+(ype) 214.46 607.33 T
+(Description) 272.08 607.33 T
+2 F
+(GLCchar) 209.23 589.33 T
+0 F
+(Character code array element) 272.08 589.33 T
+2 F
+(GLCenum) 209.23 575.33 T
+0 F
+(32 bit enumerant) 272.08 575.33 T
+2 F
+(GLCfunc) 209.23 561.33 T
+0 F
+(Callback function pointer) 272.08 561.33 T
+(T) 253.5 541.33 T
+(able 1: GLC data types) 258.71 541.33 T
+209.23 616 402.77 616 2 L
+V
+0.25 H
+0 Z
+N
+209.23 602 402.77 602 2 L
+V
+N
+209.23 556 402.77 556 2 L
+V
+N
+FMENDPAGE
+%%EndPage: "7" 7
+%%Page: "8" 8
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(8) 303.5 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+0 F
+-0.3 (plementations, the execution behavior of a GL command is de\336ned only if the GL client has pr) 72 713.33 P
+-0.3 (eviously cr) 483.92 713.33 P
+-0.3 (e-) 531.88 713.33 P
+(ated a GL context and made it curr) 72 701.33 T
+(ent to the issuing thr) 225.61 701.33 T
+(ead. It is the r) 316.63 701.33 T
+(esponsibility of the GLC client to set) 376.45 701.33 T
+(up the underlying GL implementation such that whenever GLC issues a GL command, the execution be-) 72 689.33 T
+(havior of that command is de\336ned.) 72 677.33 T
+(The behavior of GLC depends on the extension set and version of the underlying GL implementation.) 72 655.33 T
+(When a GLC context is made curr) 72 643.33 T
+(ent to a thr) 221.52 643.33 T
+(ead, GLC issues the commands) 269.46 643.33 T
+2 F
+(glGetString \050 GL_VERSION \051;) 90 621.33 T
+(glGetString \050 GL_EXTENSIONS \051;) 90 609.33 T
+0 F
+(and stor) 72 587.33 T
+(es the r) 108.16 587.33 T
+(eturned strings.) 139.83 587.33 T
+2 14 Q
+(2.4) 72 558.67 T
+(Character codes) 103.5 558.67 T
+0 10 Q
+(Except wher) 72 539.33 T
+(e otherwise speci\336ed, every character code used in GLC is an element of the Universal Multi-) 126.99 539.33 T
+(ple-Octet Coded Character Set \050UCS\051 de\336ned by the standar) 72 527.33 T
+(ds ISO/IEC 10646-1:1993 and Unicode 1.1. A) 337.42 527.33 T
+(UCS code is denoted as U+) 72 515.33 T
+3 F
+(hexcode) 191.99 515.33 T
+0 F
+(, wher) 223.28 515.33 T
+(e) 251 515.33 T
+3 F
+(hexcode) 258.29 515.33 T
+0 F
+(is a sequence of hexadecimal digits. Each UCS code cor-) 292.08 515.33 T
+-0.33 (r) 72 503.33 P
+-0.33 (esponds to a character that has a unique name string. For example, the code U+41 corr) 75.77 503.33 P
+-0.33 (esponds to the char-) 451.69 503.33 P
+(acter LA) 72 491.33 T
+(TIN CAPIT) 109.09 491.33 T
+(AL LETTER A.) 159.07 491.33 T
+2 14 Q
+(2.5) 72 462.67 T
+(Constants) 103.5 462.67 T
+0 10 Q
+(GLC de\336nes a set of implementation speci\336c constants. The integer constants) 72 443.33 T
+2 F
+(GLC_VERSION_MAJOR) 415.09 443.33 T
+0 F
+(and) 72 431.33 T
+2 F
+(GLC_VERSION_MINOR) 91.43 431.33 T
+0 F
+( identify the version of GLC that the implementation supports. These con-) 208.63 431.33 T
+-0.69 (stants corr) 72 419.33 P
+-0.69 (espond to a version) 117.25 419.33 P
+3 F
+-0.69 (A) 203.43 419.33 P
+0 F
+-0.69 (.) 210.65 419.33 P
+3 F
+-0.69 (B) 213.15 419.33 P
+0 F
+-0.69 ( of this document. If a new version br) 219.26 419.33 P
+-0.69 (eaks compatibility) 378.73 419.33 P
+-0.69 (, the major version) 458.01 419.33 P
+-0.27 (number) 72 407.33 P
+3 F
+-0.27 (A) 109.18 407.33 P
+0 F
+-0.27 ( will be incr) 116.4 407.33 P
+-0.27 (emented by one. Otherwise, the minor version number) 167.41 407.33 P
+3 F
+-0.27 (B) 410.37 407.33 P
+0 F
+-0.27 ( will be incr) 416.48 407.33 P
+-0.27 (emented by one.) 467.49 407.33 P
+-0.18 (The string constant) 72 385.33 P
+2 F
+-0.18 (GLC_VENDOR) 158.75 385.33 P
+0 F
+-0.18 ( identi\336es the vendor of the implementation. If the vendor of) 231.51 385.33 P
+-0.18 (fers a GL) 497.98 385.33 P
+(implementation, the value of) 72 373.33 T
+2 F
+(GLC_VENDOR) 202.14 373.33 T
+0 F
+( must equal the value of the GL implementation constant) 274.9 373.33 T
+2 F
+(GL_VENDOR) 72 361.33 T
+0 F
+(. Otherwise, the value of) 137.54 361.33 T
+2 F
+(GLC_VENDOR) 248.04 361.33 T
+0 F
+( must be a unique name that the vendor has allo-) 320.8 361.33 T
+(cated in the GLC vendor r) 72 349.33 T
+(egistry by sending email to glc-r) 187.08 349.33 T
+(egistry@sgi.com.) 329.36 349.33 T
+(The string constant) 72 327.33 T
+2 F
+(GLC_EXTENSIONS) 159.28 327.33 T
+0 F
+( lists in alphabetical or) 252.6 327.33 T
+(der the names of the GLC extensions that) 351.7 327.33 T
+-0.3 (ar) 72 315.33 P
+-0.3 (e supported by the implementation. One SP) 80.77 315.33 P
+-0.3 (ACE \050U+20\051 separates each pair of adjacent names. Example:) 271.5 315.33 P
+(\322GLC_EXT_kern GLC_SGI_ligatur) 72 303.33 T
+(e\323.) 225.88 303.33 T
+-0.36 (Each extension name begins with \322GLC_) 72 281.33 P
+3 F
+-0.36 (pr) 250.76 281.33 P
+-0.36 (e\336x) 259.47 281.33 P
+0 F
+-0.36 (_\323. If) 273.64 281.33 P
+-0.36 (f two or mor) 294.8 281.33 P
+-0.36 (e vendors support the extension at the time) 349.08 281.33 P
+-0.28 (of its indr) 72 269.33 P
+-0.28 (oduction, the value of) 114.26 269.33 P
+3 F
+-0.28 (pr) 212.19 269.33 P
+-0.28 (e\336x) 220.9 269.33 P
+0 F
+-0.28 (is \322EXT\323. Otherwise, the value of) 237.3 269.33 P
+3 F
+-0.28 (pr) 384.71 269.33 P
+-0.28 (e\336x) 393.42 269.33 P
+0 F
+-0.28 ( is a vendor speci\336c extension) 407.59 269.33 P
+-0.26 (name pr) 72 257.33 P
+-0.26 (e\336x string, optionally followed by one \324S\325 \050U+53\051 or one \324X\325 \050U+58\051. The \324S\325 indicates that the exten-) 108.46 257.33 P
+(sion is supported on only a subset of the vendor) 72 245.33 T
+(\325s pr) 285.24 245.33 T
+(oducts. The \324X\325 indicates that the extension is experi-) 304.54 245.33 T
+(mental and may be r) 72 233.33 T
+(ede\336ned or r) 163.02 233.33 T
+(emoved in futur) 219.66 233.33 T
+(e r) 291.44 233.33 T
+(eleases. One \324_\325 \050U+5F\051 should be used between each) 302.5 233.33 T
+(pair of adjacent wor) 72 221.33 T
+(ds in an extension name.) 160.49 221.33 T
+(If a vendor of) 72 199.33 T
+(fers a GL implementation, the vendor) 131.59 199.33 T
+(\325s GLC extension name pr) 298.63 199.33 T
+(e\336x must be the same as the) 412.95 199.33 T
+(vendor) 72 187.33 T
+(\325s GL extension name pr) 104.52 187.33 T
+(e\336x. Otherwise, this pr) 211.75 187.33 T
+(e\336x must be a unique string that the vendor has al-) 312.22 187.33 T
+-0.01 (located in the GLC extension name pr) 72 175.33 P
+-0.01 (e\336x r) 238.79 175.33 P
+-0.01 (egistry by sending email to glc-r) 261.04 175.33 P
+-0.01 (egistry@sgi.com. It is common) 403.26 175.33 P
+(for the GLC extension name pr) 72 163.33 T
+(e\336x to equal the value of) 208.41 163.33 T
+2 F
+(GLC_VENDOR) 319.5 163.33 T
+0 F
+(.) 392.26 163.33 T
+-0.1 (The string constant) 72 141.33 P
+2 F
+-0.1 ( GLC_RELEASE) 156.58 141.33 P
+0 F
+-0.1 ( identi\336es the vendor speci\336c softwar) 231.18 141.33 P
+-0.1 (e r) 395.99 141.33 P
+-0.1 (elease that contains the imple-) 406.95 141.33 P
+(mentation. Example: \322IRIX 6.2\323.) 72 129.33 T
+2 14 Q
+(2.6) 72 100.67 T
+(Masters) 103.5 100.67 T
+0 10 Q
+(Section under constr) 72 81.33 T
+(uction.) 162.72 81.33 T
+FMENDPAGE
+%%EndPage: "8" 8
+%%Page: "9" 9
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(9) 303.5 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+2 14 Q
+(2.7) 72 710.67 T
+(Fonts) 103.5 710.67 T
+0 10 Q
+(Section under constr) 72 691.33 T
+(uction.) 162.72 691.33 T
+2 14 Q
+(2.8) 72 662.67 T
+(Rendering) 103.5 662.67 T
+0 10 Q
+(Section under constr) 72 643.33 T
+(uction.) 162.72 643.33 T
+2 14 Q
+(2.9) 72 614.67 T
+(Measurement) 103.5 614.67 T
+0 10 Q
+(Section under constr) 72 595.33 T
+(uction.) 162.72 595.33 T
+2 14 Q
+(3) 72 566.67 T
+(API De\336nition) 93 566.67 T
+(3.1) 72 536.67 T
+(Errors) 103.5 536.67 T
+0 10 Q
+(If an a GLC command raises an err) 72 517.33 T
+(or) 225.8 517.33 T
+(, and the command r) 234.47 517.33 T
+(eturns a value, the r) 326.03 517.33 T
+(eturned value will be zer) 413.64 517.33 T
+(o.) 523.72 517.33 T
+2 14 Q
+(3.2) 72 488.67 T
+(Character codes) 103.5 488.67 T
+0 10 Q
+(In the GLC API, a single character code is r) 72 469.33 T
+(epr) 261.68 469.33 T
+(esented as a value of type) 276.25 469.33 T
+2 F
+(GLint) 392.08 469.33 T
+0 F
+(.) 419.29 469.33 T
+2 14 Q
+(3.3) 72 440.67 T
+(Strings) 103.5 440.67 T
+0 10 Q
+(Except wher) 72 421.33 T
+(e otherwise speci\336ed, every character string used in the GLC API is r) 126.99 421.33 T
+(epr) 431.02 421.33 T
+(esented as a zer) 445.59 421.33 T
+(o ter-) 514.69 421.33 T
+-0.48 (minated array of UCS code values. The type of these values is declar) 72 409.33 P
+-0.48 (ed statically as) 368.06 409.33 P
+2 F
+-0.48 (GLCchar) 433.74 409.33 P
+0 F
+-0.48 (, but the actual) 474.1 409.33 P
+-0.31 (type of these values is determined dynamically by the value of the variable) 72 397.33 P
+2 F
+-0.31 (GLC_STRING_TYPE) 401.72 397.33 P
+0 F
+-0.31 (. The val-) 499.49 397.33 P
+(ues) 72 385.33 T
+2 F
+(GLC_UCS1) 89.56 385.33 T
+0 F
+(,) 142.33 385.33 T
+2 F
+(GLC_UCS2) 147.33 385.33 T
+0 F
+(, and) 200.1 385.33 T
+2 F
+(GLC_UCS4) 224.53 385.33 T
+0 F
+( specify that each value is of type) 277.3 385.33 T
+2 F
+(GLubyte) 425.91 385.33 T
+0 F
+(,) 466.46 385.33 T
+2 F
+(GLushort) 471.46 385.33 T
+0 F
+(, or) 515.34 385.33 T
+2 F
+(GLint) 72 373.33 T
+0 F
+(, r) 99.21 373.33 T
+(espectively) 107.98 373.33 T
+(. The initial value of) 156.22 373.33 T
+2 F
+(GLC_STRING_TYPE) 246.85 373.33 T
+0 F
+( is) 344.62 373.33 T
+2 F
+(GLC_UCS1) 356.77 373.33 T
+0 F
+(.) 409.54 373.33 T
+(Some GLC commands r) 72 351.33 T
+(eturn strings. The r) 177.16 351.33 T
+(eturn value of these commands is a pointer to a string r) 261.5 351.33 T
+(eturn) 505.23 351.33 T
+(buf) 72 339.33 T
+(fer in the issuing thr) 86.71 339.33 T
+(ead\325s curr) 175.94 339.33 T
+(ent GLC context. This pointer is valid until the next GLC command is is-) 219.55 339.33 T
+-0.59 (sued. The pointer may be used as a parameter to the next GLC command. The client must copy the r) 72 327.33 P
+-0.59 (eturned) 503.34 327.33 P
+(string to a client pr) 72 315.33 T
+(ovided buf) 155.37 315.33 T
+(fer if the value of the string will be needed after the next GLC command is) 203.61 315.33 T
+(issued.) 72 303.33 T
+-0.1 (The value of a character code in a r) 72 281.33 P
+-0.1 (eturned string may exceed the range of the character encoding selected) 225.08 281.33 P
+(by) 72 269.33 T
+2 F
+(GLC_STRING_TYPE) 85.59 269.33 T
+0 F
+(. In this case, the r) 183.36 269.33 T
+(eturned character is converted to a character sequence) 262.39 269.33 T
+(\134<) 72 257.33 T
+3 F
+(hexcode) 84.12 257.33 T
+0 F
+(>, wher) 115.41 257.33 T
+(e \134 is the character REVERSE SOLIDUS \050U+5C\051, < is the character LESS-THAN SIGN) 149.19 257.33 T
+-0.19 (\050U+3C\051, > is the character GREA) 72 245.33 P
+-0.19 (TER-THAN SIGN \050U+3E\051, and) 213.81 245.33 P
+3 F
+-0.19 (hexcode) 351.42 245.33 P
+0 F
+-0.19 ( is the original character code r) 382.71 245.33 P
+-0.19 (epr) 517.31 245.33 P
+-0.19 (e-) 531.88 245.33 P
+-0.28 (sented as a sequence of hexadecimal digits. The sequence has no leading zer) 72 233.33 P
+-0.28 (os, and alphabetic digits ar) 404.62 233.33 P
+-0.28 (e in) 522.05 233.33 P
+(upper case.) 72 221.33 T
+2 14 Q
+(3.4) 72 192.67 T
+(Global commands) 103.5 192.67 T
+0 10 Q
+(The commands described in this section do not use GLC context state variables and can ther) 72 173.33 T
+(efor) 478.27 173.33 T
+(e be exe-) 495.62 173.33 T
+(cuted successfully if the issuing thr) 72 161.33 T
+(ead has no curr) 226.96 161.33 T
+(ent GLC context. All other GLC commands raise) 294.89 161.33 T
+2 F
+(GLC_ST) 72 149.33 T
+(A) 110.52 149.33 T
+(TE_ERROR) 117.38 149.33 T
+0 F
+( if the issuing thr) 171.26 149.33 T
+(ead has no curr) 245.93 149.33 T
+(ent GLC context.) 313.86 149.33 T
+2 14 Q
+(3.4.1) 72 120.67 T
+(glcContext) 114 120.67 T
+0 10 Q
+(The command) 72 101.33 T
+2 F
+(void glcContext \050 GLint inContext \051) 90 79.33 T
+FMENDPAGE
+%%EndPage: "9" 9
+%%Page: "10" 10
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(10) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+0 F
+(assigns the value) 72 713.33 T
+2 F
+(inContext) 149.76 713.33 T
+0 F
+( to the issuing thr) 194.75 713.33 T
+(ead\325s curr) 271.9 713.33 T
+(ent GLC context ID variable. The command raises) 315.51 713.33 T
+2 F
+-0.18 (GLC_P) 72 701.33 P
+-0.18 (ARAMETER_ERROR) 104.03 701.33 P
+0 F
+-0.18 ( if) 204.02 701.33 P
+2 F
+-0.18 (inContext) 214.9 701.33 P
+0 F
+-0.18 ( is nonzer) 259.89 701.33 P
+-0.18 (o and is not the ID of one of the client\325s GLC contexts.) 302.34 701.33 P
+(The command raises) 72 689.33 T
+2 F
+(GLC_ST) 165.86 689.33 T
+(A) 204.38 689.33 T
+(TE_ERROR) 211.24 689.33 T
+0 F
+( if) 265.12 689.33 T
+2 F
+(inContext) 276.36 689.33 T
+0 F
+( is the ID of a GLC context that is curr) 321.35 689.33 T
+(ent to a) 487.97 689.33 T
+-0.32 (thr) 72 677.33 P
+-0.32 (ead other than the issuing thr) 84.85 677.33 P
+-0.32 (ead. The command raises) 213.23 677.33 P
+2 F
+-0.32 (GLC_ST) 326.69 677.33 P
+-0.32 (A) 365.21 677.33 P
+-0.32 (TE_ERROR) 372.07 677.33 P
+0 F
+-0.32 ( if the issuing thr) 425.95 677.33 P
+-0.32 (ead is ex-) 499.32 677.33 P
+(ecuting a callback function that has been called fr) 72 665.33 T
+(om GLC.) 289.26 665.33 T
+2 14 Q
+(3.4.2) 72 636.67 T
+(glcDeleteContext) 114 636.67 T
+0 10 Q
+(The command) 72 617.33 T
+2 F
+(void glcDeleteContext \050 GLint inContext \051) 90 595.33 T
+0 F
+-0.06 (marks for deletion the GLC context identi\336ed by) 72 573.33 P
+2 F
+-0.06 (inContext) 288.64 573.33 P
+0 F
+-0.06 (. If the marked context is not curr) 333.63 573.33 P
+-0.06 (ent to any cli-) 480.11 573.33 P
+(ent thr) 72 561.33 T
+(ead, the command deletes the marked context immediately) 101.22 561.33 T
+(. Otherwise, the marked context will be) 361.46 561.33 T
+-0.07 (deleted during the execution of the next) 72 549.33 P
+2 F
+-0.07 (glcContext) 250.36 549.33 P
+0 F
+-0.07 ( command that causes it to not be curr) 299.24 549.33 P
+-0.07 (ent to any client) 467.18 549.33 P
+(thr) 72 537.33 T
+(ead. The command raises) 84.85 537.33 T
+2 F
+(GLC_P) 199.61 537.33 T
+(ARAMETER_ERROR) 231.64 537.33 T
+0 F
+( if) 331.63 537.33 T
+2 F
+(inContext) 342.87 537.33 T
+0 F
+( is not the ID of one of the client\325s) 387.86 537.33 T
+(GLC contexts.) 72 525.33 T
+2 14 Q
+(3.4.3) 72 496.67 T
+(glcGenContext) 114 496.67 T
+0 10 Q
+(The command) 72 477.33 T
+2 F
+(GLint glcGenContext \050 void \051) 90 455.33 T
+0 F
+(generates a new GLC context and r) 72 433.33 T
+(eturns its ID.) 226.87 433.33 T
+2 14 Q
+(3.4.4) 72 404.67 T
+(glcGetAllContexts) 114 404.67 T
+0 10 Q
+(The command) 72 385.33 T
+2 F
+(GLint* glcGetAllContexts \050 void \051) 90 363.33 T
+0 F
+-0.26 (r) 72 341.33 P
+-0.26 (eturns a zer) 75.77 341.33 P
+-0.26 (o terminated array of GLC context IDs that contains one entry for each of the client\325s GLC con-) 126.9 341.33 P
+(texts. GLC uses the ISO C library command) 72 329.33 T
+2 F
+(malloc) 267.08 329.33 T
+0 F
+(to allocate the array) 300.13 329.33 T
+(. The client should use the ISO C) 386.34 329.33 T
+(library command) 72 317.33 T
+2 F
+(free) 151.3 317.33 T
+0 F
+( to deallocate the array when it is no longer needed.) 169.08 317.33 T
+2 14 Q
+(3.4.5) 72 288.67 T
+(glcGetCurrentContext) 114 288.67 T
+0 10 Q
+(The command) 72 269.33 T
+2 F
+(GLint glcGetCurrentContext \050 void \051) 90 247.33 T
+0 F
+(r) 72 225.33 T
+(eturns the value of the issuing thr) 75.77 225.33 T
+(ead\325s curr) 224.33 225.33 T
+(ent GLC context ID variable.) 267.94 225.33 T
+2 14 Q
+(3.4.6) 72 196.67 T
+(glcGetError) 114 196.67 T
+0 10 Q
+(The command) 72 177.33 T
+2 F
+(GLCenum glcGetError \050 void \051) 90 155.33 T
+0 F
+(r) 72 133.33 T
+(etrieves the value of the issuing thr) 75.77 133.33 T
+(ead\325s GLC err) 230.62 133.33 T
+(or code variable, assigns the value) 291.88 133.33 T
+2 F
+(GLC_NONE) 445.59 133.33 T
+0 F
+( to that) 503.35 133.33 T
+FMENDPAGE
+%%EndPage: "10" 10
+%%Page: "11" 11
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(11) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+0 F
+(variable, and r) 72 713.33 T
+(eturns the r) 135.94 713.33 T
+(etrieved value. T) 186.67 713.33 T
+(able) 260.01 713.33 T
+(1 lists the GLC err) 280.74 713.33 T
+(or codes.) 360.51 713.33 T
+2 14 Q
+(3.4.7) 72 576.67 T
+(glcIsContext) 114 576.67 T
+0 10 Q
+(The command) 72 557.33 T
+2 F
+(GLboolean glcIsContext \050 GLint inContext \051) 90 535.33 T
+0 F
+(r) 72 513.33 T
+(eturns) 75.77 513.33 T
+2 F
+(GL_TRUE) 106.36 513.33 T
+0 F
+( if) 153.58 513.33 T
+(f) 162.14 513.33 T
+2 F
+(inContext) 167.97 513.33 T
+0 F
+( is the ID of one of the client\325s GLC contexts.) 212.96 513.33 T
+2 14 Q
+(3.5) 72 484.67 T
+(Context commands) 103.5 484.67 T
+(3.5.1) 72 454.67 T
+(glcCallbackFunc) 114 454.67 T
+0 10 Q
+(The command) 72 435.33 T
+2 F
+(void glcCallbackFunc \050 GLCenum inOpcode, GLCfunc inFunc \051) 90 413.33 T
+0 F
+-0.51 (assigns the value) 72 391.33 P
+2 F
+-0.51 (inFunc) 148.22 391.33 P
+0 F
+-0.51 ( to the callback function variable identi\336ed by) 179.88 391.33 P
+2 F
+-0.51 (inOpcode) 380.79 391.33 P
+0 F
+-0.51 (. T) 425.78 391.33 P
+-0.51 (able) 435.48 391.33 P
+-0.51 (1 lists the GLC call-) 456.21 391.33 P
+(back function variables.) 72 299.33 T
+2 14 Q
+(3.5.2) 72 270.67 T
+(glcDataPointer) 114 270.67 T
+0 10 Q
+(The command) 72 251.33 T
+2 F
+(void glcDataPointer \050 GLvoid* inPointer \051) 90 229.33 T
+0 F
+(assigns the value) 72 207.33 T
+2 F
+(inPointer) 149.76 207.33 T
+0 F
+( to the variable) 192.53 207.33 T
+2 F
+(GLC_DA) 260.86 207.33 T
+(T) 302.71 207.33 T
+(A_POINTER) 308.46 207.33 T
+0 F
+(.) 367.9 207.33 T
+2 14 Q
+(3.5.3) 72 178.67 T
+(glcDeleteGLObjects) 114 178.67 T
+0 10 Q
+(The command) 72 159.33 T
+2 F
+(void glcDeleteGLObjects \050 void \051) 90 137.33 T
+0 F
+-0.04 (causes GLC to issue a sequence of GL commands to delete all of the GL objects that it owns. GLC uses the) 72 115.33 P
+(command) 72 103.33 T
+2 F
+(glDeleteLists) 118.99 103.33 T
+0 F
+( to delete all of the GL objects named in) 179.52 103.33 T
+2 F
+(GLC_LIST_OBJECT_LIST) 356.45 103.33 T
+0 F
+( and uses the) 477.56 103.33 T
+-0.2 (command) 72 91.33 P
+2 F
+-0.2 (glDeleteT) 118.79 91.33 P
+-0.2 (exturesEXT) 163.23 91.33 P
+0 F
+-0.2 ( to delete all of the GL objects named in) 215.45 91.33 P
+2 F
+-0.2 (GLC_TEXTURE_OBJECT_LIST) 390.38 91.33 P
+0 F
+-0.2 (.) 535.2 91.33 P
+(When an execution of) 72 79.33 T
+2 F
+(glcDeleteGLObjects) 170.7 79.33 T
+0 F
+( \336nishes, both of these lists will be empty) 263.44 79.33 T
+(.) 443.86 79.33 T
+(Name) 207.34 685.33 T
+(Enumerant) 353.51 685.33 T
+2 F
+(GLC_NONE) 207.34 667.33 T
+0 F
+(0x0000) 353.51 667.33 T
+2 F
+(GLC_P) 207.34 653.33 T
+(ARAMETER_ERROR) 239.37 653.33 T
+0 F
+(0x0040) 353.51 653.33 T
+2 F
+(GLC_RESOURCE_ERROR) 207.34 639.33 T
+0 F
+(0x0041) 353.51 639.33 T
+2 F
+(GLC_ST) 207.34 625.33 T
+(A) 245.86 625.33 T
+(TE_ERROR) 252.72 625.33 T
+0 F
+(0x0042) 353.51 625.33 T
+(T) 262.64 605.33 T
+(able 2: Err) 267.85 605.33 T
+(or codes) 312.41 605.33 T
+(Name) 90.14 363.33 T
+(Enumerant) 243.93 363.33 T
+(Initial value) 308.16 363.33 T
+(T) 380.38 363.33 T
+(ype signatur) 385.61 363.33 T
+(e) 441.06 363.33 T
+2 F
+(GLC_OP_glcUnmappedCode) 90.14 345.33 T
+0 F
+(0x0020) 243.93 345.33 T
+2 F
+(GLC_NONE) 308.16 345.33 T
+(GLboolean \050*\051\050GLint inCode\051) 380.38 345.33 T
+0 F
+(T) 227.79 325.33 T
+(able 3: Callback function variables) 232.99 325.33 T
+207.34 694 404.66 694 2 L
+V
+0.25 H
+0 Z
+N
+207.34 680 404.66 680 2 L
+V
+N
+207.34 620 404.66 620 2 L
+V
+N
+90.14 372 521.86 372 2 L
+V
+N
+90.14 358 521.86 358 2 L
+V
+N
+90.14 340 521.86 340 2 L
+V
+N
+FMENDPAGE
+%%EndPage: "11" 11
+%%Page: "12" 12
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(12) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+2 14 Q
+(3.5.4) 72 710.67 T
+(glcDisable) 114 710.67 T
+0 10 Q
+(The command) 72 691.33 T
+2 F
+(void glcDisable \050 GLCenum inAttrib \051) 90 669.33 T
+0 F
+(assigns the value) 72 647.33 T
+2 F
+(GL_F) 149.76 647.33 T
+(ALSE) 174.21 647.33 T
+0 F
+( to the boolean variable identi\336ed by) 200.32 647.33 T
+2 F
+(inAttrib) 364.96 647.33 T
+0 F
+(. T) 402.17 647.33 T
+(able) 412.38 647.33 T
+(1 lists the GLC boolean) 433.11 647.33 T
+(variables.) 72 531.33 T
+2 14 Q
+(3.5.5) 72 502.67 T
+(glcEnable) 114 502.67 T
+0 10 Q
+(The command) 72 483.33 T
+2 F
+(void glcEnable \050 GLCenum inAttrib \051) 90 461.33 T
+0 F
+(assigns the value) 72 439.33 T
+2 F
+(GL_TRUE) 149.76 439.33 T
+0 F
+( to the boolean variable identi\336ed by) 196.98 439.33 T
+2 F
+(inAttrib) 361.62 439.33 T
+0 F
+(. T) 398.83 439.33 T
+(able) 409.04 439.33 T
+(1 lists the GLC boolean) 429.77 439.33 T
+(variables.) 72 427.33 T
+2 14 Q
+(3.5.6) 72 398.67 T
+(glcGetCallbackFunc) 114 398.67 T
+0 10 Q
+(The command) 72 379.33 T
+2 F
+(GLCfunc glcGetCallbackFunc \050 GLCenum inOpcode \051) 90 357.33 T
+0 F
+(r) 72 335.33 T
+(eturns the value of the callback function variable identi\336ed by) 75.77 335.33 T
+2 F
+(inOpcode) 352.21 335.33 T
+0 F
+(. T) 397.2 335.33 T
+(able) 407.41 335.33 T
+(1 lists the GLC callback) 428.14 335.33 T
+(function variables.) 72 323.33 T
+2 14 Q
+(3.5.7) 72 294.67 T
+(glcGetListc) 114 294.67 T
+0 10 Q
+(The command) 72 275.33 T
+2 F
+(const GLCchar* glcGetListc \050 GLCenum inAttrib, GLint inIndex \051) 90 253.33 T
+0 F
+-0.56 (r) 72 231.33 P
+-0.56 (eturns the string at of) 75.77 231.33 P
+-0.56 (fset) 168.09 231.33 P
+2 F
+-0.56 (inIndex) 185.65 231.33 P
+0 F
+-0.56 ( fr) 221.2 231.33 P
+-0.56 (om the \336rst element in the string list identi\336ed by) 230.24 231.33 P
+2 F
+-0.56 (inAttrib) 445.97 231.33 P
+0 F
+-0.56 (. T) 483.18 231.33 P
+-0.56 (able) 492.83 231.33 P
+-0.56 (1 lists) 513.56 231.33 P
+(the GLC string lists. The command raises) 72 139.33 T
+2 F
+(GLC_P) 256.36 139.33 T
+(ARAMETER_ERROR) 288.39 139.33 T
+0 F
+( if) 388.38 139.33 T
+2 F
+(inIndex) 399.62 139.33 T
+0 F
+( is less than zer) 435.17 139.33 T
+(o or is) 501.96 139.33 T
+(gr) 72 127.33 T
+(eater than or equal to the value of the list\325s element count variable.) 81.33 127.33 T
+2 14 Q
+(3.5.8) 72 98.67 T
+(glcGetListi) 114 98.67 T
+0 10 Q
+(The command) 72 79.33 T
+(Name) 181.45 619.33 T
+(Enumerant) 290.74 619.33 T
+(Initial value) 358.32 619.33 T
+2 F
+(GLC_AUTO_FONT) 181.45 601.33 T
+0 F
+(0x0010) 290.74 601.33 T
+2 F
+(GL_TRUE) 358.32 601.33 T
+(GLC_GL_OBJECTS) 181.45 587.33 T
+0 F
+(0x001) 290.74 587.33 T
+(1) 315.35 587.33 T
+2 F
+(GL_TRUE) 358.32 587.33 T
+(GLC_MIPMAP) 181.45 573.33 T
+0 F
+(0x0012) 290.74 573.33 T
+2 F
+(GL_TRUE) 358.32 573.33 T
+0 F
+(T) 249.01 553.33 T
+(able 4: Boolean variables) 254.23 553.33 T
+(Name) 85.43 203.33 T
+(Enumerant) 206.29 203.33 T
+(Initial value) 266.31 203.33 T
+(Element count variable) 398.13 203.33 T
+2 F
+(GLC_CA) 85.43 185.33 T
+(T) 126.17 185.33 T
+(ALOG_LIST) 131.92 185.33 T
+0 F
+(0x0080) 206.29 185.33 T
+(<implementation speci\336c>) 266.31 185.33 T
+2 F
+(GLC_CA) 398.13 185.33 T
+(T) 438.87 185.33 T
+(ALOG_COUNT) 444.62 185.33 T
+0 F
+(T) 264.62 165.33 T
+(able 5: String lists) 269.83 165.33 T
+181.45 628 430.55 628 2 L
+V
+0.25 H
+0 Z
+N
+181.45 614 430.55 614 2 L
+V
+N
+181.45 568 430.55 568 2 L
+V
+N
+85.43 212 526.57 212 2 L
+V
+N
+85.43 198 526.57 198 2 L
+V
+N
+85.43 180 526.57 180 2 L
+V
+N
+FMENDPAGE
+%%EndPage: "12" 12
+%%Page: "13" 13
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(13) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+2 F
+(GLint glcGetListi \050 GLCenum inAttrib, GLint inIndex \051) 90 713.33 T
+0 F
+-0.07 (r) 72 691.33 P
+-0.07 (eturns the integer at of) 75.77 691.33 P
+-0.07 (fset) 175.39 691.33 P
+2 F
+-0.07 (inIndex) 193.44 691.33 P
+0 F
+-0.07 ( fr) 228.99 691.33 P
+-0.07 (om the \336rst element in the integer list identi\336ed by) 238.52 691.33 P
+2 F
+-0.07 (inAttrib) 464.49 691.33 P
+0 F
+-0.07 (. T) 501.7 691.33 P
+-0.07 (able) 511.84 691.33 P
+-0.07 (1) 532.57 691.33 P
+-0.45 (lists the GLC integer lists. The command raises) 72 563.33 P
+2 F
+-0.45 (GLC_P) 278.14 563.33 P
+-0.45 (ARAMETER_ERROR) 310.17 563.33 P
+0 F
+-0.45 ( if) 410.17 563.33 P
+2 F
+-0.45 (inIndex) 420.5 563.33 P
+0 F
+-0.45 ( is less than zer) 456.05 563.33 P
+-0.45 (o or) 521.03 563.33 P
+(is gr) 72 551.33 T
+(eater than or equal to the value of the list\325s element count variable.) 90.98 551.33 T
+2 14 Q
+(3.5.9) 72 522.67 T
+(glcGetPointer) 114 522.67 T
+0 10 Q
+(The command) 72 503.33 T
+2 F
+(GLvoid* glcGetPointer \050 GLCenum inAttrib \051) 90 481.33 T
+0 F
+(r) 72 459.33 T
+(eturns the value of the pointer variable identi\336ed by) 75.77 459.33 T
+2 F
+(inAttrib) 309.05 459.33 T
+0 F
+(. T) 346.26 459.33 T
+(able) 356.47 459.33 T
+(1 lists the GLC pointer variables.) 377.2 459.33 T
+2 14 Q
+(3.5.10) 72 364.67 T
+(glcGetc) 121 364.67 T
+0 10 Q
+(The command) 72 345.33 T
+2 F
+(const GLCchar* glcGetc \050 GLCenum inAttrib \051) 90 323.33 T
+0 F
+(r) 72 301.33 T
+(eturns the value of the string constant identi\336ed by) 75.77 301.33 T
+2 F
+(inAttrib) 304.15 301.33 T
+0 F
+(. T) 341.36 301.33 T
+(able) 351.57 301.33 T
+(8 lists the GLC string constants.) 372.3 301.33 T
+2 14 Q
+(3.5.1) 72 178.67 T
+(1) 99.48 178.67 T
+(glcGetf) 120.48 178.67 T
+0 10 Q
+(The command) 72 159.33 T
+2 F
+(GL\337oat glcGetf \050 GLCenum inAttrib \051) 90 137.33 T
+0 F
+(Name) 79.36 663.33 T
+(Enumerant) 233.91 663.33 T
+(Initial value) 293.93 663.33 T
+(Element count variable) 363.71 663.33 T
+2 F
+(GLC_CURRENT_FONT_LIST) 79.36 645.33 T
+0 F
+(0x0090) 233.91 645.33 T
+(<empty list>) 293.93 645.33 T
+2 F
+(GLC_CURRENT_FONT_COUNT) 363.71 645.33 T
+(GLC_FONT_LIST) 79.36 631.33 T
+0 F
+(0x0091) 233.91 631.33 T
+(<empty list>) 293.93 631.33 T
+2 F
+(GLC_FONT_COUNT) 363.71 631.33 T
+(GLC_LIST_OBJECT_LIST) 79.36 617.33 T
+0 F
+(0x0092) 233.91 617.33 T
+(<empty list>) 293.93 617.33 T
+2 F
+(GLC_LIST_OBJECT_COUNT) 363.71 617.33 T
+(GLC_TEXTURE_OBJECT_LIST) 79.36 603.33 T
+0 F
+(0x0093) 233.91 603.33 T
+(<empty list>) 293.93 603.33 T
+2 F
+(GLC_TEXTURE_OBJECT_COUNT) 363.71 603.33 T
+0 F
+(T) 262.23 583.33 T
+(able 6: Integer lists) 267.44 583.33 T
+(Name) 181.76 431.33 T
+(Enumerant) 299.88 431.33 T
+(Initial value) 358.02 431.33 T
+2 F
+(GLC_DA) 181.76 413.33 T
+(T) 223.61 413.33 T
+(A_POINTER) 229.36 413.33 T
+0 F
+(0x00A0) 299.88 413.33 T
+2 F
+(GLC_NONE) 358.02 413.33 T
+0 F
+(T) 250.68 393.33 T
+(able 7: Pointer variables) 255.88 393.33 T
+(Name) 224.71 273.33 T
+(Enumerant) 333.28 273.33 T
+2 F
+(GLC_EXTENSIONS) 224.71 255.33 T
+0 F
+(0x00B0) 333.28 255.33 T
+2 F
+(GLC_RELEASE) 224.71 241.33 T
+0 F
+(0x00B1) 333.28 241.33 T
+2 F
+(GLC_VENDOR) 224.71 227.33 T
+0 F
+(0x00B2) 333.28 227.33 T
+(T) 252.63 207.33 T
+(able 8: String constants) 257.85 207.33 T
+79.36 672 532.64 672 2 L
+V
+0.25 H
+0 Z
+N
+79.36 658 532.64 658 2 L
+V
+N
+79.36 598 532.64 598 2 L
+V
+N
+181.76 440 430.24 440 2 L
+V
+N
+181.76 426 430.24 426 2 L
+V
+N
+181.76 408 430.24 408 2 L
+V
+N
+224.71 282 387.29 282 2 L
+V
+N
+224.71 268 387.29 268 2 L
+V
+N
+224.71 222 387.29 222 2 L
+V
+N
+FMENDPAGE
+%%EndPage: "13" 13
+%%Page: "14" 14
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(14) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+0 F
+(r) 72 713.33 T
+(eturns the value of the \337oating point variable identi\336ed by) 75.77 713.33 T
+2 F
+(inAttrib) 336.9 713.33 T
+0 F
+(. T) 374.11 713.33 T
+(able) 384.32 713.33 T
+(9 lists the GLC \337oating point) 405.05 713.33 T
+(variables.) 72 621.33 T
+2 14 Q
+(3.5.12) 72 592.67 T
+(glcGetfv) 121 592.67 T
+0 10 Q
+(The command) 72 573.33 T
+2 F
+(GL\337oat* glcGetfv \050 GLCenum inAttrib, GL\337oat* outV) 90 551.33 T
+(ec \051) 334.68 551.33 T
+0 F
+-0.68 (stor) 72 529.33 P
+-0.68 (es into) 88.73 529.33 P
+2 F
+-0.68 (outV) 118.85 529.33 P
+-0.68 (ec) 140.51 529.33 P
+0 F
+-0.68 ( the value of the \337oating point vector variable identi\336ed by) 149.96 529.33 P
+2 F
+-0.68 (inAttrib) 405.54 529.33 P
+0 F
+-0.68 (. If the command does) 442.75 529.33 P
+(not raise an err) 72 517.33 T
+(or) 138.26 517.33 T
+(, its r) 146.93 517.33 T
+(eturn value is) 168.61 517.33 T
+2 F
+(outV) 231.49 517.33 T
+(ec) 253.16 517.33 T
+0 F
+(. T) 262.6 517.33 T
+(able) 272.81 517.33 T
+(10 lists the GLC \337oating point vector variables.) 293.54 517.33 T
+2 14 Q
+(3.5.13) 72 422.67 T
+(glcGeti) 121 422.67 T
+0 10 Q
+(The command) 72 403.33 T
+2 F
+(GLint glcGeti \050 GLCenum inAttrib \051) 90 381.33 T
+0 F
+(r) 72 359.33 T
+(eturns the value of the integer variable or constant identi\336ed by) 75.77 359.33 T
+2 F
+(inAttrib) 359.64 359.33 T
+0 F
+(. T) 396.85 359.33 T
+(able) 407.06 359.33 T
+(1) 427.79 359.33 T
+(1 lists the GLC integer) 432.24 359.33 T
+(variables and constants.) 72 111.33 T
+(Name) 194.04 685.33 T
+(Enumerant) 302.62 685.33 T
+(Initial value) 360.75 685.33 T
+2 F
+(GLC_RESOLUTION) 194.04 667.33 T
+0 F
+(0x00C0) 302.62 667.33 T
+(0) 360.75 667.33 T
+(T) 235.57 647.33 T
+(able 9: Floating point variables) 240.78 647.33 T
+(Name) 184.76 489.33 T
+(Enumerant) 311.9 489.33 T
+(Initial value) 370.04 489.33 T
+2 F
+(GLC_BITMAP_MA) 184.76 471.33 T
+(TRIX) 274.4 471.33 T
+0 F
+(0x00D0) 311.9 471.33 T
+([ 1 0 0 1 ]) 370.04 471.33 T
+(T) 218.04 451.33 T
+(able 10: Floating point vector variables) 223.26 451.33 T
+(Name) 127.44 331.33 T
+(Enumerant) 302.89 331.33 T
+(Initial value) 364.07 331.33 T
+2 F
+(GLC_CA) 127.44 313.33 T
+(T) 168.18 313.33 T
+(ALOG_COUNT) 173.93 313.33 T
+0 F
+(0x00E0) 302.89 313.33 T
+(<implementation speci\336c>) 364.07 313.33 T
+2 F
+(GLC_CURRENT_FONT_COUNT) 127.44 299.33 T
+0 F
+(0x00E1) 302.89 299.33 T
+(0) 364.07 299.33 T
+2 F
+(GLC_FONT_COUNT) 127.44 285.33 T
+0 F
+(0x00E2) 302.89 285.33 T
+(0) 364.07 285.33 T
+2 F
+(GLC_LIST_OBJECT_COUNT) 127.44 271.33 T
+0 F
+(0x00E3) 302.89 271.33 T
+(0) 364.07 271.33 T
+2 F
+(GLC_MASTER_COUNT) 127.44 257.33 T
+0 F
+(0x00E4) 302.89 257.33 T
+(<implementation speci\336c>) 364.07 257.33 T
+2 F
+(GLC_MEASURED_CHAR_COUNT) 127.44 243.33 T
+0 F
+(0x00E5) 302.89 243.33 T
+(0) 364.07 243.33 T
+2 F
+(GLC_RENDER_STYLE) 127.44 229.33 T
+0 F
+(0x00E6) 302.89 229.33 T
+2 F
+(GLC_BITMAP) 364.07 229.33 T
+(GLC_REPLACEMENT_CODE) 127.44 215.33 T
+0 F
+(0x00E7) 302.89 215.33 T
+(0) 364.07 215.33 T
+2 F
+(GLC_STRING_TYPE) 127.44 201.33 T
+0 F
+(0x00E8) 302.89 201.33 T
+2 F
+(GLC_UCS1) 364.07 201.33 T
+(GLC_TEXTURE_OBJECT_COUNT) 127.44 187.33 T
+0 F
+(0x00E9) 302.89 187.33 T
+(0) 364.07 187.33 T
+2 F
+(GLC_VERSION_MAJOR) 127.44 173.33 T
+0 F
+(0x00EA) 302.89 173.33 T
+(<implementation speci\336c>) 364.07 173.33 T
+2 F
+(GLC_VERSION_MINOR) 127.44 159.33 T
+0 F
+(0x00EB) 302.89 159.33 T
+(<implementation speci\336c>) 364.07 159.33 T
+(T) 217.06 139.33 T
+(able 1) 222.27 139.33 T
+(1: Integer variables and constants) 247.45 139.33 T
+194.04 694 417.96 694 2 L
+V
+0.25 H
+0 Z
+N
+194.04 680 417.96 680 2 L
+V
+N
+194.04 662 417.96 662 2 L
+V
+N
+184.76 498 427.24 498 2 L
+V
+N
+184.76 484 427.24 484 2 L
+V
+N
+184.76 466 427.24 466 2 L
+V
+N
+127.44 340 484.56 340 2 L
+V
+N
+127.44 326 484.56 326 2 L
+V
+N
+127.44 154 484.56 154 2 L
+V
+N
+FMENDPAGE
+%%EndPage: "14" 14
+%%Page: "15" 15
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(15) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+2 14 Q
+(3.5.14) 72 710.67 T
+(glcIsEnabled) 121 710.67 T
+0 10 Q
+(The command) 72 691.33 T
+2 F
+(GLboolean glcIsEnabled \050 GLCenum inAttrib \051) 90 669.33 T
+0 F
+(r) 72 647.33 T
+(eturns) 75.77 647.33 T
+2 F
+(GL_TRUE) 106.36 647.33 T
+0 F
+( if) 153.58 647.33 T
+(f the value of the boolean variable identi\336ed by) 162.14 647.33 T
+2 F
+(inAttrib) 373.43 647.33 T
+0 F
+( is) 410.64 647.33 T
+2 F
+(GL_TRUE) 422.79 647.33 T
+0 F
+(.) 470.01 647.33 T
+2 14 Q
+(3.5.15) 72 618.67 T
+(glcStringT) 121 618.67 T
+(ype) 187.4 618.67 T
+0 10 Q
+(The command) 72 599.33 T
+2 F
+(void glcStringT) 90 577.33 T
+(ype \050 GLCenum inStringT) 160.49 577.33 T
+(ype \051) 279.3 577.33 T
+0 F
+(assigns the value) 72 555.33 T
+2 F
+(inStringT) 149.76 555.33 T
+(ype) 193.3 555.33 T
+0 F
+( to the variable) 209.97 555.33 T
+2 F
+(GLC_STRING_TYPE) 278.3 555.33 T
+0 F
+(. T) 376.07 555.33 T
+(able) 386.28 555.33 T
+(12 lists the GLC string types.) 407.01 555.33 T
+2 14 Q
+(3.6) 72 432.67 T
+(Master commands) 103.5 432.67 T
+0 10 Q
+-0.17 (Some GLC commands have a parameter) 72 413.33 P
+2 F
+-0.17 (inMaster) 251.72 413.33 P
+0 F
+-0.17 (. This parameter is an of) 292.08 413.33 P
+-0.17 (fset fr) 397.5 413.33 P
+-0.17 (om the \336rst element in the) 422.56 413.33 P
+-0.43 (GLC master list. The command raises) 72 401.33 P
+2 F
+-0.43 (GLC_P) 237.5 401.33 P
+-0.43 (ARAMETER_ERROR) 269.53 401.33 P
+0 F
+-0.43 ( if) 369.52 401.33 P
+2 F
+-0.43 (inMaster) 379.89 401.33 P
+0 F
+-0.43 ( is less than zer) 420.99 401.33 P
+-0.43 (o or is gr) 486.06 401.33 P
+-0.43 (eat-) 523.62 401.33 P
+(er than or equal to the value of the variable) 72 389.33 T
+2 F
+(GLC_MASTER_COUNT) 264.75 389.33 T
+0 F
+(.) 377.89 389.33 T
+2 14 Q
+(3.6.1) 72 360.67 T
+(glcAppendCatalog) 114 360.67 T
+0 10 Q
+(The command) 72 341.33 T
+2 F
+(void glcAppendCatalog \050 const GLCchar* inCatalog \051) 90 319.33 T
+0 F
+(appends the string) 72 297.33 T
+2 F
+(inCatalog) 157.09 297.33 T
+0 F
+( to the list) 201.53 297.33 T
+2 F
+(GLC_CA) 247.44 297.33 T
+(T) 288.18 297.33 T
+(ALOG_LIST) 293.93 297.33 T
+0 F
+(.) 351.52 297.33 T
+2 14 Q
+(3.6.2) 72 268.67 T
+(glcGetMasterListc) 114 268.67 T
+0 10 Q
+(The command) 72 249.33 T
+2 F
+(const GLCchar* glcGetMasterListc \050 GLint inMaster) 90 227.33 T
+(, GLCenum inAttrib, GLint inIndex \051) 326.31 227.33 T
+0 F
+(r) 72 205.33 T
+(eturns a string fr) 75.77 205.33 T
+(om a string list that is an attribute of the master identi\336ed by) 149.2 205.33 T
+2 F
+(inMaster) 419.92 205.33 T
+0 F
+(. The string list is) 460.28 205.33 T
+-0.55 (identi\336ed by) 72 193.33 P
+2 F
+-0.55 (inAttrib) 129.74 193.33 P
+0 F
+-0.55 (. The command r) 166.95 193.33 P
+-0.55 (eturns the string at of) 240.29 193.33 P
+-0.55 (fset) 332.65 193.33 P
+2 F
+-0.55 (inIndex) 350.22 193.33 P
+0 F
+-0.55 ( fr) 385.77 193.33 P
+-0.55 (om the \336rst element in this string) 394.82 193.33 P
+-0.15 (list. T) 72 181.33 P
+-0.15 (able) 95.38 181.33 P
+-0.15 (1 lists the string list attributes that ar) 116.11 181.33 P
+-0.15 (e associated with each GLC master and font. The command) 276.42 181.33 P
+(raises) 72 77.33 T
+2 F
+(GLC_P) 99.63 77.33 T
+(ARAMETER_ERROR) 131.66 77.33 T
+0 F
+( if) 231.65 77.33 T
+2 F
+(inIndex) 242.89 77.33 T
+0 F
+( is less than zer) 278.44 77.33 T
+(o or is gr) 345.23 77.33 T
+(eater than or equal to the value of) 384.08 77.33 T
+(Name) 249.06 527.33 T
+(Enumerant) 311.9 527.33 T
+2 F
+(GLC_UCS1) 249.06 509.33 T
+0 F
+(0x01) 311.9 509.33 T
+(10) 331.51 509.33 T
+2 F
+(GLC_UCS2) 249.06 495.33 T
+0 F
+(0x01) 311.9 495.33 T
+(1) 331.51 495.33 T
+(1) 335.96 495.33 T
+2 F
+(GLC_UCS4) 249.06 481.33 T
+0 F
+(0x01) 311.9 481.33 T
+(12) 331.51 481.33 T
+(T) 258.98 461.33 T
+(able 12: String types) 264.18 461.33 T
+(Name) 168.12 153.33 T
+(Enumerant) 276.33 153.33 T
+(Element count attribute) 336.35 153.33 T
+2 F
+(GLC_CHAR_LIST) 168.12 135.33 T
+0 F
+(0x0050) 276.33 135.33 T
+2 F
+(GLC_CHAR_COUNT) 336.35 135.33 T
+(GLC_F) 168.12 121.33 T
+(ACE_LIST) 199.79 121.33 T
+0 F
+(0x0051) 276.33 121.33 T
+2 F
+(GLC_F) 336.35 121.33 T
+(ACE_COUNT) 368.02 121.33 T
+0 F
+(T) 213.82 101.33 T
+(able 13: Master/font string list attributes) 219.03 101.33 T
+249.06 536 362.94 536 2 L
+V
+0.25 H
+0 Z
+N
+249.06 522 362.94 522 2 L
+V
+N
+249.06 476 362.94 476 2 L
+V
+N
+168.12 162 443.88 162 2 L
+V
+N
+168.12 148 443.88 148 2 L
+V
+N
+168.12 116 443.88 116 2 L
+V
+N
+FMENDPAGE
+%%EndPage: "15" 15
+%%Page: "16" 16
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(16) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+0 F
+(the list\325s element count attribute.) 72 713.33 T
+2 14 Q
+(3.6.3) 72 684.67 T
+(glcGetMasterMap) 114 684.67 T
+0 10 Q
+(The command) 72 665.33 T
+2 F
+(const GLCchar* glcGetMasterMap \050 GLint inMaster) 90 643.33 T
+(, GLint inCode \051) 325.77 643.33 T
+0 F
+-0.17 (r) 72 621.33 P
+-0.17 (eturns the string name of the character that the master identi\336ed by) 75.77 621.33 P
+2 F
+-0.17 (inMaster) 374.31 621.33 P
+0 F
+-0.17 ( maps) 415.41 621.33 P
+2 F
+-0.17 (inCode) 444.15 621.33 P
+0 F
+-0.17 ( to. If the mas-) 477.48 621.33 P
+(ter does not map) 72 609.33 T
+2 F
+(inCode) 148.98 609.33 T
+0 F
+(, the command r) 182.31 609.33 T
+(eturns) 254.44 609.33 T
+2 F
+(GLC_NONE) 285.03 609.33 T
+0 F
+(.) 342.79 609.33 T
+2 14 Q
+(3.6.4) 72 580.67 T
+(glcGetMasterc) 114 580.67 T
+0 10 Q
+(The command) 72 561.33 T
+2 F
+(const GLCchar glcGetMasterc \050 GLint inMaster) 90 539.33 T
+(, GLCenum inAttrib \051) 304.66 539.33 T
+0 F
+-0.64 (r) 72 517.33 P
+-0.64 (eturns a string attribute of the master identi\336ed by) 75.77 517.33 P
+2 F
+-0.64 (inMaster) 295.89 517.33 P
+0 F
+-0.64 (. The attribute is identi\336ed by) 336.26 517.33 P
+2 F
+-0.64 (inAttrib) 465.63 517.33 P
+0 F
+-0.64 (. T) 502.84 517.33 P
+-0.64 (able) 512.41 517.33 P
+-0.64 (1) 533.14 517.33 P
+(lists the string attributes that ar) 72 389.33 T
+(e associated with each GLC master and font.) 210.01 389.33 T
+2 14 Q
+(3.6.5) 72 360.67 T
+(glcGetMasteri) 114 360.67 T
+0 10 Q
+(The command) 72 341.33 T
+2 F
+(GLint glcGetMasteri \050 GLint inMaster) 90 319.33 T
+(, GLCenum inAttrib \051) 263.28 319.33 T
+0 F
+(r) 72 297.33 T
+(eturns an integer attribute of the master identi\336ed by) 75.77 297.33 T
+2 F
+(inMaster) 312.82 297.33 T
+0 F
+(. The attribute is identi\336ed by) 353.18 297.33 T
+2 F
+(inAttrib) 486.4 297.33 T
+0 F
+(.) 523.61 297.33 T
+(T) 72 285.33 T
+(able) 77.21 285.33 T
+(15 lists the integer attributes that ar) 97.94 285.33 T
+(e associated with each GLC master and font.) 253.79 285.33 T
+2 14 Q
+(3.6.6) 72 134.67 T
+(glcPrependCatalog) 114 134.67 T
+0 10 Q
+(The command) 72 115.33 T
+2 F
+(void glcPrependCatalog \050 const GLCchar* inCatalog \051) 90 93.33 T
+0 F
+(Name) 211.1 489.33 T
+(Enumerant) 349.52 489.33 T
+2 F
+(GLC_F) 211.1 471.33 T
+(AMIL) 242.77 471.33 T
+(Y) 269.63 471.33 T
+0 F
+(0x0060) 349.52 471.33 T
+2 F
+(GLC_MASTER_FORMA) 211.1 457.33 T
+(T) 324.62 457.33 T
+0 F
+(0x0061) 349.52 457.33 T
+2 F
+(GLC_VENDOR) 211.1 443.33 T
+0 F
+(0x0062) 349.52 443.33 T
+2 F
+(GLC_VERSION) 211.1 429.33 T
+0 F
+(0x0063) 349.52 429.33 T
+(T) 221.73 409.33 T
+(able 14: Master/font string attributes) 226.94 409.33 T
+(Name) 205.86 257.33 T
+(Enumerant) 354.76 257.33 T
+2 F
+(GLC_CHAR_COUNT) 205.86 239.33 T
+0 F
+(0x0070) 354.76 239.33 T
+2 F
+(GLC_F) 205.86 225.33 T
+(ACE_COUNT) 237.53 225.33 T
+0 F
+(0x0071) 354.76 225.33 T
+2 F
+(GLC_IS_FIXED_PITCH) 205.86 211.33 T
+0 F
+(0x0072) 354.76 211.33 T
+2 F
+(GLC_MAX_MAPPED_CODE) 205.86 197.33 T
+0 F
+(0x0073) 354.76 197.33 T
+2 F
+(GLC_MIN_MAPPED_CODE) 205.86 183.33 T
+0 F
+(0x0074) 354.76 183.33 T
+(T) 219.06 163.33 T
+(able 15: Master/font integer attributes) 224.27 163.33 T
+211.1 498 400.9 498 2 L
+V
+0.25 H
+0 Z
+N
+211.1 484 400.9 484 2 L
+V
+N
+211.1 424 400.9 424 2 L
+V
+N
+205.86 266 406.14 266 2 L
+V
+N
+205.86 252 406.14 252 2 L
+V
+N
+205.86 178 406.14 178 2 L
+V
+N
+FMENDPAGE
+%%EndPage: "16" 16
+%%Page: "17" 17
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(17) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+0 F
+(pr) 72 713.33 T
+(epends the string) 81.78 713.33 T
+2 F
+(inCatalog) 160.65 713.33 T
+0 F
+( to the list) 205.09 713.33 T
+2 F
+(GLC_CA) 251 713.33 T
+(T) 291.74 713.33 T
+(ALOG_LIST) 297.49 713.33 T
+0 F
+(.) 355.08 713.33 T
+2 14 Q
+(3.6.7) 72 684.67 T
+(glcRemoveCatalog) 114 684.67 T
+0 10 Q
+(The command) 72 665.33 T
+2 F
+(void glcRemoveCatalog \050 GLint inIndex \051) 90 643.33 T
+0 F
+(r) 72 621.33 T
+(emoves a string fr) 75.77 621.33 T
+(om the list) 154.87 621.33 T
+2 F
+(GLC_CA) 203.85 621.33 T
+(T) 244.59 621.33 T
+(ALOG_LIST) 250.34 621.33 T
+0 F
+(. The command r) 307.93 621.33 T
+(emoves the string at of) 382.93 621.33 T
+(fset) 483.17 621.33 T
+2 F
+(inIndex) 501.29 621.33 T
+0 F
+-0.11 (fr) 72 609.33 P
+-0.11 (om the \336rst element in the list. The command raises) 79.1 609.33 P
+2 F
+-0.11 (GLC_P) 308.62 609.33 P
+-0.11 (ARAMETER_ERROR) 340.65 609.33 P
+0 F
+-0.11 ( if) 440.64 609.33 P
+2 F
+-0.11 (inIndex) 451.66 609.33 P
+0 F
+-0.11 ( is less than) 487.21 609.33 P
+(zer) 72 597.33 T
+(o or is gr) 85.56 597.33 T
+(eater than or equal to the value of the variable) 124.41 597.33 T
+2 F
+(GLC_CA) 330.21 597.33 T
+(T) 370.95 597.33 T
+(ALOG_COUNT) 376.7 597.33 T
+0 F
+(.) 449.84 597.33 T
+2 14 Q
+(3.7) 72 568.67 T
+(Font commands) 103.5 568.67 T
+0 10 Q
+(Most of the commands in this category have a parameter) 72 549.33 T
+2 F
+(inFont) 325.63 549.33 T
+0 F
+(. Unless otherwise speci\336ed, these com-) 355.63 549.33 T
+(mands raise) 72 537.33 T
+2 F
+(GLC_P) 127.89 537.33 T
+(ARAMETER_ERROR) 159.92 537.33 T
+0 F
+( if) 259.91 537.33 T
+2 F
+(inFont) 271.15 537.33 T
+0 F
+( is not the ID of a font.) 301.15 537.33 T
+2 14 Q
+(3.7.1) 72 508.67 T
+(glcAppendFont) 114 508.67 T
+0 10 Q
+(The command) 72 489.33 T
+2 F
+(void glcAppendFont \050 GLint inFont \051) 90 467.33 T
+0 F
+(appends) 72 445.33 T
+2 F
+(inFont) 112.48 445.33 T
+0 F
+( to the list) 142.48 445.33 T
+2 F
+(GLC_CURRENT_FONT_LIST) 188.39 445.33 T
+0 F
+(. The command raises) 326.53 445.33 T
+2 F
+-0.59 (GLC_P) 72 433.33 P
+-0.59 (ARAMETER_ERROR) 104.03 433.33 P
+0 F
+-0.59 ( if inFont is an element in the list) 204.02 433.33 P
+2 F
+-0.59 (GLC_CURRENT_FONT_LIST) 345.33 433.33 P
+0 F
+-0.59 ( at the begin-) 484.21 433.33 P
+(ning of command execution.) 72 421.33 T
+2 14 Q
+(3.7.2) 72 392.67 T
+(glcDeleteFont) 114 392.67 T
+0 10 Q
+(The command) 72 373.33 T
+2 F
+(void glcDeleteFont \050 GLint inFont \051) 90 351.33 T
+0 F
+-0.08 (deletes the font identi\336ed by) 72 329.33 P
+2 F
+-0.08 (inFont) 200.58 329.33 P
+0 F
+-0.08 (. If) 230.58 329.33 P
+2 F
+-0.08 (inFont) 244.62 329.33 P
+0 F
+-0.08 ( is an element in the list) 274.62 329.33 P
+2 F
+-0.08 (GLC_CURRENT_FONT_LIST) 380.65 329.33 P
+0 F
+-0.08 (, the) 518.79 329.33 P
+(command r) 72 317.33 T
+(emoves that element fr) 122.76 317.33 T
+(om the list.) 223.65 317.33 T
+2 14 Q
+(3.7.3) 72 288.67 T
+(glcFont) 114 288.67 T
+0 10 Q
+(The command) 72 269.33 T
+2 F
+(void glcFont \050 GLint inFont \051) 90 247.33 T
+0 F
+-0.54 (begins by r) 72 225.33 P
+-0.54 (emoving all elements fr) 119.62 225.33 P
+-0.54 (om the list) 221.87 225.33 P
+2 F
+-0.54 (GLC_CURRENT_FONT_LIST) 269.22 225.33 P
+0 F
+-0.54 (. If) 407.36 225.33 P
+2 F
+-0.54 (inFont) 420.47 225.33 P
+0 F
+-0.54 ( is nonzer) 450.47 225.33 P
+-0.54 (o, the com-) 492.2 225.33 P
+-0.34 (mand then appends) 72 213.33 P
+2 F
+-0.34 (inFont) 161.92 213.33 P
+0 F
+-0.34 ( to the list. Otherwise, the command does not raise an err) 191.92 213.33 P
+-0.34 (or and the list r) 440.3 213.33 P
+-0.34 (emains) 506.25 213.33 P
+(empty) 72 201.33 T
+(.) 99.34 201.33 T
+2 14 Q
+(3.7.4) 72 172.67 T
+(glcFontFace) 114 172.67 T
+0 10 Q
+(The command) 72 153.33 T
+2 F
+(GLboolean glcFontFace \050 GLint inFont, const GLCchar* inFace \051) 90 131.33 T
+0 F
+-0.2 (attempts to set the curr) 72 109.33 P
+-0.2 (ent face of the font identi\336ed by) 172.91 109.33 P
+2 F
+-0.2 (inFont) 314.79 109.33 P
+0 F
+-0.2 ( to the face identi\336ed by the string) 344.79 109.33 P
+2 F
+-0.2 (inFace) 496.77 109.33 P
+0 F
+-0.2 (. If) 526.21 109.33 P
+2 F
+-0.18 (inFace) 72 97.33 P
+0 F
+-0.18 ( is not an element of the font\325s string list attribute) 101.44 97.33 P
+2 F
+-0.18 (GLC_F) 319.26 97.33 P
+-0.18 (ACE_LIST) 350.93 97.33 P
+0 F
+-0.18 (, the command leaves the font\325s) 399.08 97.33 P
+(curr) 72 85.33 T
+(ent face unchanged and r) 90.19 85.33 T
+(eturns) 201.71 85.33 T
+2 F
+(GL_F) 232.3 85.33 T
+(ALSE) 256.75 85.33 T
+0 F
+(. If the command succeeds, it r) 282.86 85.33 T
+(eturns) 416.94 85.33 T
+2 F
+(GL_TRUE) 447.53 85.33 T
+0 F
+(.) 494.75 85.33 T
+FMENDPAGE
+%%EndPage: "17" 17
+%%Page: "18" 18
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(18) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+0 F
+(If) 72 713.33 T
+2 F
+(inFont) 81.2 713.33 T
+0 F
+( is zer) 111.2 713.33 T
+(o, the command iterates over the list) 136.91 713.33 T
+2 F
+(GLC_CURRENT_FONT_LIST) 299.97 713.33 T
+0 F
+(. For each of the fonts) 438.11 713.33 T
+-0.2 (named ther) 72 701.33 P
+-0.2 (ein, the command attempts to set the font\325s curr) 122.49 701.33 P
+-0.2 (ent face to the face in that font that is identi\336ed) 331.91 701.33 P
+-0.33 (by) 72 689.33 P
+2 F
+-0.33 (inFace) 85.26 689.33 P
+0 F
+-0.33 (. In this case, the command r) 114.7 689.33 P
+-0.33 (eturns) 238.77 689.33 P
+2 F
+-0.33 (GL_TRUE) 269.03 689.33 P
+0 F
+-0.33 ( if) 316.25 689.33 P
+-0.33 (f) 324.49 689.33 P
+2 F
+-0.33 (GLC_CURRENT_FONT_LIST) 329.99 689.33 P
+0 F
+-0.33 ( contains one or) 468.87 689.33 P
+(mor) 72 677.33 T
+(e elements and the command successfully sets the curr) 90.06 677.33 T
+(ent face of each of the fonts named in the list.) 331.32 677.33 T
+2 14 Q
+(3.7.5) 72 648.67 T
+(glcFontMap) 114 648.67 T
+0 10 Q
+(The command) 72 629.33 T
+2 F
+(void glcFontMap \050 GLint inFont, GLint inCode, const GLCchar* inCharName \051) 90 607.33 T
+0 F
+(modi\336es the map of the font identi\336ed by) 72 585.33 T
+2 F
+(inFont) 258.47 585.33 T
+0 F
+( such that the font maps) 288.47 585.33 T
+2 F
+(inCode) 397.16 585.33 T
+0 F
+( to the character whose) 430.49 585.33 T
+(name is the string) 72 573.33 T
+2 F
+(inCharName) 153.2 573.33 T
+0 F
+(. If) 212.08 573.33 T
+2 F
+(inCharName) 226.28 573.33 T
+0 F
+( is) 285.16 573.33 T
+2 F
+(GLC_NONE) 297.31 573.33 T
+0 F
+(,) 355.07 573.33 T
+2 F
+(inCode) 360.07 573.33 T
+0 F
+( is r) 393.4 573.33 T
+(emoved fr) 409.32 573.33 T
+(om the font\325s map.) 454.55 573.33 T
+-0.57 (The command raises) 72 561.33 P
+2 F
+-0.57 (GLC_P) 164.14 561.33 P
+-0.57 (ARAMETER_ERROR) 196.17 561.33 P
+0 F
+-0.57 ( if) 296.16 561.33 P
+2 F
+-0.57 (inCharName) 306.25 561.33 P
+0 F
+-0.57 ( is not) 365.13 561.33 P
+2 F
+-0.57 (GLC_NONE) 392.6 561.33 P
+0 F
+-0.57 ( or an element of the) 450.36 561.33 P
+(font\325s string list attribute) 72 549.33 T
+2 F
+(GLC_CHAR_LIST) 183.94 549.33 T
+0 F
+(.) 268.19 549.33 T
+2 14 Q
+(3.7.6) 72 520.67 T
+(glcGenFontID) 114 520.67 T
+0 10 Q
+(The command) 72 501.33 T
+2 F
+(void glcGenFontID \050 void \051) 90 479.33 T
+0 F
+(r) 72 457.33 T
+(eturns a font ID that is not an element of the list) 75.77 457.33 T
+2 F
+(GLC_FONT_LIST) 288.86 457.33 T
+0 F
+(.) 371.45 457.33 T
+2 14 Q
+(3.7.7) 72 428.67 T
+(glcGetFontFace) 114 428.67 T
+0 10 Q
+(The command) 72 409.33 T
+2 F
+(const GLCchar* glcGetFontFace \050 GLint inFont \051) 90 387.33 T
+0 F
+(r) 72 365.33 T
+(eturns the string name of the curr) 75.77 365.33 T
+(ent face of the font identi\336ed by) 223.76 365.33 T
+2 F
+(inFont) 367.06 365.33 T
+0 F
+(.) 397.06 365.33 T
+2 14 Q
+(3.7.8) 72 336.67 T
+(glcGetFontListc) 114 336.67 T
+0 10 Q
+(The command) 72 317.33 T
+2 F
+(const GLCchar* glcGetFontListc \050 GLint inFont, GLCenum inAttrib, GLint inIndex \051) 90 295.33 T
+0 F
+(is identical to the command) 72 273.33 T
+2 F
+(glcGetMasterListc) 196.88 273.33 T
+0 F
+( \050Section) 280.18 273.33 T
+(3.6.2\051, except that it operates on a font \050identi\336ed) 320.44 273.33 T
+(by) 72 261.33 T
+2 F
+(inFont) 85.59 261.33 T
+0 F
+(\051, not a master) 115.59 261.33 T
+(.) 177.79 261.33 T
+2 14 Q
+(3.7.9) 72 232.67 T
+(glcGetFontMap) 114 232.67 T
+0 10 Q
+(The command) 72 213.33 T
+2 F
+(const GLCchar* glcGetFontMap \050 GLint inFont, GLint inCode \051) 90 191.33 T
+0 F
+(is identical to the command) 72 169.33 T
+2 F
+(glcGetMasterMap) 196.88 169.33 T
+0 F
+( \050Section) 279.64 169.33 T
+(3.6.3\051, except that it operates on a font \050identi\336ed) 319.9 169.33 T
+(by) 72 157.33 T
+2 F
+(inFont) 85.59 157.33 T
+0 F
+(\051, not a master) 115.59 157.33 T
+(.) 177.79 157.33 T
+2 14 Q
+(3.7.10) 72 128.67 T
+(glcGetFontc) 121 128.67 T
+0 10 Q
+(The command) 72 109.33 T
+2 F
+(const GLCchar* glcGetFontc \050 GLint inFont, GLCenum inAttrib \051) 90 87.33 T
+FMENDPAGE
+%%EndPage: "18" 18
+%%Page: "19" 19
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(19) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+0 F
+(is identical to the command) 72 713.33 T
+2 F
+(glcGetMasterc) 196.88 713.33 T
+0 F
+( \050Section) 262.97 713.33 T
+(3.6.4\051, except that it operates on a font \050identi\336ed by) 303.23 713.33 T
+2 F
+(inFont) 72 701.33 T
+0 F
+(\051, not a master) 102 701.33 T
+(.) 164.2 701.33 T
+2 14 Q
+(3.7.1) 72 672.67 T
+(1) 99.48 672.67 T
+(glcGetFonti) 120.48 672.67 T
+0 10 Q
+(The command) 72 653.33 T
+2 F
+(GLint glcGetFonti \050 GLint inFont, GLCenum inAttrib \051) 90 631.33 T
+0 F
+(is identical to the command) 72 609.33 T
+2 F
+(glcGetMasteri) 196.88 609.33 T
+0 F
+( \050Section) 261.86 609.33 T
+(3.6.5\051, except that it operates on a font \050identi\336ed by) 302.12 609.33 T
+2 F
+(inFont) 72 597.33 T
+0 F
+(\051, not a master) 102 597.33 T
+(.) 164.2 597.33 T
+2 14 Q
+(3.7.12) 72 568.67 T
+(glcIsFont) 121 568.67 T
+0 10 Q
+(The command) 72 549.33 T
+2 F
+(GLboolean glcIsFont \050 GLint inFont \051) 90 527.33 T
+0 F
+-0.36 (r) 72 505.33 P
+-0.36 (eturns) 75.77 505.33 P
+2 F
+-0.36 (GL_TRUE) 106 505.33 P
+0 F
+-0.36 ( if) 153.22 505.33 P
+-0.36 (f) 161.42 505.33 P
+2 F
+-0.36 (inFont) 166.88 505.33 P
+0 F
+-0.36 ( is the ID of a font. If) 196.88 505.33 P
+2 F
+-0.36 (inFont) 286.98 505.33 P
+0 F
+-0.36 ( is not the ID of a font, the command does not raise) 316.98 505.33 P
+(an err) 72 493.33 T
+(or) 97.83 493.33 T
+(.) 106.5 493.33 T
+2 14 Q
+(3.7.13) 72 464.67 T
+(glcNewFontFromFamily) 121 464.67 T
+0 10 Q
+(The command) 72 445.33 T
+2 F
+(GLint glcNewFontFromFamily \050 GLint inFont, const GLCchar *inFamily \051) 90 423.33 T
+0 F
+(performs a sequential sear) 72 401.33 T
+(ch beginning with the \336rst element of the GLC master list, looking for the \336rst) 188.21 401.33 T
+(master whose string attribute) 72 389.33 T
+2 F
+(GLC_F) 204.45 389.33 T
+(AMIL) 236.12 389.33 T
+(Y) 262.98 389.33 T
+0 F
+( equals) 269.65 389.33 T
+2 F
+(inFamily) 303.22 389.33 T
+0 F
+(. If ther) 343.22 389.33 T
+(e is no such master) 375.06 389.33 T
+(, the command r) 458.14 389.33 T
+(e-) 530.27 389.33 T
+(turns zer) 72 377.33 T
+(o. Otherwise, the command cr) 111.36 377.33 T
+(eates a new font fr) 244.35 377.33 T
+(om the master) 325.35 377.33 T
+(. The ID of the new font is) 387.84 377.33 T
+2 F
+(inFont) 504.82 377.33 T
+0 F
+(.) 534.82 377.33 T
+(If the command succeeds, it r) 72 365.33 T
+(eturns) 201.08 365.33 T
+2 F
+(inFont) 231.67 365.33 T
+0 F
+(. If) 261.67 365.33 T
+2 F
+(inFont) 275.87 365.33 T
+0 F
+( is the ID of a font at the beginning of command exe-) 305.87 365.33 T
+(cution, the command executes the command) 72 353.33 T
+2 F
+(glcDeleteFont \050 inFont \051) 271.64 353.33 T
+0 F
+( befor) 379.68 353.33 T
+(e cr) 405.06 353.33 T
+(eating the new font.) 420.56 353.33 T
+2 14 Q
+(3.7.14) 72 324.67 T
+(glcNewFontFromMaster) 121 324.67 T
+0 10 Q
+(The command) 72 305.33 T
+2 F
+(GLint glcNewFontFromMaster \050 GLint inFont, GLint inMaster \051) 90 283.33 T
+0 F
+-0.51 (cr) 72 261.33 P
+-0.51 (eates a new font fr) 80.21 261.33 P
+-0.51 (om the master identi\336ed by) 159.18 261.33 P
+2 F
+-0.51 (inMaster) 281.2 261.33 P
+0 F
+-0.51 (. The ID of the new font is) 321.56 261.33 P
+2 F
+-0.51 (inFont) 434.47 261.33 P
+0 F
+-0.51 (. If the command) 464.47 261.33 P
+(succeeds, it r) 72 249.33 T
+(eturns) 128.52 249.33 T
+2 F
+(inFont) 159.11 249.33 T
+0 F
+(. If) 189.11 249.33 T
+2 F
+(inFont) 203.31 249.33 T
+0 F
+( is the ID of a font at the beginning of command execution, the com-) 233.31 249.33 T
+(mand executes the command) 72 237.33 T
+2 F
+(glcDeleteFont \050 inFont \051) 203.62 237.33 T
+0 F
+( befor) 311.66 237.33 T
+(e cr) 337.04 237.33 T
+(eating the new font.) 352.54 237.33 T
+2 14 Q
+(3.8) 72 208.67 T
+(T) 103.5 208.67 T
+(ransformation commands) 111.28 208.67 T
+0 10 Q
+(Glyph coor) 72 189.33 T
+(dinates ar) 121.56 189.33 T
+(e de\336ned in the em coor) 164.96 189.33 T
+(dinate system. When the value of) 271.27 189.33 T
+2 F
+(GLC_RENDER_STYLE) 421.05 189.33 T
+0 F
+( is) 527.7 189.33 T
+2 F
+(GLC_BITMAP) 72 177.33 T
+0 F
+(, GLC uses the 2x2) 138.49 177.33 T
+2 F
+(GLC_BITMAP_MA) 222.65 177.33 T
+(TRIX) 312.29 177.33 T
+0 F
+( to transform layouts fr) 336.74 177.33 T
+(om the em coor) 438.86 177.33 T
+(dinate) 507.27 177.33 T
+(system to the GL raster coor) 72 165.33 T
+(dinate system in which bitmaps ar) 196.07 165.33 T
+(e drawn. The GLC transformation com-) 347.99 165.33 T
+(mands modify the value of) 72 153.33 T
+2 F
+(GLC_BITMAP_MA) 193.74 153.33 T
+(TRIX) 283.38 153.33 T
+0 F
+(.) 307.83 153.33 T
+(When the value of the variable) 72 131.33 T
+2 F
+(GLC_RENDER_STYLE) 210.08 131.33 T
+0 F
+( is not) 316.73 131.33 T
+2 F
+(GLC_BITMAP) 345.92 131.33 T
+0 F
+(, GLC performs no transfor-) 412.41 131.33 T
+-0.7 (mations on glyph coor) 72 119.33 P
+-0.7 (dinates. In this case, GLC uses em coor) 169.2 119.33 P
+-0.7 (dinates dir) 335.72 119.33 P
+-0.7 (ectly as GL world coor) 382.44 119.33 P
+-0.7 (dinates when) 479.49 119.33 P
+-0.3 (drawing a layout, and it is the r) 72 107.33 P
+-0.3 (esponsibility of the GLC client to issue GL commands that set up the appr) 208.7 107.33 P
+-0.3 (o-) 531.21 107.33 P
+(priate GL transformations.) 72 95.33 T
+FMENDPAGE
+%%EndPage: "19" 19
+%%Page: "20" 20
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(20) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+2 14 Q
+(3.8.1) 72 710.67 T
+(glcLoadIdentity) 114 710.67 T
+0 10 Q
+(The command) 72 691.33 T
+2 F
+(void glcLoadIdentity \050 void \051) 90 669.33 T
+0 F
+(assigns the value [ 1 0 0 1 ] to the \337oating point vector variable) 72 647.33 T
+2 F
+(GLC_BITMAP_MA) 349.85 647.33 T
+(TRIX) 439.49 647.33 T
+0 F
+(.) 463.94 647.33 T
+2 14 Q
+(3.8.2) 72 618.67 T
+(glcLoadMatrix) 114 618.67 T
+0 10 Q
+(The command) 72 599.33 T
+2 F
+(void glcLoadMatrix \050 const GL\337oat *inMatrix \051) 90 577.33 T
+0 F
+(assigns the value [) 72 555.33 T
+2 F
+(inMatrix[0] inMatrix[1] inMatrix[2] inMatrix[3]) 155.59 555.33 T
+0 F
+( ] to the \337oating point vector variable) 369.69 555.33 T
+2 F
+(GLC_BITMAP_MA) 72 543.33 T
+(TRIX) 161.64 543.33 T
+0 F
+(.) 186.09 543.33 T
+2 14 Q
+(3.8.3) 72 514.67 T
+(glcMultMatrix) 114 514.67 T
+0 10 Q
+(The command) 72 495.33 T
+2 F
+(void glcMultMatrix \050 const GL\337oat *inMatrix \051) 90 473.33 T
+0 F
+(assigns the value [) 72 451.33 T
+3 F
+(a b c d) 155.59 451.33 T
+0 F
+( ] to the \337oating point vector variable) 181.23 451.33 T
+2 F
+(GLC_BITMAP_MA) 347.99 451.33 T
+(TRIX,) 437.63 451.33 T
+0 F
+(wher) 467.08 451.33 T
+(e) 489.8 451.33 T
+2 14 Q
+(3.8.4) 72 378.67 T
+(glcRotate) 114 378.67 T
+0 10 Q
+(The command) 72 359.33 T
+2 F
+(void glcMultMatrix \050 GL\337oat inAngle \051) 90 337.33 T
+0 F
+-0.34 (assigns the value [) 72 315.33 P
+3 F
+-0.34 (a b c d) 154.23 315.33 P
+0 F
+-0.34 ( ] to the \337oating point vector variable) 178.85 315.33 P
+2 F
+-0.34 (GLC_BITMAP_MA) 342.89 315.33 P
+-0.34 (TRIX,) 432.53 315.33 P
+0 F
+-0.34 (wher) 461.64 315.33 P
+-0.34 (e) 484.36 315.33 P
+2 F
+-0.34 (inAngle) 491.31 315.33 P
+0 F
+-0.34 ( is) 528.53 315.33 P
+(measur) 72 303.33 T
+(ed in degr) 104.66 303.33 T
+(ees,) 149.52 303.33 T
+(, and) 258.49 303.33 T
+2 14 Q
+(3.8.5) 72 230.67 T
+(glcScale) 114 230.67 T
+0 10 Q
+(The command) 72 211.34 T
+2 F
+(void glcMultMatrix \050 GL\337oat inX, GL\337oat inY \051) 90 189.34 T
+0 F
+(assigns the value [) 72 167.34 T
+3 F
+(a b c d) 155.59 167.34 T
+0 F
+( ] to the \337oating point vector variable) 181.23 167.34 T
+2 F
+(GLC_BITMAP_MA) 347.99 167.34 T
+(TRIX,) 437.63 167.34 T
+0 F
+(wher) 467.08 167.34 T
+(e) 489.8 167.34 T
+2 14 Q
+(3.9) 72 94.67 T
+(Rendering commands) 103.5 94.67 T
+0 10 Q
+-0.04 (This section begins with de\336nitions of helper functions that ar) 72 75.34 P
+-0.04 (e not part of the GLC API but ar) 345.19 75.34 P
+-0.04 (e needed to) 486.7 75.34 P
+72 72 540 720 C
+78 404 534 448 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 9 Q
+0 X
+0 0 0 1 0 0 0 K
+(a) 100.35 428.86 T
+(c) 108.45 428.86 T
+(b) 100.1 416.27 T
+(d) 108.19 416.27 T
+2 10 Q
+(GLC_BITMAP_MATRIX[0]) 133.95 429.11 T
+(GLC_BITMAP_MATRIX[2]) 264.21 429.11 T
+(GLC_BITMAP_MATRIX[1]) 133.95 415.52 T
+(GLC_BITMAP_MATRIX[3]) 264.21 415.52 T
+(inMatrix[0]) 404.82 429.11 T
+(inMatrix[2]) 460.06 429.11 T
+(inMatrix[1]) 404.82 415.52 T
+(inMatrix[3]) 460.06 415.52 T
+4 9 Q
+(\327) 396.32 424.67 T
+1 F
+(=) 120.38 424.67 T
+100.59 414.02 97.9 414.02 97.9 439.2 3 L
+0.41 H
+2 Z
+N
+97.9 439.2 100.59 439.2 2 L
+N
+111.39 414.02 114.09 414.02 114.09 439.2 3 L
+N
+114.09 439.2 111.39 439.2 2 L
+N
+134.44 413.02 131.74 413.02 131.74 440.2 3 L
+N
+131.74 440.2 134.44 440.2 2 L
+N
+389.58 413.02 392.27 413.02 392.27 440.2 3 L
+N
+392.27 440.2 389.58 440.2 2 L
+N
+405.31 413.02 402.61 413.02 402.61 440.2 3 L
+N
+402.61 440.2 405.31 440.2 2 L
+N
+510.41 413.02 513.1 413.02 513.1 440.2 3 L
+N
+513.1 440.2 510.41 440.2 2 L
+N
+72 72 540 720 C
+0 0 612 792 C
+72 72 540 720 C
+78 256 534 300 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 9 Q
+0 X
+0 0 0 1 0 0 0 K
+(a) 132.21 280.86 T
+(c) 140.31 280.86 T
+(b) 131.96 268.27 T
+(d) 140.05 268.27 T
+2 10 Q
+(GLC_BITMAP_MATRIX[0]) 165.81 281.11 T
+(GLC_BITMAP_MATRIX[2]) 296.07 281.11 T
+(GLC_BITMAP_MATRIX[1]) 165.81 267.52 T
+(GLC_BITMAP_MATRIX[3]) 296.07 267.52 T
+4 9 Q
+(q) 450.1 280.86 T
+1 F
+(cos) 437.21 280.86 T
+4 F
+(q) 475.16 280.86 T
+1 F
+(sin) 463.76 280.86 T
+(\320) 458.39 280.86 T
+4 F
+(q) 449.36 268.27 T
+1 F
+(sin) 437.95 268.27 T
+4 F
+(q) 473.49 268.27 T
+1 F
+(cos) 460.59 268.27 T
+4 F
+(\327) 428.18 276.67 T
+1 F
+(=) 152.24 276.67 T
+132.45 266.02 129.76 266.02 129.76 291.21 3 L
+0.41 H
+2 Z
+N
+129.76 291.21 132.45 291.21 2 L
+N
+143.25 266.02 145.95 266.02 145.95 291.21 3 L
+N
+145.95 291.21 143.25 291.21 2 L
+N
+166.3 265.02 163.61 265.02 163.61 292.21 3 L
+N
+163.61 292.21 166.3 292.21 2 L
+N
+421.44 265.02 424.14 265.02 424.14 292.21 3 L
+N
+424.14 292.21 421.44 292.21 2 L
+N
+437.17 266.02 434.48 266.02 434.48 291.21 3 L
+N
+434.48 291.21 437.17 291.21 2 L
+N
+478.55 266.02 481.24 266.02 481.24 291.21 3 L
+N
+481.24 291.21 478.55 291.21 2 L
+N
+72 72 540 720 C
+0 0 612 792 C
+168.34 298.83 258.49 311.83 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+4 9 Q
+0 X
+0 0 0 1 0 0 0 K
+(q) 169.34 303.33 T
+2 10 Q
+(inAngle) 188.09 303.33 T
+4 9 Q
+(p) 232.06 303.33 T
+1 F
+(180) 242.99 303.33 T
+4 F
+(\244) 239.24 303.33 T
+(\327) 227.56 303.33 T
+1 F
+(=) 178.52 303.33 T
+0 0 612 792 C
+72 72 540 720 C
+78 120 534 164 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 9 Q
+0 X
+0 0 0 1 0 0 0 K
+(a) 135.89 144.86 T
+(c) 143.99 144.86 T
+(b) 135.64 132.27 T
+(d) 143.73 132.27 T
+2 10 Q
+(GLC_BITMAP_MATRIX[0]) 169.49 145.11 T
+(GLC_BITMAP_MATRIX[2]) 299.75 145.11 T
+(GLC_BITMAP_MATRIX[1]) 169.49 131.52 T
+(GLC_BITMAP_MATRIX[3]) 299.75 131.52 T
+(inX) 440.36 145.11 T
+1 9 Q
+(1) 465.87 145.11 T
+(1) 446.16 131.52 T
+2 10 Q
+(inY) 460.06 131.52 T
+4 9 Q
+(\327) 431.86 140.67 T
+1 F
+(=) 155.92 140.67 T
+136.13 130.02 133.44 130.02 133.44 155.21 3 L
+0.41 H
+2 Z
+N
+133.44 155.21 136.13 155.21 2 L
+N
+146.93 130.02 149.63 130.02 149.63 155.21 3 L
+N
+149.63 155.21 146.93 155.21 2 L
+N
+169.98 129.02 167.29 129.02 167.29 156.21 3 L
+N
+167.29 156.21 169.98 156.21 2 L
+N
+425.12 129.02 427.82 129.02 427.82 156.21 3 L
+N
+427.82 156.21 425.12 156.21 2 L
+N
+440.85 129.02 438.15 129.02 438.15 156.21 3 L
+N
+438.15 156.21 440.85 156.21 2 L
+N
+474.87 129.02 477.56 129.02 477.56 156.21 3 L
+N
+477.56 156.21 474.87 156.21 2 L
+N
+72 72 540 720 C
+0 0 612 792 C
+FMENDPAGE
+%%EndPage: "20" 20
+%%Page: "21" 21
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(21) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+0 F
+(de\336ne the semantics of the GLC r) 72 713.33 T
+(endering and measur) 219.22 713.33 T
+(ement commands. The name pr) 313.56 713.33 T
+(e\336x \322) 453.24 713.33 T
+2 F
+(__) 476.74 713.33 T
+0 F
+(\323 indicates) 486.74 713.33 T
+(that these functions ar) 72 701.33 T
+(e not GLC commands.) 169.82 701.33 T
+(The function) 72 679.33 T
+2 F
+(GLint __glcLookupFont \050 GLint inCode \051) 130.81 679.33 T
+0 F
+(r) 319.67 679.33 T
+(eturns the ID of the \336rst font in) 323.44 679.33 T
+2 F
+(GLC_CURRENT_FONT_LIST) 72 667.33 T
+0 F
+( that maps) 210.88 667.33 T
+2 F
+(inCode) 259.8 667.33 T
+0 F
+(. If ther) 293.13 667.33 T
+(e is no such font, the function r) 324.97 667.33 T
+(eturns zer) 461.3 667.33 T
+(o.) 505.45 667.33 T
+2 F
+(static GLint __glcLookupFont \050 GLint inCode \051 {) 90 645.33 T
+(GLint i;) 108 633.33 T
+(const GLint n = glcGeti \050 GLC_CURRENT_FONT_COUNT \051;) 108 621.33 T
+(for \050 i = 0 ; i < n ; ++i \051 {) 108 609.33 T
+(const GLint font = glcGetListi \050 GLC_CURRENT_FONT_LIST) 126 597.33 T
+(, i \051;) 408.86 597.33 T
+(if \050 glcGetFontMap \050 font, inCode \051 \051 return font;) 126 585.33 T
+(}) 108 573.33 T
+(return 0;) 108 561.33 T
+(}) 90 549.33 T
+0 F
+(The function) 72 527.33 T
+2 F
+(GLint __glcGetFont \050 GLint inCode \051) 130.81 527.33 T
+0 F
+(r) 300.77 527.33 T
+(eturns the ID of the \336rst font in) 304.54 527.33 T
+2 F
+-0.41 (GLC_CURRENT_FONT_LIST) 72 515.33 P
+0 F
+-0.41 ( that maps) 210.88 515.33 P
+2 F
+-0.41 (inCode) 258.57 515.33 P
+0 F
+-0.41 (. If ther) 291.9 515.33 P
+-0.41 (e is no such font, the function attempts to append) 322.92 515.33 P
+(to) 72 503.33 T
+2 F
+(GLC_CURRENT_FONT_LIST) 83.22 503.33 T
+0 F
+( and r) 222.1 503.33 T
+(eturn the ID of a font that maps) 247.8 503.33 T
+2 F
+(inCode) 389.71 503.33 T
+0 F
+(. If the attempt fails, the) 423.04 503.33 T
+(function r) 72 491.33 T
+(eturns zer) 115.34 491.33 T
+(o.) 159.49 491.33 T
+(If a callback function is de\336ned for) 72 469.33 T
+2 F
+(GLC_OP_glcUnmappedCode) 227.62 469.33 T
+0 F
+(,) 362.05 469.33 T
+2 F
+(__glcGetFont) 367.05 469.33 T
+0 F
+( calls the function. The) 427.6 469.33 T
+(callback function should r) 72 457.33 T
+(eturn) 186.7 457.33 T
+2 F
+(GL_TRUE) 213.05 457.33 T
+0 F
+( if) 260.27 457.33 T
+(f it succeeds in appending to) 268.83 457.33 T
+2 F
+(GLC_CURRENT_FONT_LIST) 397.89 457.33 T
+0 F
+(the ID of a font that maps) 72 445.33 T
+2 F
+(inCode) 187.56 445.33 T
+0 F
+(.) 220.89 445.33 T
+(If the value of the boolean variable) 72 423.33 T
+2 F
+(GLC_AUTO_FONT) 227.82 423.33 T
+0 F
+( is) 318.93 423.33 T
+2 F
+(GL_TRUE) 331.08 423.33 T
+0 F
+(,) 378.3 423.33 T
+2 F
+(__glcGetFont) 383.3 423.33 T
+0 F
+( sear) 443.85 423.33 T
+(ches) 464.15 423.33 T
+2 F
+(GLC_FONT_LIST) 72 411.33 T
+0 F
+( for the \336rst font that maps) 155.33 411.33 T
+2 F
+(inCode) 276.23 411.33 T
+0 F
+(. If the sear) 309.56 411.33 T
+(ch succeeds,) 357.93 411.33 T
+2 F
+(__glcGetFont) 414.77 411.33 T
+0 F
+( appends the) 475.32 411.33 T
+(font\325s ID to) 72 399.33 T
+2 F
+(GLC_CURRENT_FONT_LIST) 124.22 399.33 T
+0 F
+(. Otherwise, the function sear) 262.36 399.33 T
+(ches the GLC master list for the) 392.06 399.33 T
+(\336rst master that maps) 72 387.33 T
+2 F
+(inCode) 170.99 387.33 T
+0 F
+(. If the sear) 204.32 387.33 T
+(ch succeeds,) 252.69 387.33 T
+2 F
+(__glcGetFont) 309.53 387.33 T
+0 F
+( cr) 370.08 387.33 T
+(eates a font fr) 380.79 387.33 T
+(om the master and ap-) 440.34 387.33 T
+(pends the font\325s ID to) 72 375.33 T
+2 F
+(GLC_CURRENT_FONT_LIST) 170.06 375.33 T
+0 F
+(.) 308.2 375.33 T
+2 F
+(static GLint __glcGetFont \050 GLint inCode \051 {) 90 353.33 T
+(GLCfunc callbackFunc;) 108 341.33 T
+(GLint font;) 108 329.33 T
+(if \050 font = __glcLookupFont \050 inCode \051 \051 return font;) 108 317.33 T
+(callbackFunc = glcGetCallbackFunc \050 GLC_OP_glcUnmappedCode \051;) 108 305.33 T
+(if \050 callbackFunc && \050 *callbackFunc \051 \050 inCode \051 \051 {) 108 293.33 T
+(if \050 font = __glcLookupFont \050 inCode \051 \051 return font;) 126 281.33 T
+(}) 108 269.33 T
+(if \050 glcIsEnabled \050 GLC_AUTO_FONT \051 \051 {) 108 257.33 T
+(GLint i, n;) 126 245.33 T
+(n = glcGeti \050 GLC_FONT_COUNT \051;) 126 233.33 T
+(for \050 i = 0 ; i < n ; ++i \051 {) 126 221.33 T
+(font = glcGetListi \050 GLC_FONT_LIST) 144 209.33 T
+(, i \051;) 315.22 209.33 T
+(if \050 glcGetFontMap \050 font, inCode \051 \051 {) 144 197.33 T
+(glcAppendFont \050 font \051;) 162 185.33 T
+(return font;) 162 173.33 T
+(}) 144 161.33 T
+(}) 126 149.33 T
+(n = glcGeti \050 GLC_MASTER_COUNT \051;) 126 137.33 T
+(for \050 i = 0 ; i < n ; ++i \051 {) 126 125.33 T
+(if \050 glcGetMasterMap \050 i, inCode \051 \051 {) 144 113.33 T
+(font = glcNewFontFromMaster \050 glcGenFontID \050 \051, i \051;) 162 101.33 T
+(if \050 font \051 {) 162 89.33 T
+(glcAppendFont \050 font \051;) 180 77.33 T
+FMENDPAGE
+%%EndPage: "21" 21
+%%Page: "22" 22
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(22) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+2 F
+(return font;) 180 713.33 T
+(}) 162 701.33 T
+(}) 144 689.33 T
+(}) 126 677.33 T
+(}) 108 665.33 T
+(return 0;) 108 653.33 T
+(}) 90 641.33 T
+0 F
+(The function) 72 619.33 T
+2 F
+(void) 130.81 619.33 T
+(__glcRenderChar \050 GLint inCode \051) 153.87 619.33 T
+0 F
+(cr) 312.45 619.33 T
+(eates a layout for the character that) 320.66 619.33 T
+2 F
+(inCode) 478.06 619.33 T
+0 F
+( is) 511.39 619.33 T
+(mapped to, then issues GL commands to draw the layout.) 72 607.33 T
+2 F
+(void __glcRenderChar \050 GLint inCode \051 {) 90 585.33 T
+(switch \050 glcGeti \050 GLC_RENDER_STYLE \051 \051 {) 108 573.33 T
+(case GLC_BITMAP: __glcRenderBitmapChar \050 inCode \051; break;) 126 561.33 T
+(case GLC_LINE: __glcRenderLineChar \050 inCode \051; break;) 126 549.33 T
+(case GLC_TRIANGLE: __glcRenderT) 126 537.33 T
+(riangleChar \050 inCode \051; break;) 295.7 537.33 T
+(case GLC_TEXTURE: __glcRenderT) 126 525.33 T
+(extureChar \050 inCode \051; break;) 288.49 525.33 T
+(}) 108 513.33 T
+(}) 90 501.33 T
+(void __glcRenderBitmapChar \050 GLint inCode \051 {) 90 479.33 T
+(__glcBitmapLayout *const l =) 108 467.33 T
+(__glcCreateBitmapLayout \050 inCode \051;) 244.04 467.33 T
+(glBitmap \050) 108 455.33 T
+(l->size.x, l->size.y) 158.55 455.33 T
+(, l->orig.x, l->orig.y) 239.17 455.33 T
+(, l->advance.x, l->advance.y) 325.93 455.33 T
+(, l->image) 450.45 455.33 T
+(\051;) 498.45 455.33 T
+(}) 90 443.33 T
+(void __glcRenderLineChar \050 GLint inCode \051 {) 90 421.33 T
+(GLint i, j;) 108 409.33 T
+(__glcLineLayout *const l =) 108 397.33 T
+(__glcCreateLineLayout \050 inCode \051;) 231.26 397.33 T
+(GL\337oat *v = l->vtxCoords;) 108 385.33 T
+(for \050 i = 0 ; i < l->stripCount ; ++i \051 {) 108 373.33 T
+(glBegin \050 GL_LINE_STRIP \051;) 126 361.33 T
+(for \050 j = 0 ; j < l->stripLen[i] ; ++j, v += 2 \051) 126 349.33 T
+(glV) 313.94 349.33 T
+(ertex2fv \050 v \051;) 329.5 349.33 T
+(glEnd \050 \051;) 126 337.33 T
+(}) 108 325.33 T
+(glT) 108 313.33 T
+(ranslatef \050 l->advance.x, 0, 0 \051;) 122.45 313.33 T
+(}) 90 301.33 T
+(void __glcRenderT) 90 277.33 T
+(extureChar \050 GLint inCode \051 {) 175.28 277.33 T
+(GLint i;) 108 265.33 T
+(__glcT) 108 253.33 T
+(extureLayout *const l =) 136.89 253.33 T
+(__glcCreateT) 244.6 253.33 T
+(extureLayout \050 inCode \051;) 302.93 253.33 T
+(GL\337oat *t = l->texCoords;) 108 241.33 T
+(GL\337oat *v = l->vtxCoords;) 108 229.33 T
+(for \050 i = 0 ; i < l->texLevels ; ++i \051 {) 108 217.33 T
+(glT) 126 205.33 T
+(exImage2D \050) 140.45 205.33 T
+(GL_TEXTURE_2D, i, 2, l->tex[i].size.x, l->tex[i].size.y) 144 193.33 T
+(, 0,) 384.59 193.33 T
+(GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE,) 144 181.33 T
+(l->tex[i].image) 387.87 181.33 T
+(\051;) 126 169.33 T
+(}) 108 157.33 T
+(glBegin \050 GL_TRIANGLE_STRIP \051;) 108 145.33 T
+(for \050 i = 0 ; i < 4 ; ++i, t += 2, v += 2 \051 {) 108 133.33 T
+(glT) 126 121.33 T
+(exCoord2fv \050 t \051;) 140.45 121.33 T
+(glV) 126 109.33 T
+(ertex2fv \050 v \051;) 141.56 109.33 T
+(}) 108 97.33 T
+(glEnd \050 \051;) 108 85.33 T
+FMENDPAGE
+%%EndPage: "22" 22
+%%Page: "23" 23
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(23) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+2 F
+(glT) 108 713.33 T
+(ranslatef \050 l->advance.x, 0, 0 \051;) 122.45 713.33 T
+(}) 90 701.33 T
+(void __glcRenderT) 90 679.33 T
+(riangleChar \050 GLint inCode \051 {) 175.28 679.33 T
+(GLint i, j;) 108 667.33 T
+(__glcT) 108 655.33 T
+(riangleLayout *const l =) 136.89 655.33 T
+(__glcCreateT) 248.49 655.33 T
+(riangleLayout \050 inCode \051;) 306.82 655.33 T
+(GL\337oat *v = l->vtxCoords;) 108 643.33 T
+(for \050 i = 0 ; i < l->stripCount ; ++i \051 {) 108 631.33 T
+(glBegin\050 GL_TRIANGLE_STRIP \051;) 126 619.33 T
+(for \050 j = 0 ; j < l->stripLen[i] ; ++j, v += 2 \051) 126 607.33 T
+(glV) 313.94 607.33 T
+(ertex2fv \050 v \051;) 329.5 607.33 T
+(glEnd \050 \051;) 126 595.33 T
+(}) 108 583.33 T
+(glT) 108 571.33 T
+(ranslatef \050 l->advance.x, 0, 0 \051;) 122.45 571.33 T
+(}) 90 559.33 T
+0 F
+-0.29 (The function) 72 537.33 P
+2 F
+-0.29 (void) 130.23 537.33 P
+-0.29 (__glcRaiseError \050 GLCenum inError \051) 152.99 537.33 P
+0 F
+-0.29 (r) 322.9 537.33 P
+-0.29 (etrieves the value of the issuing thr) 326.67 537.33 P
+-0.29 (ead\325s GLC er-) 479.77 537.33 P
+(r) 72 525.33 T
+(or code variable. If the value is) 75.77 525.33 T
+2 F
+(GLC_NONE) 213.82 525.33 T
+0 F
+(, the function assigns the value) 271.58 525.33 T
+2 F
+(inError) 410.28 525.33 T
+0 F
+( to the variable.) 443.06 525.33 T
+2 14 Q
+(3.9.1) 72 496.67 T
+(glcRenderChar) 114 496.67 T
+0 10 Q
+(The command) 72 477.33 T
+2 F
+(void glcRenderChar \050 GLint inCode \051) 90 455.33 T
+0 F
+(r) 72 433.33 T
+(enders the character that) 75.77 433.33 T
+2 F
+(inCode) 187.33 433.33 T
+0 F
+( is mapped to.) 220.66 433.33 T
+(If the function) 72 411.33 T
+2 F
+(__glcGetFont) 137.14 411.33 T
+0 F
+( cannot \336nd a font that maps) 197.69 411.33 T
+2 F
+(inCode) 327.26 411.33 T
+0 F
+(, the command attempts to pr) 360.59 411.33 T
+(oduce an) 491.1 411.33 T
+(alternate r) 72 399.33 T
+(endering. If the value of the variable) 117.05 399.33 T
+2 F
+(GLC_REPLACEMENT_CODE) 280.15 399.33 T
+0 F
+( is nonzer) 419.57 399.33 T
+(o, and) 462.38 399.33 T
+2 F
+-0.01 (__glcGetFont) 72 387.33 P
+0 F
+-0.01 ( \336nds a font that maps the r) 132.55 387.33 P
+-0.01 (eplacement code, the command r) 254.16 387.33 P
+-0.01 (enders the character that the r) 400.21 387.33 P
+-0.01 (e-) 531.88 387.33 P
+(placement code is mapped to. Otherwise, the command attempts to r) 72 375.33 T
+(ender the character sequence) 376.73 375.33 T
+(\134<) 72 363.33 T
+3 F
+(hexcode) 84.12 363.33 T
+0 F
+(>, wher) 115.41 363.33 T
+(e \134 is the character REVERSE SOLIDUS \050U+5C\051, < is the character LESS-THAN SIGN) 149.19 363.33 T
+-0.58 (\050U+3C\051, > is the character GREA) 72 351.33 P
+-0.58 (TER-THAN SIGN \050U+3E\051, and) 211.87 351.33 P
+3 F
+-0.58 (hexcode) 347.93 351.33 P
+0 F
+-0.58 ( is) 379.22 351.33 P
+2 F
+-0.58 (inCode) 390.2 351.33 P
+0 F
+-0.58 ( r) 423.53 351.33 P
+-0.58 (epr) 429.22 351.33 P
+-0.58 (esented as a sequence) 443.79 351.33 P
+-0.37 (of hexadecimal digits. The sequence has no leading zer) 72 339.33 P
+-0.37 (os, and alphabetic digits ar) 311.31 339.33 P
+-0.37 (e in upper case. The GLC) 428.38 339.33 P
+(measur) 72 327.33 T
+(ement commands tr) 104.66 327.33 T
+(eat the sequence as a single character) 192.91 327.33 T
+(.) 355.71 327.33 T
+-0.51 (The command can be implemented as follows. A dif) 72 305.33 P
+-0.51 (fer) 298.12 305.33 P
+-0.51 (ent implementation is acceptable if) 310.01 305.33 P
+-0.51 (f its externally ob-) 461.82 305.33 P
+(servable behavior is identical.) 72 293.33 T
+2 F
+(void glcRenderChar \050 GLint inCode \051 {) 90 271.33 T
+(GLint repCode;) 108 259.33 T
+(if \050 !glcGetCurrentContext \050 \051 \051 {) 108 247.33 T
+(__glcRaiseError \050 GLC_ST) 126 235.33 T
+(A) 244.51 235.33 T
+(TE_ERROR \051;) 251.37 235.33 T
+(return;) 126 223.33 T
+(}) 108 211.33 T
+(if \050 __glcGetFont \050 inCode \051 \051 {) 108 199.33 T
+(__glcRenderChar \050 inCode \051;) 126 187.33 T
+(return;) 126 175.33 T
+(}) 108 163.33 T
+(repCode = glcGeti \050 GLC_REPLACEMENT_CODE \051;) 108 151.33 T
+(if \050 repCode && __glcGetFont \050 repCode \051 \051 {) 108 139.33 T
+(__glcRenderChar \050 repCode \051;) 126 127.33 T
+(} else {) 108 115.33 T
+(char buf[10];) 126 103.33 T
+(GLint i, n;) 126 91.33 T
+(if \050!__glcGetFont\050\324\134\134\325\051 || !__glcGetFont \050 \324<\324 \051 || !__glcGetFont \050 \324>\325 \051 \051 return;) 126 79.33 T
+FMENDPAGE
+%%EndPage: "23" 23
+%%Page: "24" 24
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(24) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+2 F
+(sprintf \050 buf, \322%X\323, inCode \051;) 126 713.33 T
+(n = strlen \050 buf \051;) 126 701.33 T
+(for \050 i = 0 ; i < n ; ++i \051 if \050 !__glcGetFont \050 buf[i] \051 \051 return;) 126 689.33 T
+(__glcRenderChar\050\324\134\134\325\051;) 126 677.33 T
+(__glcRenderChar \050 \324<\324 \051;) 126 665.33 T
+(for \050 i = 0 ; i < n ; ++i \051 __glcRenderChar \050 buf[i] \051;) 126 653.33 T
+(__glcRenderChar \050 \324>\325 \051;) 126 641.33 T
+(}) 108 629.33 T
+(}) 90 617.33 T
+2 14 Q
+(3.9.2) 72 588.67 T
+(glcRenderCountedString) 114 588.67 T
+0 10 Q
+(The command) 72 569.33 T
+2 F
+(void glcRenderCountedString \050 GLint inCount, const GLCchar *inString \051) 90 547.33 T
+0 F
+-0.37 (is identical to the command) 72 525.33 P
+2 F
+-0.37 (glcRenderChar) 195.02 525.33 P
+0 F
+-0.37 ( \050Section) 263.9 525.33 P
+-0.37 (3.9.1\051, except that it r) 303.79 525.33 P
+-0.37 (enders a string of characters. The) 393.87 525.33 P
+-0.1 (string comprises the \336rst) 72 513.33 P
+2 F
+-0.1 (inCount) 183.6 513.33 P
+0 F
+-0.1 ( elements of the array) 221.37 513.33 P
+2 F
+-0.1 (inString) 318.94 513.33 P
+0 F
+-0.1 (, which need not be followed by a zer) 356.71 513.33 P
+-0.1 (o el-) 521.1 513.33 P
+(ement. The command raises) 72 501.33 T
+2 F
+(GLC_P) 198.35 501.33 T
+(ARAMETER_ERROR) 230.38 501.33 T
+0 F
+( if) 330.37 501.33 T
+2 F
+(inCount) 341.61 501.33 T
+0 F
+( is less than zer) 379.38 501.33 T
+(o.) 446.17 501.33 T
+2 14 Q
+(3.9.3) 72 472.67 T
+(glcRenderString) 114 472.67 T
+0 10 Q
+(The command) 72 453.33 T
+2 F
+(void glcRenderString \050 const GLCchar *inString \051) 90 431.33 T
+0 F
+-0.27 (is identical to the command) 72 409.33 P
+2 F
+-0.27 (glcRenderCountedString) 195.51 409.33 P
+0 F
+-0.27 (\050Section) 312.17 409.33 P
+-0.27 (3.9.2\051, except that) 349.93 409.33 P
+2 F
+-0.27 (inString) 428.23 409.33 P
+0 F
+-0.27 ( is zer) 466 409.33 P
+-0.27 (o terminat-) 491.16 409.33 P
+(ed, not counted.) 72 397.33 T
+2 14 Q
+(3.9.4) 72 368.67 T
+(glcRenderStyle) 114 368.67 T
+0 10 Q
+(The command) 72 349.33 T
+2 F
+(void glcRenderStyle \050 GLCenum inStyle \051) 90 327.33 T
+0 F
+(assigns the value) 72 305.33 T
+2 F
+(inStyle) 149.76 305.33 T
+0 F
+( to the variable) 182.53 305.33 T
+2 F
+(GLC_RENDER_STYLE) 250.86 305.33 T
+0 F
+(. T) 357.51 305.33 T
+(able) 367.72 305.33 T
+(16 lists the GLC r) 388.45 305.33 T
+(endering styles.) 464.48 305.33 T
+2 14 Q
+(3.9.5) 72 168.67 T
+(glcReplacementCode) 114 168.67 T
+0 10 Q
+(The command) 72 149.33 T
+2 F
+(void glcReplacementCode \050 GLint inCode \051) 90 127.33 T
+0 F
+(assigns the value) 72 105.33 T
+2 F
+(inCode) 149.76 105.33 T
+0 F
+( to the variable) 183.09 105.33 T
+2 F
+(GLC_REPLACEMENT_CODE) 251.42 105.33 T
+0 F
+(.) 390.84 105.33 T
+(Name) 234.15 277.33 T
+(Enumerant) 326.81 277.33 T
+2 F
+(GLC_BITMAP) 234.15 259.33 T
+0 F
+(0x0100) 326.81 259.33 T
+2 F
+(GLC_LINE) 234.15 245.33 T
+0 F
+(0x0101) 326.81 245.33 T
+2 F
+(GLC_TEXTURE) 234.15 231.33 T
+0 F
+(0x0102) 326.81 231.33 T
+2 F
+(GLC_TRIANGLE) 234.15 217.33 T
+0 F
+(0x0103) 326.81 217.33 T
+(T) 248.57 197.33 T
+(able 16: Rendering styles) 253.77 197.33 T
+234.15 286 377.85 286 2 L
+V
+0.25 H
+0 Z
+N
+234.15 272 377.85 272 2 L
+V
+N
+234.15 212 377.85 212 2 L
+V
+N
+FMENDPAGE
+%%EndPage: "24" 24
+%%Page: "25" 25
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(25) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+2 14 Q
+(3.9.6) 72 710.67 T
+(glcResolution) 114 710.67 T
+0 10 Q
+(The command) 72 691.33 T
+2 F
+(void glcResolution \050 GL\337oat inV) 90 669.33 T
+(al \051) 237.76 669.33 T
+0 F
+(assigns the value) 72 647.33 T
+2 F
+(inV) 149.76 647.33 T
+(al) 165.87 647.33 T
+0 F
+( to the variable) 174.2 647.33 T
+2 F
+(GLC_RESOLUTION) 242.53 647.33 T
+0 F
+(.) 338.07 647.33 T
+2 14 Q
+(3.10) 72 618.67 T
+(Measurement commands) 110.5 618.67 T
+0 10 Q
+(T) 72 599.33 T
+(able) 77.21 599.33 T
+(17 lists the GLC metrics for character and string layouts.) 97.94 599.33 T
+2 F
+(GLC_BASELINE) 348.64 599.33 T
+0 F
+( is the line segment fr) 426.41 599.33 T
+(om) 520.75 599.33 T
+(the origin of the layout to the origin of the following layout.) 72 495.33 T
+2 F
+(GLC_BOUNDS) 338.64 495.33 T
+0 F
+( is the bounding box of the) 410.85 495.33 T
+(layout. Figur) 72 483.33 T
+(e) 129.05 483.33 T
+(2 illustrates the baseline and bounds of a layout.) 136.34 483.33 T
+-0.26 (Each point \050) 72 330.33 P
+3 F
+-0.26 (x) 124.64 330.33 P
+0 F
+-0.26 (,) 129.64 330.33 P
+3 F
+-0.26 (y) 134.38 330.33 P
+0 F
+-0.26 (\051 is computed in em coor) 139.38 330.33 P
+-0.26 (dinates, with the origin of a layout at \0500, 0\051. If) 247.46 330.33 P
+-0.26 (f the value of the vari-) 443.73 330.33 P
+(able) 72 318.33 T
+2 F
+(GLC_RENDER_STYLE) 92.73 318.33 T
+0 F
+( is) 199.38 318.33 T
+2 F
+(GLC_BITMAP) 211.53 318.33 T
+0 F
+(, each point is transformed by the 2x2) 278.02 318.33 T
+2 F
+(GLC_BITMAP_MA) 72 306.33 T
+(TRIX) 161.64 306.33 T
+0 F
+(.) 186.09 306.33 T
+2 14 Q
+(3.10.1) 72 277.67 T
+(glcGetCharMetric) 121 277.67 T
+0 10 Q
+(The command) 72 258.33 T
+2 F
+(GL\337oat* glcGetCharMetric \050 GLint inCode, GLCenum inMetric, GL\337oat *outV) 90 236.33 T
+(ec \051) 447.7 236.33 T
+0 F
+(is identical to the command) 72 214.33 T
+2 F
+(glcRenderChar) 196.88 214.33 T
+0 F
+(, except that instead of r) 265.02 214.33 T
+(endering the character that) 370.5 214.33 T
+2 F
+(inCode) 492.11 214.33 T
+0 F
+( is) 525.44 214.33 T
+(mapped to, the command measur) 72 202.33 T
+(es the r) 220.99 202.33 T
+(esulting layout and stor) 252.66 202.33 T
+(es in) 357.56 202.33 T
+2 F
+(outV) 380.32 202.33 T
+(ec) 401.99 202.33 T
+0 F
+( the value of the metric iden-) 411.43 202.33 T
+-0.32 (ti\336ed by) 72 190.33 P
+2 F
+-0.32 (inMetric) 110.57 190.33 P
+0 F
+-0.32 (. T) 150 190.33 P
+-0.32 (able) 159.89 190.33 P
+-0.32 (17 lists the GLC metrics. If the command does not raise an err) 180.62 190.33 P
+-0.32 (or) 448.37 190.33 P
+-0.32 (, its r) 457.04 190.33 P
+-0.32 (eturn value is) 478.08 190.33 P
+2 F
+(outV) 72 178.33 T
+(ec) 93.67 178.33 T
+0 F
+(.) 103.11 178.33 T
+2 14 Q
+(3.10.2) 72 149.67 T
+(glcGetMaxCharMetric) 121 149.67 T
+0 10 Q
+(The command) 72 130.33 T
+2 F
+(GL\337oat* glcGetMaxCharMetric \050 GLCenum inMetric, GL\337oat *outV) 90 108.33 T
+(ec \051) 399.66 108.33 T
+0 F
+-0.18 (measur) 72 86.33 P
+-0.18 (es the layout that would r) 104.66 86.33 P
+-0.18 (esult fr) 217.36 86.33 P
+-0.18 (om r) 248.01 86.33 P
+-0.18 (endering all mapped characters at the same origin, as follows:) 268.39 86.33 P
+(Name) 175.23 571.33 T
+(Enumerant) 265.82 571.33 T
+(V) 328.51 571.33 T
+(ector) 334.62 571.33 T
+2 F
+(GLC_BASELINE) 175.23 553.33 T
+0 F
+(0x0030) 265.82 553.33 T
+([) 328.51 553.33 T
+3 F
+( x) 331.84 553.33 T
+3 8 Q
+(l) 339.34 550.83 T
+3 10 Q
+(y) 344.06 553.33 T
+3 8 Q
+(l) 349.06 550.83 T
+3 10 Q
+(x) 353.79 553.33 T
+3 8 Q
+(r) 358.79 550.83 T
+3 10 Q
+(y) 364.4 553.33 T
+3 8 Q
+(r) 369.4 550.83 T
+0 10 Q
+(]) 375.01 553.33 T
+2 F
+(GLC_BOUNDS) 175.23 539.33 T
+0 F
+(0x0031) 265.82 539.33 T
+-0.6 ([) 328.51 539.33 P
+3 F
+-0.6 (x) 333.73 539.33 P
+3 8 Q
+-0.48 (lb) 338.73 536.83 P
+3 10 Q
+-0.6 (y) 346.56 539.33 P
+3 8 Q
+-0.48 (lb) 351.56 536.83 P
+3 10 Q
+-0.6 (x) 359 539.33 P
+3 8 Q
+-0.48 (rb) 364 536.83 P
+3 10 Q
+-0.6 (y) 372.71 539.33 P
+3 8 Q
+-0.48 (rb) 377.71 536.83 P
+3 10 Q
+-0.6 (x) 386.05 539.33 P
+3 8 Q
+-0.48 (rt) 391.05 536.83 P
+3 10 Q
+-0.6 (y) 398.34 539.33 P
+3 8 Q
+-0.48 (rt) 403.34 536.83 P
+3 10 Q
+-0.6 (x) 410.63 539.33 P
+3 8 Q
+-0.48 (lt) 415.63 536.83 P
+3 10 Q
+-0.6 (y) 422.04 539.33 P
+3 8 Q
+-0.48 (lt) 427.04 536.83 P
+0 10 Q
+-0.6 (]) 433.44 539.33 P
+(T) 269.01 519.33 T
+(able 17: Metrics) 274.21 519.33 T
+(Figur) 239.6 352.33 T
+(e 2: Baseline and bounds) 263.42 352.33 T
+175.23 580 436.77 580 2 L
+V
+0.25 H
+0 Z
+N
+175.23 566 436.77 566 2 L
+V
+N
+175.23 534 436.77 534 2 L
+V
+N
+72 464 540 464 2 L
+V
+N
+72 367 540 367 2 L
+V
+N
+72 367 540 464 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+279 383 324 455 R
+7 X
+0 0 0 1 0 0 0 K
+V
+0 72 Q
+0 X
+(g) 279 407 T
+269.73 406.22 332.73 406.22 2 L
+0.25 H
+2 Z
+N
+3 10 Q
+(\050x) 341.86 402.56 T
+3 8 Q
+(r) 350.19 400.06 T
+3 10 Q
+(, y) 352.56 402.56 T
+3 8 Q
+(r) 362.56 400.06 T
+3 10 Q
+(\051) 365.67 402.56 T
+279.54 386.38 319.35 441.18 R
+0 Z
+N
+90 450 1.44 1.44 267.83 406.22 G
+2 Z
+90 450 1.44 1.44 267.83 406.22 A
+90 450 1.44 1.44 334.95 406.22 G
+90 450 1.44 1.44 334.95 406.22 A
+90 450 1.44 1.44 279.67 441.11 G
+90 450 1.44 1.44 279.67 441.11 A
+90 450 1.44 1.44 319.34 441.11 G
+90 450 1.44 1.44 319.34 441.11 A
+90 450 1.44 1.44 279.67 386.44 G
+90 450 1.44 1.44 279.67 386.44 A
+90 450 1.44 1.44 319.34 386.44 G
+90 450 1.44 1.44 319.34 386.44 A
+(\050x) 235.33 402.56 T
+3 8 Q
+(l) 243.66 400.06 T
+3 10 Q
+(, y) 245.89 402.56 T
+3 8 Q
+(l) 255.89 400.06 T
+3 10 Q
+(\051) 258.11 402.56 T
+(\050x) 243 378.71 T
+3 8 Q
+(lb) 251.33 376.21 T
+3 10 Q
+(, y) 257.26 378.71 T
+3 8 Q
+(lb) 267.26 376.21 T
+3 10 Q
+(\051) 273.19 378.71 T
+(\050x) 324 378.71 T
+3 8 Q
+(rb) 332.33 376.21 T
+3 10 Q
+(, y) 339.15 378.71 T
+3 8 Q
+(rb) 349.15 376.21 T
+3 10 Q
+(\051) 355.96 378.71 T
+(\050x) 325.04 443.71 T
+3 8 Q
+(rt) 333.37 441.21 T
+3 10 Q
+(, y) 339.15 443.71 T
+3 8 Q
+(rt) 349.15 441.21 T
+3 10 Q
+(\051) 354.92 443.71 T
+(\050x) 244.04 443.71 T
+3 8 Q
+(lt) 252.37 441.21 T
+3 10 Q
+(, y) 257.26 443.71 T
+3 8 Q
+(lt) 267.26 441.21 T
+3 10 Q
+(\051) 272.15 443.71 T
+0 0 612 792 C
+FMENDPAGE
+%%EndPage: "25" 25
+%%Page: "26" 26
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(26) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+2 F
+(GLint code;) 90 713.33 T
+(for \050 code = 0 ; code <= 0x7f) 90 701.33 T
+(f) 213.28 701.33 T
+(f) 216.99 701.33 T
+(f) 220.7 701.33 T
+(f) 224.41 701.33 T
+(f) 228.12 701.33 T
+(f ; ++code \051 {) 231.83 701.33 T
+(glPushAttrib \050 GL_CURRENT_BIT \051;) 108 689.33 T
+(glPushMatrix \050 \051;) 108 677.33 T
+(if \050 __glcLookupFont \050 code \051 \051 glcRenderChar \050 code \051;) 108 665.33 T
+(glPopAttrib \050 \051;) 108 653.33 T
+(glPopMatrix \050 \051;) 108 641.33 T
+(}) 90 629.33 T
+0 F
+-0.66 (The command stor) 72 607.33 P
+-0.66 (es in) 153.65 607.33 P
+2 F
+-0.66 (outV) 175.1 607.33 P
+-0.66 (ec) 196.76 607.33 P
+0 F
+-0.66 ( the value of the metric identi\336ed by) 206.21 607.33 P
+2 F
+-0.66 (inMetric) 363.89 607.33 P
+0 F
+-0.66 (. T) 403.32 607.33 P
+-0.66 (able) 412.87 607.33 P
+-0.66 (17 lists the GLC metrics.) 433.6 607.33 P
+(If the command does not raise an err) 72 595.33 T
+(or) 233.92 595.33 T
+(, its r) 242.59 595.33 T
+(eturn value is) 264.27 595.33 T
+2 F
+(outV) 327.15 595.33 T
+(ec) 348.82 595.33 T
+0 F
+(.) 358.26 595.33 T
+2 14 Q
+(3.10.3) 72 566.67 T
+(glcGetStringCharMetric) 121 566.67 T
+0 10 Q
+(The command) 72 547.33 T
+2 F
+(GL\337oat* glcGetStringCharMetric \050 GLint inIndex, GLCenum inMetric, GL\337oat *outV) 90 525.33 T
+(ec \051) 478.25 525.33 T
+0 F
+-0.48 (r) 72 503.33 P
+-0.48 (etrieves a character metric fr) 75.77 503.33 P
+-0.48 (om the GLC measur) 199.15 503.33 P
+-0.48 (ement buf) 286.85 503.33 P
+-0.48 (fer and stor) 331.07 503.33 P
+-0.48 (es it in) 380.84 503.33 P
+2 F
+-0.48 (outV) 410.82 503.33 P
+-0.48 (ec) 432.49 503.33 P
+0 F
+-0.48 (. The character is iden-) 441.93 503.33 P
+(ti\336ed by) 72 491.33 T
+2 F
+(inIndex) 111.21 491.33 T
+0 F
+(, and the metric is identi\336ed by) 146.76 491.33 T
+2 F
+(inMetric) 286.73 491.33 T
+0 F
+(. T) 326.16 491.33 T
+(able) 336.37 491.33 T
+(17 lists the GLC metrics. The command) 357.1 491.33 T
+(raises) 72 479.33 T
+2 F
+(GLC_P) 99.63 479.33 T
+(ARAMETER_ERROR) 131.66 479.33 T
+0 F
+( if) 231.65 479.33 T
+2 F
+(inIndex) 242.89 479.33 T
+0 F
+( is less than zer) 278.44 479.33 T
+(o or is gr) 345.23 479.33 T
+(eater than or equal to the value of) 384.08 479.33 T
+-0.1 (the variable) 72 467.33 P
+2 F
+-0.1 (GLC_MEASURED_CHAR_COUNT) 126.42 467.33 P
+0 F
+-0.1 (. If the command does not raise an err) 290.66 467.33 P
+-0.1 (or) 456.8 467.33 P
+-0.1 (, its r) 465.48 467.33 P
+-0.1 (eturn value) 486.96 467.33 P
+(is) 72 455.33 T
+2 F
+(outV) 81.65 455.33 T
+(ec) 103.32 455.33 T
+0 F
+(.) 112.76 455.33 T
+2 14 Q
+(3.10.4) 72 426.67 T
+(glcGetStringMetric) 121 426.67 T
+0 10 Q
+(The command) 72 407.33 T
+2 F
+(GL\337oat* glcGetStringMetric \050 GLCenum inMetric, GL\337oat *outV) 90 385.33 T
+(ec \051) 385.77 385.33 T
+0 F
+-0.17 (r) 72 363.33 P
+-0.17 (etrieves a string metric fr) 75.77 363.33 P
+-0.17 (om the GLC measur) 185.48 363.33 P
+-0.17 (ement buf) 274.11 363.33 P
+-0.17 (fer and stor) 318.64 363.33 P
+-0.17 (es it in) 369.02 363.33 P
+2 F
+-0.17 (outV) 399.93 363.33 P
+-0.17 (ec) 421.6 363.33 P
+0 F
+-0.17 (. The metric is identi\336ed) 431.04 363.33 P
+(by) 72 351.33 T
+2 F
+(inMetric) 85.59 351.33 T
+0 F
+(. T) 125.02 351.33 T
+(able) 135.23 351.33 T
+(17 lists the GLC metrics. If the command does not raise an err) 155.96 351.33 T
+(or) 427.56 351.33 T
+(, its r) 436.23 351.33 T
+(eturn value is) 457.91 351.33 T
+2 F
+(outV) 72 339.33 T
+(ec) 93.67 339.33 T
+0 F
+(.) 103.11 339.33 T
+2 14 Q
+(3.10.5) 72 310.67 T
+(glcMeasureCountedString) 121 310.67 T
+0 10 Q
+(The command) 72 291.33 T
+2 F
+(GLint glcMeasureCountedString \050) 90 269.33 T
+(GLboolean inMeasureChars, GLint inCount, const GLCchar *inString) 108 257.33 T
+(\051) 90 245.33 T
+0 F
+(is identical to the command) 72 223.33 T
+2 F
+(glcRenderCountedString) 196.88 223.33 T
+0 F
+(, except that instead of r) 311.31 223.33 T
+(endering a string, the com-) 416.79 223.33 T
+(mand measur) 72 211.33 T
+(es the r) 132.92 211.33 T
+(esulting layout and stor) 164.59 211.33 T
+(es the measur) 269.49 211.33 T
+(ements in the GLC measur) 330.05 211.33 T
+(ement buf) 447.87 211.33 T
+(fer) 492.57 211.33 T
+(. The) 503.9 211.33 T
+-0.1 (string comprises the \336rst) 72 199.33 P
+2 F
+-0.1 (inCount) 183.6 199.33 P
+0 F
+-0.1 ( elements of the array) 221.37 199.33 P
+2 F
+-0.1 (inString) 318.94 199.33 P
+0 F
+-0.1 (, which need not be followed by a zer) 356.71 199.33 P
+-0.1 (o el-) 521.1 199.33 P
+(ement. The command raises) 72 187.33 T
+2 F
+(GLC_P) 198.35 187.33 T
+(ARAMETER_ERROR) 230.38 187.33 T
+0 F
+( if) 330.37 187.33 T
+2 F
+(inCount) 341.61 187.33 T
+0 F
+( is less than zer) 379.38 187.33 T
+(o.) 446.17 187.33 T
+-0.02 (If the value of) 72 165.33 P
+2 F
+-0.02 (inMeasureChars) 135.65 165.33 P
+0 F
+-0.02 ( is nonzer) 211.19 165.33 P
+-0.02 (o, the command computes metrics for each character and for the) 253.96 165.33 P
+(overall string, and it assigns the value) 72 153.33 T
+2 F
+(inCount) 241.77 153.33 T
+0 F
+( to the variable) 279.54 153.33 T
+2 F
+(GLC_MEASURED_CHARACTER_COUNT) 72 141.33 T
+0 F
+(. Otherwise, the command computes metrics only for the) 271.24 141.33 T
+(overall string, and it assigns the value zer) 72 129.33 T
+(o to the variable) 255.33 129.33 T
+2 F
+(GLC_MEASURED_CHARACTER_COUNT) 329.12 129.33 T
+0 F
+(.) 528.36 129.33 T
+(If the command does not raise an err) 72 107.33 T
+(or) 233.92 107.33 T
+(, its r) 242.59 107.33 T
+(eturn value is the value of the variable) 264.27 107.33 T
+2 F
+(GLC_MEASURED_CHARACTER_COUNT) 72 95.33 T
+0 F
+(.) 271.24 95.33 T
+FMENDPAGE
+%%EndPage: "26" 26
+%%Page: "27" 27
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(GLC Specification \320 SGI) 72 36.66 T
+(27) 301 36.66 T
+(Version 0.2 \320 2 Feb 1998) 438.34 36.66 T
+2 14 Q
+(3.10.6) 72 710.67 T
+(glcMeasureString) 121 710.67 T
+0 10 Q
+(The command) 72 691.33 T
+2 F
+(GLint glcMeasureString \050 GLboolean inMeasureChars, const GLCchar *inString \051) 90 669.33 T
+0 F
+-0.03 (is identical to the command) 72 647.33 P
+2 F
+-0.03 (glcMeasureCountedString) 196.75 647.33 P
+0 F
+-0.03 (\050Section) 319.77 647.33 P
+-0.03 (3.10.5\051, except that) 357.52 647.33 P
+2 F
+-0.03 (inString) 441.57 647.33 P
+0 F
+-0.03 ( is zer) 479.34 647.33 P
+-0.03 (o termi-) 505 647.33 P
+(nated, not counted.) 72 635.33 T
+2 14 Q
+(4) 72 606.67 T
+(Extensions) 93 606.67 T
+0 10 Q
+(Section under constr) 72 587.33 T
+(uction.) 162.72 587.33 T
+2 14 Q
+(References) 72 558.67 T
+0 10 Q
+(1.) 90 539.33 T
+(Segal, Mark, and Akeley) 108 539.33 T
+(, Kurt. The OpenGL) 215.19 539.33 T
+1 14 Q
+(\252) 303.15 539.33 T
+0 10 Q
+( Graphics System: A Speci\336cation \050V) 316.87 539.33 T
+(ersion 1.0\051.) 477.36 539.33 T
+(OpenGL Ar) 108 527.33 T
+(chitectural Review Boar) 160.27 527.33 T
+(d. Unpublished. 1995.) 265.58 527.33 T
+(2.) 90 505.33 T
+(Micr) 108 505.33 T
+(osoft Corp. T) 128.58 505.33 T
+(r) 185.57 505.33 T
+(ueT) 189.44 505.33 T
+(ype 1.0 Font Files: T) 205.49 505.33 T
+(echnical Speci\336cation. Revision 1.5. January 1994. A) 292.57 505.33 T
+(vail-) 520.05 505.33 T
+(able fr) 108 493.33 T
+(om Micr) 135.83 493.33 T
+(osoft Corp., Redmond, W) 173.2 493.33 T
+(A USA.) 285.34 493.33 T
+(3.) 90 471.33 T
+(Adobe Systems Incorporated. Adobe T) 108 471.33 T
+(ype 1 Font Format. V) 278.86 471.33 T
+(ersion 1.1. Addison-W) 370.99 471.33 T
+(esley) 469 471.33 T
+(. 1990.) 490.18 471.33 T
+(ISBN 0-201-57044-0.) 108 459.33 T
+(4.) 90 437.33 T
+(ISO/IEC 10646-1:1993. International Standar) 108 437.33 T
+(d -- Information technology -- Universal Multi-) 304.52 437.33 T
+(ple-Octet Coded Character Set \050UCS\051 -- Part 1: Ar) 108 425.33 T
+(chitectur) 325.55 425.33 T
+(e and Basic Multilingual Plane.) 364.27 425.33 T
+(5.) 90 403.33 T
+(The Unicode Consortium. The Unicode Standar) 108 403.33 T
+(d: W) 318.36 403.33 T
+(orldwide Character Encoding. V) 338.55 403.33 T
+(ersion 1.0,) 480.77 403.33 T
+(V) 108 391.33 T
+(olume 1. Addison-W) 114.11 391.33 T
+(esley) 205.47 391.33 T
+(. 1991. ISBN 0-201-56788-1.) 226.65 391.33 T
+(6.) 90 369.33 T
+(The Unicode Consortium. The Unicode Standar) 108 369.33 T
+(d: W) 318.36 369.33 T
+(orldwide Character Encoding. V) 338.55 369.33 T
+(ersion 1.0,) 480.77 369.33 T
+(V) 108 357.33 T
+(olume 2. Addison-W) 114.11 357.33 T
+(esley) 205.47 357.33 T
+(. 1992. ISBN 0-201-60845-6.) 226.65 357.33 T
+(7.) 90 335.33 T
+(The Unicode Consortium. Unicode T) 108 335.33 T
+(echnical Report #4: The Unicode Standar) 270.12 335.33 T
+(d, V) 449.66 335.33 T
+(ersion 1.1. Pr) 466.88 335.33 T
+(e-) 523.86 335.33 T
+(publication edition. 1993. A) 108 323.33 T
+(vailable fr) 228.9 323.33 T
+(om The Unicode Consortium, 1965 Charleston Road, Moun-) 273.2 323.33 T
+(tain V) 108 311.33 T
+(iew) 134.16 311.33 T
+(, CA 94043 USA.) 149.28 311.33 T
+(8.) 90 289.33 T
+(Dunwoody) 108 289.33 T
+(, Craig. The OpenGL) 157.41 289.33 T
+1 14 Q
+(\252) 249.38 289.33 T
+0 10 Q
+( Str) 263.1 289.33 T
+(eam Codec: A Speci\336cation. In pr) 277.88 289.33 T
+(eparation. 1996.) 424.98 289.33 T
+FMENDPAGE
+%%EndPage: "27" 27
+%%Trailer
+%%BoundingBox: 0 0 612 792
+%%PageOrder: Ascend
+%%Pages: 27
+%%DocumentFonts: Palatino-Roman
+%%+ Times-Roman
+%%+ Palatino-Bold
+%%+ Palatino-Italic
+%%+ Symbol
+%%EOF
