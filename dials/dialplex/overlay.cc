@@ -1,4 +1,5 @@
 #include "overlay.h"
+#include "dialhandler.h"
 #include <Inventor/nodes/SoOrthographicCamera.h>
 #include <Inventor/nodes/SoCoordinate3.h>
 #include <Inventor/nodes/SoLineSet.h>
@@ -39,7 +40,7 @@ void initOverlay(SoXtExaminerViewer* viewer)
     }
 }
 
-void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bool overlayVisible)
+void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bool overlayVisible, DialHandler* currentHandler)
 {
     if (!viewer) return;
     
@@ -121,7 +122,7 @@ void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bo
         }
     }
 
-    // Left side text overlay - Detailed dial descriptions  
+    // Left side text overlay - Dynamic dial descriptions from current handler
     SoSeparator *leftSep = new SoSeparator;
     SoFont *leftFont = new SoFont;
     leftFont->name.setValue("Courier");
@@ -135,61 +136,55 @@ void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bo
     SoText2 *leftText = new SoText2;
     leftText->string.set1Value(0, "DIAL FUNCTION MATRIX");
     leftText->string.set1Value(1, "====================");
-    if (currentSetIndex >= 0) {
-        SbString setName("ACTIVE SET: ");
-        setName += SbString(currentSetIndex + 1);
-        leftText->string.set1Value(2, setName.getString());
+    
+    // Show current theme description
+    if (currentHandler && currentSetIndex >= 0) {
+        SbString setInfo("ACTIVE SET: ");
+        setInfo += SbString(currentSetIndex);
+        leftText->string.set1Value(2, setInfo.getString());
+        leftText->string.set1Value(3, currentHandler->getThemeDescription());
     } else {
         leftText->string.set1Value(2, "ACTIVE SET: NONE");
+        leftText->string.set1Value(3, "No handler active");
     }
-    leftText->string.set1Value(3, "");
+    leftText->string.set1Value(4, "");
     
-    leftText->string.set1Value(4, " .--.  DIAL 0: BACKGROUND HUE");
-    leftText->string.set1Value(5, "|BG  | Controls the ambient color spectrum.");
-    leftText->string.set1Value(6, "|HUE | Shifts through deep cosmic hues.");
-    leftText->string.set1Value(7, " '--'");
-    leftText->string.set1Value(8, "");
-    
-    leftText->string.set1Value(9, " .--.  DIAL 1: SCENE ROTATE Y");
-    leftText->string.set1Value(10, "|ROT | Rotates entire scene around Y axis.");
-    leftText->string.set1Value(11, "| Y  | Provides orbital perspective control.");
-    leftText->string.set1Value(12, " '--'");
-    leftText->string.set1Value(13, "");
-    
-    leftText->string.set1Value(14, " .--.  DIAL 2: ZOOM DEPTH");
-    leftText->string.set1Value(15, "|ZOOM| Controls camera distance to objects.");
-    leftText->string.set1Value(16, "|DPTH| Dive deep or pull back for overview.");
-    leftText->string.set1Value(17, " '--'");
-    leftText->string.set1Value(18, "");
-    
-    leftText->string.set1Value(19, " .--.  DIAL 3: SCENE ROTATE X");
-    leftText->string.set1Value(20, "|ROT | Tilts scene up and down on X axis.");
-    leftText->string.set1Value(21, "| X  | Perfect for dramatic angle shifts.");
-    leftText->string.set1Value(22, " '--'");
-    leftText->string.set1Value(23, "");
-    
-    leftText->string.set1Value(24, " .--.  DIAL 4: CYLINDER HEIGHT");
-    leftText->string.set1Value(25, "|CYL | Extends all dial cylinders upward.");
-    leftText->string.set1Value(26, "|HGT | Creates towering control structures.");
-    leftText->string.set1Value(27, " '--'");
-    leftText->string.set1Value(28, "");
-    
-    leftText->string.set1Value(29, " .--.  DIAL 5: SCENE ROTATE Z");
-    leftText->string.set1Value(30, "|ROT | Spins scene around Z depth axis.");
-    leftText->string.set1Value(31, "| Z  | Adds rolling motion dynamics.");
-    leftText->string.set1Value(32, " '--'");
-    leftText->string.set1Value(33, "");
-    
-    leftText->string.set1Value(34, " .--.  DIAL 6: SCATTER CHAOS");
-    leftText->string.set1Value(35, "|SCAT| Randomly displaces all objects.");
-    leftText->string.set1Value(36, "|CHAO| Creates organic movement patterns.");
-    leftText->string.set1Value(37, " '--'");
-    leftText->string.set1Value(38, "");
-    
-    leftText->string.set1Value(39, " .--.  DIAL 7: BLOOM EFFECT");
-    leftText->string.set1Value(40, "|BLOOM Radiates objects outward from center.");
-    leftText->string.set1Value(41, "|EFCT| Transforms materials to electric blue.");
-    leftText->string.set1Value(42, " '--'");
+    // Show dynamic dial descriptions
+    int lineIndex = 5;
+    for (int i = 0; i < 8; i++) {
+        char dialHeader[32];
+        sprintf(dialHeader, " .--.  DIAL %d", i);
+        leftText->string.set1Value(lineIndex++, dialHeader);
+        
+        if (currentHandler) {
+            const char* desc = currentHandler->getDialDescription(i);
+            // Split the description into lines for better formatting
+            char shortDesc[64];
+            strncpy(shortDesc, desc, 63);
+            shortDesc[63] = '\0';
+            
+            // Find the colon to split title from description
+            char* colonPos = strchr(shortDesc, ':');
+            if (colonPos && strlen(colonPos) > 2) {
+                *colonPos = '\0'; // terminate at colon
+                char line1[64], line2[64];
+                sprintf(line1, "|%s|", shortDesc + 7); // skip "DIAL X: "
+                sprintf(line2, "|%s|", colonPos + 2); // skip ": "
+                leftText->string.set1Value(lineIndex++, line1);
+                leftText->string.set1Value(lineIndex++, line2);
+            } else {
+                char line[64];
+                sprintf(line, "|%s|", shortDesc + 7); // skip "DIAL X: "
+                leftText->string.set1Value(lineIndex++, line);
+                leftText->string.set1Value(lineIndex++, "| |");
+            }
+        } else {
+            leftText->string.set1Value(lineIndex++, "|No handler|");
+            leftText->string.set1Value(lineIndex++, "| |");
+        }
+        leftText->string.set1Value(lineIndex++, " '--'");
+        leftText->string.set1Value(lineIndex++, "");
+    }
     
     leftSep->addChild(leftText);
     overlayRoot->addChild(leftSep);

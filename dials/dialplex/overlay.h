@@ -4,6 +4,9 @@
 #include <Inventor/Xt/viewers/SoXtExaminerViewer.h>
 #include <Inventor/nodes/SoSeparator.h>
 
+// Forward declaration
+class DialHandler;
+
 // Button box layout: 6 rows, variable columns
 extern const int rowCols[6];
 
@@ -18,7 +21,7 @@ extern const ButtonBoxPos buttonBoxMap[32];
 void initOverlay(SoXtExaminerViewer* viewer);
 
 // Update the overlay scene graph based on current state
-void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bool overlayVisible);
+void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bool overlayVisible, DialHandler* currentHandler);
 
 // Cleanup overlay resources
 void cleanupOverlay();
