@@ -7,6 +7,9 @@
 #include <Inventor/nodes/SoFont.h>
 #include <Inventor/nodes/SoText2.h>
 #include <Inventor/nodes/SoTransform.h>
+#include <Inventor/nodes/SoMaterial.h>
+#include <Inventor/nodes/SoLightModel.h>
+#include <Inventor/nodes/SoBaseColor.h>
 #include <Inventor/SbString.h>
 
 // Global overlay state
@@ -133,6 +136,11 @@ void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bo
     leftTextPos->translation.setValue(30, winH - 50, 0);
     leftSep->addChild(leftTextPos);
     
+    // Set text color to white
+    SoBaseColor *leftTextColor = new SoBaseColor;
+    leftTextColor->rgb.setValue(1.0f, 1.0f, 1.0f); // White text
+    leftSep->addChild(leftTextColor);
+    
     SoText2 *leftText = new SoText2;
     leftText->string.set1Value(0, "DIAL FUNCTION MATRIX");
     leftText->string.set1Value(1, "====================");
@@ -200,6 +208,11 @@ void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bo
     rightTextPos->translation.setValue(winW - 380, winH - 50, 0);
     rightSep->addChild(rightTextPos);
     
+    // Set text color to white
+    SoBaseColor *rightTextColor = new SoBaseColor;
+    rightTextColor->rgb.setValue(1.0f, 1.0f, 1.0f); // White text
+    rightSep->addChild(rightTextColor);
+    
     SoText2 *rightText = new SoText2;
     rightText->string.set1Value(0, "DIALPLEX PROJECT OVERVIEW");
     rightText->string.set1Value(1, "==========================");
@@ -259,6 +272,11 @@ void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bo
     SoTransform *bottomTextPos = new SoTransform;
     bottomTextPos->translation.setValue(winW/2 - 350, 100, 0);
     bottomSep->addChild(bottomTextPos);
+    
+    // Set text color to white
+    SoBaseColor *bottomTextColor = new SoBaseColor;
+    bottomTextColor->rgb.setValue(1.0f, 1.0f, 1.0f); // White text
+    bottomSep->addChild(bottomTextColor);
     
     SoText2 *bottomText = new SoText2;
     bottomText->string.set1Value(0, "CYBERDYNE NEURAL NET PROCESSOR - 256 FUNCTION COMBINATIONS");

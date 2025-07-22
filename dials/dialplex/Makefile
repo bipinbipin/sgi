@@ -9,14 +9,14 @@ LIBS = -lInventorInput -lInventorXt -lInventor -lX11 -lGL -lGLU -lm
 
 # Object files
 TARGET = dialplex
-OBJECTS = dialplex.o overlay.o dialset0.o dialset1.o dialset2.o dialset3.o dialset4.o dialset5.o dialset6.o dialset7.o
+OBJECTS = dialplex.o overlay.o dialset0.o dialset1.o dialset2.o dialset3.o dialset4.o dialset5.o dialset6.o dialset7.o dialset8.o dialset9.o
 
 # Default target
 all: dialplex
 
 # Link the final executable
-dialplex: dialplex.o overlay.o dialset0.o dialset1.o dialset2.o dialset3.o dialset4.o dialset5.o dialset6.o dialset7.o
-	CC dialplex.o overlay.o dialset0.o dialset1.o dialset2.o dialset3.o dialset4.o dialset5.o dialset6.o dialset7.o $(LDFLAGS) $(LIBS) -o dialplex
+dialplex: dialplex.o overlay.o dialset0.o dialset1.o dialset2.o dialset3.o dialset4.o dialset5.o dialset6.o dialset7.o dialset8.o dialset9.o
+	CC dialplex.o overlay.o dialset0.o dialset1.o dialset2.o dialset3.o dialset4.o dialset5.o dialset6.o dialset7.o dialset8.o dialset9.o $(LDFLAGS) $(LIBS) -o dialplex
 
 # Compile dialplex.cc to dialplex.o
 dialplex.o: dialplex.cc
@@ -49,6 +49,12 @@ dialset6.o: dialset6.cc
 
 dialset7.o: dialset7.cc
 	CC $(CFLAGS) -c dialset7.cc
+
+dialset8.o: dialset8.cc
+	CC $(CFLAGS) -c dialset8.cc
+
+dialset9.o: dialset9.cc
+	CC $(CFLAGS) -c dialset9.cc
 
 # Clean build artifacts
 clean:

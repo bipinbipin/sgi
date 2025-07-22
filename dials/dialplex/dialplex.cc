@@ -14,6 +14,7 @@
 #include <Inventor/nodes/SoEventCallback.h>
 #include <Inventor/nodes/SoDirectionalLight.h>
 #include <Inventor/nodes/SoSeparator.h>
+#include <Inventor/nodes/SoSwitch.h>
 #include <Inventor/nodes/SoTransform.h>
 #include <Inventor/nodes/SoOrthographicCamera.h>
 #include <Inventor/nodes/SoFaceSet.h>
@@ -43,6 +44,8 @@ extern DialHandler* createDialSet4();
 extern DialHandler* createDialSet5();
 extern DialHandler* createDialSet6();
 extern DialHandler* createDialSet7();
+extern DialHandler* createDialSet8();
+extern DialHandler* createDialSet9();
 
 // Global scene objects and state
 SceneObjects sceneObjects;
@@ -66,6 +69,39 @@ void initDialState() {
     dialState.handlerData = NULL;
 }
 
+// Switch geometry mode
+void switchGeometryMode(GeometryMode mode) {
+    if (!sceneObjects.cylinderGroup || !sceneObjects.sphereGroup) return;
+    
+    sceneObjects.currentGeometry = mode;
+    
+    switch (mode) {
+        case GEOMETRY_CYLINDERS:
+            // Show cylinders, hide sphere
+            sceneObjects.cylinderGroup->whichChild.setValue(-3); // SO_SWITCH_ALL
+            sceneObjects.sphereGroup->whichChild.setValue(-1);   // SO_SWITCH_NONE
+            printf("Switched to cylinder geometry\n");
+            break;
+            
+        case GEOMETRY_SINGLE_SPHERE:
+            // Hide cylinders, show sphere
+            sceneObjects.cylinderGroup->whichChild.setValue(-1); // SO_SWITCH_NONE
+            sceneObjects.sphereGroup->whichChild.setValue(-3);   // SO_SWITCH_ALL
+            // Add sphere components if not present
+            if (sceneObjects.sphereGroup->getNumChildren() == 0) {
+                sceneObjects.sphereGroup->addChild(sceneObjects.sphereTransform);
+                sceneObjects.sphereGroup->addChild(sceneObjects.sphereMaterial);
+                sceneObjects.sphereGroup->addChild(sceneObjects.mainSphere);
+            }
+            printf("Switched to sphere geometry (cylinders hidden)\n");
+            break;
+    }
+    
+    if (sceneObjects.globalViewer) {
+        sceneObjects.globalViewer->render();
+    }
+}
+
 // Switch to a different dial handler
 void switchDialHandler(int setIndex) {
     // Cleanup current handler
@@ -82,32 +118,49 @@ void switchDialHandler(int setIndex) {
     switch (setIndex) {
         case 0:
             currentDialHandler = createDialSet0();
+            switchGeometryMode(GEOMETRY_CYLINDERS);
             break;
         case 1:
             currentDialHandler = createDialSet1();
+            switchGeometryMode(GEOMETRY_CYLINDERS);
             break;
         case 2:
             currentDialHandler = createDialSet2();
+            switchGeometryMode(GEOMETRY_CYLINDERS);
             break;
         case 3:
             currentDialHandler = createDialSet3();
+            switchGeometryMode(GEOMETRY_CYLINDERS);
             break;
         case 4:
             currentDialHandler = createDialSet4();
+            switchGeometryMode(GEOMETRY_CYLINDERS);
             break;
         case 5:
             currentDialHandler = createDialSet5();
+            switchGeometryMode(GEOMETRY_CYLINDERS);
             break;
         case 6:
             currentDialHandler = createDialSet6();
+            switchGeometryMode(GEOMETRY_CYLINDERS);
             break;
         case 7:
             currentDialHandler = createDialSet7();
+            switchGeometryMode(GEOMETRY_CYLINDERS);
+            break;
+        case 8:
+            currentDialHandler = createDialSet8();
+            switchGeometryMode(GEOMETRY_CYLINDERS);
+            break;
+        case 9:
+            currentDialHandler = createDialSet9();
+            switchGeometryMode(GEOMETRY_SINGLE_SPHERE);
             break;
         default:
             // Default to set 0 for any other button
             currentDialHandler = createDialSet0();
             currentSetIndex = 0;
+            switchGeometryMode(GEOMETRY_CYLINDERS);
             break;
     }
     
@@ -164,6 +217,9 @@ void resetScene() {
         currentDialHandler = NULL;
     }
     
+    // Reset geometry to cylinders
+    switchGeometryMode(GEOMETRY_CYLINDERS);
+    
     currentSetIndex = 0;
     switchDialHandler(0);
     
@@ -190,8 +246,8 @@ buttonBoxCB(void *userData, SoEventCallback *cb)
                 resetScene();
                 currentSetIndex = 0; // Reset to dial set 0
             }
-            // Switch dial handler for buttons 1-8 (indices 0-7)
-            else if (currentSetIndex >= 0 && currentSetIndex <= 7) {
+            // Switch dial handler for buttons 1-10 (indices 0-9)
+            else if (currentSetIndex >= 0 && currentSetIndex <= 9) {
                 switchDialHandler(currentSetIndex);
             }
             
@@ -217,6 +273,10 @@ void dialCB(void *userData, SoEventCallback *cb)
 
     int rawValue = ev->getValue();
     
+    // Debug output to identify dial mapping
+    printf("Physical dial %d, Raw value: %d\n", 
+           dialIndex, rawValue);
+    
     // Delegate to current dial handler
     if (currentDialHandler) {
         currentDialHandler->handleDial(dialIndex, rawValue, &sceneObjects, &dialState);
@@ -227,7 +287,7 @@ SoNode *
 buildSceneGraph()
 {
    SoGroup *sep = new SoGroup;
-   // Set cylinder detail level high
+   // Set detail level high
    SoComplexity *complexity = new SoComplexity;
    complexity->value.setValue(1.0f);  // full smoothness
    complexity->type.setValue(SoComplexity::OBJECT_SPACE);
@@ -256,6 +316,18 @@ buildSceneGraph()
    yRotSep->addChild(zRotSep);
    zRotSep->addChild(sceneObjects.sceneRotZ);
    zRotSep->addChild(cb);
+
+   // Create geometry groups for different modes
+   sceneObjects.cylinderGroup = new SoSwitch;
+   sceneObjects.sphereGroup = new SoSwitch;
+   // sceneObjects.geometryParent = zRotSep; // Store reference to parent - REMOVED
+   zRotSep->addChild(sceneObjects.cylinderGroup);
+   zRotSep->addChild(sceneObjects.sphereGroup);
+
+   // Initialize geometry mode
+   sceneObjects.currentGeometry = GEOMETRY_CYLINDERS;
+   sceneObjects.cylinderGroup->whichChild.setValue(-3); // Show cylinders initially
+   sceneObjects.sphereGroup->whichChild.setValue(-1);  // Hide sphere initially
 
    // Logical layout: dial index => (row, col)
    int dialLayout[8][2] = {
@@ -329,9 +401,24 @@ buildSceneGraph()
       pointer->set("material { diffuseColor 0.78 0.57 0.11 }");
       dialGroup->addChild(pointer);
 
-      // Final: Add the whole dialGroup to your scene
-      zRotSep->addChild(dialGroup);
+      // Final: Add the whole dialGroup to the cylinder group
+      sceneObjects.cylinderGroup->addChild(dialGroup);
    }
+
+   // Create sphere geometry
+   sceneObjects.sphereTransform = new SoTransform;
+   sceneObjects.sphereMaterial = new SoMaterial;
+   sceneObjects.mainSphere = new SoSphere;
+   
+   // Initialize sphere properties
+   sceneObjects.mainSphere->radius.setValue(2.0f);
+   sceneObjects.sphereMaterial->diffuseColor.setValue(0.8f, 0.4f, 0.2f);
+   sceneObjects.sphereMaterial->specularColor.setValue(0.9f, 0.9f, 0.9f);
+   sceneObjects.sphereMaterial->shininess.setValue(0.8f);
+   sceneObjects.sphereMaterial->emissiveColor.setValue(0.1f, 0.05f, 0.0f);
+   
+   // Initially don't add sphere components (they'll be added when needed)
+   // Sphere components will be added by switchGeometryMode(GEOMETRY_SINGLE_SPHERE)
 
    // Setup callbacks
    cb->addEventCallback(DialEvent::getClassTypeId(), dialCB, NULL);

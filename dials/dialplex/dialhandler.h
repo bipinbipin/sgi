@@ -4,9 +4,17 @@
 #include <Inventor/nodes/SoTransform.h>
 #include <Inventor/nodes/SoMaterial.h>
 #include <Inventor/nodes/SoCylinder.h>
+#include <Inventor/nodes/SoSphere.h>
+#include <Inventor/nodes/SoSeparator.h>
+#include <Inventor/nodes/SoSwitch.h>
 #include <Inventor/Xt/viewers/SoXtExaminerViewer.h>
 
 // Forward declarations
+enum GeometryMode {
+    GEOMETRY_CYLINDERS = 0,
+    GEOMETRY_SINGLE_SPHERE = 1
+};
+
 struct SceneObjects {
     SoTransform* sceneZoom;
     SoTransform* sceneRotX;
@@ -18,6 +26,14 @@ struct SceneObjects {
     SoMaterial* dialMaterials[8];
     SoCylinder* dialCylinders[8];
     SoXtExaminerViewer* globalViewer;
+    
+    // New sphere-based geometry support
+    GeometryMode currentGeometry;
+    SoSphere* mainSphere;
+    SoTransform* sphereTransform;
+    SoMaterial* sphereMaterial;
+    SoSwitch* sphereGroup;
+    SoSwitch* cylinderGroup;
 };
 
 struct DialState {
@@ -45,4 +61,4 @@ public:
 
 typedef DialHandler* (*DialHandlerFactory)();
 
-#endif // DIALHANDLER_H 
+#endif // DIALHANDLER_H
