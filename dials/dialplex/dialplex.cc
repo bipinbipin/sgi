@@ -46,6 +46,7 @@ extern DialHandler* createDialSet6();
 extern DialHandler* createDialSet7();
 extern DialHandler* createDialSet8();
 extern DialHandler* createDialSet9();
+extern DialHandler* createDialSet10();
 
 // Global scene objects and state
 SceneObjects sceneObjects;
@@ -71,7 +72,7 @@ void initDialState() {
 
 // Switch geometry mode
 void switchGeometryMode(GeometryMode mode) {
-    if (!sceneObjects.cylinderGroup || !sceneObjects.sphereGroup) return;
+    if (!sceneObjects.cylinderGroup || !sceneObjects.sphereGroup || !sceneObjects.treeGroup) return;
     
     sceneObjects.currentGeometry = mode;
     
@@ -80,6 +81,7 @@ void switchGeometryMode(GeometryMode mode) {
             // Show cylinders, hide sphere
             sceneObjects.cylinderGroup->whichChild.setValue(-3); // SO_SWITCH_ALL
             sceneObjects.sphereGroup->whichChild.setValue(-1);   // SO_SWITCH_NONE
+            sceneObjects.treeGroup->whichChild.setValue(-1);     // SO_SWITCH_NONE
             printf("Switched to cylinder geometry\n");
             break;
             
@@ -87,6 +89,7 @@ void switchGeometryMode(GeometryMode mode) {
             // Hide cylinders, show sphere
             sceneObjects.cylinderGroup->whichChild.setValue(-1); // SO_SWITCH_NONE
             sceneObjects.sphereGroup->whichChild.setValue(-3);   // SO_SWITCH_ALL
+            sceneObjects.treeGroup->whichChild.setValue(-1);     // SO_SWITCH_NONE
             // Add sphere components if not present
             if (sceneObjects.sphereGroup->getNumChildren() == 0) {
                 sceneObjects.sphereGroup->addChild(sceneObjects.sphereTransform);
@@ -94,6 +97,13 @@ void switchGeometryMode(GeometryMode mode) {
                 sceneObjects.sphereGroup->addChild(sceneObjects.mainSphere);
             }
             printf("Switched to sphere geometry (cylinders hidden)\n");
+            break;
+        case GEOMETRY_TREE:
+            // Hide other geometry, show tree
+            sceneObjects.cylinderGroup->whichChild.setValue(-1); // SO_SWITCH_NONE
+            sceneObjects.sphereGroup->whichChild.setValue(-1);   // SO_SWITCH_NONE
+            sceneObjects.treeGroup->whichChild.setValue(-3);     // SO_SWITCH_ALL
+            printf("Switched to tree geometry\n");
             break;
     }
     
@@ -155,6 +165,10 @@ void switchDialHandler(int setIndex) {
         case 9:
             currentDialHandler = createDialSet9();
             switchGeometryMode(GEOMETRY_SINGLE_SPHERE);
+            break;
+        case 10:
+            currentDialHandler = createDialSet10();
+            switchGeometryMode(GEOMETRY_TREE);
             break;
         default:
             // Default to set 0 for any other button
@@ -246,8 +260,8 @@ buttonBoxCB(void *userData, SoEventCallback *cb)
                 resetScene();
                 currentSetIndex = 0; // Reset to dial set 0
             }
-            // Switch dial handler for buttons 1-10 (indices 0-9)
-            else if (currentSetIndex >= 0 && currentSetIndex <= 9) {
+            // Switch dial handler for buttons 1-11 (indices 0-10)
+            else if (currentSetIndex >= 0 && currentSetIndex <= 10) {
                 switchDialHandler(currentSetIndex);
             }
             
@@ -320,14 +334,17 @@ buildSceneGraph()
    // Create geometry groups for different modes
    sceneObjects.cylinderGroup = new SoSwitch;
    sceneObjects.sphereGroup = new SoSwitch;
+    sceneObjects.treeGroup = new SoSwitch;
    // sceneObjects.geometryParent = zRotSep; // Store reference to parent - REMOVED
    zRotSep->addChild(sceneObjects.cylinderGroup);
    zRotSep->addChild(sceneObjects.sphereGroup);
+   zRotSep->addChild(sceneObjects.treeGroup);
 
    // Initialize geometry mode
    sceneObjects.currentGeometry = GEOMETRY_CYLINDERS;
    sceneObjects.cylinderGroup->whichChild.setValue(-3); // Show cylinders initially
-   sceneObjects.sphereGroup->whichChild.setValue(-1);  // Hide sphere initially
+   sceneObjects.sphereGroup->whichChild.setValue(-1);   // Hide sphere initially
+   sceneObjects.treeGroup->whichChild.setValue(-1);     // Hide tree initially
 
    // Logical layout: dial index => (row, col)
    int dialLayout[8][2] = {

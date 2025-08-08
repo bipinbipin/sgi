@@ -245,8 +245,8 @@ void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bo
     rightText->string.set1Value(21, "effects. Button presses activate");
     rightText->string.set1Value(22, "this overlay interface, providing");
     rightText->string.set1Value(23, "real-time feedback and function");
-    rightText->string.set1Value(24, "reference. The result: 256 unique");
-    rightText->string.set1Value(25, "control combinations (32 x 8).");
+    rightText->string.set1Value(24, "reference. The result: 256+ unique");
+    rightText->string.set1Value(25, "control combinations (32 x 8, growing).");
     rightText->string.set1Value(26, "");
     rightText->string.set1Value(27, "SYSTEM STATUS:");
     rightText->string.set1Value(28, "===============");

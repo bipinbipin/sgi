@@ -12,7 +12,8 @@
 // Forward declarations
 enum GeometryMode {
     GEOMETRY_CYLINDERS = 0,
-    GEOMETRY_SINGLE_SPHERE = 1
+    GEOMETRY_SINGLE_SPHERE = 1,
+    GEOMETRY_TREE = 2
 };
 
 struct SceneObjects {
@@ -34,6 +35,9 @@ struct SceneObjects {
     SoMaterial* sphereMaterial;
     SoSwitch* sphereGroup;
     SoSwitch* cylinderGroup;
+
+    // New tree-based geometry support
+    SoSwitch* treeGroup;
 };
 
 struct DialState {

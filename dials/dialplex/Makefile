@@ -3,20 +3,26 @@
 
 # Compiler and flags
 CC = CC
-CFLAGS = -g -n32 -I/usr/include/Inventor -I/usr/include/X11
+# Note: '-woff 1552' suppresses MIPSpro warning CC-1552: "variable set but never used"
+# Also suppress CC-1174
+# Add additional IDs separated by commas in one '-woff' or via multiple '-woff' entries
+CFLAGS = -g -n32 -I/usr/include/Inventor -I/usr/include/X11 -woff 1552,1174
 LDFLAGS = -L/usr/lib32
 LIBS = -lInventorInput -lInventorXt -lInventor -lX11 -lGL -lGLU -lm
 
 # Object files
 TARGET = dialplex
-OBJECTS = dialplex.o overlay.o dialset0.o dialset1.o dialset2.o dialset3.o dialset4.o dialset5.o dialset6.o dialset7.o dialset8.o dialset9.o
+OBJECTS = dialplex.o overlay.o \
+          dialset0.o dialset1.o dialset2.o dialset3.o dialset4.o \
+          dialset5.o dialset6.o dialset7.o dialset8.o dialset9.o \
+          dialset10.o
 
 # Default target
 all: dialplex
 
 # Link the final executable
-dialplex: dialplex.o overlay.o dialset0.o dialset1.o dialset2.o dialset3.o dialset4.o dialset5.o dialset6.o dialset7.o dialset8.o dialset9.o
-	CC dialplex.o overlay.o dialset0.o dialset1.o dialset2.o dialset3.o dialset4.o dialset5.o dialset6.o dialset7.o dialset8.o dialset9.o $(LDFLAGS) $(LIBS) -o dialplex
+dialplex: $(OBJECTS)
+	CC $(OBJECTS) $(LDFLAGS) $(LIBS) -o $(TARGET)
 
 # Compile dialplex.cc to dialplex.o
 dialplex.o: dialplex.cc
@@ -55,6 +61,9 @@ dialset8.o: dialset8.cc
 
 dialset9.o: dialset9.cc
 	CC $(CFLAGS) -c dialset9.cc
+
+dialset10.o: dialset10.cc
+	CC $(CFLAGS) -c dialset10.cc
 
 # Clean build artifacts
 clean:
