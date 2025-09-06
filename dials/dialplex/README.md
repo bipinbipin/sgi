@@ -19,3 +19,8 @@ Button 7 (Set 6): ORGANIC GROWTH - L-systems, plant evolution, seasonal cycles, 
 Button 8 (Set 7): RETRO SYNTHESIZER - 80s synthwave visuals with waveforms, VU meters, frequency analysis, and neon colors
 Button 9 (Set 8): FLUID DYNAMICS - Advanced computational fluid dynamics with viscosity, flow, pressure, vorticity, surface tension, density, and temperature
 Button 10 (Set 9): SPHERE CONTROL - Single sphere manipulation with radius, position, rotation, scaling, material properties, and animation controls
+Button 11 (Set 10): TREE STUDIO - Procedural tree generation with space colonization algorithm (performance-limited)
+
+Special Function Buttons:
+Button 31: STEREO TOGGLE - Toggle stereoscopic viewing mode for 3D depth perception (works with SGI stereo glasses)
+Button 32: RESET - Reset scene to initial state and return to dial set 0

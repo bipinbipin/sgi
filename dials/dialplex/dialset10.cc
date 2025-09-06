@@ -14,12 +14,12 @@
 #include <stdio.h>
 
 // Simple tree model controls (first pass placeholder before full Space Colonization)
-static float backgroundHue = 0.66f;     // Dial 0: Background hue
+// Note: backgroundHue removed - dial 0 now controls tree X-rotation
 
 // Space Colonization parameters (moving toward 3D)
 static float crownRadius = 3.0f;        // Dial 1: horizontal radius of crown ellipsoid
-static int   attractorCount = 900;      // Dial 2: number of attractor points
-static float influenceRadius = 1.2f;    // Dial 3: influence radius
+static int   attractorCount = 400;      // Dial 2: number of attractor points (reduced default)
+static float influenceRadius = 1.2f;    // Fixed value for colonization algorithm (dial 3 now controls forward/back)
 static float killDistance = 0.5f;       // Dial 4: kill distance
 static float stepLength = 0.35f;        // Dial 5: branch step length
 static float tropismUp = 0.06f;         // Dial 6: upward tropism
@@ -51,6 +51,9 @@ struct TreeScene {
     std::vector<SbVec3f>  nodeDirs;        // per-node growth direction for smoothing
     std::vector<int>      nodeDepth;       // depth from root for thickness
     bool growthPaused;                     // pause further growth at caps
+    // Performance monitoring
+    int consecutiveSlowFrames;             // count of slow render cycles
+    int totalRenderCalls;                  // total renders since init
 };
 
 class DialSet10 : public DialHandler {
@@ -71,6 +74,7 @@ private:
 };
 
 static int gStepsHint = 1;
+static bool gSystemOverloaded = false;  // global safety valve
 
 // (legacy parametric helpers removed; using 3D space colonization)
 
@@ -87,19 +91,22 @@ static SbVec3f rotateAroundAxis(const SbVec3f &v, const SbVec3f &kUnit, float an
 }
 
 // Hard caps to keep UI responsive regardless of dial settings
-static int kMaxNodes = 1500;            // absolute cap on grown nodes
-static int kMaxRenderSegments = 500;    // cap on rendered cylinders
+static int kMaxNodes = 300;             // absolute cap on grown nodes (reduced from 1500)
+static int kMaxRenderSegments = 150;    // cap on rendered cylinders (reduced from 500)
+static int kMaxAttractors = 800;        // cap on attractors to prevent overwhelming
 
 void DialSet10::init(SceneObjects* scene, DialState* state) {
-    backgroundHue = 0.66f;
     crownRadius = 3.0f;
-    attractorCount = 900;
-    influenceRadius = 1.2f;
+    attractorCount = 400;
+    influenceRadius = 1.2f;        // Still used in colonization algorithm
     killDistance = 0.5f;
     stepLength = 0.35f;
     tropismUp = 0.06f;
     treeScale = 1.5f;
     branchHue = 0.10f;
+    
+    // Reset global overload state on init
+    gSystemOverloaded = false;
 
     // Prepare tree group
     if (scene->treeGroup) {
@@ -150,13 +157,14 @@ void DialSet10::init(SceneObjects* scene, DialState* state) {
         tree->drawStyle = style;
         tree->needReseed = true;
         tree->growthPaused = false;
+        tree->consecutiveSlowFrames = 0;
+        tree->totalRenderCalls = 0;
         state->handlerData = (void*)tree;
     }
 
     if (scene->globalViewer) {
-        float r, g, b; hueToRGB(backgroundHue, r, g, b);
-        r *= 0.1f; g *= 0.1f; b *= 0.15f;
-        scene->globalViewer->setBackgroundColor(SbColor(r, g, b));
+        // Set a fixed nice background for tree viewing (dark blue-green)
+        scene->globalViewer->setBackgroundColor(SbColor(0.05f, 0.08f, 0.12f));
     }
 
     rebuildTree(scene, state);
@@ -185,10 +193,10 @@ const char* DialSet10::getThemeDescription() {
 
 const char* DialSet10::getDialDescription(int i) {
     static const char* d[8] = {
-        "DIAL 0: Background Hue",
+        "DIAL 0: Tree X-Rotation - Rotate tree around X-axis",
         "DIAL 1: Crown Radius (XY)",
         "DIAL 2: Attractor Count",
-        "DIAL 3: Influence Radius",
+        "DIAL 3: Tree Forward/Back - Move tree closer/farther",
         "DIAL 4: Kill Distance",
         "DIAL 5: Step Length",
         "DIAL 6: Tropism Up",
@@ -204,11 +212,14 @@ void DialSet10::handleDial(int dialIndex, int rawValue, SceneObjects* scene, Dia
 
     switch (dialIndex) {
         case 0: {
-            backgroundHue = (sinf(angle) * 0.5f + 0.5f);
-            if (scene->globalViewer) {
-                float r, g, b; hueToRGB(backgroundHue, r, g, b);
-                r *= 0.1f; g *= 0.1f; b *= 0.15f;
-                scene->globalViewer->setBackgroundColor(SbColor(r, g, b));
+            // Tree X-Rotation control
+            if (state->handlerData) {
+                TreeScene* tree = (TreeScene*)state->handlerData;
+                if (tree->treeTransform) {
+                    // Convert dial angle to rotation (full 360 degree range)
+                    float rotationAngle = angle;  // Use raw angle for full rotation
+                    tree->treeTransform->rotation.setValue(SbVec3f(1, 0, 0), rotationAngle);
+                }
             }
             break;
         }
@@ -220,13 +231,23 @@ void DialSet10::handleDial(int dialIndex, int rawValue, SceneObjects* scene, Dia
         }
         case 2: {
             float a01 = (sinf(angle) * 0.5f + 0.5f);
-            attractorCount = 200 + (int)(a01 * 2800.0f); // 200..3000
+            attractorCount = 100 + (int)(a01 * 700.0f); // 100..800 (capped)
+            if (attractorCount > kMaxAttractors) attractorCount = kMaxAttractors;
             if (state->handlerData) ((TreeScene*)state->handlerData)->needReseed = true;
             break;
         }
         case 3: {
-            float a01 = (sinf(angle) * 0.5f + 0.5f);
-            influenceRadius = 0.3f + a01 * 2.2f; // 0.3..2.5
+            // Tree Forward/Back control (like dialset0 dial 2)
+            if (state->handlerData) {
+                TreeScene* tree = (TreeScene*)state->handlerData;
+                if (tree->treeTransform) {
+                    // Use same logic as dialset0: -5.0f + angle * 2.0f
+                    float zoomZ = -5.0f + state->dialAngles[3] * 2.0f;
+                    // Get current translation and only modify Z component
+                    SbVec3f currentTrans = tree->treeTransform->translation.getValue();
+                    tree->treeTransform->translation.setValue(currentTrans[0], currentTrans[1], zoomZ);
+                }
+            }
             break;
         }
         case 4: {
@@ -286,6 +307,12 @@ void DialSet10::rebuildTree(SceneObjects* scene, DialState* state) {
     if (!state->handlerData) return;
     TreeScene* tree = (TreeScene*)state->handlerData;
     if (!tree->coords || !tree->lines) return;
+    
+    // Safety valve - if system is overloaded, only allow color changes
+    if (gSystemOverloaded) {
+        printf("[TreeStudio] System overloaded - skipping tree rebuild\n");
+        return;
+    }
 
     // Optionally reseed attractors when distribution parameters changed
     if (tree->needReseed) {
@@ -318,7 +345,18 @@ void DialSet10::rebuildTree(SceneObjects* scene, DialState* state) {
 
     // Perform a tiny number of growth steps per dial event to keep UI responsive
     if (!tree->growthPaused) {
-        runColonizationSteps(tree, gStepsHint);
+        // Adaptive step hint based on current complexity
+        int currentNodes = (int)tree->nodePositions.size();
+        int adaptiveSteps = gStepsHint;
+        if (currentNodes > 100) adaptiveSteps = 1;      // very conservative past 100 nodes
+        if (currentNodes > 200) adaptiveSteps = 0;      // pause at 200 nodes
+        
+        if (adaptiveSteps > 0) {
+            runColonizationSteps(tree, adaptiveSteps);
+        } else {
+            tree->growthPaused = true;
+            printf("[TreeStudio] Growth auto-paused due to complexity\n");
+        }
     }
 
     // Rebuild 3D cylinder geometry for branches
@@ -394,6 +432,22 @@ void DialSet10::rebuildTree(SceneObjects* scene, DialState* state) {
     }
 
     if (scene->globalViewer) scene->globalViewer->render();
+    
+    // Check for system overload conditions
+    tree->totalRenderCalls++;
+    int currentNodes = (int)tree->nodePositions.size();
+    int totalCylinders = tree->branchContainer ? tree->branchContainer->getNumChildren() : 0;
+    
+    if (currentNodes > kMaxNodes * 0.9f || totalCylinders > kMaxRenderSegments * 0.9f) {
+        tree->consecutiveSlowFrames++;
+        if (tree->consecutiveSlowFrames > 3) {
+            gSystemOverloaded = true;
+            tree->growthPaused = true;
+            printf("[TreeStudio] System overload detected - tree growth disabled\n");
+        }
+    } else {
+        tree->consecutiveSlowFrames = 0;  // reset counter
+    }
 }
 
 void DialSet10::hueToRGB(float hue, float& r, float& g, float& b) {
@@ -460,7 +514,16 @@ void DialSet10::runColonizationSteps(TreeScene* tree, int steps) {
 
     for (int iteration = 0; iteration < steps; ++iteration) {
         int numNodes = (int)tree->nodePositions.size();
-        if (numNodes >= maxNodes) break;
+        if (numNodes >= maxNodes) {
+            tree->growthPaused = true;
+            break;
+        }
+        
+        // Early termination if too few attractors remain
+        if (tree->attractors.size() < 10) {
+            printf("[TreeStudio] Growth stopped: insufficient attractors\n");
+            break;
+        }
 
         // Accumulators per node
         std::vector<SbVec3f> accum;
@@ -508,13 +571,22 @@ void DialSet10::runColonizationSteps(TreeScene* tree, int steps) {
                 g = (g * 0.6f) + (tree->nodeDirs[n] * 0.3f) + (trop * 0.1f);
                 if (g.length() > 1e-5f) g.normalize();
                 
-                // Auto-slowdown as we approach caps
+                // Auto-slowdown as we approach caps (more aggressive)
                 float fullness = (float)numNodes / (float)maxNodes; // 0..1
                 int adaptiveForks = maxForksPerTip;
-                if (fullness > 0.6f) adaptiveForks = 2;
-                if (fullness > 0.8f) adaptiveForks = 1;
-                float adaptiveStep = stepLength * (fullness > 0.7f ? 0.6f : 1.0f);
+                if (fullness > 0.3f) adaptiveForks = 2;     // reduce forking earlier
+                if (fullness > 0.5f) adaptiveForks = 1;     // single branch only at 50%
+                if (fullness > 0.8f) adaptiveForks = 0;     // stop growth at 80%
+                
+                // More aggressive step reduction
+                float adaptiveStep = stepLength;
+                if (fullness > 0.4f) adaptiveStep *= 0.8f;  // slow down at 40%
+                if (fullness > 0.6f) adaptiveStep *= 0.6f;  // slower at 60%
+                if (fullness > 0.8f) adaptiveStep *= 0.3f;  // very slow at 80%
 
+                // Early exit if growth is stopped
+                if (adaptiveForks <= 0) continue;
+                
                 // Compute up to N fork directions around g
                 int forks = adaptiveForks;
                 if (forks < 1) forks = 1; if (forks > 3) forks = 3;
@@ -562,16 +634,20 @@ void DialSet10::runColonizationSteps(TreeScene* tree, int steps) {
         }
 
         if (newNodeIndices.empty()) {
-            // Fallback: extend trunk upward a step to reach attractors
+            // Fallback: extend trunk upward a step to reach attractors (only if not too dense)
             int last = (int)tree->nodePositions.size() - 1;
-            if (last >= 0) {
+            if (last >= 0 && numNodes < maxNodes * 0.7f) {  // only allow fallback before 70% full
                 SbVec3f newPos = tree->nodePositions[last] + SbVec3f(0.0f, stepLength, 0.0f);
                 tree->nodePositions.push_back(newPos);
                 tree->parentIndex.push_back(last);
                 tree->nodeDirs.push_back(SbVec3f(0.0f, 1.0f, 0.0f));
                 newNodeIndices.push_back((int)tree->nodePositions.size() - 1);
+            } else {
+                // No new nodes possible - stop growth
+                printf("[TreeStudio] Growth stopped: no viable expansion\n");
+                tree->growthPaused = true;
+                break;
             }
-            // If still no new nodes possible next loop, we'll naturally terminate
         }
 
         // Update frontier to newly created nodes unless paused

@@ -59,6 +59,7 @@ SoXtExaminerViewer *globalViewer = NULL;
 DialHandler* currentDialHandler = NULL;
 int currentSetIndex = 0;
 bool overlayVisible = false;
+bool stereoEnabled = false;
 
 // Initialize dial state
 void initDialState() {
@@ -184,6 +185,29 @@ void switchDialHandler(int setIndex) {
     }
 }
 
+// Toggle stereoscopic viewing
+void toggleStereoViewing() {
+    if (!sceneObjects.globalViewer) {
+        printf("Warning: No viewer available for stereo toggle\n");
+        return;
+    }
+    
+    stereoEnabled = !stereoEnabled;
+    
+    if (stereoEnabled) {
+        // Enable stereo viewing
+        sceneObjects.globalViewer->setStereoViewing(TRUE);
+        printf("Stereoscopic viewing enabled\n");
+    } else {
+        // Disable stereo viewing
+        sceneObjects.globalViewer->setStereoViewing(FALSE);
+        printf("Stereoscopic viewing disabled\n");
+    }
+    
+    // Force a render to apply the change
+    sceneObjects.globalViewer->render();
+}
+
 // Reset scene to initial state
 void resetScene() {
     printf("Resetting scene to initial state\n");
@@ -253,15 +277,22 @@ buttonBoxCB(void *userData, SoEventCallback *cb)
         printf("button %d pressed\n", which);
         
         if (which >= 1 && which <= 32) {
-            currentSetIndex = which - 1;
+            int buttonIndex = which - 1;
             
             // Handle reset button (button 32, index 31)
-            if (currentSetIndex == 31) {
+            if (buttonIndex == 31) {
                 resetScene();
                 currentSetIndex = 0; // Reset to dial set 0
             }
+            // Handle stereo toggle button (button 31, index 30)
+            else if (buttonIndex == 30) {
+                toggleStereoViewing();
+                // Don't change the currentSetIndex for stereo toggle
+                // Keep the previous active set
+            }
             // Switch dial handler for buttons 1-11 (indices 0-10)
-            else if (currentSetIndex >= 0 && currentSetIndex <= 10) {
+            else if (buttonIndex >= 0 && buttonIndex <= 10) {
+                currentSetIndex = buttonIndex;
                 switchDialHandler(currentSetIndex);
             }
             
@@ -269,10 +300,10 @@ buttonBoxCB(void *userData, SoEventCallback *cb)
                 sceneObjects.globalViewer->render();
             }
         }
-        updateOverlaySceneGraph(globalViewer, currentSetIndex, overlayVisible, currentDialHandler);
+        updateOverlaySceneGraph(globalViewer, currentSetIndex, overlayVisible, currentDialHandler, stereoEnabled);
     } else if (ev->getState() == SoButtonEvent::UP) {
         overlayVisible = false;
-        updateOverlaySceneGraph(globalViewer, currentSetIndex, overlayVisible, currentDialHandler);
+        updateOverlaySceneGraph(globalViewer, currentSetIndex, overlayVisible, currentDialHandler, stereoEnabled);
         if (sceneObjects.globalViewer) {
             sceneObjects.globalViewer->render();
         }

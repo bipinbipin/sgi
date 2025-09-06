@@ -43,7 +43,7 @@ void initOverlay(SoXtExaminerViewer* viewer)
     }
 }
 
-void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bool overlayVisible, DialHandler* currentHandler)
+void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bool overlayVisible, DialHandler* currentHandler, bool stereoEnabled)
 {
     if (!viewer) return;
     
@@ -91,6 +91,8 @@ void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bo
         SoDrawStyle *style = new SoDrawStyle;
         if (btnIdx == currentSetIndex) {
             style->lineWidth.setValue(8.0f); // thick when pressed
+        } else if (btnIdx == 29 && stereoEnabled) {
+            style->lineWidth.setValue(4.0f); // medium when stereo is enabled
         } else {
             style->lineWidth.setValue(2.0f); // thin when not pressed
         }
@@ -254,10 +256,15 @@ void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bo
     rightText->string.set1Value(30, " BTNS:  [||||||||] 32/32 READY");
     rightText->string.set1Value(31, " OVLY:  [||||||||] FUNCTIONAL");
     rightText->string.set1Value(32, " REND:  [||||||||] 60 FPS");
-    rightText->string.set1Value(33, "");
-    rightText->string.set1Value(34, "CASSETTE FUTURISM MODE: ACTIVE");
-    rightText->string.set1Value(35, "RETRO INTERFACE: ENGAGED");
-    rightText->string.set1Value(36, "NEURAL LINK: ESTABLISHED");
+    if (stereoEnabled) {
+        rightText->string.set1Value(33, " STREO: [||||||||] ENABLED");
+    } else {
+        rightText->string.set1Value(33, " STREO: [--------] DISABLED");
+    }
+    rightText->string.set1Value(34, "");
+    rightText->string.set1Value(35, "CASSETTE FUTURISM MODE: ACTIVE");
+    rightText->string.set1Value(36, "RETRO INTERFACE: ENGAGED");
+    rightText->string.set1Value(37, "NEURAL LINK: ESTABLISHED");
     
     rightSep->addChild(rightText);
     overlayRoot->addChild(rightSep);
@@ -281,7 +288,7 @@ void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bo
     SoText2 *bottomText = new SoText2;
     bottomText->string.set1Value(0, "CYBERDYNE NEURAL NET PROCESSOR - 256 FUNCTION COMBINATIONS");
     bottomText->string.set1Value(1, "================================================================");
-    bottomText->string.set1Value(2, "PRESS ANY BUTTON TO ACTIVATE FUNCTION SET | RELEASE TO RETURN TO STANDBY");
+    bottomText->string.set1Value(2, "PRESS ANY BUTTON TO ACTIVATE FUNCTION SET | BTN 30: STEREO TOGGLE | BTN 32: RESET");
     bottomSep->addChild(bottomText);
     overlayRoot->addChild(bottomSep);
 

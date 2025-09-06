@@ -21,7 +21,7 @@ extern const ButtonBoxPos buttonBoxMap[32];
 void initOverlay(SoXtExaminerViewer* viewer);
 
 // Update the overlay scene graph based on current state
-void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bool overlayVisible, DialHandler* currentHandler);
+void updateOverlaySceneGraph(SoXtExaminerViewer* viewer, int currentSetIndex, bool overlayVisible, DialHandler* currentHandler, bool stereoEnabled = false);
 
 // Cleanup overlay resources
 void cleanupOverlay();
